@@ -1,0 +1,9 @@
+# Unreferenced source screenshots / working images. Each new site tends to
+# accumulate these (2MB+ each, referenced by nothing once the real images are
+# in) — add them here per-site rather than committing them.
+# e.g. images/hero-source-screenshot.PNG
+
+# OS / editor cruft
+Thumbs.db
+desktop.ini
+.DS_Store

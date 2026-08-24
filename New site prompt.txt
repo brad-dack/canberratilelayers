@@ -1,0 +1,154 @@
+
+[Before sending: confirm model is set to Opus 4.8, effort set to High]
+
+
+
+TASK: Populate the template for a real niche. Content and config only.
+Engine changes (bake.js, main.js, styles.css, page-shell structure) are
+allowed when real copy genuinely doesn't fit the shape the template
+provides — but if you make one, record what and why in this site's own
+README under a "Divergence from the template" heading, so it can be
+re-applied if the template is ever regenerated, and so the next person
+knows this build isn't running the stock engine.
+
+NICHE: [e.g. Epoxy Flooring]
+CITY: [e.g. Perth, WA]
+DOMAIN: [e.g. epoxyperth.com]
+PRIMARY KEYWORD: [e.g. epoxy flooring perth]
+BUSINESS NAME: [generic brand for this site, e.g. "Perth Epoxy Co"]
+SERVICE AREA: [e.g. Perth metro and surrounding suburbs]
+
+PHONE / EMAIL / HOURS: leave unset unless you already have a real forwarding
+number, inbox, and hours to publish. The template renders correctly either
+way — every UI element that would use these degrades to absent while
+they're empty, rather than showing something fake or dead. Fill them in
+later with zero other changes needed.
+
+SERVICES (3-5, these become the service pages): for each, a keyword-URL
+filename (e.g. "epoxy-flooring-installation.html", not a numbered stub) and
+a topic. Do NOT ask for pricing here — see PRICING below.
+
+AREAS: 0 for launch, unless you already have genuinely differentiated
+content ready to write for specific suburbs (see AREAS note below). Leave
+the array empty otherwise — it can be added later.
+
+FAQs: 8 general FAQs (quoting, payment, service area — these go on About &
+Contact) and 2-3 per service (go in that service's own blocks). [Pick one:
+I've supplied these below / research them from real People Also Ask results
+and competitor sites for the primary keyword — see FAQ RESEARCH below.]
+
+BRAND ACCENT COLOR: [hex code, or "pick something that fits the niche"]
+
+GA4 MEASUREMENT ID: [G-XXXXXXXXXX, or "not set up yet"]
+FORMSPREE ID: [the token after /f/ in the endpoint, or "not set up yet"]
+
+TASKS
+1. Populate config.js completely: business identity, domain, brand colors,
+   ga4Id, formspreeId, page meta and headlines, services array (each an
+   ordered array of content blocks — see README's block-type reference),
+   areas array, about.faqs, about copy, value props, contact.fields.
+   Every headline should mirror the actual phrase people search for.
+   schema.type stays "Organization" — see SCHEMA below.
+2. Source real images: one hero plus one per service page, plus one per
+   area page if used, from Unsplash or Pexels, genuinely relevant to the
+   niche and city where possible. Replace the placeholder SVGs in /images.
+   Optimise to roughly 1200x800, under about 150KB, JPG or WebP. Write
+   literal descriptive alt text into config, and set accurate width/height.
+   These are illustrative stock images: give them NO caption (a caption
+   implies the photo is of this business's own work) and do not place them
+   anywhere the page implies they depict real completed jobs. If an image
+   would need to make a factual or diagnostic claim (e.g. "this is what a
+   structural crack looks like"), draw an SVG instead of sourcing a photo —
+   a stock photo that only approximately matches actively misleads. If
+   licensing on any image is unclear, skip it and tell me rather than using
+   it.
+3. Run bake.js to regenerate every static page plus CNAME, robots.txt,
+   sitemap.xml and 404.html from the config.
+4. Run `node bake.js --check` and fix everything it flags — both the
+   unfinished-content list (every marker/bracket token, resolved from a
+   real source per README's content-sourcing rules, or deleted along with
+   the claim it guards) and the preflight-problems list — until it passes
+   clean.
+5. Leave testimonials and photos arrays empty. No invented reviews, star
+   ratings, names, project photos, credentials, licence numbers, years in
+   business, or job counts. Nothing on this site may claim something that
+   isn't independently true yet.
+6. Serve the site locally and verify: zero console errors, all pages render,
+   correct content on every page, forms present, layout correct at mobile,
+   tablet and desktop widths.
+
+PRICING
+Do not ask for or invent pricing. No typical job value, no price range, no
+numbers pulled from competitor sites or national averages — a national or
+competitor number is not this business's price and stating it as if it
+were is a claim you can't back up. Leave pricing out of service pages
+entirely for now; write instead about what drives the price (job size,
+access, materials, condition) using content you can actually stand behind.
+Real pricing gets added later, logged per quote with date, suburb, job
+type, and the specifics that drove the number — never sourced any other
+way. If a page reads oddly without a number, say so rather than filling the
+gap with a guess.
+
+SCHEMA
+schema.type stays "Organization" for the whole build. Do not set it to a
+LocalBusiness subtype, do not add priceRange, AggregateRating, or Review —
+there's no premises, no hours, and no reviews behind this site yet, so none
+of those properties would be true. `node bake.js --check` enforces this by
+grepping the baked HTML. The upgrade to a real LocalBusiness subtype
+happens later, once a renter's actual address and hours exist (see
+README's "When a renter signs" checklist) — don't do it now even if it
+seems like it would help SEO.
+
+AREAS
+Default to zero area pages. Six thin suburb pages with the service name
+swapped in is the scaled-content pattern search engines filter out. Only
+write area pages if you're prepared to research and write content that's
+genuinely different per suburb (specific travel time, housing stock,
+common local job types) — not a template with the name changed. If in
+doubt, leave the array empty and say so.
+
+FAQ RESEARCH
+Same sourcing bar as everything else on this site: real, checkable sources
+(People Also Ask results, competitor sites for factual claims only,
+manufacturer/standards/government pages) — never a number or claim you
+can't point to. If research turns up conflicting or contradictory answers
+for a question, flag it rather than picking one arbitrarily.
+
+FLAG ANYTHING YOU CAN'T POPULATE HONESTLY — DO NOT GUESS
+This is the single most important rule in this prompt. The template's copy
+is written in a first-person voice that implies an operating business.
+Since no renter exists yet, every claim on the site must be one that will
+still be true when a renter is attached, or that is factually about the
+quoting process rather than about work performed. If you can't populate
+something honestly — a source doesn't exist, a claim can only be made with
+a caveat, pricing genuinely can't be estimated for this niche/city, image
+licensing is ambiguous, a service doesn't map cleanly onto the block
+structure — use a `{ type: "marker" }` block or flag it explicitly and stop
+rather than guessing. If something needs more exploration or judgement than
+a straightforward content pass, say so explicitly so I can decide whether
+to increase effort, rather than filling the gap yourself.
+
+NOTES TO ME VS. COPY FOR A READER
+Every string value in config.js is rendered to the public site. There is no
+private field. Notes written to me rather than to a reader — decision logs
+("Decision (12 March 2027): staying with the illustrative images for now"),
+priority notes ("not urgent", "worth revisiting at some point"), research
+status ("no source found yet", "pending real data"), references to markers
+or to config.js/bake.js — must go in a /* TODO (Brad): ... */ code comment,
+never in a note/p/lead/FAQ/meta string.
+
+A `note` block is for reader-facing sourcing and caveats only: real
+citations, provenance a reader benefits from, "re-check this before relying
+on it". If you're unsure which a given sentence is, ask whether someone with
+the problem this page describes would care. If not, it's a comment.
+
+`node bake.js --check` enforces this and will fail the build. The patterns
+are narrow on purpose — if one fires on copy you believe is legitimately
+reader-facing, reword the copy or tell me, but do not loosen the pattern.
+
+STOPPING POINT
+Stop once config is fully populated, bake.js has regenerated everything,
+`--check` passes clean (zero unfinished-content items, zero preflight
+problems), real licensed images are in place with alt text, and the site
+renders correctly across breakpoints with zero console errors. Present the
+result and stop.
