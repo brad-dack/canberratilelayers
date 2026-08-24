@@ -562,8 +562,12 @@ function runCheck() {
   if (!cfg.ga4Id || /X{4,}/.test(cfg.ga4Id) || !/^G-[A-Z0-9]+$/.test(cfg.ga4Id)) {
     errors.push("ga4Id is unset or a placeholder — analytics and click_to_call tracking are OFF");
   }
-  if (!cfg.formspreeId || cfg.formspreeId.indexOf("YOUR_") === 0) {
-    errors.push("formspreeId is unset or a placeholder — the site CANNOT capture web form leads");
+  if (!cfg.ingestUrl || !cfg.ingestSecret ||
+      cfg.ingestUrl.indexOf("YOUR_") === 0 || cfg.ingestSecret.indexOf("YOUR_") === 0) {
+    errors.push("ingestUrl/ingestSecret is unset or a placeholder — the site CANNOT capture web form leads");
+  }
+  if (!cfg.turnstileSiteKey) {
+    errors.push("turnstileSiteKey is unset — the form has no spam protection");
   }
 
   /* -- 3. service page files <-> config ------------------------------------ */

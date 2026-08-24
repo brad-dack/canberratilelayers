@@ -11,8 +11,9 @@
    3. brand colors + theme (style/pattern — makes each site look different)
    4. ga4Id — REQUIRED before launch: analytics + call tracking stay OFF
       while the X placeholder is in place
-   5. formspreeId — REQUIRED before launch: the form cannot deliver leads
-      until this is a real Formspree ID
+   5. ingestUrl / ingestSecret — REQUIRED before launch: the form cannot
+      deliver leads until these are real values. turnstileSiteKey alongside
+      them, or the form ships with no spam protection.
    6. schema.type — stays "Organization" until a renter's real premises/
       hours exist. See "Schema: Organization until a renter exists" in
       README before ever changing this.
@@ -85,9 +86,16 @@ window.SITE_CONFIG = {
      contain "XXXX", so the placeholder below keeps tracking OFF. */
   ga4Id: "G-XXXXXXXXXX",
 
-  /* Formspree form ID — create a form at formspree.io and paste the ID
-     (the token after /f/ in your form endpoint). */
-  formspreeId: "YOUR_FORMSPREE_ID",
+  /* Form leads POST straight to our own ingest endpoint, not to a third-party
+     form service — see rank-and-rent-backend's docs/DASHBOARD_PLAN.md, Phase 2
+     Stage B. ingestUrl is the endpoint, ingestSecret is the shared secret it
+     checks (light abuse resistance + the site's identity), and
+     turnstileSiteKey is the Cloudflare Turnstile key used for spam filtering.
+     Whichever services host the endpoint receive enquiry data, so name them in
+     the privacy policy copy (see renderPrivacy in js/main.js). */
+  ingestUrl: "YOUR_INGEST_URL",
+  ingestSecret: "YOUR_INGEST_SECRET",
+  turnstileSiteKey: "",
 
   /* --- Structured data ---------------------------------------------------
      Organization, sitewide, until a renter's real premises/hours exist —

@@ -609,7 +609,10 @@
         "<h2>How it's used</h2>" +
         "<p>Your details are used for one purpose: to contact you about your quote request. They are not sold, shared with advertisers, or added to any marketing list.</p>" +
         "<h2>Who processes the form</h2>" +
-        "<p>The form is delivered by <a href=\"https://formspree.io\" rel=\"noopener\">Formspree</a>, a form-handling service. When you submit the form, your details pass through Formspree's servers to reach us. Formspree's own privacy policy is available on their website.</p>" +
+        // TODO (per site): name the actual services the endpoint runs on. This
+        // wording is accurate for the standard Supabase + Cloudflare setup; if
+        // a site's ingest endpoint is hosted elsewhere, say so here instead.
+        "<p>The form is delivered directly to our own systems for handling enquiries. A free security check (Cloudflare Turnstile) runs in the background to filter out automated spam submissions before your enquiry reaches us.</p>" +
         "<h2>Analytics</h2>" +
         "<p>This site may use Google Analytics to understand how visitors find and use it (for example, which pages are viewed). Google Analytics uses cookies and collects anonymous usage data such as your general location and device type. It does not see anything you type into the quote form.</p>" +
         "<h2>Phone calls</h2>" +
@@ -644,6 +647,27 @@
       (f.required === false ? "" : " required") + "></div>";
   }
 
+  /* One id per page load, shared by every render of the form. The ingest
+     function dedupes leads on (channel, source_ref) and reads source_ref from
+     _id, falling back to a random uuid per request when it's absent — so a
+     site that never sends _id creates a fresh lead on every retry after a
+     failed submit. crypto.randomUUID needs a secure context; the fallback
+     isn't cryptographically strong, but this only has to be unique enough to
+     dedupe one visitor's retries. */
+  var _submissionId = null;
+  function submissionId() {
+    if (_submissionId) return _submissionId;
+    if (window.crypto && typeof window.crypto.randomUUID === "function") {
+      _submissionId = window.crypto.randomUUID();
+    } else {
+      _submissionId = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+        var r = Math.random() * 16 | 0;
+        return (c === "x" ? r : (r & 0x3 | 0x8)).toString(16);
+      });
+    }
+    return _submissionId;
+  }
+
   function renderQuoteFormHtml(opts) {
     opts = opts || {};
     var fields = (cfg.contact.fields || []).concat(opts.extraField ? [opts.extraField] : []);
@@ -675,10 +699,76 @@
         '<fieldset class="form-step" id="form-step-2"' + (picker ? " hidden" : "") + '>' +
           (picker ? "<legend>" + esc(cfg.contact.step2Label) + "</legend>" : "") +
           fieldsHtml +
+          // Honeypot: real visitors never see this (off-screen, not
+          // display:none — some bots skip display:none fields specifically) or
+          // fill it in. The endpoint treats any value here as spam.
+          '<input type="text" id="qf-gotcha" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" ' +
+            'style="position:absolute;left:-9999px;top:-9999px">' +
+          // Idempotency key. Left empty here and filled by wireQuoteForm() on
+          // every page load, so the value can't be frozen into baked markup —
+          // it has to be unique per real load or retries stop deduping.
+          '<input type="hidden" id="qf-id" name="_id" value="">' +
+          (cfg.turnstileSiteKey ? '<div id="turnstile-widget"></div>' : "") +
           '<button class="btn btn-primary btn-block" type="submit">' + esc(cfg.contact.submitText) + "</button>" +
         "</fieldset>" +
         '<p class="form-status" id="form-status" role="status" aria-live="polite"></p>' +
       "</form>";
+  }
+
+  /* Turnstile's api.js is deliberately NOT a static <head> tag: it competes
+     with the hero image for bandwidth and main-thread time during the LCP
+     window on every page, whether or not that visitor ever reaches the form.
+     Load it on demand instead — when the enquiry section is about to scroll
+     into view, or immediately on first interaction as a fast path for anyone
+     who scrolls or types before the observer's margin trips. */
+  var _turnstileLoading = false;
+  function loadTurnstileScript() {
+    if (_turnstileLoading || window.turnstile || !cfg.turnstileSiteKey) return;
+    _turnstileLoading = true;
+    var s = document.createElement("script");
+    s.src = "https://challenges.cloudflare.com/turnstile/v0/api.js";
+    s.async = true;
+    document.head.appendChild(s);
+  }
+
+  function scheduleTurnstileLoad(section) {
+    if (!cfg.turnstileSiteKey) return;
+    if (!section || !("IntersectionObserver" in window)) {
+      loadTurnstileScript();
+      return;
+    }
+    var triggered = false;
+    var trigger = function () {
+      if (triggered) return;
+      triggered = true;
+      loadTurnstileScript();
+    };
+    var observer = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          trigger();
+          observer.disconnect();
+        }
+      });
+    }, { rootMargin: "600px 0px" });
+    observer.observe(section);
+    ["pointerdown", "focusin", "keydown"].forEach(function (evt) {
+      document.addEventListener(evt, trigger, { once: true, passive: true });
+    });
+  }
+
+  /* The api.js load above is async and the form is re-rendered on every page
+     navigation, so Turnstile's own auto-render-on-load scan would miss a form
+     injected into the DOM after that scan already ran. Render explicitly once
+     the API is available instead. */
+  function renderTurnstile(container) {
+    if (!container || !cfg.turnstileSiteKey) return;
+    if (container.hasChildNodes()) return;     // already rendered into
+    if (window.turnstile) {
+      window.turnstile.render(container, { sitekey: cfg.turnstileSiteKey });
+    } else {
+      setTimeout(function () { renderTurnstile(container); }, 100);
+    }
   }
 
   function wireQuoteForm() {
@@ -687,6 +777,16 @@
     var step2 = document.getElementById("form-step-2");
     var status = document.getElementById("form-status");
     var fieldNames = (cfg.contact.fields || []).map(function (f) { return f.name; });
+
+    // Set fresh per page load, whether the markup was baked or just rendered.
+    var idField = document.getElementById("qf-id");
+    if (idField) idField.value = submissionId();
+    // Observe the form's own containing section rather than a fixed id — the
+    // form is dropped into a differently-named section on different page
+    // types (and different sites), and a missed lookup here silently degrades
+    // to loading Turnstile eagerly, which is the thing this avoids.
+    scheduleTurnstileLoad(form.closest ? form.closest("section") || form : form);
+    renderTurnstile(document.getElementById("turnstile-widget"));
 
     form.addEventListener("change", function (e) {
       if (e.target.name === "service" && step2.hidden) {
@@ -713,10 +813,11 @@
         return;
       }
 
-      var id = cfg.formspreeId;
-      if (!id || id.indexOf("YOUR_") === 0) {
-        // Owner hasn't configured Formspree yet — fail gracefully for visitors.
-        console.warn("Formspree ID not set in config.js — form cannot submit.");
+      var ingestUrl = cfg.ingestUrl;
+      if (!ingestUrl || !cfg.ingestSecret || ingestUrl.indexOf("YOUR_") === 0) {
+        // Owner hasn't configured the ingest endpoint yet — fail gracefully
+        // for visitors (the phone number is offered as a fallback below).
+        console.warn("ingestUrl/ingestSecret not set in config.js — form cannot submit.");
         showError();
         return;
       }
@@ -726,15 +827,24 @@
       status.textContent = UI.sending;
       status.className = "form-status";
 
-      var data = new FormData();
-      data.append("service", serviceVal.value);
-      Object.keys(values).forEach(function (name) { data.append(name, values[name]); });
-      data.append("_subject", "New quote request: " + serviceVal.value);
+      var gotcha = document.getElementById("qf-gotcha");
+      var submissionIdField = document.getElementById("qf-id");
+      var turnstileResponse = form.querySelector('[name="cf-turnstile-response"]');
+      // Config-driven fields first, then the fixed keys — so a stray field
+      // name in config can't clobber `service` or any of the meta fields.
+      var payload = {};
+      Object.keys(values).forEach(function (name) { payload[name] = values[name]; });
+      payload.service = serviceVal.value;
+      payload.subject = "New quote request: " + serviceVal.value;
+      payload._secret = cfg.ingestSecret;
+      payload._gotcha = gotcha ? gotcha.value : "";
+      payload._id = (submissionIdField && submissionIdField.value) || submissionId();
+      payload["cf-turnstile-response"] = turnstileResponse ? turnstileResponse.value : "";
 
-      fetch("https://formspree.io/f/" + id, {
+      fetch(ingestUrl, {
         method: "POST",
-        body: data,
-        headers: { "Accept": "application/json" }
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload)
       }).then(function (res) {
         if (res.ok) {
           form.innerHTML = '<p class="form-status success">' + esc(cfg.contact.successMessage) + "</p>";

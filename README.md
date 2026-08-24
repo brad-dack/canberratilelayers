@@ -71,7 +71,8 @@ categories:
    `services[0].blocks[6].note`) so it's findable.
 2. **Preflight problems** — template leftovers (`yourdomain`, `Springfield`,
    555-numbers, `YOUR_`, lorem ipsum, `TODO`/`TBD`/`FIXME`), unset
-   `ga4Id`/`formspreeId`, broken/orphaned page files, sitemap/disk drift,
+   `ga4Id`/`ingestUrl`/`ingestSecret`/`turnstileSiteKey`, broken/orphaned
+   page files, sitemap/disk drift,
    domain mismatches, missing images or image dimensions, duplicate
    meta title/description, and banned LocalBusiness-only schema terms
    reappearing while `schema.type` is `Organization`.
@@ -190,9 +191,17 @@ What to edit in `config.js`:
 4. **ga4Id** — **required before launch**: while it contains `XXXX`, no
    analytics and no `click_to_call` tracking, meaning no call-volume proof
    for a future renter.
-5. **formspreeId** — **required before launch**: the site cannot capture
-   web form leads until this is a real [formspree.io](https://formspree.io)
-   ID.
+5. **ingestUrl / ingestSecret / turnstileSiteKey** — form leads post straight
+   to our own ingest endpoint (see `rank-and-rent-backend`'s
+   `docs/DASHBOARD_PLAN.md`, Phase 2 Stage B), not to a third-party form
+   service. `ingestUrl` is the endpoint, `ingestSecret` is the shared secret
+   it checks, `turnstileSiteKey` is the Cloudflare Turnstile key for spam
+   filtering. **Required before launch: the site cannot capture web form
+   leads until `ingestUrl`/`ingestSecret` are real values, and has no spam
+   protection until `turnstileSiteKey` is set.** Until then, submitting the
+   form shows a polite error with the phone number as fallback — phone calls
+   work, web leads are silently lost. Whichever services host the endpoint
+   receive enquiry data, so name them in the privacy policy copy.
 6. **schema.type** — leave as `Organization`. See the schema section above.
 7. **pages** — meta titles/descriptions and message-matched headlines for
    home/about/privacy.
