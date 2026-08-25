@@ -116,15 +116,33 @@
       esc(text) + "</a>";
   }
 
-  /* Builds an <img> from a config image object ({src, alt, width, height}).
-     Returns "" when no image is configured, so sections degrade cleanly. */
+  /* Mirror of srcsetAttr() in bake.js — see the long comment there. The
+     full-size image.src is deliberately NOT a srcset candidate; it stays only
+     in the plain src= fallback. */
+  function srcsetAttr(image) {
+    if (!image.widths || !image.widths.length) return "";
+    var dot = image.src.lastIndexOf(".");
+    var base = image.src.slice(0, dot), ext = image.src.slice(dot);
+    var set = image.widths.map(function (w) {
+      return esc(base + "-" + w + ext) + " " + w + "w";
+    });
+    return ' srcset="' + set.join(", ") + '"' +
+      (image.sizes ? ' sizes="' + esc(image.sizes) + '"' : "");
+  }
+
+  /* Builds an <img> from a config image object ({src, alt, width, height},
+     optionally widths/sizes/title). Returns "" when no image is configured,
+     so sections degrade cleanly. `title` defaults to the alt text — an
+     on-page audit flags every <img> without one. */
   function imgTag(image, className, lazy) {
     if (!image || !image.src) return "";
     return '<img class="' + (className || "") + '" src="' + esc(image.src) + '"' +
+      srcsetAttr(image) +
       ' alt="' + esc(image.alt || "") + '"' +
+      ' title="' + esc(image.title || image.alt || "") + '"' +
       (image.width ? ' width="' + image.width + '"' : "") +
       (image.height ? ' height="' + image.height + '"' : "") +
-      (lazy ? ' loading="lazy"' : "") + ">";
+      (lazy ? ' loading="lazy"' : ' fetchpriority="high"') + ">";
   }
 
   function faqItems(list) {
@@ -259,6 +277,23 @@
 
   /* ---------- header / footer ------------------------------------------ */
 
+  /* bake.js writes the real markup for the header, hero, #page-content and
+     footer into every page at build time, and marks each one data-baked (see
+     the long comment above the mirror renderer in bake.js). These renderers
+     skip rebuilding an element that already carries it — so the two renderers
+     can't produce conflicting output, and there's no redundant innerHTML work
+     on load. Interactivity (the nav toggle, form wiring, the contact bar) is
+     still wired unconditionally below, baked or not. */
+  function isBaked(el) {
+    return !!(el && el.hasAttribute && el.hasAttribute("data-baked"));
+  }
+
+  /* Writes page body HTML unless bake.js already put the same thing there. */
+  function setContent(content, html) {
+    if (isBaked(content)) return;
+    content.innerHTML = html;
+  }
+
   function renderHeader() {
     var file = currentFile();
     var links = [
@@ -275,20 +310,25 @@
         UI.callLabel + " " + esc(cfg.business.phoneDisplay) + "</a>"
       : quoteButton(cfg.pages.home.ctaText, "nav-phone");
 
-    document.getElementById("site-header").innerHTML =
-      '<div class="container header-inner">' +
-        '<a class="logo" href="index.html">' + esc(cfg.business.name) + "</a>" +
-        '<button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="' + UI.menuLabel + '">' +
-          '<span></span><span></span><span></span>' +
-        "</button>" +
-        '<nav id="site-nav" class="site-nav" aria-label="Main">' +
-          "<ul>" + nav + "</ul>" +
-          navPhone +
-        "</nav>" +
-      "</div>";
+    var headerEl = document.getElementById("site-header");
+    if (!isBaked(headerEl)) {
+      headerEl.innerHTML =
+        '<div class="container header-inner">' +
+          '<a class="logo" href="index.html">' + esc(cfg.business.name) + "</a>" +
+          '<button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="' + UI.menuLabel + '">' +
+            '<span></span><span></span><span></span>' +
+          "</button>" +
+          '<nav id="site-nav" class="site-nav" aria-label="Main">' +
+            "<ul>" + nav + "</ul>" +
+            navPhone +
+          "</nav>" +
+        "</div>";
+    }
 
+    // Wired either way — the baked markup is inert until this runs.
     var toggle = document.querySelector(".nav-toggle");
     var navEl = document.getElementById("site-nav");
+    if (!toggle || !navEl) return;
     toggle.addEventListener("click", function () {
       var open = navEl.classList.toggle("open");
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
@@ -332,7 +372,10 @@
     if (cfg.business.serviceArea) detailLines.push(UI.serviceAreaLabel + ": " + esc(cfg.business.serviceArea));
     if (hasHours()) detailLines.push(UI.hoursLabel + ": " + esc(cfg.business.hours));
 
-    document.getElementById("site-footer").innerHTML =
+    var footerEl = document.getElementById("site-footer");
+    if (isBaked(footerEl)) return;
+
+    footerEl.innerHTML =
       '<div class="container footer-grid">' +
         "<div>" +
           '<p class="footer-brand">' + esc(cfg.business.name) + "</p>" +
@@ -360,7 +403,7 @@
      subheadline and ctaText are optional (area pages may omit them). */
   function fillHero(h, image) {
     var dyn = document.querySelector(".hero-dynamic");
-    if (!dyn) return;
+    if (!dyn || isBaked(dyn)) return;
     dyn.innerHTML =
       (h.subheadline ? '<p class="hero-sub">' + esc(h.subheadline) + "</p>" : "") +
       '<div class="hero-actions">' +
@@ -422,7 +465,8 @@
   function photosSection() {
     if (!cfg.photos || !cfg.photos.length) return "";
     var items = cfg.photos.map(function (p) {
-      return '<figure class="photo"><img loading="lazy" src="' + esc(p.src) + '" alt="' + esc(p.alt) + '">' +
+      return '<figure class="photo"><img loading="lazy" src="' + esc(p.src) + '" alt="' + esc(p.alt) +
+        '" title="' + esc(p.title || p.alt || "") + '">' +
         (p.caption ? "<figcaption>" + esc(p.caption) + "</figcaption>" : "") + "</figure>";
     }).join("");
     return '<section class="section"><div class="container">' +
@@ -468,14 +512,14 @@
         "</div></section>"
       : "";
 
-    content.innerHTML =
+    setContent(content,
       '<section class="section" id="services"><div class="container">' +
         "<h2>" + UI.services + '</h2><div class="grid-3">' + serviceCards(cfg.services) + "</div></div></section>" +
       areasSection() +
       howItWorksSection(false) +
       testimonialsSection() +
       faqSection +
-      ctaBand(p.ctaText);
+      ctaBand(p.ctaText));
   }
 
   /* Service pages render from an ordered array of typed content blocks
@@ -500,14 +544,14 @@
 
     fillHero(svc, svc.image);
 
-    content.innerHTML =
+    setContent(content,
       '<section class="section"><div class="container narrow prose">' +
         renderBlocks(svc.blocks) +
         '<p class="center"><a class="btn btn-primary" href="about.html#quote">' + esc(svc.ctaText) + "</a></p>" +
       "</div></section>" +
       howItWorksSection(true) +
       testimonialsSection() +
-      ctaBand(svc.ctaText);
+      ctaBand(svc.ctaText));
 
     wireQuoteForm();
   }
@@ -541,7 +585,7 @@
       ? cfg.services.filter(function (s) { return area.services.indexOf(s.page) !== -1; })
       : cfg.services;
 
-    content.innerHTML =
+    setContent(content,
       '<section class="section"><div class="container narrow">' +
         area.intro.map(function (t) { return '<p class="lead">' + esc(t) + "</p>"; }).join("") +
         detail +
@@ -558,7 +602,7 @@
             faqItems(area.faqs) +
           "</div></section>"
         : "") +
-      ctaBand(area.ctaText || cfg.pages.home.ctaText);
+      ctaBand(area.ctaText || cfg.pages.home.ctaText));
   }
 
   /* FAQs live on the page that answers them: general/quoting/payment
@@ -582,7 +626,7 @@
     if (cfg.business.serviceArea) contactLines.push("<strong>" + UI.serviceAreaLabel + ":</strong> " + esc(cfg.business.serviceArea));
     if (hasHours()) contactLines.push("<strong>" + UI.hoursLabel + ":</strong> " + esc(cfg.business.hours));
 
-    content.innerHTML =
+    setContent(content,
       '<section class="section"><div class="container narrow">' +
         cfg.about.paragraphs.map(function (t) { return '<p class="lead">' + richText(t) + "</p>"; }).join("") +
         (contactLines.length ? '<p class="contact-lines">' + contactLines.join("<br>") + "</p>" : "") +
@@ -593,7 +637,7 @@
         '<p class="reassurance">' + esc(cfg.contact.reassurance) + "</p>" +
         renderQuoteFormHtml({}) +
       "</div></section>" +
-      faqsSection();
+      faqsSection());
 
     wireQuoteForm();
   }
@@ -601,7 +645,7 @@
   function renderPrivacy(content) {
     var p = cfg.pages.privacy;
     var name = esc(cfg.business.name);
-    content.innerHTML =
+    setContent(content,
       '<section class="section"><div class="container narrow prose">' +
         "<p><em>Last updated: " + esc(p.lastUpdated) + "</em></p>" +
         "<h2>What this website collects</h2>" +
@@ -624,7 +668,7 @@
         "<h2>Contact</h2>" +
         "<p>Questions about this policy can be sent to " + name + " at " +
         '<a href="mailto:' + esc(cfg.business.email) + '">' + esc(cfg.business.email) + "</a>.</p>" +
-      "</div></section>";
+      "</div></section>");
   }
 
   /* ---------- config-driven quote form ------------------------------------
@@ -877,7 +921,11 @@
       header.classList.toggle("scrolled", window.scrollY > 8);
     };
     document.addEventListener("scroll", onScroll, { passive: true });
-    onScroll();
+    // Deferred rather than called synchronously right after the page-build
+    // innerHTML writes — reading window.scrollY there forces a layout flush
+    // mid-boot (shows up as "forced reflow" in PageSpeed). setTimeout, not
+    // requestAnimationFrame: see the boot section for why rAF is wrong here.
+    setTimeout(onScroll, 0);
   }
 
   function initReveal() {
@@ -899,12 +947,15 @@
       });
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
 
-    targets.forEach(function (el) {
-      // Stagger siblings (e.g. cards in a grid) by their position.
-      var idx = el.parentNode
-        ? Array.prototype.indexOf.call(el.parentNode.children, el)
-        : 0;
-      el.style.transitionDelay = (idx % 6) * 70 + "ms";
+    // Two passes rather than one — read every element's sibling position
+    // first, then apply all the style/class writes — so DOM reads and writes
+    // don't interleave per element right after the page was just built.
+    // Stagger siblings (e.g. cards in a grid) by their position.
+    var indices = Array.prototype.map.call(targets, function (el) {
+      return el.parentNode ? Array.prototype.indexOf.call(el.parentNode.children, el) : 0;
+    });
+    Array.prototype.forEach.call(targets, function (el, i) {
+      el.style.transitionDelay = (indices[i] % 6) * 70 + "ms";
       el.classList.add("reveal");
       observer.observe(el);
     });
@@ -915,27 +966,49 @@
   applyBrand();
   injectGA4();
   trackPhoneClicks();
-  renderHeader();
-  renderFooter();
-  initHeaderShadow();
 
-  var content = document.getElementById("page-content");
-  var page = document.body.getAttribute("data-page");
-  var renderers = {
-    home: renderHome,
-    service: renderService,
-    area: renderArea,
-    about: renderAbout,
-    privacy: renderPrivacy
-  };
-  if (renderers[page] && content) renderers[page](content);
-  renderContactBar();
-  initReveal();
+  /* Everything below builds or wires the header, footer and #page-content,
+     none of which is needed for the hero — bake.js writes the hero directly
+     into the static HTML (see heroMain() there). Running it after a
+     setTimeout(0) yields one task boundary first, so this script's own
+     synchronous block isn't what occupies the main thread at the exact moment
+     the browser would otherwise paint the already-complete hero.
 
-  /* If the URL has a hash (e.g. about.html#quote), re-scroll after render
-     since the target element didn't exist at initial page load. */
-  if (window.location.hash) {
-    var target = document.querySelector(window.location.hash);
-    if (target) target.scrollIntoView();
-  }
+     Deliberately setTimeout, not requestAnimationFrame: rAF callbacks don't
+     fire for a tab that isn't compositing frames (backgrounded, prerendered,
+     an unfocused preview pane). Perth Brickworks tried rAF here first and it
+     left the entire page blank in exactly that case. setTimeout has no such
+     dependency and still yields the same opportunity to paint. */
+  setTimeout(function () {
+    renderHeader();
+    renderFooter();
+    initHeaderShadow();
+
+    var content = document.getElementById("page-content");
+    var page = document.body.getAttribute("data-page");
+    var renderers = {
+      home: renderHome,
+      service: renderService,
+      area: renderArea,
+      about: renderAbout,
+      privacy: renderPrivacy
+    };
+    if (renderers[page] && content) renderers[page](content);
+    renderContactBar();
+    initReveal();
+
+    /* If the URL has a hash (e.g. about.html#quote), re-scroll after render
+       since the target element may not have existed at initial page load.
+       Forced to "auto": the stylesheet sets scroll-behavior: smooth, and a
+       smooth scroll started here gets cancelled by the browser's own scroll
+       restoration. rAF is fine for this one — a non-compositing tab just
+       means the scroll doesn't happen yet, not that content stays missing. */
+    if (window.location.hash) {
+      requestAnimationFrame(function () {
+        var target = null;
+        try { target = document.querySelector(window.location.hash); } catch (e) { /* not a selector */ }
+        if (target) target.scrollIntoView({ behavior: "auto", block: "start" });
+      });
+    }
+  }, 0);
 })();

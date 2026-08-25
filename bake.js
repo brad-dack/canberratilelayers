@@ -80,6 +80,19 @@ const rgba = (hex, alpha) => {
   return "rgba(" + r + "," + g + "," + b + "," + alpha + ")";
 };
 
+/* css/styles.css is inlined into every page's <head> rather than linked, so
+   first paint doesn't wait on a second render-blocking request (measured at
+   ~470ms off the critical path on Perth Brickworks). css/styles.css stays the
+   editable source on disk; bake.js is the only thing that reads it, so
+   re-run bake.js after editing it. A separate cacheable file would matter
+   more if GitHub Pages' cache TTL weren't fixed at 10 minutes — at that TTL
+   and this page count, inlining wins. Guards against a literal "</style>" in
+   the source, which would otherwise close the tag early. */
+function siteCss() {
+  const raw = fs.readFileSync(path.join(__dirname, "css/styles.css"), "utf8");
+  return raw.replace(/<\/style>/gi, "<\\/style>");
+}
+
 /* The full brand palette as a CSS block, baked into each page's <head> so
    crawlers and first paint see final colors with no JS and no flash.
    main.js re-derives the same values at runtime as a fallback. */
@@ -205,7 +218,7 @@ function head({ title, description, file, faqs, extraSchemas }) {
     '  <meta property="og:image:width" content="1200">',
     '  <meta property="og:image:height" content="630">',
     '  <meta name="twitter:card" content="summary_large_image">',
-    '  <link rel="stylesheet" href="css/styles.css">',
+    "  <style>" + siteCss() + "</style>",
     "  <style>" + brandCss() + "</style>",
     "  " + jsonLd(bizSchema()),
     faqs && faqs.length ? "  " + jsonLd(faqSchema(faqs)) : null,
@@ -224,25 +237,511 @@ const noscript =
     : " &mdash; enable JavaScript for a free quote.") +
   "</p></noscript>";
 
-// Hero pages (home, services, areas): static H1 inside the hero; main.js
-// fills .hero-dynamic and #page-content around it.
-const heroMain = headline => `    <section class="hero">
+/* ---------- baked body: a mirror of js/main.js's renderer -----------------
+
+   Everything below duplicates the corresponding function in js/main.js so the
+   page's real content exists in the static HTML at build time, rather than
+   being written into empty divs by JS after config.js and main.js have
+   downloaded and run.
+
+   Why this matters, from what the live sites measured:
+     - SEO. A no-JS crawl of Perth Brickworks' two long service pages saw 39
+       and 49 words, against ~6-10k words a JS-rendering crawl saw. Not every
+       crawler runs JS, and the ones that do run it later and less reliably.
+     - LCP. The hero image is the LCP element and can't be discovered by the
+       browser's preload scanner at all while a script has to build it first.
+     - CLS. #site-header is position:sticky, so filling it after first paint
+       pushes the whole page down — a layout shift on every page.
+
+   Every element this file bakes carries data-baked, and the matching
+   renderer in main.js skips it when that attribute is present. So the two
+   renderers can't produce conflicting output and there's no redundant work on
+   load — but they CAN drift as separate code, so any change to a renderer
+   here needs the same change in main.js, and vice versa. Keeping the two in
+   the same order, with the same function names, is deliberate.
+
+   The exceptions — things main.js still does unconditionally on every load,
+   because they can't be correct as fixed markup:
+     - the form's _id idempotency key (must be unique per real page load)
+     - the mobile contact bar, nav toggle, and form wiring (interactivity)
+     - Turnstile (loaded lazily, see loadTurnstileScript in main.js)
+--------------------------------------------------------------------------- */
+
+/* Generic UI labels — mirror of the UI object in js/main.js. */
+const UI = {
+  howItWorks: "How It Works",
+  services: "Our Services",
+  faqPreviewTitle: "Common Questions",
+  faqSeeAll: "See all questions",
+  serviceDetails: "Pricing &amp; details",
+  ctaBandTitle: "Ready to get started?",
+  callLabel: "Call",
+  orText: "or",
+  testimonialsTitle: "What Customers Say",
+  photosTitle: "Recent Work",
+  serviceAreaLabel: "Service area",
+  hoursLabel: "Hours",
+  backHome: "Back to homepage",
+  menuLabel: "Menu",
+  areasTitle: "Areas We Serve",
+  servicesInPrefix: "Services available in",
+  quoteShort: "Quote",
+  emailLabel: "Email",
+  faqTitle: "Frequently Asked Questions",
+  faqsTitle: "Frequently Asked Questions"
+};
+
+/* Mirror of ICONS/iconSvg in js/main.js. */
+const ICONS = {
+  phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>',
+  chat: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
+  clipboard: '<path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/>',
+  check: '<path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>',
+  calendar: '<rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>',
+  wrench: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+  bolt: '<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
+  home: '<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>'
+};
+
+function iconSvg(name) {
+  if (!name || !ICONS[name]) return "";
+  return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" ' +
+    'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ICONS[name] + "</svg>";
+}
+
+const hasPhone = () => !!(cfg.business.phone && cfg.business.phoneDisplay);
+const hasEmail = () => !!cfg.business.email;
+const hasHours = () => !!cfg.business.hours;
+const telHref = () => "tel:" + cfg.business.phone;
+
+const exists = rel => fs.existsSync(path.join(__dirname, rel));
+
+/* Mirror of richText() in js/main.js: escape first, THEN re-enable a tiny
+   markup subset, so config copy can never inject HTML. */
+function richText(s) {
+  let t = esc(String(s == null ? "" : s));
+  t = t.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, label, url) =>
+    '<a href="' + url + '">' + label + "</a>");
+  return t.replace(/\n/g, "<br>");
+}
+
+const callButtonHtml = extraClass => hasPhone()
+  ? '<a class="btn btn-outline ' + (extraClass || "") + '" href="' + telHref() + '">' +
+    UI.callLabel + " " + esc(cfg.business.phoneDisplay) + "</a>"
+  : "";
+
+const quoteButtonHtml = (text, extraClass) =>
+  '<a class="btn btn-primary ' + (extraClass || "") + '" href="about.html#quote">' +
+  esc(text) + "</a>";
+
+/* Responsive variants. An image entry may carry `widths: [400, 560, 720, 960]`
+   and a `sizes` string; each listed width needs a real file beside the
+   original, named <name>-<width>.<ext>. Falls back to a plain <img> when the
+   variants aren't on disk, so an image swapped in without regenerating them
+   still works, just without the size win — and --check warns about it.
+
+   The full-size image.src is deliberately NOT a srcset candidate: adding it
+   makes it a normal pick under high-DPR mobile sizes math, defeating the
+   whole point of the variants. It stays only in the plain src= fallback, for
+   browsers that ignore srcset. (Perth Limestone shipped it as a candidate for
+   two weeks and it was likely the main cause of the homepage's slow load
+   relative to every other page.) */
+function srcsetAttr(image) {
+  if (!image.widths || !image.widths.length) return "";
+  const dot = image.src.lastIndexOf(".");
+  const base = image.src.slice(0, dot), ext = image.src.slice(dot);
+  const set = image.widths.map(w => esc(base + "-" + w + ext) + " " + w + "w");
+  return ' srcset="' + set.join(", ") + '"' +
+    (image.sizes ? ' sizes="' + esc(image.sizes) + '"' : "");
+}
+
+/* Mirror of imgTag() in js/main.js. `title` defaults to the alt text — an
+   on-page audit flags every <img> without one — and can be overridden with an
+   optional `title` field on the image entry. */
+function imgTag(image, className, lazy) {
+  if (!image || !image.src) return "";
+  return '<img class="' + (className || "") + '" src="' + esc(image.src) + '"' +
+    srcsetAttr(image) +
+    ' alt="' + esc(image.alt || "") + '"' +
+    ' title="' + esc(image.title || image.alt || "") + '"' +
+    (image.width ? ' width="' + image.width + '"' : "") +
+    (image.height ? ' height="' + image.height + '"' : "") +
+    (lazy ? ' loading="lazy"' : ' fetchpriority="high"') + ">";
+}
+
+function faqItems(list) {
+  return (list || []).map(f =>
+    '<details class="faq-item"><summary>' + esc(f.q) + "</summary>" +
+    '<div class="faq-answer"><p>' + richText(f.a) + "</p></div></details>"
+  ).join("");
+}
+
+/* ---------- quote form (mirror of renderQuoteFormHtml in js/main.js) ------
+   The _id field is baked EMPTY on purpose: it's an idempotency key that has
+   to be unique per real page load, so a fixed value would make every visitor
+   to a given page share one. wireQuoteForm() in main.js fills it on load. */
+
+function fieldHtml(f, placeholders) {
+  const id = "qf-" + f.name;
+  const ph = (placeholders && placeholders[f.name]) || f.placeholder;
+  return '<div class="form-field"><label for="' + id + '">' + esc(f.label) + "</label>" +
+    '<input id="' + id + '" name="' + esc(f.name) + '" type="' + esc(f.type || "text") + '"' +
+    (f.autocomplete ? ' autocomplete="' + esc(f.autocomplete) + '"' : "") +
+    (ph ? ' placeholder="' + esc(ph) + '"' : "") +
+    (f.required === false ? "" : " required") + "></div>";
+}
+
+function quoteFormHtml(opts) {
+  opts = opts || {};
+  const fields = (cfg.contact.fields || []).concat(opts.extraField ? [opts.extraField] : []);
+  const fieldsHtml = fields.map(f => fieldHtml(f, opts.placeholders)).join("");
+
+  let picker = "", presetInput = "";
+  if (opts.presetService) {
+    presetInput = '<input type="hidden" name="service" value="' + esc(opts.presetService) + '">';
+  } else {
+    const options = cfg.services.map(s => s.name).concat([cfg.contact.otherServiceLabel]);
+    const radios = options.map(name =>
+      '<label class="service-option">' +
+        '<input type="radio" name="service" value="' + esc(name) + '" required>' +
+        "<span>" + esc(name) + "</span>" +
+      "</label>"
+    ).join("");
+    picker = '<fieldset class="form-step" id="form-step-1">' +
+      "<legend>" + esc(cfg.contact.step1Label) + "</legend>" +
+      '<div class="service-options">' + radios + "</div>" +
+    "</fieldset>";
+  }
+
+  return (opts.heading ? "<h2>" + esc(opts.heading) + "</h2>" : "") +
+    '<form id="quote-form" novalidate>' +
+      presetInput +
+      picker +
+      '<fieldset class="form-step" id="form-step-2"' + (picker ? " hidden" : "") + ">" +
+        (picker ? "<legend>" + esc(cfg.contact.step2Label) + "</legend>" : "") +
+        fieldsHtml +
+        '<input type="text" id="qf-gotcha" name="_gotcha" tabindex="-1" autocomplete="off" aria-hidden="true" ' +
+          'style="position:absolute;left:-9999px;top:-9999px">' +
+        '<input type="hidden" id="qf-id" name="_id" value="">' +
+        (cfg.turnstileSiteKey ? '<div id="turnstile-widget"></div>' : "") +
+        '<button class="btn btn-primary btn-block" type="submit">' + esc(cfg.contact.submitText) + "</button>" +
+      "</fieldset>" +
+      '<p class="form-status" id="form-status" role="status" aria-live="polite"></p>' +
+    "</form>";
+}
+
+/* ---------- content blocks (mirror of renderBlock in js/main.js) --------- */
+
+function blockHtml(b) {
+  switch (b.type) {
+    case "h2": return "<h2>" + richText(b.text) + "</h2>";
+    case "h3": return "<h3>" + richText(b.text) + "</h3>";
+    case "p": return "<p>" + richText(b.text) + "</p>";
+    case "lead": return '<p class="lead">' + richText(b.text) + "</p>";
+    case "ul":
+      return "<ul>" + b.items.map(i => "<li>" + richText(i) + "</li>").join("") + "</ul>";
+    case "ol":
+      return "<ol>" + b.items.map(i => "<li>" + richText(i) + "</li>").join("") + "</ol>";
+    case "table":
+      return '<div class="block-table-wrap"><table class="block-table">' +
+        (b.caption ? "<caption>" + richText(b.caption) + "</caption>" : "") +
+        "<thead><tr>" + b.headers.map(h => "<th>" + richText(h) + "</th>").join("") + "</tr></thead>" +
+        "<tbody>" + b.rows.map(row =>
+          "<tr>" + row.map(cell => "<td>" + richText(cell) + "</td>").join("") + "</tr>"
+        ).join("") + "</tbody></table></div>";
+    case "note":
+      return '<aside class="block-note">' + richText(b.text) + "</aside>";
+    case "credit":
+      return '<p class="block-credit">' + richText(b.text) + "</p>";
+    case "marker":
+      return '<div class="block-marker" role="note">' +
+        "<strong>Unfinished &mdash; not for publication.</strong> " + richText(b.text) + "</div>";
+    case "faqs":
+      return '<div class="block-faqs">' + faqItems(b.items) + "</div>";
+    case "form":
+      return quoteFormHtml({
+        heading: b.heading, presetService: b.presetService,
+        extraField: b.extraField, placeholders: b.placeholders
+      });
+    case "image":
+      return '<figure class="block-image">' + imgTag(b, "", true) +
+        (b.caption ? "<figcaption>" + richText(b.caption) + "</figcaption>" : "") + "</figure>";
+    default:
+      return "";
+  }
+}
+
+const renderBlocks = blocks => (blocks || []).map(blockHtml).join("");
+
+/* ---------- shared sections (mirrors of js/main.js) ---------------------- */
+
+function howItWorksSection(compact) {
+  const steps = (cfg.howItWorks || []).map((s, i) => {
+    const badge = s.icon && iconSvg(s.icon)
+      ? '<span class="step-num" aria-hidden="true">' + iconSvg(s.icon) + "</span>" +
+        '<span class="step-label">Step ' + (i + 1) + "</span>"
+      : '<span class="step-num" aria-hidden="true">' + (i + 1) + "</span>";
+    return '<li class="step">' + badge +
+      "<h3>" + esc(s.title) + "</h3><p>" + esc(s.text) + "</p></li>";
+  }).join("");
+  return '<section class="section how-it-works' + (compact ? " compact" : "") + '" id="how-it-works">' +
+    '<div class="container"><h2>' + UI.howItWorks + "</h2>" +
+    '<ol class="steps">' + steps + "</ol></div></section>";
+}
+
+function ctaBand(ctaText) {
+  const phoneLine = hasPhone()
+    ? UI.callLabel + ' <a href="' + telHref() + '">' + esc(cfg.business.phoneDisplay) +
+      "</a> " + UI.orText + " request your free quote online."
+    : "Request your free quote online.";
+  return '<section class="cta-band"><div class="container">' +
+    "<h2>" + UI.ctaBandTitle + "</h2><p>" + phoneLine + "</p>" +
+    quoteButtonHtml(ctaText, "btn-invert") + "</div></section>";
+}
+
+function testimonialsSection() {
+  if (!cfg.testimonials || !cfg.testimonials.length) return "";
+  const items = cfg.testimonials.map(t =>
+    '<figure class="testimonial"><blockquote>' + esc(t.quote) + "</blockquote>" +
+    "<figcaption>" + esc(t.name) + (t.detail ? " &mdash; " + esc(t.detail) : "") +
+    "</figcaption></figure>"
+  ).join("");
+  return '<section class="section"><div class="container"><h2>' + UI.testimonialsTitle +
+    '</h2><div class="grid-3">' + items + "</div></div></section>";
+}
+
+function photosSection() {
+  if (!cfg.photos || !cfg.photos.length) return "";
+  const items = cfg.photos.map(p =>
+    '<figure class="photo"><img loading="lazy" src="' + esc(p.src) + '" alt="' + esc(p.alt) +
+    '" title="' + esc(p.title || p.alt || "") + '">' +
+    (p.caption ? "<figcaption>" + esc(p.caption) + "</figcaption>" : "") + "</figure>"
+  ).join("");
+  return '<section class="section"><div class="container"><h2>' + UI.photosTitle +
+    '</h2><div class="grid-3">' + items + "</div></div></section>";
+}
+
+function serviceCards(services) {
+  return services.map(s =>
+    '<article class="card">' +
+      '<h3><a href="' + esc(s.page) + '">' + esc(s.name) + "</a></h3>" +
+      "<p>" + esc(s.shortDescription) + "</p>" +
+      '<a class="card-link" href="' + esc(s.page) + '">' + UI.serviceDetails + " &rarr;</a>" +
+    "</article>"
+  ).join("");
+}
+
+function areasSection() {
+  if (!cfg.areas || !cfg.areas.length) return "";
+  const links = cfg.areas.map(a =>
+    '<li><a href="' + esc(a.slug) + '.html">' + esc(a.name) + "</a></li>").join("");
+  return '<section class="section" id="areas"><div class="container"><h2>' + UI.areasTitle +
+    '</h2><ul class="area-links">' + links + "</ul></div></section>";
+}
+
+function faqsSection() {
+  if (!cfg.about.faqs || !cfg.about.faqs.length) return "";
+  return '<section class="section section-alt" id="faqs"><div class="container narrow">' +
+    "<h2>" + UI.faqsTitle + "</h2>" + faqItems(cfg.about.faqs) + "</div></section>";
+}
+
+/* ---------- header / footer (mirrors of js/main.js) ---------------------- */
+
+/* #site-header is position:sticky, so filling it from JS after first paint
+   pushes the whole page down — a layout shift on every page. The nav toggle's
+   click handler is still wired by main.js; only the markup is baked. */
+function headerHtml(file) {
+  const links = [
+    { href: "index.html", label: "Home" },
+    { href: "index.html#services", label: "Services" },
+    { href: "about.html", label: "Contact" }
+  ];
+  const nav = links.map(l =>
+    "<li><a" + (l.href === file ? ' class="active"' : "") +
+    ' href="' + l.href + '">' + l.label + "</a></li>").join("");
+  const navPhone = hasPhone()
+    ? '<a class="btn btn-primary nav-phone" href="' + telHref() + '">' +
+      UI.callLabel + " " + esc(cfg.business.phoneDisplay) + "</a>"
+    : quoteButtonHtml(cfg.pages.home.ctaText, "nav-phone");
+
+  return '<div class="container header-inner">' +
+      '<a class="logo" href="index.html">' + esc(cfg.business.name) + "</a>" +
+      '<button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="' + UI.menuLabel + '">' +
+        "<span></span><span></span><span></span>" +
+      "</button>" +
+      '<nav id="site-nav" class="site-nav" aria-label="Main">' +
+        "<ul>" + nav + "</ul>" + navPhone +
+      "</nav>" +
+    "</div>";
+}
+
+/* Baked so the footer's links to every service page are crawlable without
+   JS — on a small site that internal link block is a meaningful share of the
+   internal linking. */
+function footerHtml() {
+  const serviceLinks = cfg.services.map(s =>
+    '<li><a href="' + esc(s.page) + '">' + esc(s.name) + "</a></li>").join("");
+
+  const contactLines = [];
+  if (hasPhone()) contactLines.push('<a href="' + telHref() + '">' + esc(cfg.business.phoneDisplay) + "</a>");
+  if (hasEmail()) contactLines.push('<a href="mailto:' + esc(cfg.business.email) + '">' + esc(cfg.business.email) + "</a>");
+  const detailLines = [];
+  if (cfg.business.serviceArea) detailLines.push(UI.serviceAreaLabel + ": " + esc(cfg.business.serviceArea));
+  if (hasHours()) detailLines.push(UI.hoursLabel + ": " + esc(cfg.business.hours));
+
+  return '<div class="container footer-grid">' +
+      "<div>" +
+        '<p class="footer-brand">' + esc(cfg.business.name) + "</p>" +
+        (contactLines.length ? "<p>" + contactLines.join("<br>") + "</p>" : "") +
+        (detailLines.length ? "<p>" + detailLines.join("<br>") + "</p>" : "") +
+      "</div>" +
+      '<div><p class="footer-title">' + UI.services + "</p><ul>" + serviceLinks + "</ul></div>" +
+      '<div><p class="footer-title">Pages</p><ul>' +
+        '<li><a href="index.html">Home</a></li>' +
+        '<li><a href="about.html">About &amp; Contact</a></li>' +
+        '<li><a href="privacy.html">Privacy Policy</a></li>' +
+      "</ul></div>" +
+    "</div>" +
+    '<div class="container footer-bottom">' +
+      "<p>&copy; " + new Date().getFullYear() + " " + esc(cfg.business.name) +
+      (cfg.business.city ? ". Serving " + esc(cfg.business.city) + ", " + esc(cfg.business.state) + "." : ".") +
+      "</p>" +
+    "</div>";
+}
+
+/* ---------- page bodies -------------------------------------------------- */
+
+/* Hero pages (home, services, areas): H1, sub-headline, CTAs, value props and
+   the hero image all baked. The hero image is the LCP element — while a
+   script had to build it, the browser's preload scanner couldn't discover it
+   at all. Note there is deliberately no entrance animation on hero elements:
+   main.js adds html.anim only after first paint, so a fade-in here would hide
+   the headline and image and re-reveal them a moment later, and that later
+   moment is what gets measured as LCP. Below-the-fold content animates via
+   .reveal instead, where the cost is zero. */
+function heroMain(h, image, contentHtml) {
+  const media = imgTag(image, "hero-img", false);
+  return `    <section class="hero${media ? " has-media" : ""}">
       <div class="container hero-grid">
         <div class="hero-copy">
-          <h1>${esc(headline)}</h1>
-          <div class="hero-dynamic"></div>
-        </div>
+          <h1>${esc(h.headline)}</h1>
+          <div class="hero-dynamic" data-baked>${
+            (h.subheadline ? '<p class="hero-sub">' + esc(h.subheadline) + "</p>" : "") +
+            '<div class="hero-actions">' +
+              quoteButtonHtml(h.ctaText || cfg.pages.home.ctaText) + callButtonHtml() +
+            "</div>" +
+            '<ul class="value-props">' +
+              (cfg.valueProps || []).map(v => "<li>" + esc(v) + "</li>").join("") +
+            "</ul>"
+          }</div>
+        </div>${media ? '\n        <div class="hero-media">' + media + "</div>" : ""}
       </div>
     </section>
-    <div id="page-content"></div>`;
+    <div id="page-content" data-baked>${contentHtml}</div>`;
+}
 
-// Simple pages (faq/about/privacy): static H1 in the page header band.
-const pageHeadMain = headline => `    <section class="page-head">
+// Simple pages (about/privacy): static H1 in the page header band.
+const pageHeadMain = (headline, contentHtml) => `    <section class="page-head">
       <div class="container"><h1>${esc(headline)}</h1></div>
     </section>
-    <div id="page-content"></div>`;
+    <div id="page-content" data-baked>${contentHtml}</div>`;
 
-const page = (dataPage, headHtml, mainInner) => `<!DOCTYPE html>
+function homeContentHtml() {
+  const p = cfg.pages.home;
+  const faqPreview = (cfg.about.faqs || []).slice(0, cfg.faqPreviewCount || 3);
+  const faqSection = faqPreview.length
+    ? '<section class="section section-alt"><div class="container narrow">' +
+        "<h2>" + UI.faqPreviewTitle + "</h2>" + faqItems(faqPreview) +
+        '<p class="center"><a class="text-link" href="about.html#faqs">' + UI.faqSeeAll + " &rarr;</a></p>" +
+      "</div></section>"
+    : "";
+  return '<section class="section" id="services"><div class="container">' +
+      "<h2>" + UI.services + '</h2><div class="grid-3">' + serviceCards(cfg.services) + "</div></div></section>" +
+    areasSection() + howItWorksSection(false) + testimonialsSection() + faqSection + ctaBand(p.ctaText);
+}
+
+function serviceContentHtml(svc) {
+  return '<section class="section"><div class="container narrow prose">' +
+      renderBlocks(svc.blocks) +
+      '<p class="center"><a class="btn btn-primary" href="about.html#quote">' + esc(svc.ctaText) + "</a></p>" +
+    "</div></section>" +
+    howItWorksSection(true) + testimonialsSection() + ctaBand(svc.ctaText);
+}
+
+function areaContentHtml(area) {
+  const detail = area.localDetail
+    ? [].concat(area.localDetail).map(t => "<p>" + esc(t) + "</p>").join("")
+    : "";
+  const featured = area.services && area.services.length
+    ? cfg.services.filter(s => area.services.indexOf(s.page) !== -1)
+    : cfg.services;
+  return '<section class="section"><div class="container narrow">' +
+      area.intro.map(t => '<p class="lead">' + esc(t) + "</p>").join("") + detail +
+    "</div></section>" +
+    '<section class="section section-alt"><div class="container">' +
+      "<h2>" + UI.servicesInPrefix + " " + esc(area.name) + "</h2>" +
+      '<div class="grid-3">' + serviceCards(featured) + "</div>" +
+      '<p class="center"><a class="text-link" href="index.html">' + UI.backHome + " &rarr;</a></p>" +
+    "</div></section>" +
+    howItWorksSection(true) +
+    (area.faqs && area.faqs.length
+      ? '<section class="section section-alt"><div class="container narrow">' +
+          "<h2>" + esc(area.name) + " &mdash; " + UI.faqTitle + "</h2>" + faqItems(area.faqs) +
+        "</div></section>"
+      : "") +
+    ctaBand(area.ctaText || cfg.pages.home.ctaText);
+}
+
+function aboutContentHtml() {
+  const contactLines = [];
+  if (hasPhone()) contactLines.push("<strong>" + UI.callLabel + ":</strong> " +
+    '<a href="' + telHref() + '">' + esc(cfg.business.phoneDisplay) + "</a>");
+  if (hasEmail()) contactLines.push("<strong>Email:</strong> " +
+    '<a href="mailto:' + esc(cfg.business.email) + '">' + esc(cfg.business.email) + "</a>");
+  if (cfg.business.serviceArea) contactLines.push("<strong>" + UI.serviceAreaLabel + ":</strong> " + esc(cfg.business.serviceArea));
+  if (hasHours()) contactLines.push("<strong>" + UI.hoursLabel + ":</strong> " + esc(cfg.business.hours));
+
+  return '<section class="section"><div class="container narrow">' +
+      cfg.about.paragraphs.map(t => '<p class="lead">' + richText(t) + "</p>").join("") +
+      (contactLines.length ? '<p class="contact-lines">' + contactLines.join("<br>") + "</p>" : "") +
+    "</div></section>" +
+    photosSection() +
+    '<section class="section section-alt" id="quote"><div class="container narrow">' +
+      "<h2>" + esc(cfg.contact.formHeadline) + "</h2>" +
+      '<p class="reassurance">' + esc(cfg.contact.reassurance) + "</p>" +
+      quoteFormHtml({}) +
+    "</div></section>" +
+    faqsSection();
+}
+
+/* Mirror of renderPrivacy() in js/main.js — keep the two copies in step. */
+function privacyContentHtml() {
+  const p = cfg.pages.privacy;
+  const name = esc(cfg.business.name);
+  return '<section class="section"><div class="container narrow prose">' +
+      "<p><em>Last updated: " + esc(p.lastUpdated) + "</em></p>" +
+      "<h2>What this website collects</h2>" +
+      "<p>When you use the quote form on this site, we collect three things: your <strong>name</strong>, your <strong>phone number</strong>, and the <strong>service you need</strong>. That's it &mdash; the form has no other fields.</p>" +
+      "<h2>How it's used</h2>" +
+      "<p>Your details are used for one purpose: to contact you about your quote request. They are not sold, shared with advertisers, or added to any marketing list.</p>" +
+      "<h2>Who processes the form</h2>" +
+      "<p>The form is delivered directly to our own systems for handling enquiries. A free security check (Cloudflare Turnstile) runs in the background to filter out automated spam submissions before your enquiry reaches us.</p>" +
+      "<h2>Analytics</h2>" +
+      "<p>This site may use Google Analytics to understand how visitors find and use it (for example, which pages are viewed). Google Analytics uses cookies and collects anonymous usage data such as your general location and device type. It does not see anything you type into the quote form.</p>" +
+      "<h2>Phone calls</h2>" +
+      "<p>If you call the number on this site, standard call records apply. We don't record calls.</p>" +
+      "<h2>Your choices</h2>" +
+      "<p>If you'd like the details you submitted to be deleted, call " +
+      '<a href="' + telHref() + '">' + esc(cfg.business.phoneDisplay) + "</a> or email " +
+      '<a href="mailto:' + esc(cfg.business.email) + '">' + esc(cfg.business.email) + "</a> and ask &mdash; they'll be removed.</p>" +
+      "<h2>Contact</h2>" +
+      "<p>Questions about this policy can be sent to " + name + " at " +
+      '<a href="mailto:' + esc(cfg.business.email) + '">' + esc(cfg.business.email) + "</a>.</p>" +
+    "</div></section>";
+}
+
+const page = (dataPage, headHtml, mainInner, file) => `<!DOCTYPE html>
 <html lang="en" data-style="${themeStyle()}" data-pattern="${themePattern()}">
 <head>
 ${headHtml}
@@ -250,11 +749,11 @@ ${headHtml}
 <body data-page="${dataPage}">
   <a class="skip-link" href="#main">Skip to content</a>
   ${noscript}
-  <header id="site-header"></header>
+  <header id="site-header" data-baked>${headerHtml(file)}</header>
   <main id="main">
 ${mainInner}
   </main>
-  <footer id="site-footer"></footer>
+  <footer id="site-footer" data-baked>${footerHtml()}</footer>
 </body>
 </html>
 `;
@@ -266,7 +765,8 @@ function buildPages() {
 
   files.push(["index.html", page("home",
     head({ title: cfg.pages.home.metaTitle, description: cfg.pages.home.metaDescription, file: "index.html" }),
-    heroMain(cfg.pages.home.headline))]);
+    heroMain(cfg.pages.home, cfg.pages.home.image, homeContentHtml()),
+    "index.html")]);
 
   for (const svc of cfg.services) {
     files.push([svc.page, page("service",
@@ -278,7 +778,8 @@ function buildPages() {
           breadcrumbSchema(svc.name, canonicalFor(svc.page))
         ]
       }),
-      heroMain(svc.headline))]);
+      heroMain(svc, svc.image, serviceContentHtml(svc)),
+      svc.page)]);
   }
 
   for (const area of cfg.areas || []) {
@@ -288,7 +789,8 @@ function buildPages() {
         title: area.metaTitle, description: area.metaDescription, file: file, faqs: area.faqs,
         extraSchemas: [breadcrumbSchema(area.name, canonicalFor(file))]
       }),
-      heroMain(area.headline))]);
+      heroMain(area, null, areaContentHtml(area)),
+      file)]);
   }
 
   files.push(["about.html", page("about",
@@ -297,14 +799,16 @@ function buildPages() {
       faqs: cfg.about.faqs,
       extraSchemas: [breadcrumbSchema(cfg.pages.about.headline, canonicalFor("about.html"))]
     }),
-    pageHeadMain(cfg.pages.about.headline))]);
+    pageHeadMain(cfg.pages.about.headline, aboutContentHtml()),
+    "about.html")]);
 
   files.push(["privacy.html", page("privacy",
     head({
       title: cfg.pages.privacy.metaTitle, description: cfg.pages.privacy.metaDescription, file: "privacy.html",
       extraSchemas: [breadcrumbSchema(cfg.pages.privacy.headline, canonicalFor("privacy.html"))]
     }),
-    pageHeadMain(cfg.pages.privacy.headline))]);
+    pageHeadMain(cfg.pages.privacy.headline, privacyContentHtml()),
+    "privacy.html")]);
 
   return files;
 }
@@ -481,7 +985,6 @@ function runCheck() {
     try { return fs.readFileSync(path.join(__dirname, f), "utf8"); }
     catch (e) { return null; }
   };
-  const exists = f => fs.existsSync(path.join(__dirname, f));
   const trunc = s => s.length > 60 ? s.slice(0, 57) + "..." : s;
 
   /* -- 1a. unfinished-content scan over every string VALUE in config ------ */
@@ -645,6 +1148,23 @@ function runCheck() {
         if (!exists(node.src)) errors.push("config " + trail + ": image file not found: " + node.src);
         if (!node.width || !node.height) {
           errors.push("config " + trail + ": image entry missing width/height (" + node.src + ")");
+        }
+        /* Declared responsive variants must actually be on disk, or the
+           browser picks a 404 for that width. Warn rather than fail: the
+           plain src= fallback still works, it's just the full-size file. */
+        if (node.widths && node.widths.length) {
+          const dot = node.src.lastIndexOf(".");
+          const base = node.src.slice(0, dot), ext = node.src.slice(dot);
+          const missing = node.widths
+            .map(w => base + "-" + w + ext).filter(v => !exists(v));
+          if (missing.length) {
+            warnings.push("config " + trail + ": declared responsive variant(s) not on disk (" +
+              missing.join(", ") + ") — those srcset candidates will 404");
+          }
+        }
+        if (node.widths && node.widths.length && !node.sizes) {
+          warnings.push("config " + trail + ": has widths but no sizes string (" + node.src +
+            ") — without it the browser assumes 100vw and picks a larger file than needed");
         }
       }
       Object.keys(node).forEach(k => walkImages(node[k], trail ? trail + "." + k : k));
