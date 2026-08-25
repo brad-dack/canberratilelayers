@@ -95,7 +95,7 @@ function siteCss() {
 
 /* The full brand palette as a CSS block, baked into each page's <head> so
    crawlers and first paint see final colors with no JS and no flash.
-   main.js re-derives the same values at runtime as a fallback. */
+   This is the only place they are derived. */
 function brandCss() {
   const c = cfg.brand.color;
   return ":root{" +
@@ -237,14 +237,17 @@ const noscript =
     : " &mdash; enable JavaScript for a free quote.") +
   "</p></noscript>";
 
-/* ---------- baked body: a mirror of js/main.js's renderer -----------------
+/* ---------- the renderer --------------------------------------------------
 
-   Everything below duplicates the corresponding function in js/main.js so the
-   page's real content exists in the static HTML at build time, rather than
-   being written into empty divs by JS after config.js and main.js have
-   downloaded and run.
+   THIS IS THE ONLY RENDERER. Everything below turns config.js into the
+   finished HTML — header, hero, page content, footer, the quote form's
+   markup — at build time. js/main.js does not build the page; it only wires
+   up behaviour on the HTML this file produced. A copy or layout change means
+   editing config.js or this file and running `node bake.js`.
 
-   Why this matters, from what the live sites measured:
+   It used to be the other way around: the browser built the page and this
+   file baked only the <head> and the H1. That cost, from what the live sites
+   measured:
      - SEO. A no-JS crawl of Perth Brickworks' two long service pages saw 39
        and 49 words, against ~6-10k words a JS-rendering crawl saw. Not every
        crawler runs JS, and the ones that do run it later and less reliably.
@@ -253,21 +256,23 @@ const noscript =
      - CLS. #site-header is position:sticky, so filling it after first paint
        pushes the whole page down — a layout shift on every page.
 
-   Every element this file bakes carries data-baked, and the matching
-   renderer in main.js skips it when that attribute is present. So the two
-   renderers can't produce conflicting output and there's no redundant work on
-   load — but they CAN drift as separate code, so any change to a renderer
-   here needs the same change in main.js, and vice versa. Keeping the two in
-   the same order, with the same function names, is deliberate.
+   For a while both files carried a copy of this renderer, with main.js
+   skipping any element marked data-baked. That worked but left two copies of
+   the same recipe free to drift. The browser copy is gone: this file is the
+   source of truth, and there is nothing left to keep in sync.
 
-   The exceptions — things main.js still does unconditionally on every load,
-   because they can't be correct as fixed markup:
-     - the form's _id idempotency key (must be unique per real page load)
-     - the mobile contact bar, nav toggle, and form wiring (interactivity)
-     - Turnstile (loaded lazily, see loadTurnstileScript in main.js)
+   The three things that genuinely can't be fixed markup, and so live in
+   main.js instead:
+     - the form's _id idempotency key (must be unique per real page load, so
+       it is baked EMPTY and filled on load)
+     - Turnstile (loaded lazily, so it doesn't compete with the hero for
+       bandwidth during the LCP window)
+     - the mobile contact bar (a position:fixed overlay duplicating links
+       already baked into the header and footer)
 --------------------------------------------------------------------------- */
 
-/* Generic UI labels — mirror of the UI object in js/main.js. */
+/* Generic UI labels — the reader-facing text that isn't niche-specific.
+   Niche-specific copy all comes from config.js. */
 const UI = {
   howItWorks: "How It Works",
   services: "Our Services",
@@ -291,7 +296,8 @@ const UI = {
   faqsTitle: "Frequently Asked Questions"
 };
 
-/* Mirror of ICONS/iconSvg in js/main.js. */
+/* Inline SVG icon set for how-it-works steps (referenced by name from
+   config.js). Inline = zero extra requests, colored via currentColor. */
 const ICONS = {
   phone: '<path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/>',
   chat: '<path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>',
@@ -316,7 +322,7 @@ const telHref = () => "tel:" + cfg.business.phone;
 
 const exists = rel => fs.existsSync(path.join(__dirname, rel));
 
-/* Mirror of richText() in js/main.js: escape first, THEN re-enable a tiny
+/* Escape first, THEN re-enable a tiny
    markup subset, so config copy can never inject HTML. */
 function richText(s) {
   let t = esc(String(s == null ? "" : s));
@@ -356,7 +362,7 @@ function srcsetAttr(image) {
     (image.sizes ? ' sizes="' + esc(image.sizes) + '"' : "");
 }
 
-/* Mirror of imgTag() in js/main.js. `title` defaults to the alt text — an
+/* `title` defaults to the alt text — an
    on-page audit flags every <img> without one — and can be overridden with an
    optional `title` field on the image entry. */
 function imgTag(image, className, lazy) {
@@ -377,7 +383,7 @@ function faqItems(list) {
   ).join("");
 }
 
-/* ---------- quote form (mirror of renderQuoteFormHtml in js/main.js) ------
+/* ---------- quote form ---------------------------------------------------
    The _id field is baked EMPTY on purpose: it's an idempotency key that has
    to be unique per real page load, so a fixed value would make every visitor
    to a given page share one. wireQuoteForm() in main.js fills it on load. */
@@ -431,7 +437,7 @@ function quoteFormHtml(opts) {
     "</form>";
 }
 
-/* ---------- content blocks (mirror of renderBlock in js/main.js) --------- */
+/* ---------- content blocks ---------------------------------------------- */
 
 function blockHtml(b) {
   switch (b.type) {
@@ -474,7 +480,7 @@ function blockHtml(b) {
 
 const renderBlocks = blocks => (blocks || []).map(blockHtml).join("");
 
-/* ---------- shared sections (mirrors of js/main.js) ---------------------- */
+/* ---------- shared sections --------------------------------------------- */
 
 function howItWorksSection(compact) {
   const steps = (cfg.howItWorks || []).map((s, i) => {
@@ -546,7 +552,7 @@ function faqsSection() {
     "<h2>" + UI.faqsTitle + "</h2>" + faqItems(cfg.about.faqs) + "</div></section>";
 }
 
-/* ---------- header / footer (mirrors of js/main.js) ---------------------- */
+/* ---------- header / footer --------------------------------------------- */
 
 /* #site-header is position:sticky, so filling it from JS after first paint
    pushes the whole page down — a layout shift on every page. The nav toggle's
@@ -626,7 +632,7 @@ function heroMain(h, image, contentHtml) {
       <div class="container hero-grid">
         <div class="hero-copy">
           <h1>${esc(h.headline)}</h1>
-          <div class="hero-dynamic" data-baked>${
+          <div class="hero-dynamic">${
             (h.subheadline ? '<p class="hero-sub">' + esc(h.subheadline) + "</p>" : "") +
             '<div class="hero-actions">' +
               quoteButtonHtml(h.ctaText || cfg.pages.home.ctaText) + callButtonHtml() +
@@ -638,14 +644,14 @@ function heroMain(h, image, contentHtml) {
         </div>${media ? '\n        <div class="hero-media">' + media + "</div>" : ""}
       </div>
     </section>
-    <div id="page-content" data-baked>${contentHtml}</div>`;
+    <div id="page-content">${contentHtml}</div>`;
 }
 
 // Simple pages (about/privacy): static H1 in the page header band.
 const pageHeadMain = (headline, contentHtml) => `    <section class="page-head">
       <div class="container"><h1>${esc(headline)}</h1></div>
     </section>
-    <div id="page-content" data-baked>${contentHtml}</div>`;
+    <div id="page-content">${contentHtml}</div>`;
 
 function homeContentHtml() {
   const p = cfg.pages.home;
@@ -715,7 +721,7 @@ function aboutContentHtml() {
     faqsSection();
 }
 
-/* Mirror of renderPrivacy() in js/main.js — keep the two copies in step. */
+
 function privacyContentHtml() {
   const p = cfg.pages.privacy;
   const name = esc(cfg.business.name);
@@ -749,11 +755,11 @@ ${headHtml}
 <body data-page="${dataPage}">
   <a class="skip-link" href="#main">Skip to content</a>
   ${noscript}
-  <header id="site-header" data-baked>${headerHtml(file)}</header>
+  <header id="site-header">${headerHtml(file)}</header>
   <main id="main">
 ${mainInner}
   </main>
-  <footer id="site-footer" data-baked>${footerHtml()}</footer>
+  <footer id="site-footer">${footerHtml()}</footer>
 </body>
 </html>
 `;
@@ -1108,11 +1114,22 @@ function runCheck() {
     if (!exists(p)) errors.push("service page file missing from disk: " + p +
       " (run node bake.js)");
   }
-  const stubsOnDisk = fs.readdirSync(__dirname)
-    .filter(f => /^service-\d+\.html$/.test(f));
-  for (const stub of stubsOnDisk) {
-    if (!servicePages.includes(stub)) {
-      errors.push("orphaned service stub with no config entry: " + stub + " (delete it?)");
+  /* Any .html on disk that bake.js didn't generate is orphaned — most often a
+     service or area page left behind after its config entry was renamed or
+     removed. It still serves, still gets crawled, and now shows stale copy
+     that no longer matches config.
+
+     This replaces a runtime guard: js/main.js used to detect an unmapped page
+     at load time and replace it with a "Page not in use" notice. Now that
+     bake.js is the only renderer there is nothing to detect it in the
+     browser, so the check moves here — which is better anyway, since it fires
+     before the stale page is ever deployed rather than after. */
+  const generated = new Set(buildPages().map(([f]) => f).concat(["404.html"]));
+  for (const f of fs.readdirSync(__dirname).filter(f => f.endsWith(".html"))) {
+    if (!generated.has(f)) {
+      errors.push("orphaned page file with no config entry: " + f +
+        " — bake.js does not generate it, so its copy is frozen at whatever " +
+        "config said when it was last baked (delete it, or add the config entry back)");
     }
   }
 

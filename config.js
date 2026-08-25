@@ -92,7 +92,7 @@ window.SITE_CONFIG = {
      checks (light abuse resistance + the site's identity), and
      turnstileSiteKey is the Cloudflare Turnstile key used for spam filtering.
      Whichever services host the endpoint receive enquiry data, so name them in
-     the privacy policy copy (see renderPrivacy in js/main.js). */
+     the privacy policy copy (see privacyContentHtml in bake.js). */
   ingestUrl: "YOUR_INGEST_URL",
   ingestSecret: "YOUR_INGEST_SECRET",
   turnstileSiteKey: "",
@@ -162,7 +162,7 @@ window.SITE_CONFIG = {
   ],
 
   /* --- How it works (shown on homepage + compact version on service pages)
-     "icon" picks an inline SVG from the built-in set in js/main.js:
+     "icon" picks an inline SVG from the built-in set in bake.js:
      phone | chat | clipboard | check | calendar | wrench | bolt | home     */
   howItWorks: [
     {
