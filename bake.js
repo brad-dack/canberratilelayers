@@ -1025,13 +1025,42 @@ function runCheck() {
     [/\bcredibility upgrade\b/i, "editorial commentary"],
     [/\btracked separately\b/i, "internal tracking note"],
     [/\bmarker\b/i, "internal marker jargon"],
-    [/\b(?:config|bake)\.js\b/, "reference to the site's own source files"]
+    [/\b(?:config|bake)\.js\b/, "reference to the site's own source files"],
+    /* The next three are from Perth Brickworks (217b7f1). A real citation and
+       a note about the author's own research process happened to share a
+       sentence, so notes carrying real URLs read as legitimate at first pass
+       — "(already cited above for its councils)", "a live policy-document
+       link could not be found (site links returned 404 at the time of
+       checking)", "This is three councils, not a survey of all thirty". None
+       of that is information a reader needs. */
+    [/\balready cited above\b/i, "internal cross-reference note"],
+    [/\b(?:returned 404|could not be found)\b/i, "failed-research admission"],
+    [/\bnot a survey of all\b/i, "scope-disclosure note"],
+    /* From Perth Limestone (d94c843). A review cadence is something only the
+       operator has: a reader-facing caveat says "re-check before relying on
+       this row", a note to self says "re-check on a fixed schedule". */
+    [/\bon a fixed schedule\b/i, "maintenance-cadence note"],
+    [/\bdate is updated each time\b/i, "maintenance-cadence note"]
   ];
+  /* An author name inside a `note` is almost always the author auditing their
+     own sourcing ("Brad knows this area firsthand") rather than information a
+     reader needs. Scoped to .note rather than global so the `credit` bylines
+     ("Researched and written by …") are unaffected. Set schema.founder in
+     config and this fires on that name; leave it unset and the check is off.
+     From Perth Brickworks (217b7f1), generalised from a hardcoded "Brad". */
+  const founder = (cfg.schema && cfg.schema.founder) || "";
+  const AUTHOR_VOICE_NOTE_ONLY_PATTERNS = founder
+    ? [[new RegExp("\\b" + founder.split(/\s+/)[0].replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b"),
+        "author self-reference"]]
+    : [];
   (function walk(node, trail, inMarker) {
     if (typeof node === "string") {
       // Marker blocks are author-facing by design and already reported above.
       if (!inMarker) {
-        for (const [re, label] of AUTHOR_VOICE_PATTERNS) {
+        const checks = /\.note$/.test(trail)
+          ? AUTHOR_VOICE_PATTERNS.concat(AUTHOR_VOICE_NOTE_ONLY_PATTERNS)
+          : AUTHOR_VOICE_PATTERNS;
+        for (const [re, label] of checks) {
           if (re.test(node)) {
             errors.push("config " + trail + ": author-voice note in reader-facing " +
               "copy (" + label + ") — move it to a code comment — \"" + trunc(node) + '"');
@@ -1193,6 +1222,26 @@ function runCheck() {
     }
   }
 
+  /* -- 8b. metaTitle length -------------------------------------------------
+     Under ~30 chars reads as thin to on-page SEO tools (DataForSEO flags it);
+     over ~60 gets truncated in the Google result. About and privacy are the
+     usual culprits, since "About {Business Name}" is the tempting default.
+     Warn rather than fail — a short title is sometimes deliberate. From Perth
+     Limestone (b7d406b), where an on-page audit caught a 28-char About
+     title. */
+  for (const [label, obj] of metas) {
+    const t = obj.metaTitle;
+    if (!t) continue;
+    if (t.length < 30) {
+      warnings.push(label + " metaTitle is only " + t.length + ' chars ("' + t +
+        '") — likely to read as thin/duplicate-prone to SEO tools; aim for ' +
+        '30-60, e.g. "About {Business Name} | {Service} in {City}"');
+    } else if (t.length > 60) {
+      warnings.push(label + " metaTitle is " + t.length + ' chars ("' + t +
+        '") — likely to get truncated in the Google search result');
+    }
+  }
+
   /* -- 9. banned LocalBusiness-only schema terms while type is Organization -
      Belt-and-braces: if config still says Organization (the pre-renter
      default — see bake.js schema builders), grep every baked page for terms
@@ -1221,7 +1270,7 @@ function runCheck() {
   /* -- 9b. no way to contact (warn) ---------------------------------------- */
   if (!cfg.business.phone && !cfg.business.email) {
     warnings.push("business.phone and business.email are both empty — the only way to " +
-      "receive a lead is the quote form (formspreeId)");
+      "receive a lead is the quote form (ingestUrl/ingestSecret)");
   }
 
   /* -- 10. testimonials / photos populated (warn — must be REAL content) ---- */

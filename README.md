@@ -77,9 +77,21 @@ categories:
    meta title/description, and banned LocalBusiness-only schema terms
    reappearing while `schema.type` is `Organization`.
 
-Warnings (non-fatal) fire if `testimonials`/`photos` are populated, or if
-`business.phone` and `business.email` are both empty — reminders, not
-blockers.
+Warnings (non-fatal) fire if `testimonials`/`photos` are populated, if
+`business.phone` and `business.email` are both empty, if a `metaTitle` is
+under 30 or over 60 characters, or if an image declares `widths` whose
+variant files aren't on disk — reminders, not blockers.
+
+**Author-voice guard.** Every string value in `config.js` is rendered to the
+public site, so the preflight also flags working notes written to the
+operator rather than to a reader: dated decision logs, "not urgent",
+"no source found yet", cross-references like "already cited above", failed
+research ("returned 404", "could not be found"), review-cadence instructions
+("on a fixed schedule"), and — inside a `note` block only — the
+`schema.founder` name. Those belong in a code comment, not in copy. The
+patterns are deliberately narrow: a hit should mean real author-voice copy,
+so if one fires on legitimate reader copy, reword the copy rather than
+loosening the pattern.
 
 ## Content blocks (service pages)
 

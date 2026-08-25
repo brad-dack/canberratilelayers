@@ -111,7 +111,13 @@ window.SITE_CONFIG = {
      and reviews are on the site. */
   schema: {
     type: "Organization",
-    priceRange: "$$" // only used once schema.type is a LocalBusiness subtype
+    priceRange: "$$", // only used once schema.type is a LocalBusiness subtype
+    /* Who actually researched and wrote the site's copy. Two uses: the
+       `credit` byline on long-form pages, and a --check guard — the author's
+       own name inside a `note` block is almost always them auditing their
+       sourcing ("X knows this area firsthand") rather than something a reader
+       needs. Leave empty to switch that guard off. */
+    founder: ""
   },
 
   /* --- Homepage ---------------------------------------------------------- */
