@@ -112,7 +112,7 @@ function brandCss() {
 }
 
 /* Core pages that always exist; area slugs must not collide with these. */
-const CORE_PAGES = ["index.html", "about.html", "privacy.html", "404.html"];
+const CORE_PAGES = ["index.html", "about.html", "contact.html", "disclaimer.html", "privacy.html", "404.html"];
 
 const areaFile = area => area.slug + ".html";
 
@@ -338,7 +338,7 @@ const callButtonHtml = extraClass => hasPhone()
   : "";
 
 const quoteButtonHtml = (text, extraClass) =>
-  '<a class="btn btn-primary ' + (extraClass || "") + '" href="about.html#quote">' +
+  '<a class="btn btn-primary ' + (extraClass || "") + '" href="contact.html#quote">' +
   esc(text) + "</a>";
 
 /* Responsive variants. An image entry may carry `widths: [400, 560, 720, 960]`
@@ -391,11 +391,17 @@ function faqItems(list) {
 function fieldHtml(f, placeholders) {
   const id = "qf-" + f.name;
   const ph = (placeholders && placeholders[f.name]) || f.placeholder;
+  const reqAttr = f.required === false ? "" : " required";
+  if (f.type === "textarea") {
+    return '<div class="form-field"><label for="' + id + '">' + esc(f.label) + "</label>" +
+      '<textarea id="' + id + '" name="' + esc(f.name) + '" rows="' + (f.rows || 4) + '"' +
+      (ph ? ' placeholder="' + esc(ph) + '"' : "") + reqAttr + "></textarea></div>";
+  }
   return '<div class="form-field"><label for="' + id + '">' + esc(f.label) + "</label>" +
     '<input id="' + id + '" name="' + esc(f.name) + '" type="' + esc(f.type || "text") + '"' +
     (f.autocomplete ? ' autocomplete="' + esc(f.autocomplete) + '"' : "") +
     (ph ? ' placeholder="' + esc(ph) + '"' : "") +
-    (f.required === false ? "" : " required") + "></div>";
+    reqAttr + "></div>";
 }
 
 function quoteFormHtml(opts) {
@@ -407,7 +413,15 @@ function quoteFormHtml(opts) {
   if (opts.presetService) {
     presetInput = '<input type="hidden" name="service" value="' + esc(opts.presetService) + '">';
   } else {
-    const options = cfg.services.map(s => s.name).concat([cfg.contact.otherServiceLabel]);
+    /* Job-type picker options come from cfg.contact.jobTypes, NOT
+       cfg.services — the services array is a list of PAGES on this build
+       (it includes content assets like the cost guide and the quote
+       checklist, neither of which is something a homeowner "needs done").
+       jobTypes is the actual set of enquiry categories a customer picks
+       from. Falls back to service names for a template config that hasn't
+       set jobTypes, so older/simpler builds keep working. */
+    const options = (cfg.contact.jobTypes || cfg.services.map(s => s.name))
+      .concat([cfg.contact.otherServiceLabel]);
     const radios = options.map(name =>
       '<label class="service-option">' +
         '<input type="radio" name="service" value="' + esc(name) + '" required>' +
@@ -496,14 +510,17 @@ function howItWorksSection(compact) {
     '<ol class="steps">' + steps + "</ol></div></section>";
 }
 
-function ctaBand(ctaText) {
+/* heading/body are OPTIONAL per-page overrides (each service/page entry can
+   set ctaHeading/ctaBody) — falls back to the generic sitewide copy when a
+   page doesn't specify its own, so older/simpler configs keep working. */
+function ctaBand(ctaText, heading, body) {
   const phoneLine = hasPhone()
     ? UI.callLabel + ' <a href="' + telHref() + '">' + esc(cfg.business.phoneDisplay) +
       "</a> " + UI.orText + " request your free quote online."
     : "Request your free quote online.";
   return '<section class="cta-band"><div class="container">' +
-    "<h2>" + UI.ctaBandTitle + "</h2><p>" + phoneLine + "</p>" +
-    quoteButtonHtml(ctaText, "btn-invert") + "</div></section>";
+    "<h2>" + esc(heading || UI.ctaBandTitle) + "</h2><p>" + richText(body || "") + (body ? "" : phoneLine) + "</p>" +
+    quoteButtonHtml(ctaText, "btn-invert") + callButtonHtml("btn-invert") + "</div></section>";
 }
 
 function testimonialsSection() {
@@ -560,8 +577,8 @@ function faqsSection() {
 function headerHtml(file) {
   const links = [
     { href: "index.html", label: "Home" },
-    { href: "index.html#services", label: "Services" },
-    { href: "about.html", label: "Contact" }
+    { href: "about.html", label: "About" },
+    { href: "contact.html", label: "Contact" }
   ];
   const nav = links.map(l =>
     "<li><a" + (l.href === file ? ' class="active"' : "") +
@@ -605,8 +622,10 @@ function footerHtml() {
       '<div><p class="footer-title">' + UI.services + "</p><ul>" + serviceLinks + "</ul></div>" +
       '<div><p class="footer-title">Pages</p><ul>' +
         '<li><a href="index.html">Home</a></li>' +
-        '<li><a href="about.html">About &amp; Contact</a></li>' +
+        '<li><a href="about.html">About</a></li>' +
+        '<li><a href="contact.html">Contact</a></li>' +
         '<li><a href="privacy.html">Privacy Policy</a></li>' +
+        '<li><a href="disclaimer.html">Disclaimer</a></li>' +
       "</ul></div>" +
     "</div>" +
     '<div class="container footer-bottom">' +
@@ -653,26 +672,26 @@ const pageHeadMain = (headline, contentHtml) => `    <section class="page-head">
     </section>
     <div id="page-content">${contentHtml}</div>`;
 
+/* Home renders from cfg.pages.home.blocks (routing block, service coverage,
+   the tiling-process explainer, FAQs, etc.) — the same block system as every
+   other page, rather than the generic services-grid/areas/testimonials
+   scaffolding the template ships with. That scaffolding was built for a
+   fixed-card "3-5 services" niche; this build's homepage is long-form,
+   message-matched copy, so it fits the block system, not the cards. */
 function homeContentHtml() {
   const p = cfg.pages.home;
-  const faqPreview = (cfg.about.faqs || []).slice(0, cfg.faqPreviewCount || 3);
-  const faqSection = faqPreview.length
-    ? '<section class="section section-alt"><div class="container narrow">' +
-        "<h2>" + UI.faqPreviewTitle + "</h2>" + faqItems(faqPreview) +
-        '<p class="center"><a class="text-link" href="about.html#faqs">' + UI.faqSeeAll + " &rarr;</a></p>" +
-      "</div></section>"
-    : "";
-  return '<section class="section" id="services"><div class="container">' +
-      "<h2>" + UI.services + '</h2><div class="grid-3">' + serviceCards(cfg.services) + "</div></div></section>" +
-    areasSection() + howItWorksSection(false) + testimonialsSection() + faqSection + ctaBand(p.ctaText);
+  return '<section class="section"><div class="container narrow prose">' +
+      renderBlocks(p.blocks) +
+    "</div></section>" +
+    areasSection() + testimonialsSection() +
+    ctaBand(p.ctaText, p.ctaHeading, p.ctaBody);
 }
 
 function serviceContentHtml(svc) {
   return '<section class="section"><div class="container narrow prose">' +
       renderBlocks(svc.blocks) +
-      '<p class="center"><a class="btn btn-primary" href="about.html#quote">' + esc(svc.ctaText) + "</a></p>" +
     "</div></section>" +
-    howItWorksSection(true) + testimonialsSection() + ctaBand(svc.ctaText);
+    testimonialsSection() + ctaBand(svc.ctaText, svc.ctaHeading, svc.ctaBody);
 }
 
 function areaContentHtml(area) {
@@ -699,6 +718,14 @@ function areaContentHtml(area) {
     ctaBand(area.ctaText || cfg.pages.home.ctaText);
 }
 
+/* about/privacy/contact/disclaimer all render from their own cfg.pages.X.blocks
+   array — the same block system as services — rather than the bespoke,
+   largely-hardcoded English the template shipped with for these pages. That
+   boilerplate assumed a single generic form-handling story (and a Formspree
+   sentence that predates this repo's own ingest-endpoint backend); a Level 2
+   rank-and-rent build has page-specific legal, disclosure and positioning
+   copy that doesn't fit a fixed shape. See README's "Divergence from the
+   template" for why. */
 function aboutContentHtml() {
   const contactLines = [];
   if (hasPhone()) contactLines.push("<strong>" + UI.callLabel + ":</strong> " +
@@ -708,42 +735,36 @@ function aboutContentHtml() {
   if (cfg.business.serviceArea) contactLines.push("<strong>" + UI.serviceAreaLabel + ":</strong> " + esc(cfg.business.serviceArea));
   if (hasHours()) contactLines.push("<strong>" + UI.hoursLabel + ":</strong> " + esc(cfg.business.hours));
 
-  return '<section class="section"><div class="container narrow">' +
-      cfg.about.paragraphs.map(t => '<p class="lead">' + richText(t) + "</p>").join("") +
+  return '<section class="section"><div class="container narrow prose">' +
+      renderBlocks(cfg.pages.about.blocks) +
       (contactLines.length ? '<p class="contact-lines">' + contactLines.join("<br>") + "</p>" : "") +
     "</div></section>" +
     photosSection() +
+    faqsSection();
+}
+
+function contactContentHtml() {
+  return '<section class="section"><div class="container narrow prose">' +
+      renderBlocks(cfg.pages.contact.blocks) +
+    "</div></section>" +
     '<section class="section section-alt" id="quote"><div class="container narrow">' +
       "<h2>" + esc(cfg.contact.formHeadline) + "</h2>" +
       '<p class="reassurance">' + esc(cfg.contact.reassurance) + "</p>" +
       quoteFormHtml({}) +
-    "</div></section>" +
-    faqsSection();
+    "</div></section>";
 }
 
+function disclaimerContentHtml() {
+  return '<section class="section"><div class="container narrow prose">' +
+      renderBlocks(cfg.pages.disclaimer.blocks) +
+    "</div></section>";
+}
 
 function privacyContentHtml() {
   const p = cfg.pages.privacy;
-  const name = esc(cfg.business.name);
   return '<section class="section"><div class="container narrow prose">' +
       "<p><em>Last updated: " + esc(p.lastUpdated) + "</em></p>" +
-      "<h2>What this website collects</h2>" +
-      "<p>When you use the quote form on this site, we collect three things: your <strong>name</strong>, your <strong>phone number</strong>, and the <strong>service you need</strong>. That's it &mdash; the form has no other fields.</p>" +
-      "<h2>How it's used</h2>" +
-      "<p>Your details are used for one purpose: to contact you about your quote request. They are not sold, shared with advertisers, or added to any marketing list.</p>" +
-      "<h2>Who processes the form</h2>" +
-      "<p>The form is delivered directly to our own systems for handling enquiries. A free security check (Cloudflare Turnstile) runs in the background to filter out automated spam submissions before your enquiry reaches us.</p>" +
-      "<h2>Analytics</h2>" +
-      "<p>This site may use Google Analytics to understand how visitors find and use it (for example, which pages are viewed). Google Analytics uses cookies and collects anonymous usage data such as your general location and device type. It does not see anything you type into the quote form.</p>" +
-      "<h2>Phone calls</h2>" +
-      "<p>If you call the number on this site, standard call records apply. We don't record calls.</p>" +
-      "<h2>Your choices</h2>" +
-      "<p>If you'd like the details you submitted to be deleted, call " +
-      '<a href="' + telHref() + '">' + esc(cfg.business.phoneDisplay) + "</a> or email " +
-      '<a href="mailto:' + esc(cfg.business.email) + '">' + esc(cfg.business.email) + "</a> and ask &mdash; they'll be removed.</p>" +
-      "<h2>Contact</h2>" +
-      "<p>Questions about this policy can be sent to " + name + " at " +
-      '<a href="mailto:' + esc(cfg.business.email) + '">' + esc(cfg.business.email) + "</a>.</p>" +
+      renderBlocks(p.blocks) +
     "</div></section>";
 }
 
@@ -770,7 +791,10 @@ function buildPages() {
   const files = [];
 
   files.push(["index.html", page("home",
-    head({ title: cfg.pages.home.metaTitle, description: cfg.pages.home.metaDescription, file: "index.html" }),
+    head({
+      title: cfg.pages.home.metaTitle, description: cfg.pages.home.metaDescription, file: "index.html",
+      faqs: faqsFromBlocks(cfg.pages.home.blocks)
+    }),
     heroMain(cfg.pages.home, cfg.pages.home.image, homeContentHtml()),
     "index.html")]);
 
@@ -802,11 +826,30 @@ function buildPages() {
   files.push(["about.html", page("about",
     head({
       title: cfg.pages.about.metaTitle, description: cfg.pages.about.metaDescription, file: "about.html",
-      faqs: cfg.about.faqs,
+      faqs: faqsFromBlocks(cfg.pages.about.blocks).concat(cfg.about.faqs || []),
       extraSchemas: [breadcrumbSchema(cfg.pages.about.headline, canonicalFor("about.html"))]
     }),
     pageHeadMain(cfg.pages.about.headline, aboutContentHtml()),
     "about.html")]);
+
+  files.push(["contact.html", page("contact",
+    head({
+      title: cfg.pages.contact.metaTitle, description: cfg.pages.contact.metaDescription, file: "contact.html",
+      extraSchemas: [
+        { "@context": "https://schema.org", "@type": "ContactPage", "name": cfg.pages.contact.metaTitle, "url": canonicalFor("contact.html") },
+        breadcrumbSchema(cfg.pages.contact.headline, canonicalFor("contact.html"))
+      ]
+    }),
+    pageHeadMain(cfg.pages.contact.headline, contactContentHtml()),
+    "contact.html")]);
+
+  files.push(["disclaimer.html", page("disclaimer",
+    head({
+      title: cfg.pages.disclaimer.metaTitle, description: cfg.pages.disclaimer.metaDescription, file: "disclaimer.html",
+      extraSchemas: [breadcrumbSchema(cfg.pages.disclaimer.headline, canonicalFor("disclaimer.html"))]
+    }),
+    pageHeadMain(cfg.pages.disclaimer.headline, disclaimerContentHtml()),
+    "disclaimer.html")]);
 
   files.push(["privacy.html", page("privacy",
     head({
@@ -985,6 +1028,7 @@ function runCheck() {
        preflight — everything else: template leftovers, missing IDs, broken
          file references, drift, banned schema types, etc. */
   const unfinished = [];
+  const unfinishedTrails = []; // parallel to `unfinished`, for the per-page summary below
   const errors = [];
   const warnings = [];
   const read = f => {
@@ -1077,6 +1121,7 @@ function runCheck() {
       for (const [re, label] of UNFINISHED_PATTERNS) {
         if (re.test(node)) {
           unfinished.push("config " + trail + ": " + label + ' — "' + trunc(node) + '"');
+          unfinishedTrails.push(trail);
         }
       }
       for (const [re, label] of PLACEHOLDER_PATTERNS) {
@@ -1090,6 +1135,7 @@ function runCheck() {
       if (node.type === "marker") {
         unfinished.push("config " + trail + ": unfinished marker block — " +
           '"' + trunc(String(node.text || "")) + '"');
+        unfinishedTrails.push(trail);
         inMarker = true;
       }
       Object.keys(node).forEach(k => walk(node[k], trail ? trail + "." + k : k, inMarker));
@@ -1221,7 +1267,8 @@ function runCheck() {
 
   /* -- 8. duplicate metaTitle / metaDescription across pages --------------- */
   const metas = [["home", cfg.pages.home],
-    ["about", cfg.pages.about], ["privacy", cfg.pages.privacy]]
+    ["about", cfg.pages.about], ["contact", cfg.pages.contact],
+    ["disclaimer", cfg.pages.disclaimer], ["privacy", cfg.pages.privacy]]
     .concat(cfg.services.map(s => [s.page, s]))
     .concat((cfg.areas || []).map(a => [areaFile(a), a]));
   for (const field of ["metaTitle", "metaDescription"]) {
@@ -1301,9 +1348,41 @@ function runCheck() {
   }
 
   /* -- report --------------------------------------------------------------- */
+  /* Maps a config path like "services[2].blocks[5].text" to the page file it
+     ends up on, so the volume of unfinished content (30 VERIFY + 47 NEEDS
+     INPUT markers, on this build) is readable as progress per page rather
+     than one long undifferentiated list. */
+  function pageLabelForTrail(trail) {
+    let m;
+    if (/^pages\.home\b/.test(trail)) return "index.html";
+    if (/^pages\.about\b/.test(trail) || /^about\b/.test(trail)) return "about.html";
+    if (/^pages\.contact\b/.test(trail) || /^contact\b/.test(trail)) return "contact.html";
+    if (/^pages\.disclaimer\b/.test(trail)) return "disclaimer.html";
+    if (/^pages\.privacy\b/.test(trail)) return "privacy.html";
+    if ((m = trail.match(/^services\[(\d+)\]/))) {
+      const svc = cfg.services[Number(m[1])];
+      return svc ? svc.page : trail.slice(0, m[0].length);
+    }
+    if ((m = trail.match(/^areas\[(\d+)\]/))) {
+      const area = (cfg.areas || [])[Number(m[1])];
+      return area ? areaFile(area) : trail.slice(0, m[0].length);
+    }
+    return "(other config)";
+  }
+
   if (unfinished.length) {
+    const byPage = {};
+    unfinishedTrails.forEach(t => {
+      const label = pageLabelForTrail(t);
+      byPage[label] = (byPage[label] || 0) + 1;
+    });
     console.error("UNFINISHED CONTENT — " + unfinished.length +
       " item(s) not ready to publish:\n");
+    console.error("  Per page:");
+    Object.keys(byPage).sort((a, b) => byPage[b] - byPage[a]).forEach(label => {
+      console.error("    " + byPage[label] + "  " + label);
+    });
+    console.error("");
     unfinished.forEach(e => console.error("  ✖ " + e));
   }
   if (errors.length) {

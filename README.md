@@ -410,3 +410,77 @@ README under a "Divergence from the template" heading. It's the fastest way
 to re-apply your changes if this template is ever regenerated, and the
 fastest way for the next person to know your build isn't running the
 stock engine.
+
+### This build (Canberra Tiling, built from canberra-tiling-build-package.md)
+
+1. **Contact and Disclaimer are now standalone pages** (`contact.html`,
+   `disclaimer.html`), each with its own `cfg.pages.contact` /
+   `cfg.pages.disclaimer` config entry, `blocks` array, and generator
+   function in `bake.js` (`contactContentHtml`, `disclaimerContentHtml`).
+   The stock template folds contact into `about.html`. This build's brief
+   requires them separate — the about page runs Level 1 (transparent
+   broker) positioning while contact/disclaimer don't, and disclaimer is a
+   distinct legal document with no body-copy inbound links by design (both
+   live in the sitewide footer only — see `footerHtml`).
+2. **Home, About and Privacy now render from their own `blocks` array**
+   (`cfg.pages.home.blocks`, `.about.blocks`, `.privacy.blocks`) via the
+   same `renderBlocks` system as services, instead of the template's
+   bespoke hardcoded English for those three pages. A Level 2 rank-and-rent
+   build has page-specific positioning, legal and disclosure copy that
+   doesn't fit a fixed shape — see `homeContentHtml`/`aboutContentHtml`/
+   `privacyContentHtml` in `bake.js`. The generic `serviceCards`/
+   `areasSection`/3-icon `howItWorks` scaffolding for the homepage isn't
+   used (see point 4).
+3. **`services` carries 8 entries**, not the template's usual 3-5 —
+   content-driven by the keyword data in the build brief, not card-driven.
+   Two of the 8 (`tiling-quote-checklist-canberra.html`,
+   `tiling-cost-guide-canberra.html`) are content assets rather than a
+   quotable trade service. Because of this, **the enquiry form's job-type
+   picker now reads from `cfg.contact.jobTypes`, not `cfg.services`**
+   (see `quoteFormHtml` in `bake.js`) — the services array is a page list
+   on this build, and "Tiling Quote Checklist" is not a job type a
+   homeowner would select.
+4. **`cfg.howItWorks` (the generic 3-icon, response-time-promising
+   component) is unused** — a response-time promise is banned at Level 2
+   (build brief §5), and the homepage's own "How a tiling job actually
+   runs" content (in `pages.home.blocks`) already serves that role with
+   real, tiling-specific process content instead.
+5. **`ctaBand` takes optional per-page `heading`/`body` overrides** (used
+   via `ctaHeading`/`ctaBody` on `pages.home` and each service entry),
+   instead of one fixed sitewide CTA heading — every page in the build
+   brief specifies its own "Call to action" heading and body.
+6. **`fieldHtml` gained a `textarea` field type** for the enquiry form's
+   free-text "tell us about the job" field.
+7. **The brand/domain-name blocker is represented as the literal string
+   `"[NEEDS INPUT: Brand Name]"`** in `business.name` (and in a few page
+   titles), rather than a template placeholder like "Springfield" — it
+   trips `--check`'s existing `[NEEDS INPUT: ...]` bracket scan everywhere
+   it appears, which is louder and more honest than a placeholder name that
+   could pass for real copy. `domain` is left at the template's own
+   `"https://yourdomain.com"`, which `--check` already bans by name — no
+   change needed there.
+8. **The Twilio tracking-number blocker is NOT represented as a marker.**
+   `business.phone`/`phoneDisplay` are left empty, which is the template's
+   existing "unset config degrades to absent" mechanism — every
+   call-to-action already omits the phone option cleanly while empty, and
+   `--check` warns (doesn't fail) that phone+email are both unset. This is
+   more accurate than sprinkling a `[NEEDS INPUT: Twilio number]` marker
+   across the ~9 pages that mention it in the build brief.
+9. **`--check`'s unfinished-content report now prints a per-page summary**
+   (counts of unfinished items grouped by the page file they end up on)
+   above the itemised list, so the volume of remaining `[VERIFY]`/
+   `[NEEDS INPUT]` markers reads as progress per page. See
+   `pageLabelForTrail` in `bake.js`.
+10. **Two resolved NEEDS INPUT items, not left as markers:** the about and
+    disclaimer pages' "contractor status" wording uses the CONDITIONAL
+    version the build brief itself supplies for pre-renter, rather than
+    leaving it open — see the `TODO (Brad)` comments beside each, which
+    note the direct/present-tense wording to switch to once a contractor
+    signs.
+11. **Not yet done, flagged here rather than silently skipped:** the
+    quote checklist page has no print stylesheet (checklist markers
+    are ordinary `<ul>` items prefixed with "☐ "). No pages have
+    illustrative diagrams — the build brief calls for several
+    (a wet-area cross-section, a drummy-tile pattern map, a fall-to-waste
+    diagram); every service `image` field is currently omitted rather
+    than reusing an unrelated stock icon from the old niche.
