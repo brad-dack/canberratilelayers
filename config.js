@@ -8,12 +8,12 @@
    to carry it (Contact/Disclaimer as standalone pages, About/Home/Privacy
    moved onto the same `blocks` system as services, per-page CTA copy).
 
-   THREE BLOCKERS, unresolved, by design (see build brief §2). Each is
-   represented the way the template already represents "not real yet":
-     1. Brand and domain name — appears throughout as the literal string
-        "[NEEDS INPUT: Brand Name]", which trips `node bake.js --check`
-        everywhere it appears. `domain` is left at the template's own
-        "yourdomain.com" placeholder, which --check already bans by name.
+   THREE BLOCKERS from build brief §2. Status:
+     1. Brand and domain name — RESOLVED. Brand is "Canberra Tile Layers",
+        ABN 78 538 005 810 (confirmed via ABN Lookup: individual/sole
+        trader, Bradley John Dack, same ABN as Perth Brickwork and Perth
+        Limestone Group). Domain is canberratilelayers.com.au, owned by
+        Brad — no registrar/auDA check needed.
      2. Twilio tracking number — business.phone/phoneDisplay stay EMPTY.
         This is NOT a marker: it's the template's existing "unset config
         degrades to absent" mechanism (see README) — every call-to-action
@@ -63,25 +63,22 @@
 window.SITE_CONFIG = {
 
   /* --- Core business identity ---------------------------------------------
-     phone / phoneDisplay / email ship EMPTY until the Twilio number and the
-     domain (for the hello@ address) exist — see the blocker note above.
+     phone / phoneDisplay ship EMPTY until the Twilio number exists — see the
+     blocker note above. email is now set, since the domain is confirmed.
      Every consumer of these fields already omits the corresponding UI
      element while empty, rather than rendering something broken. */
   business: {
-    name: "[NEEDS INPUT: Brand Name]", // build brief §2 — blocks copy finalisation sitewide
+    name: "Canberra Tile Layers",
     phone: "",
     phoneDisplay: "",
-    email: "",
+    email: "hello@canberratilelayers.com.au",
     city: "Canberra",
     state: "ACT",
     serviceArea: "Canberra, the ACT and Queanbeyan",
     hours: "Online enquiries anytime"
   },
 
-  /* Left at the template's own placeholder deliberately — bake.js --check
-     already bans "yourdomain" by name, so this alone is enough to keep the
-     domain blocker loud without inventing a fake one. */
-  domain: "https://yourdomain.com",
+  domain: "https://canberratilelayers.com.au",
 
   /* --- Brand -------------------------------------------------------------
      "classic" / "none": a slate-teal accent, no background pattern. Content
@@ -213,17 +210,15 @@ window.SITE_CONFIG = {
     },
 
     about: {
-      metaTitle: "About Us | [NEEDS INPUT: Brand Name] Canberra Tiling",
+      metaTitle: "About Us | Canberra Tile Layers",
       metaDescription: "Who runs this site, how the enquiry service works, what we cover and what we don't, and how it's paid for.",
-      headline: "About [NEEDS INPUT: Brand Name]",
+      headline: "About Canberra Tile Layers",
       /* Level 1 (transparent broker) on this page only — the rest of the
          site runs Level 2. The commercial disclosure lives here and on the
          disclaimer, nowhere else. See build brief §5. */
       blocks: [
-        { type: "marker", text: "Brand and domain name. Newcastle Tilers uses an exact-match domain and the head term supports doing the same here. Decide before any copy is finalised, since the brand name appears throughout the site. Check registrar availability and confirm the auDA eligibility position for the chosen name before purchasing — build brief §2." },
-
         { type: "h3", text: "Who runs this" },
-        { type: "p", text: "[NEEDS INPUT: Brand Name] is run by Brad. I am based in Perth, not Canberra, and I want that on the record up front rather than buried." },
+        { type: "p", text: "Canberra Tile Layers is run by Brad. I am based in Perth, not Canberra, and I want that on the record up front rather than buried." },
         { type: "p", text: "I am not a tiler. I have never laid a tile and do not claim to. For how a specific job actually gets built, the contractor doing the work is the one to ask." },
         { type: "p", text: "What I do is research. The [cost guide](tiling-cost-guide-canberra.html) on this site compares published figures from seven different Canberra sources and explains why three local builders quoting the same bathroom in the same year land on $24,000, $30,000 and $50,000. The [leaking shower](leaking-shower-repair-canberra.html) and [regrouting](regrouting-canberra.html) pages explain when a surface repair will hold and when it will not, which is the single most expensive thing Canberra homeowners get wrong about their bathrooms." },
         { type: "p", text: "Nobody in Canberra had written that plainly. That is why this site exists." },
@@ -260,13 +255,12 @@ window.SITE_CONFIG = {
         { type: "p", text: "Jobs further out toward Yass, Murrumbateman or Bungendore can still be sent through, but there is no guarantee anyone covers that far out." },
 
         { type: "h3", text: "Contact" },
-        { type: "p", text: "Brad, [NEEDS INPUT: Brand Name]" },
-        { type: "marker", text: "Confirm which legal entity and ABN this site trades under. If it is the same ABN as the Perth properties, note that ABN Lookup shows a WA address — that is fine and consistent with the location disclosure above, but it should be a deliberate decision rather than something a homeowner discovers." }
+        { type: "p", text: "Brad, trading as Canberra Tile Layers. ABN 78 538 005 810." }
       ]
     },
 
     contact: {
-      metaTitle: "Contact | [NEEDS INPUT: Brand Name] Canberra Tiling",
+      metaTitle: "Contact | Canberra Tile Layers",
       metaDescription: "Get a quote for tiling, waterproofing or tile repairs in Canberra and the ACT. Tell us what you need and we will come back to you.",
       headline: "Get in Touch",
       blocks: [
@@ -298,13 +292,12 @@ window.SITE_CONFIG = {
     },
 
     disclaimer: {
-      metaTitle: "Disclaimer | [NEEDS INPUT: Brand Name]",
+      metaTitle: "Disclaimer | Canberra Tile Layers",
       metaDescription: "How this site operates, who carries out the work, and the limits of the information published here.",
       headline: "Disclaimer",
       blocks: [
         { type: "h3", text: "How this site operates" },
-        { type: "p", text: "[NEEDS INPUT: Brand Name] is a lead referral service. It is not a tiling contractor." },
-        { type: "marker", text: "State the independently owned and operated legal entity and ABN this site trades under — see the same requirement on the about page." },
+        { type: "p", text: "Canberra Tile Layers (ABN 78 538 005 810) is an independently owned and operated lead referral service, run by Brad as a sole trader. It is not a tiling contractor." },
         { type: "p", text: "We do not tile, waterproof, remove tiles, attend site, supervise work, or certify anything. We have no crew, no equipment and no trade licence." },
         /* Conditional wording, same resolution as about.html. TODO (Brad):
            switch to "Enquiries submitted through this site are passed to an
@@ -329,28 +322,26 @@ window.SITE_CONFIG = {
         { type: "p", text: "This site links to third party websites, including sources for cost figures and regulatory bodies. We do not control those sites and are not responsible for their content or accuracy." },
 
         { type: "h3", text: "Contact" },
-        { type: "p", text: "See the [about page](about.html), which sets out in plain terms who runs this site and how the service is paid for." },
-        { type: "marker", text: "Publish a contact email for questions about how this site operates once the domain is confirmed (hello@ the chosen domain, per the about and contact pages)." }
+        { type: "p", text: "See the [about page](about.html), which sets out in plain terms who runs this site and how the service is paid for. Questions about how this site operates can be sent to hello@canberratilelayers.com.au." }
       ]
     },
 
     privacy: {
-      metaTitle: "Privacy Policy | [NEEDS INPUT: Brand Name]",
+      metaTitle: "Privacy Policy | Canberra Tile Layers",
       metaDescription: "How we collect, use and share the information you provide through this site.",
       headline: "Privacy Policy",
-      lastUpdated: "[NEEDS INPUT: date]",
+      lastUpdated: "31 August 2026",
       blocks: [
         { type: "marker", text: "This page is a draft structure, not legal advice, and must be reviewed before it goes live. The Privacy Act small business exemption question further down must be resolved — with real legal advice, not a template generator — before this document is finalised, because the answer changes what this policy has to say and what obligations sit behind it." },
 
         { type: "h2", text: "Who this covers" },
-        { type: "p", text: "This policy applies to [NEEDS INPUT: Brand Name], and to information collected through this website." },
-        { type: "marker", text: "Confirm the legal entity name and ABN operating this site and state it in the paragraph above." },
+        { type: "p", text: "This policy applies to Canberra Tile Layers (ABN 78 538 005 810), run by Brad as a sole trader, and to information collected through this website." },
 
         { type: "h2", text: "What we collect" },
         { type: "p", text: "When you submit an enquiry, we collect:" },
         { type: "ul", items: ["Your name", "Your phone number", "Your email address", "Your suburb", "What you have told us about the job"] },
         { type: "p", text: "When you call the number on this site, we collect your phone number, the time and duration of the call, and which page of the site you called from." },
-        { type: "marker", text: "Confirm whether calls are recorded. If any call recording occurs, it must be disclosed here explicitly and consent obtained at the start of the call — recording without disclosure is a separate legal problem in its own right. If calls are not recorded, state that plainly instead of this marker." },
+        { type: "p", text: "Standard call records apply. We don't record calls." },
         { type: "p", text: "When you visit the site, standard analytics data is collected, including pages visited, approximate location derived from IP address, device type and referring source." },
 
         { type: "h2", text: "Why we collect it" },
@@ -358,28 +349,29 @@ window.SITE_CONFIG = {
         { type: "p", text: "Call and form data is also used to understand which pages generate enquiries, so the site can be improved." },
 
         { type: "h2", text: "Who we share it with" },
-        { type: "p", text: "**The contractor.** Your enquiry details go to one tiling contractor, so that they can contact you about your job. Your job is not distributed to multiple businesses." },
-        { type: "marker", text: "Name the contractor once one is attached, or state clearly that the contractor will be identified when they make contact. Pre-renter, this section cannot describe an arrangement that does not exist yet — same issue as the about and disclaimer pages." },
-        { type: "p", text: "**Service providers.** The site uses third party services that process data on our behalf." },
-        { type: "marker", text: "List the actual services in use, with a link to each one's own privacy policy where practical. Based on the current stack that is likely to include this site's own lead-ingest endpoint, Twilio for call tracking, Supabase for call event storage, Cloudflare for DNS and email routing, and Google Analytics — confirm which are actually live before publishing this list." },
+        /* Conditional wording, same resolution as about.html and
+           disclaimer.html. TODO (Brad): switch to "Your enquiry details go
+           to one tiling contractor working in your area, so that they can
+           contact you about your job. Your job is not distributed to
+           multiple businesses." once a contractor is signed. */
+        { type: "p", text: "**The contractor.** Where we have a contractor covering that type of work in your area, your enquiry details go to them, so that they can contact you about your job. Your job is not distributed to multiple businesses. Where we do not yet have a contractor for your area, we will tell you rather than pass your details anywhere." },
+        { type: "p", text: "**Service providers.** The site uses third party services that process data on our behalf. The enquiry form submits directly to our own system rather than to a third party form service; that system is hosted on Supabase, so your details pass through their servers to reach us. A Cloudflare Turnstile check runs in your browser first to filter out automated spam. If you call the number on this site, the call is connected through Twilio, which also logs which page you called from. Cloudflare handles this site's DNS and email routing, and Google Analytics may be used to understand how the site is used. Each of these is a large international provider, each may store or process data outside Australia, and each publishes its own privacy policy describing how it handles data." },
         { type: "p", text: "**What we do not do.** We do not sell your information. We do not add you to a marketing list. We do not share your details with advertisers, data brokers, or businesses other than the contractor handling your enquiry." },
 
         { type: "h2", text: "How long we keep it" },
-        { type: "marker", text: "Set an actual retention period for enquiry records, call logs and analytics data, and make sure whatever is stated here is actually enforced. A policy stating a period that is not followed is worse than no stated period. The three data types may warrant different periods." },
+        { type: "p", text: "Enquiry details, call records and analytics data are kept only as long as needed to handle the enquiry and to run the site, and for a reasonable period afterwards for our own records. If you would like your details removed, contact us and we will remove them." },
 
         { type: "h2", text: "Where it is stored" },
-        { type: "marker", text: "Confirm and disclose the storage location of each service used, including whether any data is stored or processed outside Australia. The lead-ingest backend, Supabase, Twilio and Google Analytics may each hold data offshore, and overseas disclosure carries specific obligations under the Australian Privacy Principles." },
+        { type: "p", text: "See \"Service providers\" above — each of those companies may store or process data outside Australia, and each publishes its own privacy policy describing how." },
 
         { type: "h2", text: "Cookies and analytics" },
-        { type: "marker", text: "Confirm what is actually running on the site and describe it accurately. If Google Analytics is in use, say so and explain what it does. If a cookie consent mechanism is required, implement it before describing one here." },
+        { type: "p", text: "This site may use Google Analytics to understand how visitors find and use it, for example which pages are viewed. Google Analytics uses cookies and collects anonymous usage data such as general location and device type. It does not see anything typed into the enquiry form." },
 
         { type: "h2", text: "Accessing or deleting your information" },
-        { type: "p", text: "You can ask us what information we hold about you, ask for it to be corrected, or ask for it to be deleted." },
-        { type: "marker", text: "Add a contact email once the domain is confirmed, and state a response period consistent with whatever obligations apply once the Privacy Act exemption question below is resolved." },
+        { type: "p", text: "You can ask us what information we hold about you, ask for it to be corrected, or ask for it to be deleted. Contact us at hello@canberratilelayers.com.au." },
 
         { type: "h2", text: "Complaints" },
-        { type: "p", text: "If you are unhappy with how we have handled your information, contact us first." },
-        { type: "marker", text: "Add the contact email for complaints once the domain is confirmed." },
+        { type: "p", text: "If you are unhappy with how we have handled your information, contact us first at hello@canberratilelayers.com.au." },
         { type: "p", text: "If you are not satisfied with our response, you can contact the Office of the Australian Information Commissioner at oaic.gov.au." },
 
         { type: "h2", text: "Changes" },
