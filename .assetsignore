@@ -1,0 +1,12 @@
+# Files in the repo root that aren't part of the public site.
+# Wrangler would otherwise upload and serve these alongside the real pages.
+.claude/
+.git/
+.gitignore
+.assetsignore
+wrangler.jsonc
+New site prompt.txt
+README.md
+TEMPLATE_SUMMARY.md
+bake.js
+canberra-tiling-build-package.md
