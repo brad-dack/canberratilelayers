@@ -185,7 +185,7 @@ window.SITE_CONFIG = {
         { type: "faqs", items: [
           {
             q: "How much does a tiler charge in Canberra?",
-            a: "Rates for floor tiling supply and install run roughly $55 to $140 per square metre, but is dependant on an on-site quote."
+            a: "Rates for floor tiling supply and install run roughly $55 to $140 per square metre, but are dependent on an on-site quote."
           },
           {
             q: "My shower is leaking. Do I need it regrouted or replaced?",
