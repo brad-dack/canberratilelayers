@@ -329,9 +329,72 @@ window.SITE_CONFIG = {
       metaDescription: "How we collect, use and share the information you provide through this site.",
       headline: "Privacy Policy",
       lastUpdated: "31 August 2026",
-      blocks: [
-        { type: "marker", text: "This page is a draft structure, not legal advice, and must be reviewed before it goes live. The Privacy Act small business exemption question further down must be resolved — with real legal advice, not a template generator — before this document is finalised, because the answer changes what this policy has to say and what obligations sit behind it." },
+      /* =====================================================================
+         PRIVACY POSITION — decision record, 31 August 2026.
 
+         This replaces the two markers that previously blocked this page. They
+         asked for the Privacy Act question to be resolved before publishing.
+         It has been resolved to a position; the reasoning is recorded here so
+         it can be re-examined rather than re-derived.
+
+         THE QUESTION. The site relies on the small business operator exemption
+         under the Privacy Act 1988 (turnover under $3m). But OAIC's small
+         business guidance lists "trading in personal information" as a
+         situation where a small business IS covered regardless of turnover —
+         disclosing personal information for a benefit, service or advantage.
+         A rank-and-rent site passing homeowner details to a contractor who
+         pays for the referral is squarely in the frame for that carve-out.
+
+         THE ANSWER RELIED ON. That carve-out applies only where the disclosure
+         is made "without the consent of the individual". OAIC states plainly
+         that consent may be express OR implied. So obtaining consent preserves
+         the exemption. Implied consent is available here because none of this
+         is "sensitive information" under the Act (no health, race, political
+         opinion etc.) — express consent is only mandatory for sensitive
+         information, so no tick-box is required.
+
+         WHAT THE POSITION DEPENDS ON. Implied consent must still be INFORMED
+         (OAIC's four elements: informed, voluntary, current and specific,
+         capacity). The person must understand, at the point of collection,
+         that their details go to a contractor. That is why the collection
+         notice wording on both channels is load-bearing and must not be
+         softened into generic reassurance copy:
+           - Web form: contact.reassurance, rendered directly above the only
+             form on the site. See the note on that key.
+           - Phone: the voicemail greeting, which is the only opportunity to
+             give notice before a caller speaks. Held in the backend as
+             sites.greeting_audio_url (the MP3) and sites.greeting_text (the
+             text-to-speech fallback). Both must carry the notice and must say
+             the same thing.
+
+         OUTSTANDING AS AT 31 AUG 2026. The greeting has NOT yet been
+         re-recorded. The live MP3 and greeting_text still read "Please leave
+         some details about your job at the tone", which gives a caller no
+         notice at all. Agreed replacement wording:
+           "Hi, thanks for calling Canberra Tile Layers. Leave your name,
+            suburb and job details after the tone. We pass enquiries to a
+            tiler who can quote the job."
+         Until that is recorded, uploaded, and set in BOTH columns, the phone
+         channel does not carry a collection notice and this position is only
+         half implemented. The web form side is done.
+
+         STATUS AND LIMITS. Self-assessed by Brad against OAIC guidance and
+         OAIC's privacy checklist for small business. NOT reviewed by a
+         solicitor. Two things would change the answer and are worth watching:
+         a move to per-lead pricing rather than flat monthly rent (payment then
+         maps directly onto each individual disclosure, which reads more like
+         the carve-out), and removal of the small business exemption itself,
+         which has been flagged for a future reform tranche. If the exemption
+         goes, all thirteen APPs apply and APP 8 (cross-border disclosure) is
+         the heavy one, given Supabase, Cloudflare, Twilio, Google and Resend
+         are all overseas.
+
+         PORTFOLIO. Perth Brickwork and Perth Limestone Group run the same
+         model and depend on the same reasoning, but their collection notices
+         are weaker (Limestone) or absent entirely (Brickwork). This position
+         does not hold for those sites until they are brought into line.
+         ===================================================================== */
+      blocks: [
         { type: "h2", text: "Who this covers" },
         { type: "p", text: "This policy applies to Canberra Tile Layers (ABN 78 538 005 810), run by Brad as a sole trader, and to information collected through this website." },
 
@@ -379,10 +442,11 @@ window.SITE_CONFIG = {
         { type: "p", text: "If you are not satisfied with our response, you can contact the Office of the Australian Information Commissioner at oaic.gov.au." },
 
         { type: "h2", text: "Changes" },
-        { type: "p", text: "We may update this policy. The current version is always the one on this page, with the date it was last updated at the top." },
-
-        { type: "h2", text: "The Privacy Act question this site depends on" },
-        { type: "marker", text: "Obtain legal advice on whether the small business operator exemption under the Privacy Act 1988 applies to a lead referral business that passes enquirer details to a paying contractor. A rank-and-rent lead business collects a homeowner's personal details and passes them to a contractor who pays for that enquiry, which on a plain reading looks like disclosing personal information for a benefit — one of the carve-outs from the exemption. If the exemption does not apply, the Australian Privacy Principles apply in full: collection notices, use and disclosure rules, overseas disclosure, data quality, security, access and correction, and a complaints process, a materially heavier compliance position than a template policy describes. Confirm also the position following recent Privacy Act reforms, and whether the answer differs where the contractor pays per lead versus a flat monthly fee. This question is shared across the whole portfolio (Perth Brickwork, Perth Limestone Group both run the same model) and should be resolved once, properly, and applied consistently." }
+        { type: "p", text: "We may update this policy. The current version is always the one on this page, with the date it was last updated at the top." }
+        /* The "Privacy Act question this site depends on" heading and its
+           marker sat here. Both removed: the heading existed only to host the
+           marker, and the reasoning is now recorded as a comment at the top of
+           this page's config rather than published to visitors. */
       ]
     }
   },
