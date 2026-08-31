@@ -14,12 +14,11 @@
         trader, Bradley John Dack, same ABN as Perth Brickwork and Perth
         Limestone Group). Domain is canberratilelayers.com.au, owned by
         Brad — no registrar/auDA check needed.
-     2. Twilio tracking number — business.phone/phoneDisplay stay EMPTY.
-        This is NOT a marker: it's the template's existing "unset config
-        degrades to absent" mechanism (see README) — every call-to-action
-        on the site already omits the phone option cleanly while it's
-        empty, and --check WARNS (doesn't fail) that phone+email are both
-        unset. Fill in once the number is provisioned; nothing else to edit.
+     2. Twilio tracking number — RESOLVED. +61 2 6105 9990, provisioned
+        31 Aug 2026 and recorded as this site's twilio_number in the
+        backend `sites` row (slug 'canberra-tile-layers'). Still to do in
+        Twilio itself: upload the greeting MP3 and point the number's voice
+        webhooks at twilio-voice / twilio-status.
      3. Contractor status — resolved to the CONDITIONAL wording the build
         brief itself supplies for pre-renter (about.html, disclaimer.html).
         Switch to the direct/present-tense wording once a contractor signs
@@ -63,14 +62,13 @@
 window.SITE_CONFIG = {
 
   /* --- Core business identity ---------------------------------------------
-     phone / phoneDisplay ship EMPTY until the Twilio number exists — see the
-     blocker note above. email is now set, since the domain is confirmed.
-     Every consumer of these fields already omits the corresponding UI
-     element while empty, rather than rendering something broken. */
+     phone is the Twilio tracking number, not a direct line — calls route
+     through twilio-voice and are logged per site. phoneDisplay is the
+     human-readable form; phone stays E.164 for the tel: link. */
   business: {
     name: "Canberra Tile Layers",
-    phone: "",
-    phoneDisplay: "",
+    phone: "+61261059990",
+    phoneDisplay: "(02) 6105 9990",
     email: "hello@canberratilelayers.com.au",
     city: "Canberra",
     state: "ACT",
