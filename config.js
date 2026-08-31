@@ -339,7 +339,13 @@ window.SITE_CONFIG = {
         { type: "p", text: "When you submit an enquiry, we collect:" },
         { type: "ul", items: ["Your name", "Your phone number", "Your email address", "Your suburb", "What you have told us about the job"] },
         { type: "p", text: "When you call the number on this site, we collect your phone number, the time and duration of the call, and which page of the site you called from." },
-        { type: "p", text: "Standard call records apply. We don't record calls." },
+        /* ACCURACY NOTE — this previously read "We don't record calls", which
+           was wrong: calls are not answered live, they go to voicemail, and
+           twilio-voice records the message and stores the audio. The greeting
+           tells callers this before the tone, which is where consent for the
+           phone channel is obtained. Keep this paragraph in step with what the
+           greeting actually says and with the 12-month prune-storage rule. */
+        { type: "p", text: "Calls are not answered live. They go to voicemail, and the message you leave is recorded and stored so that it can be passed on and acted on — the greeting tells you this before the tone. Nobody listens in on a live conversation, because there isn't one. Recordings are kept for up to twelve months and then deleted, though a record that the call happened is kept for our own accounting." },
         { type: "p", text: "When you visit the site, standard analytics data is collected, including pages visited, approximate location derived from IP address, device type and referring source." },
 
         { type: "h2", text: "Why we collect it" },
