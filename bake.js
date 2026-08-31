@@ -1,5 +1,5 @@
 /* =============================================================================
-   bake.js — manual helper, NOT a build step.
+   bake.js - manual helper, NOT a build step.
 
    Two modes:
 
@@ -15,7 +15,7 @@
                               duplicate meta tag it finds. Run before launch.
 
    Run these yourself after editing config.js, then commit the regenerated
-   files. Nothing runs automatically — the deployed site is plain static
+   files. Nothing runs automatically - the deployed site is plain static
    files with no pipeline. Plain Node, no dependencies.
 ============================================================================= */
 const fs = require("fs");
@@ -52,7 +52,7 @@ function validateTheme() {
   for (const key of ["color", "colorDark", "colorContrast"]) {
     if (!/^#[0-9a-fA-F]{6}$/.test(cfg.brand[key] || "")) {
       problems.push("brand." + key + ' must be a 6-digit hex color (got "' +
-        cfg.brand[key] + '") — derived tints can\'t be computed from it');
+        cfg.brand[key] + '") - derived tints can\'t be computed from it');
     }
   }
   if (!STYLES.includes(themeStyle())) {
@@ -85,7 +85,7 @@ const rgba = (hex, alpha) => {
    ~470ms off the critical path on Perth Brickworks). css/styles.css stays the
    editable source on disk; bake.js is the only thing that reads it, so
    re-run bake.js after editing it. A separate cacheable file would matter
-   more if GitHub Pages' cache TTL weren't fixed at 10 minutes — at that TTL
+   more if GitHub Pages' cache TTL weren't fixed at 10 minutes - at that TTL
    and this page count, inlining wins. Guards against a literal "</style>" in
    the source, which would otherwise close the tag early. */
 function siteCss() {
@@ -117,12 +117,12 @@ const CORE_PAGES = ["index.html", "about.html", "contact.html", "disclaimer.html
 const areaFile = area => area.slug + ".html";
 
 /* ---------- schema builders ---------------------------------------------
-   Default is Organization — deliberately NOT a LocalBusiness subtype. A
+   Default is Organization - deliberately NOT a LocalBusiness subtype. A
    rank-and-rent site with no renter attached has no premises, no opening
    hours, no service counter, no reviews: LocalBusiness/AggregateRating/
    Review properties would all be invented. Upgrade schema.type to a real
    LocalBusiness subtype (see schema.org/LocalBusiness) only once a renter's
-   real address/hours exist — the --check banned-terms guard below stops
+   real address/hours exist - the --check banned-terms guard below stops
    this reverting silently. */
 
 const schemaType = () => cfg.schema.type || "Organization";
@@ -162,7 +162,7 @@ const faqSchema = faqs => ({
 });
 
 /* Flattens every { type: "faqs", items: [...] } block on a page into one
-   list — the FAQPage schema for that page is built from exactly the FAQs
+   list - the FAQPage schema for that page is built from exactly the FAQs
    that are actually visible on it, never a separate global list. */
 const faqsFromBlocks = blocks =>
   (blocks || []).filter(b => b.type === "faqs").flatMap(b => b.items);
@@ -240,8 +240,8 @@ const noscript =
 /* ---------- the renderer --------------------------------------------------
 
    THIS IS THE ONLY RENDERER. Everything below turns config.js into the
-   finished HTML — header, hero, page content, footer, the quote form's
-   markup — at build time. js/main.js does not build the page; it only wires
+   finished HTML - header, hero, page content, footer, the quote form's
+   markup - at build time. js/main.js does not build the page; it only wires
    up behaviour on the HTML this file produced. A copy or layout change means
    editing config.js or this file and running `node bake.js`.
 
@@ -254,7 +254,7 @@ const noscript =
      - LCP. The hero image is the LCP element and can't be discovered by the
        browser's preload scanner at all while a script has to build it first.
      - CLS. #site-header is position:sticky, so filling it after first paint
-       pushes the whole page down — a layout shift on every page.
+       pushes the whole page down - a layout shift on every page.
 
    For a while both files carried a copy of this renderer, with main.js
    skipping any element marked data-baked. That worked but left two copies of
@@ -271,7 +271,7 @@ const noscript =
        already baked into the header and footer)
 --------------------------------------------------------------------------- */
 
-/* Generic UI labels — the reader-facing text that isn't niche-specific.
+/* Generic UI labels - the reader-facing text that isn't niche-specific.
    Niche-specific copy all comes from config.js. */
 const UI = {
   howItWorks: "How It Works",
@@ -345,7 +345,7 @@ const quoteButtonHtml = (text, extraClass) =>
    and a `sizes` string; each listed width needs a real file beside the
    original, named <name>-<width>.<ext>. Falls back to a plain <img> when the
    variants aren't on disk, so an image swapped in without regenerating them
-   still works, just without the size win — and --check warns about it.
+   still works, just without the size win - and --check warns about it.
 
    The full-size image.src is deliberately NOT a srcset candidate: adding it
    makes it a normal pick under high-DPR mobile sizes math, defeating the
@@ -362,8 +362,8 @@ function srcsetAttr(image) {
     (image.sizes ? ' sizes="' + esc(image.sizes) + '"' : "");
 }
 
-/* `title` defaults to the alt text — an
-   on-page audit flags every <img> without one — and can be overridden with an
+/* `title` defaults to the alt text - an
+   on-page audit flags every <img> without one - and can be overridden with an
    optional `title` field on the image entry. */
 function imgTag(image, className, lazy) {
   if (!image || !image.src) return "";
@@ -414,7 +414,7 @@ function quoteFormHtml(opts) {
     presetInput = '<input type="hidden" name="service" value="' + esc(opts.presetService) + '">';
   } else {
     /* Job-type picker options come from cfg.contact.jobTypes, NOT
-       cfg.services — the services array is a list of PAGES on this build
+       cfg.services - the services array is a list of PAGES on this build
        (it includes content assets like the cost guide and the quote
        checklist, neither of which is something a homeowner "needs done").
        jobTypes is the actual set of enquiry categories a customer picks
@@ -511,7 +511,7 @@ function howItWorksSection(compact) {
 }
 
 /* heading/body are OPTIONAL per-page overrides (each service/page entry can
-   set ctaHeading/ctaBody) — falls back to the generic sitewide copy when a
+   set ctaHeading/ctaBody) - falls back to the generic sitewide copy when a
    page doesn't specify its own, so older/simpler configs keep working. */
 function ctaBand(ctaText, heading, body) {
   const phoneLine = hasPhone()
@@ -572,7 +572,7 @@ function faqsSection() {
 /* ---------- header / footer --------------------------------------------- */
 
 /* #site-header is position:sticky, so filling it from JS after first paint
-   pushes the whole page down — a layout shift on every page. The nav toggle's
+   pushes the whole page down - a layout shift on every page. The nav toggle's
    click handler is still wired by main.js; only the markup is baked. */
 function headerHtml(file) {
   const links = [
@@ -600,7 +600,7 @@ function headerHtml(file) {
 }
 
 /* Baked so the footer's links to every service page are crawlable without
-   JS — on a small site that internal link block is a meaningful share of the
+   JS - on a small site that internal link block is a meaningful share of the
    internal linking. */
 function footerHtml() {
   const serviceLinks = cfg.services.map(s =>
@@ -638,7 +638,7 @@ function footerHtml() {
 /* ---------- page bodies -------------------------------------------------- */
 
 /* Hero pages (home, services, areas): H1, sub-headline, CTAs, value props and
-   the hero image all baked. The hero image is the LCP element — while a
+   the hero image all baked. The hero image is the LCP element - while a
    script had to build it, the browser's preload scanner couldn't discover it
    at all. Note there is deliberately no entrance animation on hero elements:
    main.js adds html.anim only after first paint, so a fade-in here would hide
@@ -673,7 +673,7 @@ const pageHeadMain = (headline, contentHtml) => `    <section class="page-head">
     <div id="page-content">${contentHtml}</div>`;
 
 /* Home renders from cfg.pages.home.blocks (routing block, service coverage,
-   the tiling-process explainer, FAQs, etc.) — the same block system as every
+   the tiling-process explainer, FAQs, etc.) - the same block system as every
    other page, rather than the generic services-grid/areas/testimonials
    scaffolding the template ships with. That scaffolding was built for a
    fixed-card "3-5 services" niche; this build's homepage is long-form,
@@ -719,7 +719,7 @@ function areaContentHtml(area) {
 }
 
 /* about/privacy/contact/disclaimer all render from their own cfg.pages.X.blocks
-   array — the same block system as services — rather than the bespoke,
+   array - the same block system as services - rather than the bespoke,
    largely-hardcoded English the template shipped with for these pages. That
    boilerplate assumed a single generic form-handling story (and a Formspree
    sentence that predates this repo's own ingest-endpoint backend); a Level 2
@@ -980,7 +980,7 @@ const faviconContent = () => `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0
 function bake() {
   const problems = [...validateTheme(), ...validateAreaSlugs()];
   if (problems.length) {
-    console.error("Cannot bake — fix these entries in config.js first:");
+    console.error("Cannot bake - fix these entries in config.js first:");
     problems.forEach(p => console.error("  ✖ " + p));
     process.exitCode = 1;
     return;
@@ -1006,7 +1006,7 @@ function bake() {
   }
 
   // Flag leftover pages (e.g. an area removed from config, or a renamed
-  // service stub) — they aren't in the sitemap and should be deleted.
+  // service stub) - they aren't in the sitemap and should be deleted.
   const expected = new Set([...pageNames, "404.html"]);
   const stale = fs.readdirSync(__dirname)
     .filter(f => f.endsWith(".html") && !expected.has(f));
@@ -1024,11 +1024,11 @@ function bake() {
 
 function runCheck() {
   /* Two separate classes, reported and counted separately (both fatal):
-       unfinished — content that's flagged as not-yet-real: bracket tokens
+       unfinished - content that's flagged as not-yet-real: bracket tokens
          ([VERIFY: ...], [NEEDS INPUT: ...], [BUILD GATE: ...], any
          [UPPERCASE_TOKEN]) and every { type: "marker" } block, wherever it
          appears in config, whether or not its text has bracket syntax.
-       preflight — everything else: template leftovers, missing IDs, broken
+       preflight - everything else: template leftovers, missing IDs, broken
          file references, drift, banned schema types, etc. */
   const unfinished = [];
   const unfinishedTrails = []; // parallel to `unfinished`, for the per-page summary below
@@ -1062,7 +1062,7 @@ function runCheck() {
      value in config is rendered to the public site, so this kind of working
      note belongs in a "TODO (Brad):" code comment instead.
 
-     The patterns are deliberately narrow — a hit should mean real author-voice
+     The patterns are deliberately narrow - a hit should mean real author-voice
      copy, not a pattern that needs loosening. If one ever fires on legitimate
      reader copy, reword the copy. Note there is deliberately no pattern on
      "worth doing" / "worth getting": those are ordinary reader copy ("when a
@@ -1082,7 +1082,7 @@ function runCheck() {
     /* The next three are from Perth Brickworks (217b7f1). A real citation and
        a note about the author's own research process happened to share a
        sentence, so notes carrying real URLs read as legitimate at first pass
-       — "(already cited above for its councils)", "a live policy-document
+       - "(already cited above for its councils)", "a live policy-document
        link could not be found (site links returned 404 at the time of
        checking)", "This is three councils, not a survey of all thirty". None
        of that is information a reader needs. */
@@ -1116,27 +1116,27 @@ function runCheck() {
         for (const [re, label] of checks) {
           if (re.test(node)) {
             errors.push("config " + trail + ": author-voice note in reader-facing " +
-              "copy (" + label + ") — move it to a code comment — \"" + trunc(node) + '"');
+              "copy (" + label + ") - move it to a code comment - \"" + trunc(node) + '"');
             break;   // one report per string, not one per pattern
           }
         }
       }
       for (const [re, label] of UNFINISHED_PATTERNS) {
         if (re.test(node)) {
-          unfinished.push("config " + trail + ": " + label + ' — "' + trunc(node) + '"');
+          unfinished.push("config " + trail + ": " + label + ' - "' + trunc(node) + '"');
           unfinishedTrails.push(trail);
         }
       }
       for (const [re, label] of PLACEHOLDER_PATTERNS) {
         if (re.test(node)) {
-          errors.push("config " + trail + ": " + label + ' — "' + trunc(node) + '"');
+          errors.push("config " + trail + ": " + label + ' - "' + trunc(node) + '"');
         }
       }
     } else if (Array.isArray(node)) {
       node.forEach((v, i) => walk(v, trail + "[" + i + "]", inMarker));
     } else if (node && typeof node === "object") {
       if (node.type === "marker") {
-        unfinished.push("config " + trail + ": unfinished marker block — " +
+        unfinished.push("config " + trail + ": unfinished marker block - " +
           '"' + trunc(String(node.text || "")) + '"');
         unfinishedTrails.push(trail);
         inMarker = true;
@@ -1147,14 +1147,14 @@ function runCheck() {
 
   /* -- 2. tracking / form IDs unset --------------------------------------- */
   if (!cfg.ga4Id || /X{4,}/.test(cfg.ga4Id) || !/^G-[A-Z0-9]+$/.test(cfg.ga4Id)) {
-    errors.push("ga4Id is unset or a placeholder — analytics and click_to_call tracking are OFF");
+    errors.push("ga4Id is unset or a placeholder - analytics and click_to_call tracking are OFF");
   }
   if (!cfg.ingestUrl || !cfg.ingestSecret ||
       cfg.ingestUrl.indexOf("YOUR_") === 0 || cfg.ingestSecret.indexOf("YOUR_") === 0) {
-    errors.push("ingestUrl/ingestSecret is unset or a placeholder — the site CANNOT capture web form leads");
+    errors.push("ingestUrl/ingestSecret is unset or a placeholder - the site CANNOT capture web form leads");
   }
   if (!cfg.turnstileSiteKey) {
-    errors.push("turnstileSiteKey is unset — the form has no spam protection");
+    errors.push("turnstileSiteKey is unset - the form has no spam protection");
   }
 
   /* -- 3. service page files <-> config ------------------------------------ */
@@ -1163,7 +1163,7 @@ function runCheck() {
     if (!exists(p)) errors.push("service page file missing from disk: " + p +
       " (run node bake.js)");
   }
-  /* Any .html on disk that bake.js didn't generate is orphaned — most often a
+  /* Any .html on disk that bake.js didn't generate is orphaned - most often a
      service or area page left behind after its config entry was renamed or
      removed. It still serves, still gets crawled, and now shows stale copy
      that no longer matches config.
@@ -1171,13 +1171,13 @@ function runCheck() {
      This replaces a runtime guard: js/main.js used to detect an unmapped page
      at load time and replace it with a "Page not in use" notice. Now that
      bake.js is the only renderer there is nothing to detect it in the
-     browser, so the check moves here — which is better anyway, since it fires
+     browser, so the check moves here - which is better anyway, since it fires
      before the stale page is ever deployed rather than after. */
   const generated = new Set(buildPages().map(([f]) => f).concat(["404.html"]));
   for (const f of fs.readdirSync(__dirname).filter(f => f.endsWith(".html"))) {
     if (!generated.has(f)) {
       errors.push("orphaned page file with no config entry: " + f +
-        " — bake.js does not generate it, so its copy is frozen at whatever " +
+        " - bake.js does not generate it, so its copy is frozen at whatever " +
         "config said when it was last baked (delete it, or add the config entry back)");
     }
   }
@@ -1254,12 +1254,12 @@ function runCheck() {
             .map(w => base + "-" + w + ext).filter(v => !exists(v));
           if (missing.length) {
             warnings.push("config " + trail + ": declared responsive variant(s) not on disk (" +
-              missing.join(", ") + ") — those srcset candidates will 404");
+              missing.join(", ") + ") - those srcset candidates will 404");
           }
         }
         if (node.widths && node.widths.length && !node.sizes) {
           warnings.push("config " + trail + ": has widths but no sizes string (" + node.src +
-            ") — without it the browser assumes 100vw and picks a larger file than needed");
+            ") - without it the browser assumes 100vw and picks a larger file than needed");
         }
       }
       Object.keys(node).forEach(k => walkImages(node[k], trail ? trail + "." + k : k));
@@ -1293,7 +1293,7 @@ function runCheck() {
      Under ~30 chars reads as thin to on-page SEO tools (DataForSEO flags it);
      over ~60 gets truncated in the Google result. About and privacy are the
      usual culprits, since "About {Business Name}" is the tempting default.
-     Warn rather than fail — a short title is sometimes deliberate. From Perth
+     Warn rather than fail - a short title is sometimes deliberate. From Perth
      Limestone (b7d406b), where an on-page audit caught a 28-char About
      title. */
   for (const [label, obj] of metas) {
@@ -1301,17 +1301,17 @@ function runCheck() {
     if (!t) continue;
     if (t.length < 30) {
       warnings.push(label + " metaTitle is only " + t.length + ' chars ("' + t +
-        '") — likely to read as thin/duplicate-prone to SEO tools; aim for ' +
+        '") - likely to read as thin/duplicate-prone to SEO tools; aim for ' +
         '30-60, e.g. "About {Business Name} | {Service} in {City}"');
     } else if (t.length > 60) {
       warnings.push(label + " metaTitle is " + t.length + ' chars ("' + t +
-        '") — likely to get truncated in the Google search result');
+        '") - likely to get truncated in the Google search result');
     }
   }
 
   /* -- 9. banned LocalBusiness-only schema terms while type is Organization -
      Belt-and-braces: if config still says Organization (the pre-renter
-     default — see bake.js schema builders), grep every baked page for terms
+     default - see bake.js schema builders), grep every baked page for terms
      that would only be legitimate once a real premises/hours/reviews exist,
      in case a future edit reintroduces them by hand. Once schema.type is
      deliberately upgraded to a LocalBusiness subtype, this guard steps aside. */
@@ -1327,7 +1327,7 @@ function runCheck() {
       for (const term of BANNED_SCHEMA_TERMS) {
         if (raw.includes(term)) {
           errors.push(f + ": contains banned schema term \"" + term +
-            "\" while schema.type is Organization (no renter/premises yet) — " +
+            "\" while schema.type is Organization (no renter/premises yet) - " +
             "either remove it or deliberately upgrade schema.type to a LocalBusiness subtype");
         }
       }
@@ -1336,18 +1336,18 @@ function runCheck() {
 
   /* -- 9b. no way to contact (warn) ---------------------------------------- */
   if (!cfg.business.phone && !cfg.business.email) {
-    warnings.push("business.phone and business.email are both empty — the only way to " +
+    warnings.push("business.phone and business.email are both empty - the only way to " +
       "receive a lead is the quote form (ingestUrl/ingestSecret)");
   }
 
-  /* -- 10. testimonials / photos populated (warn — must be REAL content) ---- */
+  /* -- 10. testimonials / photos populated (warn - must be REAL content) ---- */
   if (cfg.testimonials && cfg.testimonials.length) {
     warnings.push("testimonials is non-empty (" + cfg.testimonials.length +
-      " entries) — make sure these are REAL, verifiable testimonials, never invented ones");
+      " entries) - make sure these are REAL, verifiable testimonials, never invented ones");
   }
   if (cfg.photos && cfg.photos.length) {
     warnings.push("photos is non-empty (" + cfg.photos.length +
-      " entries) — make sure these are REAL photos from the actual business");
+      " entries) - make sure these are REAL photos from the actual business");
   }
 
   /* -- report --------------------------------------------------------------- */
@@ -1379,7 +1379,7 @@ function runCheck() {
       const label = pageLabelForTrail(t);
       byPage[label] = (byPage[label] || 0) + 1;
     });
-    console.error("UNFINISHED CONTENT — " + unfinished.length +
+    console.error("UNFINISHED CONTENT - " + unfinished.length +
       " item(s) not ready to publish:\n");
     console.error("  Per page:");
     Object.keys(byPage).sort((a, b) => byPage[b] - byPage[a]).forEach(label => {
@@ -1389,7 +1389,7 @@ function runCheck() {
     unfinished.forEach(e => console.error("  ✖ " + e));
   }
   if (errors.length) {
-    console.error((unfinished.length ? "\n" : "") + "PREFLIGHT PROBLEMS — " +
+    console.error((unfinished.length ? "\n" : "") + "PREFLIGHT PROBLEMS - " +
       errors.length + " item(s):\n");
     errors.forEach(e => console.error("  ✖ " + e));
   }
@@ -1400,10 +1400,10 @@ function runCheck() {
   const failed = unfinished.length + errors.length;
   if (!failed) {
     console.log((warnings.length ? "\n" : "") + "Preflight passed" +
-      (warnings.length ? " with " + warnings.length + " warning(s)." : " — no problems found."));
+      (warnings.length ? " with " + warnings.length + " warning(s)." : " - no problems found."));
   } else {
     console.error("\n" + failed + " total problem(s). Resolve every marker/bracket token from " +
-      "a real source (or delete the claim it guards — never just remove the marker), fix the " +
+      "a real source (or delete the claim it guards - never just remove the marker), fix the " +
       "config.js issues above, run node bake.js, then re-run node bake.js --check.");
     process.exitCode = 1;
   }

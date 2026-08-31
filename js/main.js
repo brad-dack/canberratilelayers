@@ -1,5 +1,5 @@
 /* =============================================================================
-   Interactivity — everything on the page that needs a browser.
+   Interactivity - everything on the page that needs a browser.
 
    This file does NOT build the page. bake.js is the only renderer: it turns
    config.js into the finished HTML (header, hero, page content, footer, the
@@ -100,7 +100,7 @@
     });
   }
 
-  /* Fixed bottom bar on mobile — phone/quote/email stay reachable below the
+  /* Fixed bottom bar on mobile - phone/quote/email stay reachable below the
      800px breakpoint where the header nav is collapsed. Auto-hides while
      the quote form itself is on screen (no point showing a call bar over
      the form the visitor is already filling in).
@@ -136,7 +136,7 @@
 
   /* One id per page load, shared by every render of the form. The ingest
      function dedupes leads on (channel, source_ref) and reads source_ref from
-     _id, falling back to a random uuid per request when it's absent — so a
+     _id, falling back to a random uuid per request when it's absent - so a
      site that never sends _id creates a fresh lead on every retry after a
      failed submit. crypto.randomUUID needs a secure context; the fallback
      isn't cryptographically strong, but this only has to be unique enough to
@@ -161,7 +161,7 @@
   /* Turnstile's api.js is deliberately NOT a static <head> tag: it competes
      with the hero image for bandwidth and main-thread time during the LCP
      window on every page, whether or not that visitor ever reaches the form.
-     Load it on demand instead — when the enquiry section is about to scroll
+     Load it on demand instead - when the enquiry section is about to scroll
      into view, or immediately on first interaction as a fast path for anyone
      who scrolls or types before the observer's margin trips. */
   var _turnstileLoading = false;
@@ -201,7 +201,7 @@
   }
 
   /* The api.js load above is async, so Turnstile's own auto-render-on-load
-     scan may run before — or long after — this point. Render explicitly once
+     scan may run before - or long after - this point. Render explicitly once
      the API is available rather than relying on that scan. */
   function renderTurnstile(container) {
     if (!container || !cfg.turnstileSiteKey) return;
@@ -223,7 +223,7 @@
     // Baked empty; set fresh on every page load. See submissionId() above.
     var idField = document.getElementById("qf-id");
     if (idField) idField.value = submissionId();
-    // Observe the form's own containing section rather than a fixed id — the
+    // Observe the form's own containing section rather than a fixed id - the
     // form is dropped into a differently-named section on different page
     // types (and different sites), and a missed lookup here silently degrades
     // to loading Turnstile eagerly, which is the thing this avoids.
@@ -257,9 +257,9 @@
 
       var ingestUrl = cfg.ingestUrl;
       if (!ingestUrl || !cfg.ingestSecret || ingestUrl.indexOf("YOUR_") === 0) {
-        // Owner hasn't configured the ingest endpoint yet — fail gracefully
+        // Owner hasn't configured the ingest endpoint yet - fail gracefully
         // for visitors (the phone number is offered as a fallback below).
-        console.warn("ingestUrl/ingestSecret not set in config.js — form cannot submit.");
+        console.warn("ingestUrl/ingestSecret not set in config.js - form cannot submit.");
         showError();
         return;
       }
@@ -272,7 +272,7 @@
       var gotcha = document.getElementById("qf-gotcha");
       var submissionIdField = document.getElementById("qf-id");
       var turnstileResponse = form.querySelector('[name="cf-turnstile-response"]');
-      // Config-driven fields first, then the fixed keys — so a stray field
+      // Config-driven fields first, then the fixed keys - so a stray field
       // name in config can't clobber `service` or any of the meta fields.
       var payload = {};
       Object.keys(values).forEach(function (name) { payload[name] = values[name]; });
@@ -309,7 +309,7 @@
 
   /* ---------- motion ------------------------------------------------------
      Purely decorative. Both helpers bail out cleanly when the browser lacks
-     support or the user prefers reduced motion — content is always visible
+     support or the user prefers reduced motion - content is always visible
      because the hidden state only exists under html.anim (see styles.css).
 
      Note there is deliberately nothing here that animates the hero: html.anim
@@ -324,7 +324,7 @@
       header.classList.toggle("scrolled", window.scrollY > 8);
     };
     document.addEventListener("scroll", onScroll, { passive: true });
-    // Deferred rather than called synchronously during boot — reading
+    // Deferred rather than called synchronously during boot - reading
     // window.scrollY there forces a layout flush (shows up as "forced reflow"
     // in PageSpeed). setTimeout, not requestAnimationFrame: see the boot
     // section for why rAF is wrong here.
@@ -350,8 +350,8 @@
       });
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0.05 });
 
-    // Two passes rather than one — read every element's sibling position
-    // first, then apply all the style/class writes — so DOM reads and writes
+    // Two passes rather than one - read every element's sibling position
+    // first, then apply all the style/class writes - so DOM reads and writes
     // don't interleave per element.
     // Stagger siblings (e.g. cards in a grid) by their position.
     var indices = Array.prototype.map.call(targets, function (el) {
@@ -372,7 +372,7 @@
   /* The rest is deferred one task so this script's own synchronous block isn't
      occupying the main thread at the exact moment the browser would otherwise
      paint the already-baked hero. Much less work happens here than it used to
-     — the page is built before it ever reaches the browser — but initReveal
+     - the page is built before it ever reaches the browser - but initReveal
      still touches every animated element, which is enough to matter.
 
      Deliberately setTimeout, not requestAnimationFrame: rAF callbacks don't
@@ -391,7 +391,7 @@
        own scroll restoration can land before layout settles. Forced to
        "auto" because the stylesheet sets scroll-behavior: smooth, and a
        smooth scroll started here gets cancelled by that restoration. rAF is
-       fine for this one — a non-compositing tab just means the scroll doesn't
+       fine for this one - a non-compositing tab just means the scroll doesn't
        happen yet, not that content stays missing. */
     if (window.location.hash) {
       requestAnimationFrame(function () {

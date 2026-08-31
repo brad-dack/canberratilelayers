@@ -17,7 +17,7 @@
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <style>/* =============================================================================
-   Generic template styles — niche-agnostic. You should not need to edit this
+   Generic template styles - niche-agnostic. You should not need to edit this
    file when swapping niches:
 
    - Brand colors + derived tints are CSS variables baked into each page's
@@ -33,7 +33,7 @@
 ============================================================================= */
 
 :root {
-  /* Brand vars are baked/overridden from config.js — safe fallbacks only. */
+  /* Brand vars are baked/overridden from config.js - safe fallbacks only. */
   --brand: #0b6e4f;
   --brand-dark: #08523b;
   --brand-contrast: #ffffff;
@@ -51,7 +51,7 @@
   --footer-bg: #161d26;           /* baked as a brand-tinted near-black */
   --footer-ink: #c6cdd6;
 
-  /* Shape + type — style presets below override these. */
+  /* Shape + type - style presets below override these. */
   --radius: 12px;
   --radius-lg: 18px;
   --btn-radius: 12px;
@@ -66,7 +66,7 @@
   --shadow-md: 0 2px 4px rgba(16, 24, 32, 0.05), 0 10px 24px rgba(16, 24, 32, 0.09);
   --shadow-lg: 0 4px 8px rgba(16, 24, 32, 0.06), 0 20px 48px rgba(16, 24, 32, 0.14);
 
-  /* Pattern texture — data-pattern presets fill these in. */
+  /* Pattern texture - data-pattern presets fill these in. */
   --pattern: none;
   --pattern-size: auto;
   --pattern-ink: rgba(27, 36, 48, 0.06);
@@ -320,7 +320,7 @@ html[data-style="sharp"] .btn-primary:hover {
   text-decoration: none;
   padding-block: 12px;
 }
-/* Small brand mark before the name — shape follows the theme. */
+/* Small brand mark before the name - shape follows the theme. */
 .logo::before {
   content: "";
   flex: none;
@@ -428,7 +428,7 @@ html[data-style="elegant"] .logo::before { border-radius: 50%; width: 9px; heigh
   padding-block: 60px;
   text-align: center;
 }
-/* Texture overlay — inherits the data-pattern preset. */
+/* Texture overlay - inherits the data-pattern preset. */
 .hero::before {
   content: "";
   position: absolute;
@@ -520,7 +520,7 @@ html[data-style="sharp"] .value-props li { border-radius: var(--radius); }
 
 /* --- hero: style variants --- */
 
-/* BOLD — full brand-color hero with a diagonal bottom edge. */
+/* BOLD - full brand-color hero with a diagonal bottom edge. */
 html[data-style="bold"] .hero {
   background: linear-gradient(135deg, var(--brand) 0%, var(--brand-dark) 100%);
   color: var(--brand-contrast);
@@ -563,7 +563,7 @@ html[data-style="bold"] .hero-media::before {
   background: rgba(255, 255, 255, 0.14);
 }
 
-/* SOFT — pale wash, rounded bottom, blob-shaped imagery. */
+/* SOFT - pale wash, rounded bottom, blob-shaped imagery. */
 html[data-style="soft"] .hero {
   background: var(--brand-soft);
   border-radius: 0 0 3rem 3rem;
@@ -574,7 +574,7 @@ html[data-style="soft"] .hero-img {
 }
 html[data-style="soft"] .value-props li { border-color: var(--border); }
 
-/* SHARP — flat white, strong rule, offset solid shadow on imagery. */
+/* SHARP - flat white, strong rule, offset solid shadow on imagery. */
 html[data-style="sharp"] .hero {
   background: var(--bg);
   border-bottom: 3px solid var(--ink);
@@ -589,7 +589,7 @@ html[data-style="sharp"] .hero-img {
   max-width: calc(100% - 10px);
 }
 
-/* ELEGANT — quiet, framed imagery, thin rules. */
+/* ELEGANT - quiet, framed imagery, thin rules. */
 html[data-style="elegant"] .hero {
   background: linear-gradient(180deg, var(--brand-softer), var(--bg));
   border-bottom: 1px solid var(--border);
@@ -1158,7 +1158,7 @@ html[data-style="sharp"] .cta-band { background: var(--brand); }
   margin: -0.8em 0 1.4em;
 }
 
-/* Loud on purpose — this must be impossible to miss in preview, and
+/* Loud on purpose - this must be impossible to miss in preview, and
    node bake.js --check fails while any of these remain in config.js. */
 .block-marker {
   display: block;
@@ -1299,7 +1299,7 @@ html[data-style="sharp"] .cta-band { background: var(--brand); }
    quote, so printing is a real use of this site rather than an afterthought.
    Deliberately no PDF: a print stylesheet needs no maintenance, and it keeps
    the page itself the canonical linkable version rather than splitting link
-   equity to a file. Never gate this behind an email capture — the links are
+   equity to a file. Never gate this behind an email capture - the links are
    the point of the page.
 
    Site chrome is dropped, but the header logo stays so the printed sheet
@@ -1323,7 +1323,7 @@ html[data-style="sharp"] .cta-band { background: var(--brand); }
     display: none !important;
   }
 
-  /* Flatten anything decorative — printers charge for ink. */
+  /* Flatten anything decorative - printers charge for ink. */
   *, *::before, *::after {
     background: transparent !important;
     box-shadow: none !important;

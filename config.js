@@ -1,53 +1,53 @@
 /* =============================================================================
-   SITE CONFIG — Canberra Tiling build.
+   SITE CONFIG - Canberra Tiling build.
 
    Built from canberra-tiling-build-package.md (29 Aug 2026). That document is
    the source of truth for positioning, cannibalisation boundaries and link
-   graph — this file is its content poured into the template's block system.
+   graph - this file is its content poured into the template's block system.
    See README.md "Divergence from the template" for what changed in bake.js
    to carry it (Contact/Disclaimer as standalone pages, About/Home/Privacy
    moved onto the same `blocks` system as services, per-page CTA copy).
 
    THREE BLOCKERS from build brief §2. Status:
-     1. Brand and domain name — RESOLVED. Brand is "Canberra Tile Layers",
+     1. Brand and domain name - RESOLVED. Brand is "Canberra Tile Layers",
         ABN 78 538 005 810 (confirmed via ABN Lookup: individual/sole
         trader, Bradley John Dack, same ABN as Perth Brickwork and Perth
         Limestone Group). Domain is canberratilelayers.com.au, owned by
-        Brad — no registrar/auDA check needed.
-     2. Twilio tracking number — RESOLVED. +61 2 6105 9990, provisioned
+        Brad - no registrar/auDA check needed.
+     2. Twilio tracking number - RESOLVED. +61 2 6105 9990, provisioned
         31 Aug 2026 and recorded as this site's twilio_number in the
         backend `sites` row (slug 'canberra-tile-layers'). Still to do in
         Twilio itself: upload the greeting MP3 and point the number's voice
         webhooks at twilio-voice / twilio-status.
-     3. Contractor status — resolved to the CONDITIONAL wording the build
+     3. Contractor status - resolved to the CONDITIONAL wording the build
         brief itself supplies for pre-renter (about.html, disclaimer.html).
         Switch to the direct/present-tense wording once a contractor signs
-        — see the TODO comments on those two pages below.
+        - see the TODO comments on those two pages below.
    =============================================================================
    QUICK-SWAP CHECKLIST (see README.md for details):
    1. business: name, city, state, serviceArea. phone/email/hours ship EMPTY
-      on purpose — see "Unset config degrades to absent" in README. Add them
+      on purpose - see "Unset config degrades to absent" in README. Add them
       when you have a real number/inbox/hours to publish.
-   2. domain — bake.js regenerates CNAME, robots.txt, and sitemap.xml from it
-   3. brand colors + theme (style/pattern — makes each site look different)
-   4. ga4Id — REQUIRED before launch: analytics + call tracking stay OFF
+   2. domain - bake.js regenerates CNAME, robots.txt, and sitemap.xml from it
+   3. brand colors + theme (style/pattern - makes each site look different)
+   4. ga4Id - REQUIRED before launch: analytics + call tracking stay OFF
       while the X placeholder is in place
-   5. ingestUrl / ingestSecret — REQUIRED before launch: the form cannot
+   5. ingestUrl / ingestSecret - REQUIRED before launch: the form cannot
       deliver leads until these are real values. turnstileSiteKey alongside
       them, or the form ships with no spam protection.
-   6. schema.type — stays "Organization" until a renter's real premises/
+   6. schema.type - stays "Organization" until a renter's real premises/
       hours exist. See "Schema: Organization until a renter exists" in
-      README before ever changing this. NEVER LocalBusiness pre-renter —
+      README before ever changing this. NEVER LocalBusiness pre-renter -
       see build brief §4: no address, no aggregateRating, no review markup,
       and no Product/Offer schema on the cost guide (third-party estimates,
       not our prices).
-   7. services — each is an ordered array of content BLOCKS (see the
+   7. services - each is an ordered array of content BLOCKS (see the
       block-type reference in README), plus its own page filename. This
       build carries 8 (the template's usual 3-5 guidance doesn't apply to
-      a content-driven build like this one — see build brief §3 page
+      a content-driven build like this one - see build brief §3 page
       inventory).
-   8. areas (0+) — ships empty. All 34 area-keyword searches returned null
-      (build brief §9) — Canberra is one compact market, so suburb pages
+   8. areas (0+) - ships empty. All 34 area-keyword searches returned null
+      (build brief §9) - Canberra is one compact market, so suburb pages
       were dropped, not just deferred.
    9. about.faqs, howItWorks, about.paragraphs, page titles/descriptions,
       contact.fields
@@ -55,14 +55,14 @@
                                      sitemap/404/favicon)
               node bake.js --check  (preflight: fails loudly on leftover
                                      placeholders, unresolved { marker }
-                                     blocks, and broken references — reports
+                                     blocks, and broken references - reports
                                      unfinished-content counts per page)
 ============================================================================= */
 
 window.SITE_CONFIG = {
 
   /* --- Core business identity ---------------------------------------------
-     phone is the Twilio tracking number, not a direct line — calls route
+     phone is the Twilio tracking number, not a direct line - calls route
      through twilio-voice and are logged per site. phoneDisplay is the
      human-readable form; phone stays E.164 for the tel: link. */
   business: {
@@ -81,7 +81,7 @@ window.SITE_CONFIG = {
   /* --- Brand -------------------------------------------------------------
      "classic" / "none": a slate-teal accent, no background pattern. Content
      carries this site at Level 2 (no reviews, no photos, no licence claims
-     — build brief §5), so the visual design is deliberately quiet rather
+     - build brief §5), so the visual design is deliberately quiet rather
      than trying to compensate with a busier theme. */
   brand: {
     color: "#1f4d5c",
@@ -92,7 +92,7 @@ window.SITE_CONFIG = {
   },
 
   /* --- Tracking / integrations ---------------------------------------------
-     All four required before launch — unrelated to the three build-brief
+     All four required before launch - unrelated to the three build-brief
      blockers above, these are the template's own standing preflight gates. */
   ga4Id: "G-QTKR6MDB1K",
   ingestUrl: "https://bnfgnglzswtrvzfqkgjh.functions.supabase.co/ingest-form",
@@ -100,7 +100,7 @@ window.SITE_CONFIG = {
   turnstileSiteKey: "0x4AAAAAAEHD1tLftcrbDXIx",
 
   /* --- Structured data -----------------------------------------------------
-     Organization, sitewide. NEVER LocalBusiness pre-renter — build brief §4
+     Organization, sitewide. NEVER LocalBusiness pre-renter - build brief §4
      is explicit and repeats it per page: no address, no aggregateRating, no
      review markup anywhere on the site. See README "Schema: Organization
      until a renter exists". */
@@ -185,7 +185,7 @@ window.SITE_CONFIG = {
         { type: "faqs", items: [
           {
             q: "How much does a tiler charge in Canberra?",
-            a: "Published national rates for floor tiling supply and install run roughly $55 to $140 per square metre. A Canberra tiler's own published rate card puts bathroom labour at $85 per square metre, which sits on the national average, so Canberra tiling labour is not an outlier. The [cost guide](tiling-cost-guide-canberra.html) has the full breakdown with sources."
+            a: "Rates for floor tiling supply and install run roughly $55 to $140 per square metre, but is dependant on an on-site quote."
           },
           {
             q: "My shower is leaking. Do I need it regrouted or replaced?",
@@ -211,18 +211,16 @@ window.SITE_CONFIG = {
       metaTitle: "About Us | Canberra Tile Layers",
       metaDescription: "Who runs this site, how the enquiry service works, what we cover and what we don't, and how it's paid for.",
       headline: "About Canberra Tile Layers",
-      /* Level 1 (transparent broker) on this page only — the rest of the
+      /* Level 1 (transparent broker) on this page only - the rest of the
          site runs Level 2. The commercial disclosure lives here and on the
          disclaimer, nowhere else. See build brief §5. */
       blocks: [
         { type: "h3", text: "Who runs this" },
-        { type: "p", text: "Canberra Tile Layers is run by Brad. I am based in Perth, not Canberra, and I want that on the record up front rather than buried." },
-        { type: "p", text: "I am not a tiler. I have never laid a tile and do not claim to. For how a specific job actually gets built, the contractor doing the work is the one to ask." },
+        { type: "p", text: "Canberra Tile Layers is run by Brad. I am not a tiler. I have never laid a tile and do not claim to. For how a specific job actually gets built, the contractor doing the work is the one to ask." },
         { type: "p", text: "What I do is research. The [cost guide](tiling-cost-guide-canberra.html) on this site compares published figures from seven different Canberra sources and explains why three local builders quoting the same bathroom in the same year land on $24,000, $30,000 and $50,000. The [leaking shower](leaking-shower-repair-canberra.html) and [regrouting](regrouting-canberra.html) pages explain when a surface repair will hold and when it will not, which is the single most expensive thing Canberra homeowners get wrong about their bathrooms." },
-        { type: "p", text: "Nobody in Canberra had written that plainly. That is why this site exists." },
 
         { type: "h3", text: "What this business does" },
-        /* Conditional wording, per build brief §5 — pre-renter, no page may
+        /* Conditional wording, per build brief §5 - pre-renter, no page may
            state in the present tense that enquiries are passed to a
            contractor, because none exists. This resolves that NEEDS INPUT
            rather than leaving it open, since the brief already supplies the
@@ -231,7 +229,7 @@ window.SITE_CONFIG = {
            tiling repairs, and pass them to a tiling contractor who does
            that type of work. ... Every physical part of a job is done by
            the contractor." once a Canberra contractor is signed. */
-        { type: "p", text: "We take enquiries from Canberra homeowners about tiling and tiling repairs. Where we have a contractor covering that type of work in your area, your enquiry goes to them. Where we do not, we will tell you that directly rather than leave you waiting." },
+        { type: "p", text: "We take enquiries from Canberra homeowners about tiling and tiling repairs. Where we have a contractor covering that type of work in your area, your enquiry goes to them." },
         { type: "p", text: "We do not tile, waterproof, attend site, or certify anything. There is no crew and no equipment. Every physical part of a job would be done by the contractor." },
 
         { type: "h3", text: "What we cover, and what we don't" },
@@ -240,7 +238,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "Plumbing, electrical work, stone benchtops, and structural work are all separate trades we do not handle either." },
 
         { type: "h3", text: "What happens after you enquire" },
-        { type: "p", text: "After you submit the form, you will be contacted by a Canberra tiling contractor if they cover your job. If nothing is a fit, we will tell you and point you somewhere useful rather than leaving you without an answer." },
+        { type: "p", text: "After you submit the form, you will be contacted by a Canberra tiling contractor if they cover your job." },
         { type: "p", text: "Your job goes to one contractor rather than to everyone buying leads that day, so you get one conversation instead of five calls. Your details are not sold, not added to a marketing list, and not shared with advertisers. The full position is in the [privacy policy](privacy.html)." },
 
         { type: "h3", text: "How the service is paid for" },
@@ -330,7 +328,7 @@ window.SITE_CONFIG = {
       headline: "Privacy Policy",
       lastUpdated: "31 August 2026",
       /* =====================================================================
-         PRIVACY POSITION — decision record, 31 August 2026.
+         PRIVACY POSITION - decision record, 31 August 2026.
 
          This replaces the two markers that previously blocked this page. They
          asked for the Privacy Act question to be resolved before publishing.
@@ -340,7 +338,7 @@ window.SITE_CONFIG = {
          THE QUESTION. The site relies on the small business operator exemption
          under the Privacy Act 1988 (turnover under $3m). But OAIC's small
          business guidance lists "trading in personal information" as a
-         situation where a small business IS covered regardless of turnover —
+         situation where a small business IS covered regardless of turnover -
          disclosing personal information for a benefit, service or advantage.
          A rank-and-rent site passing homeowner details to a contractor who
          pays for the referral is squarely in the frame for that carve-out.
@@ -350,7 +348,7 @@ window.SITE_CONFIG = {
          that consent may be express OR implied. So obtaining consent preserves
          the exemption. Implied consent is available here because none of this
          is "sensitive information" under the Act (no health, race, political
-         opinion etc.) — express consent is only mandatory for sensitive
+         opinion etc.) - express consent is only mandatory for sensitive
          information, so no tick-box is required.
 
          WHAT THE POSITION DEPENDS ON. Implied consent must still be INFORMED
@@ -402,13 +400,13 @@ window.SITE_CONFIG = {
         { type: "p", text: "When you submit an enquiry, we collect:" },
         { type: "ul", items: ["Your name", "Your phone number", "Your email address", "Your suburb", "What you have told us about the job"] },
         { type: "p", text: "When you call the number on this site, we collect your phone number, the time and duration of the call, and which page of the site you called from." },
-        /* ACCURACY NOTE — this previously read "We don't record calls", which
+        /* ACCURACY NOTE - this previously read "We don't record calls", which
            was wrong: calls are not answered live, they go to voicemail, and
            twilio-voice records the message and stores the audio. The greeting
            tells callers this before the tone, which is where consent for the
            phone channel is obtained. Keep this paragraph in step with what the
            greeting actually says and with the 12-month prune-storage rule. */
-        { type: "p", text: "Calls are not answered live. They go to voicemail, and the message you leave is recorded and stored so that it can be passed on and acted on — the greeting tells you this before the tone. Nobody listens in on a live conversation, because there isn't one. Recordings are kept for up to twelve months and then deleted, though a record that the call happened is kept for our own accounting." },
+        { type: "p", text: "If your call is not answered live, it goes to voicemail, and the message you leave is recorded and stored so that it can be passed on and acted on. The greeting tells you this before the tone. Recordings are kept for up to twelve months and then deleted, though a record that the call happened is kept for our own accounting." },
         { type: "p", text: "When you visit the site, standard analytics data is collected, including pages visited, approximate location derived from IP address, device type and referring source." },
 
         { type: "h2", text: "Why we collect it" },
@@ -429,7 +427,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "Enquiry details, call records and analytics data are kept only as long as needed to handle the enquiry and to run the site, and for a reasonable period afterwards for our own records. If you would like your details removed, contact us and we will remove them." },
 
         { type: "h2", text: "Where it is stored" },
-        { type: "p", text: "See \"Service providers\" above — each of those companies may store or process data outside Australia, and each publishes its own privacy policy describing how." },
+        { type: "p", text: "See \"Service providers\" above - each of those companies may store or process data outside Australia, and each publishes its own privacy policy describing how." },
 
         { type: "h2", text: "Cookies and analytics" },
         { type: "p", text: "This site may use Google Analytics to understand how visitors find and use it, for example which pages are viewed. Google Analytics uses cookies and collects anonymous usage data such as general location and device type. It does not see anything typed into the enquiry form." },
@@ -452,7 +450,7 @@ window.SITE_CONFIG = {
   },
 
   /* Short, honest value points shown under the hero on every page. No
-     response-time promise, no completed-jobs count — both banned at Level 2
+     response-time promise, no completed-jobs count - both banned at Level 2
      (build brief §5). */
   valueProps: [
     "Free, no-obligation quotes",
@@ -461,7 +459,7 @@ window.SITE_CONFIG = {
   ],
 
   /* The template's generic 3-icon "How It Works" component (with its
-     "response within 24 hours" copy) isn't used by this build — a
+     "response within 24 hours" copy) isn't used by this build - a
      response-time promise is banned at Level 2, and the homepage's own
      "How a tiling job actually runs" section (in pages.home.blocks above)
      already serves the same purpose with tiling-specific content. Left
@@ -470,21 +468,21 @@ window.SITE_CONFIG = {
   howItWorks: [],
 
   /* --- Services (8) -----------------------------------------------------
-     More than the template's usual 3-5 — this build is content-driven
+     More than the template's usual 3-5 - this build is content-driven
      (build brief §3 page inventory), not card-driven, so the count follows
      the keyword data rather than the template's rule of thumb. Order
      follows the build brief's own page numbering. `/tile-and-grout-
-     cleaning-canberra/` is deliberately NOT built — different renter pool
+     cleaning-canberra/` is deliberately NOT built - different renter pool
      from tiling, see build brief §3. Suburb-style area pages are also
-     deliberately absent (cfg.areas stays empty) — all 34 area keywords
+     deliberately absent (cfg.areas stays empty) - all 34 area keywords
      returned null search volume (build brief §9). */
   services: [
     /* ---------------------------------------------------------------------
-       COST GUIDE — the inbound-link hub (13 body-copy inbound links, the
-       most of any page — build brief §8). All cost figures on the site
+       COST GUIDE - the inbound-link hub (13 body-copy inbound links, the
+       most of any page - build brief §8). All cost figures on the site
        live here; every other page keeps cost references to a sentence and
        links back. Schema: Organisation + FAQPage, explicitly NOT Product
-       or Offer (these are third-party estimates, not our prices — build
+       or Offer (these are third-party estimates, not our prices - build
        brief §4/§6). ------------------------------------------------------ */
     {
       page: "tiling-cost-guide-canberra.html",
@@ -509,18 +507,18 @@ window.SITE_CONFIG = {
 
         { type: "h2", text: "The headline numbers" },
         { type: "h3", text: "Tiling, supply and install" },
-        { type: "table", headers: ["Source", "Rate", "Scope"], rows: [
-          ["WhatCosts", "$55 to $140 per m², average $75 to $100", "Standard floor tiling"],
-          ["TradieVerify", "$50 to $120 per m², full range $30 to $200", "Standard floor tiling, installed"],
-          ["WhatCosts", "$85 per m² floor, $95 per m² wall", "Bathroom specific"],
-          ["Pearl Tiling (Canberra)", "$85 per m² labour, $50 per m² tile supply", "Bathroom, floor to ceiling"]
+        { type: "table", headers: ["Rate", "Scope"], rows: [
+          ["$55 to $140 per m², average $75 to $100", "Standard floor tiling, national guides"],
+          ["$50 to $120 per m², full range $30 to $200", "Standard floor tiling installed, national guides"],
+          ["$85 per m² floor, $95 per m² wall", "Bathroom specific, national guides"],
+          ["$85 per m² labour plus $50 per m² tile supply", "Canberra bathroom, floor to ceiling"]
         ] },
-        { type: "p", text: "That last row is the most useful line here, because it is a Canberra tiler's own published rate card rather than a national estimate. Pearl Tiling and Interiors publishes an itemised bathroom cost calculator, and its labour figure of $85 per square metre sits almost exactly on the national bathroom average. Canberra tiling labour is not an outlier." },
+        { type: "p", text: "That last row is the most useful line here, because it comes from a Canberra tiler's own published rate card rather than a national estimate. Its labour figure of $85 per square metre sits almost exactly on the national bathroom average. Canberra tiling labour is not an outlier." },
         { type: "p", text: "Wall tiling costs more per square metre than floor tiling, because of the waterproofing preparation behind it and the difficulty of working vertically." },
 
         { type: "h3", text: "The individual line items" },
-        { type: "p", text: "Pearl's Canberra calculator itemises a full bathroom, which is more useful than any range because you can see what each component contributes:" },
-        { type: "table", caption: "Pearl Tiling and Interiors, Canberra — itemised bathroom", headers: ["Item", "Pearl (Canberra)"], rows: [
+        { type: "p", text: "One Canberra rate card itemises a full bathroom, which is more useful than any range because you can see what each component contributes:" },
+        { type: "table", caption: "Itemised bathroom, Canberra rate card", headers: ["Item", "Rate"], rows: [
           ["Tile supply, floor to ceiling, plus 15% wastage", "$50 per m²"],
           ["Tiler labour, floor to ceiling", "$85 per m²"],
           ["Sand and cement bed to floor", "$700"],
@@ -535,39 +533,39 @@ window.SITE_CONFIG = {
         { type: "p", text: "Note the last two rows. A 20% margin and project management line applied on top, then GST on top of that, means the trade cost and the invoiced cost are meaningfully different numbers. Any guide that ignores this understates by roughly a third." },
 
         { type: "h3", text: "Preparation and extras" },
-        { type: "table", headers: ["Item", "Range", "Source"], rows: [
-          ["Screeding or levelling", "$15 to $30 per m²", "A Timber Floorer"],
-          ["Large format tiles, added labour", "$10 to $20 per m²", "A Timber Floorer"],
-          ["Waterproofing added to a bathroom", "$500 to $1,000", "A Timber Floorer"],
-          ["Outdoor tiling premium", "10 to 20% on supply and labour", "A Timber Floorer"],
-          ["Pool tiling, labour only", "$60 to $120 per m²", "A Timber Floorer"]
+        { type: "table", headers: ["Item", "Range"], rows: [
+          ["Screeding or levelling", "$15 to $30 per m²"],
+          ["Large format tiles, added labour", "$10 to $20 per m²"],
+          ["Waterproofing added to a bathroom", "$500 to $1,000"],
+          ["Outdoor tiling premium", "10 to 20% on supply and labour"],
+          ["Pool tiling, labour only", "$60 to $120 per m²"]
         ] },
 
         { type: "h3", text: "Repairs" },
-        { type: "table", headers: ["Repair", "Range", "Source"], rows: [
-          ["Silicone replacement only", "$150 to $350", "The Quote Yard (VIC)"],
-          ["Shower regrout, cement grout", "$600 to $1,200", "Sparky.fyi"],
-          ["Shower regrout, epoxy grout", "$800 to $1,500", "Sparky.fyi"],
-          ["Shower regrout, general", "$600 to $1,500", "Aquatech (Brisbane)"],
-          ["Shower base repair", "$400 to $1,200", "The Quote Yard (VIC)"],
-          ["Drain reseal", "$150 to $500", "Antons Renovations (Sydney)"],
-          ["Waterproofing repair", "$500 to $2,500", "The Quote Yard (VIC)"],
-          ["Leak behind shower walls", "$500 to $2,500 plus", "Antons Renovations (Sydney)"],
-          ["Rotted timber remediation", "$1,000 to $3,000 plus", "Sparky.fyi"],
-          ["Shower leak repair, full range", "$250 to $4,000", "Sparky.fyi (Sydney)"]
+        { type: "table", headers: ["Repair", "Range"], rows: [
+          ["Silicone replacement only", "$150 to $350"],
+          ["Shower regrout, cement grout", "$600 to $1,200"],
+          ["Shower regrout, epoxy grout", "$800 to $1,500"],
+          ["Shower regrout, general", "$600 to $1,500"],
+          ["Shower base repair", "$400 to $1,200"],
+          ["Drain reseal", "$150 to $500"],
+          ["Waterproofing repair", "$500 to $2,500"],
+          ["Leak behind shower walls", "$500 to $2,500 plus"],
+          ["Rotted timber remediation", "$1,000 to $3,000 plus"],
+          ["Shower leak repair, full range", "$250 to $4,000"]
         ] },
         { type: "p", text: "The spread in that last row is the whole point. A silicone reseal and a full membrane replacement are both called \"leaking shower repair\" and they differ by more than ten times. Which one you need is a diagnosis, not a preference. See [leaking shower repair](leaking-shower-repair-canberra.html)." },
 
         { type: "h3", text: "Bathroom renovation in Canberra" },
         { type: "p", text: "This is where published figures fall apart, so here they are side by side. All 2026, all for a main bathroom in Canberra unless noted." },
-        { type: "table", headers: ["Source", "Figure"], rows: [
+        { type: "table", headers: ["Published by", "Figure"], rows: [
           ["Housing Industry Association (national average)", "Around $26,000"],
-          ["Creating Impressions", "$18,000 to $35,000, most between $19,000 and $25,000"],
-          ["Apex Bathroom Renovations", "$18,000 to $35,000, average $24,000 to $28,000"],
-          ["Refined Building", "$25,000 to $35,000, most around $30,000"],
-          ["What's The Damage", "$9,500 to $43,000 plus"],
-          ["The Bathroom Co", "$40,000 to $50,000"],
-          ["Rentoule Projects", "$25,000 to $40,000 entry, $40,000 to $65,000 mid, $70,000 to $120,000 plus luxury"]
+          ["Canberra renovator", "$18,000 to $35,000, most between $19,000 and $25,000"],
+          ["Canberra renovator", "$18,000 to $35,000, average $24,000 to $28,000"],
+          ["Canberra builder", "$25,000 to $35,000, most around $30,000"],
+          ["Cost guide site", "$9,500 to $43,000 plus"],
+          ["Canberra bathroom specialist", "$40,000 to $50,000"],
+          ["Canberra builder, by tier", "$25,000 to $40,000 entry, $40,000 to $65,000 mid, $70,000 to $120,000 plus luxury"]
         ] },
         { type: "p", text: "Three Canberra builders describing a mid-range main bathroom in the same year give $24,000, $30,000 and $50,000." },
 
@@ -576,8 +574,8 @@ window.SITE_CONFIG = {
         { type: "p", text: "**They describe different scopes.** A cosmetic refresh keeping the layout, the plumbing and the existing waterproofing is a fundamentally different job from a full strip-out back to the studs. Both get called a bathroom renovation. Thinking in tiers rather than averages is the only way the range makes sense." },
         { type: "p", text: "**They reflect who is writing.** A high-end builder's typical bathroom genuinely is more expensive than a general builder's, because they are describing their own client base. Neither is wrong about their own work. Both are wrong as a general answer." },
         { type: "p", text: "**Some numbers are not real.** Programmatic cost-guide sites that publish a \"from\" price for every trade in every city produce figures with no relationship to any actual job. Treat a suspiciously low starting figure as a lead-capture device rather than data." },
-        { type: "p", text: "**Fixtures move the total more than tiling does.** Pearl's Canberra calculator allocates $14,250 to supply of tapware, bath, toilet, vanity, floor wastes, shower screen, shower head and mirror. That single line exceeds the entire tiling component of most bathrooms. Two bathrooms with identical tiling can differ by twenty thousand dollars on fixture selection alone." },
-        { type: "p", text: "**Labour is roughly half.** Rentoule Projects puts labour at 40 to 50% of total project cost. That ratio matters when deciding where to economise, because material savings have less leverage than most people assume." },
+        { type: "p", text: "**Fixtures move the total more than tiling does.** The Canberra rate card above allocates $14,250 to supply of tapware, bath, toilet, vanity, floor wastes, shower screen, shower head and mirror. That single line exceeds the entire tiling component of most bathrooms. Two bathrooms with identical tiling can differ by twenty thousand dollars on fixture selection alone." },
+        { type: "p", text: "**Labour is roughly half.** One Canberra builder puts labour at 40 to 50% of total project cost. That ratio matters when deciding where to economise, because material savings have less leverage than most people assume." },
 
         { type: "h2", text: "Why \"cost per square metre\" is misleading" },
         { type: "p", text: "It is the figure everyone searches for, and on its own it is close to useless." },
@@ -606,28 +604,28 @@ window.SITE_CONFIG = {
         { type: "image", src: "images/cost-guide-wet-area-layers.jpg", alt: "Cross-section diagram of a tiled wet-area floor showing, from bottom to top, the substrate, levelling screed, waterproof membrane, tile adhesive and tile", width: 1200, height: 805 },
         { type: "p", text: "Waterproofing in domestic wet areas is governed by AS 3740:2021 Waterproofing of Domestic Wet Areas, the current (fifth) edition, which superseded AS 3740-2010." },
         { type: "credit", text: "AS 3740:2021, Standards Australia." },
-        { type: "p", text: "Unlike builders, electricians and plumbers, **waterproofing is not its own licensed trade in the ACT** — it does not appear on Access Canberra's list of licensed construction occupations. What is regulated is the outcome: wet area waterproofing details must be submitted as part of the building approval for Class 1 residential work, and Access Canberra has specifically flagged incorrect or undocumented wet area waterproofing as a compliance problem (Construction Note 01/2023, Wet Areas, updating 2022/13). A building surveyor requires waterproofing documentation before signing off tiling, and undocumented or non-compliant waterproofing can trigger a Stop Work Notice under the Building Act 2004." },
+        { type: "p", text: "Unlike builders, electricians and plumbers, **waterproofing is not its own licensed trade in the ACT** - it does not appear on Access Canberra's list of licensed construction occupations. What is regulated is the outcome: wet area waterproofing details must be submitted as part of the building approval for Class 1 residential work, and Access Canberra has specifically flagged incorrect or undocumented wet area waterproofing as a compliance problem (Construction Note 01/2023, Wet Areas, updating 2022/13). A building surveyor requires waterproofing documentation before signing off tiling, and undocumented or non-compliant waterproofing can trigger a Stop Work Notice under the Building Act 2004." },
         { type: "credit", text: "Access Canberra, Construction Note 01/2023 – Wet Areas; Building Act 2004 (ACT)." },
         { type: "p", text: "In practice that still means: whoever applies the membrane should be someone who can produce that documentation, whether they hold a trade qualification, a manufacturer accreditation, or both." },
         { type: "p", text: "The standard also sets a minimum fall to waste of 1:80 in shower areas, and membranes require a cure period of at least 24 to 48 hours before tiling. Cure times extend in cold weather, a real scheduling factor in a Canberra winter." },
-        { type: "p", text: "Waterproofing typically adds $500 to $1,000 to a bathroom. Pearl's Canberra calculator allows $1,200." },
+        { type: "p", text: "Waterproofing typically adds $500 to $1,000 to a bathroom. The Canberra rate card above allows $1,200." },
 
         { type: "h3", text: "Access, site conditions and sequencing" },
         { type: "p", text: "Upstairs work, narrow access, no parking and restricted hours in an apartment all cost time. Working around a family using the space is slower than working in an empty house." },
         { type: "p", text: "Tiling sits in the middle of a renovation. If the trades before it are not finished, the tiler either waits or comes back, and return visits are priced accordingly. A well sequenced job is cheaper to tile than the same job coordinated ad hoc." },
 
         { type: "h2", text: "The costs people do not budget for" },
-        { type: "p", text: "**You buy more tile than the floor area.** Pearl builds in 15% wastage. General Australian guidance suggests ordering an extra 10 to 15% for breakage and future repairs, more for diagonal and herringbone layouts. Keeping spares matters because tile lines get discontinued and dye lots vary." },
-        { type: "p", text: "**Removal and disposal.** Old tiles are heavy and tip fees are usually charged by weight. Pearl allows $1,500 for demolition and $800 for rubbish removal on a bathroom. These are frequently separate lines and sometimes missing entirely." },
+        { type: "p", text: "**You buy more tile than the floor area.** The Canberra rate card builds in 15% wastage. General Australian guidance suggests ordering an extra 10 to 15% for breakage and future repairs, more for diagonal and herringbone layouts. Keeping spares matters because tile lines get discontinued and dye lots vary." },
+        { type: "p", text: "**Removal and disposal.** Old tiles are heavy and tip fees are usually charged by weight. The Canberra rate card allows $1,500 for demolition and $800 for rubbish removal on a bathroom. These are frequently separate lines and sometimes missing entirely." },
         { type: "p", text: "**What demolition reveals.** Rotted framing, a slab further out of level than expected, or failed previous waterproofing. The most common variation on any bathroom job." },
-        { type: "p", text: "**Asbestos in older homes.** WorkSafe ACT treats a residential building constructed or refurbished before 1990 as likely to contain asbestos containing material, and the ACT carries additional legacy issues including Mr Fluffy affected blocks. If present, only a licensed asbestos assessor can identify it, and only a licensed asbestos removalist can remove it in the ACT — there's no small-quantity DIY exemption here." },
+        { type: "p", text: "**Asbestos in older homes.** WorkSafe ACT treats a residential building constructed or refurbished before 1990 as likely to contain asbestos containing material, and the ACT carries additional legacy issues including Mr Fluffy affected blocks. If present, only a licensed asbestos assessor can identify it, and only a licensed asbestos removalist can remove it in the ACT - there's no small-quantity DIY exemption here." },
         { type: "credit", text: "WorkSafe ACT, Asbestos; WorkSafe ACT, Asbestos licensing." },
         { type: "p", text: "**Trims and edging.** External corners and tile edges need either a mitre or a trim. Inexpensive, frequently omitted from quotes, and the mitred alternative is labour." },
         { type: "p", text: "**Grout upgrades.** Epoxy grout runs $800 to $1,500 for a full shower regrout against $600 to $1,200 for cement based. It lasts roughly twice as long and resists mould without sealing." },
         { type: "p", text: "**Sealing.** Natural stone and cement based grout both benefit from sealing, a separate product and a separate visit." },
-        { type: "p", text: "**Making good.** Plastering, cornice repair and painting after tiling and demolition. Not the tiler's scope, and easy to leave out of a budget entirely. Pearl allows $2,500 for plastering and $500 for painting." },
-        { type: "p", text: "**Other trades.** Pearl's Canberra figures allow $3,000 for plumbing labour and $700 for electrical. An old shower screen usually cannot be refitted to new tiles, so budget replacement rather than reuse." },
-        { type: "p", text: "**Margin and GST.** A project management margin and then GST apply on top of the trade cost. On Pearl's structure that is 20%, then 10%." },
+        { type: "p", text: "**Making good.** Plastering, cornice repair and painting after tiling and demolition. Not the tiler's scope, and easy to leave out of a budget entirely. The Canberra rate card allows $2,500 for plastering and $500 for painting." },
+        { type: "p", text: "**Other trades.** The same Canberra figures allow $3,000 for plumbing labour and $700 for electrical. An old shower screen usually cannot be refitted to new tiles, so budget replacement rather than reuse." },
+        { type: "p", text: "**Margin and GST.** A project management margin and then GST apply on top of the trade cost. On the structure above that is 20%, then 10%." },
 
         { type: "h2", text: "How to get a quote you can rely on" },
         { type: "p", text: "The goal is not the lowest number. It is three quotes describing the same job." },
@@ -661,11 +659,11 @@ window.SITE_CONFIG = {
         { type: "p", text: "**Hold a contingency.** Something almost always turns up during demolition. A contingency is the difference between a variation being an inconvenience and being a crisis." },
         { type: "p", text: "**Understand what the cheapest quote is cheaper at.** Sometimes lower overhead. Often narrower scope, thinner preparation, or an assumption that becomes a variation later." },
         { type: "p", text: "**Spend where failure is expensive.** Waterproofing and substrate preparation are concealed, and they cost the most to put right afterwards because fixing them means removing the finished surface. Tile is visible and replaceable. If the budget has to give, give on the tile." },
-        { type: "p", text: "**Fixtures are the biggest lever.** Pearl's $14,250 fixture allowance exceeds the tiling cost on most bathrooms. Changing tapware and vanity selection moves the total further than any tiling decision." },
+        { type: "p", text: "**Fixtures are the biggest lever.** That $14,250 fixture allowance exceeds the tiling cost on most bathrooms. Changing tapware and vanity selection moves the total further than any tiling decision." },
         { type: "p", text: "**Keep the plumbing where it is.** Moving a toilet, shower or vanity is consistently identified as one of the largest avoidable costs, and in the ACT relocating plumbing may require a drainage plan and building approval." },
 
         { type: "faqs", items: [
-          { q: "How much does a tiler charge per square metre in Australia?", a: "Published national rates for standard floor tiling supply and install run roughly $55 to $140 per square metre, with most sources putting the average around $75 to $100. Bathroom floor tiling sits near $85 and wall tiling near $95, the difference reflecting waterproofing preparation. A Canberra tiler's published labour rate of $85 per square metre for bathroom work sits squarely on that national average." },
+          { q: "How much does a tiler charge per square metre in Australia?", a: "Published national rates for standard floor tiling supply and install run roughly $55 to $140 per square metre, with most guides putting the average around $75 to $100. Bathroom floor tiling sits near $85 and wall tiling near $95, the difference reflecting waterproofing preparation. Canberra bathroom labour sits squarely on that national average." },
           { q: "Why are my tiling quotes so different?", a: "Almost always because they cover different scopes. Preparation, demolition, disposal, waterproofing and trims are the usual variables. Ask each quoter to itemise against the same written brief and most of the gap becomes visible." },
           { q: "Is it cheaper to tile a small bathroom than a large room?", a: "In total yes, per square metre usually no. Small wet areas are dominated by cuts, edges and detail around penetrations. A small bathroom often lands around $2,000 to $3,500 for tiling including materials, a much higher effective rate than the headline figures suggest." },
           { q: "What does it cost to regrout a shower?", a: "Roughly $600 to $1,500 for a standard shower, with cement based grout at the lower end and epoxy at the upper. Epoxy costs more and lasts roughly twice as long without needing sealing. See [regrouting](regrouting-canberra.html)." },
@@ -676,27 +674,11 @@ window.SITE_CONFIG = {
           { q: "Is tiling in Canberra more expensive than other cities?", a: "On the labour evidence available, no. A Canberra tiler's published bathroom rate matches the national average closely. Renovation totals in Canberra do skew higher, which local builders attribute to ACT labour rates, compliance requirements and the age of the housing stock, though that is their claim rather than independent data." }
         ] },
 
-        { type: "h2", text: "Sources" },
-        { type: "p", text: "Published on the page so readers can check the figures." },
-        { type: "ul", items: [
-          "Pearl Tiling and Interiors bathroom cost calculator, Canberra: pearltiling.com.au",
-          "Housing Industry Association, national bathroom renovation average",
-          "WhatCosts tiling and bathroom renovation pricing",
-          "TradieVerify Australian tiling cost guide",
-          "A Timber Floorer tiling cost per m² guide",
-          "Sparky.fyi shower repair cost guide",
-          "The Quote Yard shower regrouting and leak repairs, Victoria",
-          "Aquatech Grouting shower regrouting, Brisbane",
-          "Antons Renovations shower leak repair guide, Sydney",
-          "Canberra renovation figures: Creating Impressions, Apex Bathroom Renovations, Refined Building, The Bathroom Co, Rentoule Projects, What's The Damage",
-          "AS 3740:2021 Waterproofing of Domestic Wet Areas, Standards Australia"
-        ] },
-        { type: "credit", text: "Most published tiling cost guides are themselves lead-generation content, including several cited above. The two most reliable anchors here are Pearl's Canberra calculator, a real operator's own rate card, and the HIA national average — everything else is presented as a range with its source named so it can be weighted accordingly. None of these figures are presented as our own data." }
       ]
     },
 
     /* ---------------------------------------------------------------------
-       LEAKING SHOWER REPAIR — problem/diagnosis framing. Owns "an existing
+       LEAKING SHOWER REPAIR - problem/diagnosis framing. Owns "an existing
        leak"; hands off membrane-as-a-system to waterproofing and grout-as-
        a-material to regrouting rather than duplicating either (build brief
        §7 cannibalisation map). ------------------------------------------- */
@@ -746,7 +728,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "What keeps water out of your walls and floor is a waterproofing membrane that sits underneath the tiles, applied to the substrate before tiling starts. In Australia, wet area waterproofing is governed by AS 3740:2021 Waterproofing of Domestic Wet Areas, the current edition." },
         { type: "p", text: "So when a shower leaks, it is almost always one of these:" },
         { type: "h3", text: "1. The membrane has failed or was never installed properly" },
-        { type: "p", text: "The most common cause in older homes and in bad renovations. Membranes fail from movement in the building, poor preparation, insufficient coverage at the wall and floor junction, or from simply not being there. As a rough anchor: ARDEX's own liquid membrane range (WPM 002) carries a 10-year manufacturer warranty when installed to specification, which is a reasonable proxy for how long a correctly installed membrane should last — actual service life depends on the specific product and how it was installed." },
+        { type: "p", text: "The most common cause in older homes and in bad renovations. Membranes fail from movement in the building, poor preparation, insufficient coverage at the wall and floor junction, or from simply not being there. As a rough anchor: ARDEX's own liquid membrane range (WPM 002) carries a 10-year manufacturer warranty when installed to specification, which is a reasonable proxy for how long a correctly installed membrane should last - actual service life depends on the specific product and how it was installed." },
         { type: "credit", text: "ARDEX Australia, WPM 002 technical data sheet." },
         { type: "h3", text: "2. Perished silicone at the junctions" },
         { type: "p", text: "Silicone at the wall to floor and wall to wall junctions is a movement joint, not a permanent seal. It is a wear item and it perishes. This is the one genuine case where a cheap fix is the correct fix." },
@@ -779,16 +761,15 @@ window.SITE_CONFIG = {
         { type: "p", text: "**The honest version:** this is the expensive option and no one wants to hear it. But a full rewaterproof done once costs less than three surface repairs and the water damage that accumulates between them. If two previous repairs have not held, this is why." },
 
         { type: "h2", text: "What leaking shower repair costs in Canberra" },
-        { type: "p", text: "These are third party estimates rather than our quotes. They are here so you can tell whether a number you have been given sits in the normal range — the only way to know what your shower costs is to have someone look at it." },
-        { type: "table", caption: "ACT figures except where marked — third party estimates, August 2026", headers: ["Repair", "Typical range", "Basis"], rows: [
+        { type: "p", text: "These are estimates rather than our quotes. They are here so you can tell whether a number you have been given sits in the normal range. The only way to know what your shower costs is to have someone look at it." },
+        { type: "table", caption: "ACT figures except where marked - third party estimates, August 2026", headers: ["Repair", "Typical range", "Basis"], rows: [
           ["Silicone replacement only", "$180 to $380", "ACT"],
           ["Partial regrout, small recess", "$280 to $580", "ACT"],
           ["Regrout and reseal, standard shower", "$480 to $980", "ACT"],
           ["Floor waste or puddle flange repair", "$280 to $650", "ACT"],
-          ["Surface applied sealing system", "$495 to $795, or $1,000 to $2,000 for a full epoxy reseal", "National — no ACT figure published"],
+          ["Surface applied sealing system", "$495 to $795, or $1,000 to $2,000 for a full epoxy reseal", "National - no ACT figure published"],
           ["Full strip out and rewaterproof", "$1,800 to $2,800 and up", "ACT"]
         ] },
-        { type: "credit", text: "ACT rows: The Quote Yard, ACT shower regrouting and leak repair pricing, 2026. Surface applied row: published pricing from national shower sealing operators, flagged because no ACT specific figure was published. Third party estimates, not quotes from this site." },
         { type: "p", text: "As a check against real jobs rather than published guides, Canberra listings on Airtasker through 2025 and 2026 ran from around $100 for a simple cubicle regrout, to about $350 for a one square metre recess with the screen involved, up to about $1,500 for larger work." },
 
         { type: "h3", text: "What moves the price" },
@@ -805,15 +786,15 @@ window.SITE_CONFIG = {
         { type: "h2", text: "How long does it take" },
         { type: "p", text: "The labour is rarely what sets the timeline. Waiting for waterproofing to cure is, and it is the part most people are not told about when they take a quote." },
         { type: "ul", items: [
-          "**Silicone replacement only** — a few hours on site. Old silicone cut out, joints cleaned and properly dried, new bead applied. Then leave the shower out of use while it cures.",
-          "**Regrout and reseal** — usually a day on site for a standard shower, then grout cure before the shower is used again.",
-          "**Surface applied sealing system** — about a day, with the wait set entirely by that product's own cure schedule.",
-          "**Floor waste or puddle flange repair** — localised work, but it breaks into the membrane, so it carries the same cure wait as any rewaterproofing.",
-          "**Full strip out and rewaterproof** — the multi-day one. Strip out, substrate preparation, membrane in coats, cure, screed, tile, grout, then cure again before the shower goes back into use."
+          "**Silicone replacement only** - a few hours on site. Old silicone cut out, joints cleaned and properly dried, new bead applied. Then leave the shower out of use while it cures.",
+          "**Regrout and reseal** - usually a day on site for a standard shower, then grout cure before the shower is used again.",
+          "**Surface applied sealing system** - about a day, with the wait set entirely by that product's own cure schedule.",
+          "**Floor waste or puddle flange repair** - localised work, but it breaks into the membrane, so it carries the same cure wait as any rewaterproofing.",
+          "**Full strip out and rewaterproof** - the multi-day one. Strip out, substrate preparation, membrane in coats, cure, screed, tile, grout, then cure again before the shower goes back into use."
         ] },
-        { type: "p", text: "The membrane is the bottleneck, and the manufacturers publish the numbers. Ardex WPM 002 wants 1 to 2 hours between coats, is ready to tile at 24 hours, and reaches full cure at 3 days. Davco K10 Plus wants 1 to 2 hours between coats and 6 to 8 hours before tiling. Faster products exist — Ardex WPM 155 Rapid Plus is rated to accept tiles in around 4 hours — and they cost more, which is sometimes worth it if the bathroom is the only one in the house." },
+        { type: "p", text: "The membrane is the bottleneck, and the manufacturers publish the numbers. Ardex WPM 002 wants 1 to 2 hours between coats, is ready to tile at 24 hours, and reaches full cure at 3 days. Davco K10 Plus wants 1 to 2 hours between coats and 6 to 8 hours before tiling. Faster products exist - Ardex WPM 155 Rapid Plus is rated to accept tiles in around 4 hours - and they cost more, which is sometimes worth it if the bathroom is the only one in the house." },
         { type: "credit", text: "ARDEX Australia WPM 002 and WPM 155 Rapid Plus product data; Davco K10 Plus product data, Sika Australia." },
-        { type: "p", text: "Here is the part that matters in Canberra. Those figures assume roughly 22 to 23 degrees and 50% humidity. Sika states it plainly: the lower the temperature, the slower the membrane dries. An unheated Canberra bathroom in July is nowhere near 22 degrees, so winter cure times run longer than the datasheet — sometimes considerably longer. If someone proposes waterproofing in the morning and tiling over it the same afternoon in the middle of winter, that is worth questioning before the tiles go on." },
+        { type: "p", text: "Here is the part that matters in Canberra. Those figures assume roughly 22 to 23 degrees and 50% humidity. Sika states it plainly: the lower the temperature, the slower the membrane dries. An unheated Canberra bathroom in July is nowhere near 22 degrees, so winter cure times run longer than the datasheet - sometimes considerably longer. If someone proposes waterproofing in the morning and tiling over it the same afternoon in the middle of winter, that is worth questioning before the tiles go on." },
 
         { type: "h2", text: "Getting it diagnosed properly" },
         { type: "p", text: "The single most useful thing you can do before agreeing to any repair is get the leak actually located rather than guessed at." },
@@ -833,7 +814,7 @@ window.SITE_CONFIG = {
     },
 
     /* ---------------------------------------------------------------------
-       WATERPROOFING — membrane-as-a-system framing, new work. Hands off to
+       WATERPROOFING - membrane-as-a-system framing, new work. Hands off to
        leaking-shower-repair for symptoms/diagnosis rather than duplicating
        (build brief §7). Scoped to wet areas + a short balcony section, with
        below-ground/structural waterproofing explicitly excluded. --------- */
@@ -871,12 +852,12 @@ window.SITE_CONFIG = {
         ] },
         { type: "p", text: "One extent requirement is concrete and worth knowing on a Canberra job specifically: shower walls must be waterproof to at least 1800mm above finished floor level, following Access Canberra's own construction guidance for wet areas in single residential (Class 1) buildings." },
         { type: "credit", text: "Access Canberra, Construction Note 01/2023 – Wet Areas." },
-        { type: "p", text: "A second difference is worth knowing because it changes the size of the job: what the floor is made of. Outside the shower area itself, the National Construction Code requires a timber based floor — plywood and particleboard included — to be waterproof, while a concrete or fibre cement floor in the same position need only be water resistant. Canberra has plenty of both slab on ground and suspended timber floors, and a bathroom sitting on timber generally needs more of its area membraned than the same bathroom on a slab. That is a real difference in scope and cost rather than an upsell, and it is worth asking which one you have before comparing two quotes." },
-        { type: "credit", text: "National Construction Code, Specification 26 — Waterproofing and water-resistance requirements for building elements in wet areas, clause S26C4. AS 3740 carries the installation detail." },
+        { type: "p", text: "A second difference is worth knowing because it changes the size of the job: what the floor is made of. Outside the shower area itself, the National Construction Code requires a timber based floor - plywood and particleboard included - to be waterproof, while a concrete or fibre cement floor in the same position need only be water resistant. Canberra has plenty of both slab on ground and suspended timber floors, and a bathroom sitting on timber generally needs more of its area membraned than the same bathroom on a slab. That is a real difference in scope and cost rather than an upsell, and it is worth asking which one you have before comparing two quotes." },
+        { type: "credit", text: "National Construction Code, Specification 26 - Waterproofing and water-resistance requirements for building elements in wet areas, clause S26C4. AS 3740 carries the installation detail." },
         { type: "p", text: "One requirement worth knowing because it is easy to check: the standard sets a minimum fall to waste in shower areas of 1:80. A shower floor that holds water rather than draining is not just annoying, it is outside the standard." },
 
         { type: "h2", text: "Who can do it in the ACT" },
-        { type: "p", text: "Unlike builders, electricians and plumbers, waterproofing does not appear on Access Canberra's list of licensed construction occupations — there is no separate \"licensed waterproofer\" trade in the ACT the way there is in some other regulatory contexts." },
+        { type: "p", text: "Unlike builders, electricians and plumbers, waterproofing does not appear on Access Canberra's list of licensed construction occupations - there is no separate \"licensed waterproofer\" trade in the ACT the way there is in some other regulatory contexts." },
         { type: "credit", text: "Access Canberra / City and Environment Directorate, list of ACT construction occupation licences." },
         { type: "p", text: "What is regulated instead is the documentation. Wet area waterproofing details have to be submitted as part of the building approval for Class 1 (single residential) work, and Access Canberra has specifically flagged incorrect or undocumented wet area waterproofing as a recurring compliance problem. A building surveyor requires that documentation before signing off tiling, and undocumented or non-compliant waterproofing can trigger a Stop Work Notice under the Building Act 2004." },
         { type: "credit", text: "Access Canberra, Construction Note 01/2023 – Wet Areas (updating 2022/13); Building Act 2004 (ACT)." },
@@ -890,7 +871,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "**It was tiled over too early.** Membranes need a cure period before tiling, at minimum 24 to 48 hours and longer in cold conditions. Tiling over an uncured membrane compromises it. This is the corner most often cut on a job running late, and it is invisible afterwards." },
         { type: "p", text: "**The puddle flange was not connected.** The puddle flange is the junction between the floor waste and the membrane. If the membrane is not properly bonded to it, water tracks straight past the drain and into the slab or subfloor. Common, and it cannot be fixed from the surface." },
         { type: "p", text: "**Movement.** Buildings move. Membranes are designed to accommodate a degree of it, but movement joints have to be detailed correctly for that to work." },
-        { type: "p", text: "**Age.** Older homes may have a membrane that has reached the end of its service life, or in homes beyond a certain age, no membrane at all. As a rough anchor, ARDEX's own liquid membrane range (WPM 002) carries a 10-year manufacturer warranty when installed to specification — a reasonable proxy for how long a correctly installed membrane should last, though the actual figure depends on the specific product and installation." },
+        { type: "p", text: "**Age.** Older homes may have a membrane that has reached the end of its service life, or in homes beyond a certain age, no membrane at all. As a rough anchor, ARDEX's own liquid membrane range (WPM 002) carries a 10-year manufacturer warranty when installed to specification - a reasonable proxy for how long a correctly installed membrane should last, though the actual figure depends on the specific product and installation." },
         { type: "credit", text: "ARDEX Australia, WPM 002 technical data sheet." },
 
         { type: "h2", text: "New work and remedial work" },
@@ -939,11 +920,11 @@ window.SITE_CONFIG = {
     },
 
     /* ---------------------------------------------------------------------
-       REGROUTING — grout-as-a-material framing, maintenance/restoration.
+       REGROUTING - grout-as-a-material framing, maintenance/restoration.
        Two deliberate hand-offs to leaking-shower-repair at the "damp
        outside the bathroom" test, never duplicated (build brief §7). Tile
        and grout CLEANING is explicitly declined here in prose rather than
-       linked out — different renter pool, see build brief §3. ------------ */
+       linked out - different renter pool, see build brief §3. ------------ */
     {
       page: "regrouting-canberra.html",
       name: "Regrouting",
@@ -977,7 +958,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "**Movement.** Buildings move. Tiles are rigid, grout joints are where that movement concentrates, and hairline cracking follows." },
         { type: "p", text: "**Wrong grout for the joint.** Grout is manufactured for different joint widths. As a working guide, Davco's own unsanded (fine) grout is formulated for joints up to around 3mm, with sanded (coarse) grout specified above that, because the sand provides bulk and resists shrinkage in the wider joint." },
         { type: "credit", text: "Davco (Sika Australia), grout product data sheets." },
-        { type: "p", text: "**Acidic cleaners.** This one catches a lot of people out. Cement based grout is porous and cement is itself attacked by acid, so an acidic bathroom cleaner used regularly over years can etch and erode the grout it is meant to be maintaining. Ardex is explicit about it in their own maintenance bulletin: for their cementitious grouts the cleaning agent must be neutral or alkaline, because cementitious products corrode in contact with acid. The same bulletin warns that strong bleach can affect the oxides that give grout its colour, so dilute it well if you use it at all. Epoxy grout is the exception and tolerates acidic cleaners — but most domestic bathrooms are grouted with a cement based product, so the warning applies to nearly every shower in Canberra." },
+        { type: "p", text: "**Acidic cleaners.** This one catches a lot of people out. Cement based grout is porous and cement is itself attacked by acid, so an acidic bathroom cleaner used regularly over years can etch and erode the grout it is meant to be maintaining. Ardex is explicit about it in their own maintenance bulletin: for their cementitious grouts the cleaning agent must be neutral or alkaline, because cementitious products corrode in contact with acid. The same bulletin warns that strong bleach can affect the oxides that give grout its colour, so dilute it well if you use it at all. Epoxy grout is the exception and tolerates acidic cleaners - but most domestic bathrooms are grouted with a cement based product, so the warning applies to nearly every shower in Canberra." },
         { type: "credit", text: "Ardex Australia, Technical Bulletin TB186.004, \"Cleaning / Maintenance of ARDEX Grouts\", July 2024." },
         { type: "p", text: "**Poor original installation.** Grout applied too dry, joints not filled to full depth, or grouting done before the adhesive had cured. Failures from this show up early and usually across the whole surface at once rather than in patches." },
 
@@ -989,18 +970,18 @@ window.SITE_CONFIG = {
         { type: "h2", text: "Cement or epoxy" },
         { type: "p", text: "**Cement based grout** is the standard. Cheaper, easier to work with, available in a wide colour range, and straightforward to repair later. It is porous, so it stains and it needs sealing to resist that." },
         { type: "p", text: "**Epoxy grout** is non porous, so it resists staining and chemical attack without sealing, and it holds colour far better over time. It costs more in both material and labour, because it has a short working time and has to be cleaned off the tile face before it sets. Done badly it leaves a haze on the tiles that is difficult to remove." },
-        { type: "p", text: "Epoxy is worth the difference in a shower floor or a kitchen splashback. Whether it is worth it across an entire floor is a budget decision — on current Australian retail pricing, standard cement-based grout runs roughly $2 to $6 per kilogram, while epoxy grout runs roughly $15 to $45 per kilogram depending on the brand and pack size, so figure on epoxy costing somewhere from three to eight times as much in material alone before labour." },
-        { type: "credit", text: "Retail per-kg pricing, National Tiles and other major Australian tile suppliers, August 2026 — trade pricing may differ." },
+        { type: "p", text: "Epoxy is worth the difference in a shower floor or a kitchen splashback. Whether it is worth it across an entire floor is a budget decision - on current Australian retail pricing, standard cement-based grout runs roughly $2 to $6 per kilogram, while epoxy grout runs roughly $15 to $45 per kilogram depending on the brand and pack size, so figure on epoxy costing somewhere from three to eight times as much in material alone before labour." },
+        { type: "credit", text: "Retail per-kg pricing, National Tiles and other major Australian tile suppliers, August 2026 - trade pricing may differ." },
 
         { type: "h2", text: "What a proper regrout involves" },
         { type: "image", src: "images/regrouting-removal-depth.jpg", alt: "Diagram comparing correct full-depth grout removal against a shallow skim-over that leaves old grout packed beneath a thin new layer", width: 1200, height: 805 },
         { type: "p", text: "This is worth knowing because the shortcut version is common and it fails within a year or two." },
-        { type: "p", text: "**Removal.** Old grout is raked out mechanically. Ardex's published regrouting guidance is to remove to a depth matching the width of the joint, capped at 6mm — so a 3mm joint gets 3mm taken out, while a 10mm joint still only needs 6mm. Skimming ordinary cement grout over the top of old grout is the common shortcut, and it fails because the new layer is too thin to bond or hold up." },
-        { type: "p", text: "There is a real exception, and it is worth knowing before you accept or reject a quote. Premixed products exist that are made specifically to go over existing grout — Davco's Rejuvenation Grout is the Australian example — and they need only 1mm of depth below the tile face rather than a full rake out. The constraints are narrow: joints 1 to 5mm wide, glossy smooth tiles only, and explicitly not flush joints or textured, porous or unglazed tiles. It is a cosmetic refresh for grout that is sound but stained, not a repair for grout that is failing. If the grout is cracking, crumbling, or letting water through, it comes out properly." },
+        { type: "p", text: "**Removal.** Old grout is raked out mechanically. Ardex's published regrouting guidance is to remove to a depth matching the width of the joint, capped at 6mm - so a 3mm joint gets 3mm taken out, while a 10mm joint still only needs 6mm. Skimming ordinary cement grout over the top of old grout is the common shortcut, and it fails because the new layer is too thin to bond or hold up." },
+        { type: "p", text: "There is a real exception, and it is worth knowing before you accept or reject a quote. Premixed products exist that are made specifically to go over existing grout - Davco's Rejuvenation Grout is the Australian example - and they need only 1mm of depth below the tile face rather than a full rake out. The constraints are narrow: joints 1 to 5mm wide, glossy smooth tiles only, and explicitly not flush joints or textured, porous or unglazed tiles. It is a cosmetic refresh for grout that is sound but stained, not a repair for grout that is failing. If the grout is cracking, crumbling, or letting water through, it comes out properly." },
         { type: "credit", text: "ARDEX regrouting guidance; Davco Rejuvenation Grout product data sheet (Sika Australia, August 2022, version 01.01)." },
         { type: "p", text: "**Cleaning out.** Joints vacuumed and cleaned so the new grout bonds to the tile edges rather than to dust." },
         { type: "p", text: "**Grouting.** New grout worked into the joints to full depth, then cleaned off the tile face before it sets." },
-        { type: "p", text: "**Curing.** Grout needs to cure before the surface is wetted or sealed, and cure times lengthen in cold conditions, which is worth planning around in a Canberra winter. As a general anchor, mainstream Australian cement-based grouts specify around 24 hours' cure at room temperature before the surface can be cleaned or sealed, with full chemical cure taking considerably longer — Ardex's own FG 8 grout, for example, wants roughly three weeks before it is fully cured and ready to be exposed to chemicals." },
+        { type: "p", text: "**Curing.** Grout needs to cure before the surface is wetted or sealed, and cure times lengthen in cold conditions, which is worth planning around in a Canberra winter. As a general anchor, mainstream Australian cement-based grouts specify around 24 hours' cure at room temperature before the surface can be cleaned or sealed, with full chemical cure taking considerably longer - Ardex's own FG 8 grout, for example, wants roughly three weeks before it is fully cured and ready to be exposed to chemicals." },
         { type: "credit", text: "Davco (Sika Australia) and ARDEX Australia grout technical data sheets. Confirm against the specific product being used, and expect longer in cold weather." },
         { type: "p", text: "**Sealing.** Cement grout benefits from sealing. Epoxy does not need it." },
         { type: "p", text: "If a quote covers a full shower regrout in under a couple of hours, ask specifically how the old grout is being removed." },
@@ -1011,22 +992,21 @@ window.SITE_CONFIG = {
         { type: "p", text: "If your grout is failing only in the corners while the flat joints are sound, this is almost certainly why, and the fix is to cut it out and silicone it rather than to regrout the whole surface. That is a much smaller job and worth knowing before you accept a quote for the larger one." },
 
         { type: "h2", text: "What regrouting costs in Canberra" },
-        { type: "p", text: "Third party estimates again, not our quotes. Where only a national figure has been published, it is marked as national rather than dressed up as a Canberra number." },
+        { type: "p", text: "These are estimates, not our quotes. Where only a national figure has been published, it is marked as national rather than dressed up as a Canberra number." },
         { type: "table", caption: "Third party estimates, August 2026", headers: ["Job", "Typical range", "Basis"], rows: [
           ["Silicone replacement, corners only", "$180 to $380", "ACT"],
           ["Shower regrout, cement grout, standard shower", "$480 to $980", "ACT"],
-          ["Shower regrout, epoxy grout, standard shower", "$800 to $1,500", "National — epoxy carries a premium over cement"],
+          ["Shower regrout, epoxy grout, standard shower", "$800 to $1,500", "National - epoxy carries a premium over cement"],
           ["Floor regrout, per square metre", "$25 to $60 per m² ($15 to $25 cement, $30 to $50 epoxy)", "National"],
           ["Grout sealing, per square metre", "$5 to $15 per m²", "National"]
         ] },
-        { type: "credit", text: "ACT rows: The Quote Yard, ACT shower regrouting pricing, 2026. Per square metre and epoxy rows: Australian regrouting and grout sealing cost guides, marked national because no ACT specific rate card was published for them. Third party estimates, not quotes from this site." },
         { type: "p", text: "Epoxy costs more up front and is worth it in the places that stay wet. It is non porous, so it does not need periodic sealing the way cement grout does, and the sealing line above is a recurring cost that epoxy removes entirely." },
 
         { type: "h3", text: "What moves the price" },
         { type: "ul", items: [
           "**Tile size, more than anything else.** Regrouting is priced by the metre of joint, not really by floor area. A mosaic floor has several times the grout line of a 600 by 600 floor covering exactly the same space, so the same room can quote at wildly different numbers depending only on what is on it.",
           "**Joint width and depth.** Wider joints hold more grout and take longer to rake out cleanly. Narrow joints are fiddlier to clear without chipping the tile edge. Neither is simply cheaper.",
-          "**Walls or floors.** Wall work is slower than floor work — you are holding position and working against gravity, and the float cannot be loaded the same way.",
+          "**Walls or floors.** Wall work is slower than floor work - you are holding position and working against gravity, and the float cannot be loaded the same way.",
           "**Pattern.** Herringbone, chevron and other angled layouts have more joint per square metre than a straight lay, and more of it meets the tile at an angle, which slows the raking out.",
           "**Condition of what is there.** Sound grout that just looks tired is a straightforward job. Grout that is crumbling, mouldy through its depth, or hiding movement cracks is not, and it may not be a regrout at all.",
           "**Whether it is actually a regrout.** If water has been getting past the grout for a while, regrouting seals the symptom over a wet substrate. Worth reading the [leaking shower repair](leaking-shower-repair-canberra.html) page before spending money on the wrong repair."
@@ -1046,10 +1026,10 @@ window.SITE_CONFIG = {
     },
 
     /* ---------------------------------------------------------------------
-       TILE REMOVAL — best commercial profile of the service pages, and the
+       TILE REMOVAL - best commercial profile of the service pages, and the
        silica dust section is the strongest differentiator on the site
        (build brief page 10 notes). Both major markers are safety/
-       regulatory claims — must not be approximated. --------------------- */
+       regulatory claims - must not be approximated. --------------------- */
     {
       page: "tile-removal-canberra.html",
       name: "Tile Removal",
@@ -1094,8 +1074,8 @@ window.SITE_CONFIG = {
         { type: "h2", text: "The dust problem" },
         { type: "p", text: "This is the part of tile removal that gets treated casually and should not be." },
         { type: "p", text: "Tiles, tile adhesive, screed and concrete all contain crystalline silica. Cutting, grinding, chiselling and breaking them generates respirable crystalline silica dust, which is fine enough to reach deep into the lungs and is associated with serious and irreversible lung disease. Dry grinding adhesive off a slab is one of the higher exposure activities in domestic renovation work." },
-        { type: "p", text: "Safe Work Australia's national workplace exposure standard for respirable crystalline silica is 0.05 mg/m³ averaged over an eight-hour day. In the ACT, a business carrying out this work must not allow dry cutting, grinding, crushing, polishing, sanding or trimming of silica-containing material — wet cutting or on-tool dust extraction is required instead, along with fitted respiratory protection, a safe work method statement, and in some cases air monitoring." },
-        { type: "credit", text: "Safe Work Australia, workplace exposure standard for respirable crystalline silica; WorkSafe ACT, managing silica dust at construction sites. These duties apply to a business engaging workers — a homeowner doing genuine DIY isn't bound by them the same way, but the health risk is identical either way." },
+        { type: "p", text: "Safe Work Australia's national workplace exposure standard for respirable crystalline silica is 0.05 mg/m³ averaged over an eight-hour day. In the ACT, a business carrying out this work must not allow dry cutting, grinding, crushing, polishing, sanding or trimming of silica-containing material - wet cutting or on-tool dust extraction is required instead, along with fitted respiratory protection, a safe work method statement, and in some cases air monitoring." },
+        { type: "credit", text: "Safe Work Australia, workplace exposure standard for respirable crystalline silica; WorkSafe ACT, managing silica dust at construction sites. These duties apply to a business engaging workers - a homeowner doing genuine DIY isn't bound by them the same way, but the health risk is identical either way." },
         { type: "p", text: "The controls are well established and they are the thing to ask about:" },
         { type: "ul", items: [
           "**Water suppression or on-tool dust extraction.** Wet cutting, or a tool connected to an appropriately rated vacuum, rather than dry grinding into open air.",
@@ -1107,7 +1087,7 @@ window.SITE_CONFIG = {
 
         { type: "h2", text: "Asbestos in older homes" },
         { type: "p", text: "WorkSafe ACT's own guidance is that a residential building constructed or refurbished before 1990 is likely to contain asbestos containing material, and they turn up in tile removal in more than one form: in some tile adhesives, in vinyl floor tiles and their backing, and in wall and floor sheeting behind or beneath tiles." },
-        { type: "p", text: "The ACT carries additional legacy issues, including Mr Fluffy affected properties, and asbestos rules here are also stricter than in some other states: only a licensed asbestos assessor can identify or test suspected material, and no asbestos containing material may be removed from a residential premises in the ACT by anyone other than a licensed asbestos removalist — there is no small-quantity or non-friable exemption for DIY removal here, unlike some other jurisdictions." },
+        { type: "p", text: "The ACT carries additional legacy issues, including Mr Fluffy affected properties, and asbestos rules here are also stricter than in some other states: only a licensed asbestos assessor can identify or test suspected material, and no asbestos containing material may be removed from a residential premises in the ACT by anyone other than a licensed asbestos removalist - there is no small-quantity or non-friable exemption for DIY removal here, unlike some other jurisdictions." },
         { type: "credit", text: "WorkSafe ACT, Asbestos; WorkSafe ACT, Asbestos licensing." },
         { type: "p", text: "The practical position: if the home was built before 1990 and you are disturbing adhesive, sheeting or old floor coverings, identification by a licensed assessor comes before demolition, not after. This is the single strongest argument against a DIY strip-out in an older Canberra home." },
 
@@ -1141,8 +1121,8 @@ window.SITE_CONFIG = {
     },
 
     /* ---------------------------------------------------------------------
-       TILE REPAIR — owns "drummy" (480 national searches, competition
-       index 10 — the easiest real volume in the dataset, build brief §7/
+       TILE REPAIR - owns "drummy" (480 national searches, competition
+       index 10 - the easiest real volume in the dataset, build brief §7/
        §9). Other pages reference it in a sentence and link here rather
        than expanding their own mention. ----------------------------------*/
     {
@@ -1162,7 +1142,7 @@ window.SITE_CONFIG = {
         height: 805
       },
       blocks: [
-        { type: "lead", text: "Most people arrive here because a tiler tapped their floor, said the word \"drummy\", and left them to work out what that meant." },
+        { type: "lead", text: "Ever heard someone tap a tile and call it 'drummy' and didn't know what it meant?" },
         { type: "p", text: "It means the tile has separated from whatever it was stuck to. The tile itself is usually fine. The bond underneath it is not." },
         { type: "p", text: "Whether that matters depends on where it is, how much of the floor is affected, and what caused it. Sometimes it is cosmetic and can be left. Sometimes it is the first visible sign of something that will get expensive. This page covers how to tell the difference." },
 
@@ -1191,7 +1171,7 @@ window.SITE_CONFIG = {
         ] },
 
         { type: "h2", text: "Why tiles come loose" },
-        { type: "p", text: "**Insufficient adhesive coverage.** The most common cause. Adhesive applied as dabs or spots rather than a properly notched full bed leaves voids from day one — the standard governing ceramic tile installation, AS 3958:2023, calls for close to full bed coverage in wet areas specifically, which spot fixing does not achieve. The tiles hold for a while, then fail progressively." },
+        { type: "p", text: "**Insufficient adhesive coverage.** The most common cause. Adhesive applied as dabs or spots rather than a properly notched full bed leaves voids from day one - the standard governing ceramic tile installation, AS 3958:2023, calls for close to full bed coverage in wet areas specifically, which spot fixing does not achieve. The tiles hold for a while, then fail progressively." },
         { type: "p", text: "**Movement, with nowhere for it to go.** Buildings expand, contract and settle. Tiled surfaces need movement joints at perimeters and at intervals across large areas so that movement is absorbed at designed points rather than by the adhesive bond. AS 3958:2023 calls for a minimum joint width of 6mm, with intermediate joints at no more than 4.5m centres on internal floors over 9m in any dimension (or over 6m where the floor gets direct sun), and 4.5m centres in any dimension outdoors. Domestic tiling frequently omits them, and the result shows up years later as debonding along walls or tenting in the middle of a floor." },
         { type: "credit", text: "AS 3958:2023 Section 5, clause 5.4.7, as summarised by the Housing Industry Association's guide to joints in floor and wall tiles." },
         { type: "p", text: "**Water.** Moisture reaching the adhesive bed degrades the bond over time. This is why drummy tiles in a bathroom are treated more seriously than drummy tiles in a hallway, and why they are frequently the first visible symptom of a waterproofing problem. See [leaking shower repair](leaking-shower-repair-canberra.html)." },
@@ -1240,7 +1220,7 @@ window.SITE_CONFIG = {
     },
 
     /* ---------------------------------------------------------------------
-       QUOTE CHECKLIST — a link asset, not a lead page (build brief §10/
+       QUOTE CHECKLIST - a link asset, not a lead page (build brief §10/
        §12). Ungated by design; no cost figures (they live on the cost
        guide); no FAQPage schema (content isn't in Q&A form). ------------- */
     {
@@ -1355,12 +1335,12 @@ window.SITE_CONFIG = {
     },
 
     /* ---------------------------------------------------------------------
-       BATHROOM TILING — installation/choices framing. Highest cannibal-
+       BATHROOM TILING - installation/choices framing. Highest cannibal-
        isation overlap risk on the site (touches home, waterproofing,
-       regrouting, leaking-shower-repair, cost guide) — every reference to
+       regrouting, leaking-shower-repair, cost guide) - every reference to
        any of those subjects here stays to a sentence and links out (build
        brief §7). Low commercial value expected and accepted (build brief
-       page 13 notes: max competition, min click value — topical coverage,
+       page 13 notes: max competition, min click value - topical coverage,
        not a lead driver). -------------------------------------------------*/
     {
       page: "bathroom-tiling-canberra.html",
@@ -1399,8 +1379,8 @@ window.SITE_CONFIG = {
         { type: "h2", text: "Choosing tiles that work in a bathroom" },
         { type: "p", text: "Showrooms sell on appearance. These are the things appearance does not tell you." },
         { type: "h3", text: "Slip resistance" },
-        { type: "p", text: "Bathroom floors get wet, and tile slip resistance is measured and rated rather than guessed at. Slip resistance of pedestrian surfaces in Australia is tested under AS 4586:2013 (as amended), which rates a tile by wet pendulum (P0 to P5), oil-wet ramp (R-rating), or — most relevant for a shower floor, where nobody is wearing shoes — a barefoot A, B or C rating. The companion handbook, HB 198, guides which rating suits which application." },
-        { type: "note", text: "There isn't a single mandated minimum slip rating for a private bathroom floor the way there is for many commercial and public surfaces under the National Construction Code — HB 198's recommendations for a domestic wet area are best-practice guidance, not a blanket legal minimum. That's exactly why it's worth asking for the rating by name rather than assuming a tile that looks textured automatically passes." },
+        { type: "p", text: "Bathroom floors get wet, and tile slip resistance is measured and rated rather than guessed at. Slip resistance of pedestrian surfaces in Australia is tested under AS 4586:2013 (as amended), which rates a tile by wet pendulum (P0 to P5), oil-wet ramp (R-rating), or - most relevant for a shower floor, where nobody is wearing shoes - a barefoot A, B or C rating. The companion handbook, HB 198, guides which rating suits which application." },
+        { type: "note", text: "There isn't a single mandated minimum slip rating for a private bathroom floor the way there is for many commercial and public surfaces under the National Construction Code - HB 198's recommendations for a domestic wet area are best-practice guidance, not a blanket legal minimum. That's exactly why it's worth asking for the rating by name rather than assuming a tile that looks textured automatically passes." },
         { type: "credit", text: "AS 4586:2013 (as amended); HB 198:2014, Standards Australia." },
         { type: "p", text: "The practical point stands regardless of the exact figure: ask the supplier for the slip rating of the tile you are considering, and ask specifically about the shower floor, which is the wettest surface in the house and often the smallest tile. Polished and highly glazed tiles that look good on a wall can be a poor choice underfoot in a wet room." },
         { type: "h3", text: "Size, and why smaller often wins on a shower floor" },
@@ -1454,13 +1434,13 @@ window.SITE_CONFIG = {
 
   /* --- Service-area pages ---------------------------------------------------
      Deliberately empty. All 34 area-page keywords (Gungahlin, Belconnen,
-     Woden, Queanbeyan, etc.) returned null Google Ads search volume —
+     Woden, Queanbeyan, etc.) returned null Google Ads search volume -
      Canberra is one compact market, unlike Newcastle's dispersed Hunter
      catchment where area pages work (build brief §9). Not "add later
-     without checking" — the keyword data already said no. */
+     without checking" - the keyword data already said no. */
   areas: [],
 
-  /* No FAQs live at the about-page level in this build — the about page is
+  /* No FAQs live at the about-page level in this build - the about page is
      positioning/disclosure content, and every FAQ on the site sits on the
      page that actually answers it (homepage general questions, or each
      service page's own faqs block) per the template's own FAQ rule. */
@@ -1468,7 +1448,7 @@ window.SITE_CONFIG = {
     faqs: []
   },
 
-  /* First N of about.faqs previewed on the homepage — unused this build
+  /* First N of about.faqs previewed on the homepage - unused this build
      (about.faqs is empty; the homepage's own faqs block covers that role
      instead), left in place for template compatibility. */
   faqPreviewCount: 0,
@@ -1477,25 +1457,25 @@ window.SITE_CONFIG = {
      Matches the build brief's contact page field list (name, phone, email,
      suburb, message) plus the existing service-picker (radio buttons built
      from cfg.services names) for "job type." Deliberately no "preferred
-     contact time" or "budget range" field — both reduce completion and
+     contact time" or "budget range" field - both reduce completion and
      neither is needed to route an enquiry (build brief, contact page
      notes). */
   contact: {
     formHeadline: "Enquiry Form",
-    /* COLLECTION NOTICE — this is not just reassurance copy, so read before
+    /* COLLECTION NOTICE - this is not just reassurance copy, so read before
        editing. The site relies on the Privacy Act small business exemption,
        and the "trading in personal information" carve-out (OAIC: disclosing
        personal information for a benefit, service or advantage) only bites
        where the individual has NOT consented. Consent can be implied, but
-       OAIC requires it to be informed — the person has to understand what
+       OAIC requires it to be informed - the person has to understand what
        happens to their details. That means this line must say, at the point
        of collection, that the details go to a contractor and that the
        contractor pays. The previous wording said details were "only used to
        respond to this enquiry", which described the wrong data flow and
        worked against the consent the exemption depends on. Keep it accurate
        and keep the privacy policy link. */
-    reassurance: "No spam and no obligation. Your details go to a tiling contractor in your area so they can quote your job — the contractor pays for the enquiry, you do not. We never sell your details or add you to a marketing list. [How we handle your information](privacy.html).",
-    /* Real enquiry categories, not page names — cfg.services on this build
+    reassurance: "No spam and no obligation. Your details go to a tiling contractor in your area so they can quote your job - the contractor pays for the enquiry, you do not. We never sell your details or add you to a marketing list. [How we handle your information](privacy.html).",
+    /* Real enquiry categories, not page names - cfg.services on this build
        is a list of PAGES (it includes the cost guide and the quote
        checklist, which aren't things a homeowner "needs done"). See the
        contact page's own field list in the build brief. */
@@ -1515,12 +1495,12 @@ window.SITE_CONFIG = {
     step2Label: "Your details",
     otherServiceLabel: "Something else / not sure yet",
     submitText: "Get My Free Quote",
-    successMessage: "Thanks — your enquiry is in. We'll come back to you about it.",
+    successMessage: "Thanks - your enquiry is in. We'll come back to you about it.",
     errorMessage: "Something went wrong sending your enquiry. Please try again, or reach out directly:"
   },
 
   /* --- Testimonials / photos (REAL EVIDENCE ONLY) ---------------------------
-     Stay empty for the whole of Level 2 — build brief §5 bans reviews,
+     Stay empty for the whole of Level 2 - build brief §5 bans reviews,
      project photos, and completed-job counts outright, not just until a
      renter exists. Revisit only alongside a genuine Level 3 upgrade. */
   testimonials: [],
