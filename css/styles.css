@@ -1275,3 +1275,67 @@ html[data-style="sharp"] .cta-band { background: var(--brand); }
   html { scroll-behavior: auto; }
   *, *::before, *::after { transition-duration: 0.01ms !important; animation: none !important; }
 }
+
+/* --- Print ----------------------------------------------------------------
+   The quote checklist page tells people to print it and write on it at the
+   quote, so printing is a real use of this site rather than an afterthought.
+   Deliberately no PDF: a print stylesheet needs no maintenance, and it keeps
+   the page itself the canonical linkable version rather than splitting link
+   equity to a file. Never gate this behind an email capture — the links are
+   the point of the page.
+
+   Site chrome is dropped, but the header logo stays so the printed sheet
+   carries the brand into whatever quote it is taken to. Nothing here is
+   site-specific, so this block stays portable across the template. */
+@media print {
+  html, body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+
+  /* Navigation and calls to action carry no meaning on paper. */
+  #site-nav,
+  #site-footer,
+  .cta-band,
+  .skip-link,
+  .noscript-warning,
+  .nav-toggle,
+  .hero-media,
+  .hero-actions {
+    display: none !important;
+  }
+
+  /* Flatten anything decorative — printers charge for ink. */
+  *, *::before, *::after {
+    background: transparent !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  #site-header {
+    position: static !important;
+    border-bottom: 1px solid #999;
+    margin-bottom: 1.2em;
+  }
+
+  #main { padding: 0 !important; margin: 0 !important; }
+  .container { max-width: none !important; width: auto !important; padding: 0 !important; }
+  .section { padding: 0 0 0.6em !important; }
+
+  body { font-size: 11.5pt; line-height: 1.7; }
+  h1 { font-size: 20pt; }
+  h2 { font-size: 14pt; margin-top: 1.2em; }
+  h3 { font-size: 12pt; }
+
+  /* A heading stranded at the foot of a page reads as a mistake. */
+  h1, h2, h3 { page-break-after: avoid; break-after: avoid; }
+  p, li, img, tr { page-break-inside: avoid; break-inside: avoid; }
+
+  /* Room to hand-write an answer beside each question. */
+  li { margin-bottom: 0.55em; }
+
+  img { max-width: 100% !important; }
+  a { color: #000 !important; text-decoration: none !important; }
+
+  @page { margin: 15mm; }
+}

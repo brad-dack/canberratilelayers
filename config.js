@@ -1153,7 +1153,6 @@ window.SITE_CONFIG = {
       blocks: [
         { type: "lead", text: "Three quotes for the same bathroom can be thousands apart without anyone being unreasonable. Usually they are not quoting the same job." },
         { type: "p", text: "This checklist makes them comparable. Print it, take it to each quote, and write the answers next to the questions." },
-        { type: "marker", text: "Decide whether to also offer a PDF download alongside the print view. A print stylesheet is simpler, has no maintenance cost, and avoids gating — the safer default. Do not put this checklist behind an email capture: gated resources don't attract links, and links are the entire purpose of this page." },
 
         { type: "h2", text: "Before you ask anyone to quote" },
         { type: "ul", items: [
