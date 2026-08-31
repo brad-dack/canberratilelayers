@@ -749,7 +749,10 @@ function contactContentHtml() {
     "</div></section>" +
     '<section class="section section-alt" id="quote"><div class="container narrow">' +
       "<h2>" + esc(cfg.contact.formHeadline) + "</h2>" +
-      '<p class="reassurance">' + esc(cfg.contact.reassurance) + "</p>" +
+      /* richText, not esc: this line is the collection notice sitting directly
+         above the only form on the site, and it has to be able to link to the
+         privacy policy. See the consent note on contact.reassurance in config. */
+      '<p class="reassurance">' + richText(cfg.contact.reassurance) + "</p>" +
       quoteFormHtml({}) +
     "</div></section>";
 }

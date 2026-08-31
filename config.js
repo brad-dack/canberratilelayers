@@ -1412,7 +1412,19 @@ window.SITE_CONFIG = {
      notes). */
   contact: {
     formHeadline: "Enquiry Form",
-    reassurance: "No spam, no obligation — your details are only used to respond to this enquiry. See the privacy policy.",
+    /* COLLECTION NOTICE — this is not just reassurance copy, so read before
+       editing. The site relies on the Privacy Act small business exemption,
+       and the "trading in personal information" carve-out (OAIC: disclosing
+       personal information for a benefit, service or advantage) only bites
+       where the individual has NOT consented. Consent can be implied, but
+       OAIC requires it to be informed — the person has to understand what
+       happens to their details. That means this line must say, at the point
+       of collection, that the details go to a contractor and that the
+       contractor pays. The previous wording said details were "only used to
+       respond to this enquiry", which described the wrong data flow and
+       worked against the consent the exemption depends on. Keep it accurate
+       and keep the privacy policy link. */
+    reassurance: "No spam and no obligation. Your details go to a tiling contractor in your area so they can quote your job — the contractor pays for the enquiry, you do not. We never sell your details or add you to a marketing list. [How we handle your information](privacy.html).",
     /* Real enquiry categories, not page names — cfg.services on this build
        is a list of PAGES (it includes the cost guide and the quote
        checklist, which aren't things a homeowner "needs done"). See the
