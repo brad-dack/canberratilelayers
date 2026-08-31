@@ -97,9 +97,9 @@ window.SITE_CONFIG = {
      All four required before launch — unrelated to the three build-brief
      blockers above, these are the template's own standing preflight gates. */
   ga4Id: "G-XXXXXXXXXX",
-  ingestUrl: "YOUR_INGEST_URL",
-  ingestSecret: "YOUR_INGEST_SECRET",
-  turnstileSiteKey: "",
+  ingestUrl: "https://bnfgnglzswtrvzfqkgjh.functions.supabase.co/ingest-form",
+  ingestSecret: "ed11ac06c8ca1cb55e83ecfd2b25246c",
+  turnstileSiteKey: "0x4AAAAAAEHD1tLftcrbDXIx",
 
   /* --- Structured data -----------------------------------------------------
      Organization, sitewide. NEVER LocalBusiness pre-renter — build brief §4
