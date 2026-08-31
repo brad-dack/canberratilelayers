@@ -1,6 +1,15 @@
 {
 	"name": "canberratilelayers",
 	"compatibility_date": "2026-08-31",
+	// The site is served from canberratilelayers.com.au. Wrangler turns
+	// workers.dev ON by default when this key is absent, which left a second
+	// fully crawlable copy of every page at
+	// canberratilelayers.fourfoxesconsulting.workers.dev — serving the same
+	// robots.txt with Allow: /. Canonical tags point at the apex so Google
+	// should consolidate, but there is no reason to publish the duplicate at
+	// all. Setting it here rather than toggling it in the dashboard is what
+	// makes it stick: the default would be re-applied on the next deploy.
+	"workers_dev": false,
 	"assets": {
 		"directory": "./",
 		"not_found_handling": "404-page"
