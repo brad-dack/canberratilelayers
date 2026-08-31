@@ -709,7 +709,27 @@ window.SITE_CONFIG = {
         { type: "p", text: "**The honest version:** this is the expensive option and no one wants to hear it. But a full rewaterproof done once costs less than three surface repairs and the water damage that accumulates between them. If two previous repairs have not held, this is why." },
 
         { type: "h2", text: "What leaking shower repair costs in Canberra" },
-        { type: "marker", text: "Cost ranges for each repair type in the Canberra market are required before this section goes live: silicone replacement only; regrout and reseal, standard shower; surface applied sealing system; floor waste / puddle flange repair; full strip out and rewaterproof, standard shower. Source options in priority order: (1) quotes obtained directly from Canberra operators, (2) published rate cards from Canberra waterproofing businesses, (3) hipages or ServiceSeeking Canberra cost guides, cited as third party estimates rather than presented as our own figures. Do not substitute national averages and describe them as Canberra pricing." },
+        { type: "p", text: "These are third party estimates rather than our quotes. They are here so you can tell whether a number you have been given sits in the normal range — the only way to know what your shower costs is to have someone look at it." },
+        { type: "table", caption: "ACT figures except where marked — third party estimates, August 2026", headers: ["Repair", "Typical range", "Basis"], rows: [
+          ["Silicone replacement only", "$180 to $380", "ACT"],
+          ["Partial regrout, small recess", "$280 to $580", "ACT"],
+          ["Regrout and reseal, standard shower", "$480 to $980", "ACT"],
+          ["Floor waste or puddle flange repair", "$280 to $650", "ACT"],
+          ["Surface applied sealing system", "$495 to $795, or $1,000 to $2,000 for a full epoxy reseal", "National — no ACT figure published"],
+          ["Full strip out and rewaterproof", "$1,800 to $2,800 and up", "ACT"]
+        ] },
+        { type: "credit", text: "ACT rows: The Quote Yard, ACT shower regrouting and leak repair pricing, 2026. Surface applied row: published pricing from national shower sealing operators, flagged because no ACT specific figure was published. Third party estimates, not quotes from this site." },
+        { type: "p", text: "As a check against real jobs rather than published guides, Canberra listings on Airtasker through 2025 and 2026 ran from around $100 for a simple cubicle regrout, to about $350 for a one square metre recess with the screen involved, up to about $1,500 for larger work." },
+
+        { type: "h3", text: "What moves the price" },
+        { type: "ul", items: [
+          "**What is under the floor.** The biggest single factor in Canberra. A shower on a concrete slab is a more predictable job than the same shower on a suspended timber floor, and if the timber has been wet long enough to soften, the work stops being a tiling job and becomes a structural one.",
+          "**Where the house is.** Older stock through the inner north and inner south is more likely to have timber subfloors and original wet area construction. Newer areas such as Gungahlin and the Molonglo Valley are more likely to be slab on ground with modern waterproofing, and quote lower for the same repair.",
+          "**Size of the recess.** More area means more linear metres of joint, and joints are where the labour is.",
+          "**Tile size.** This one catches people out. Small tiles and mosaics carry far more grout line per square metre than large format tiles, so anything grout related costs more on a mosaic floor than on a 600 by 600 floor of exactly the same area.",
+          "**Access.** A second storey bathroom, a narrow stair, or nowhere to put a skip adds hours that have nothing to do with tiling.",
+          "**How many times it has been repaired already.** Each previous surface repair has to come off before the next goes on, and a shower that has been sealed twice is telling you something about the substrate underneath."
+        ] },
         { type: "p", text: "Related reading: [Canberra Tiling Cost Guide](tiling-cost-guide-canberra.html)." },
 
         { type: "h2", text: "How long does it take" },
@@ -921,7 +941,26 @@ window.SITE_CONFIG = {
         { type: "p", text: "If your grout is failing only in the corners while the flat joints are sound, this is almost certainly why, and the fix is to cut it out and silicone it rather than to regrout the whole surface. That is a much smaller job and worth knowing before you accept a quote for the larger one." },
 
         { type: "h2", text: "What regrouting costs in Canberra" },
-        { type: "marker", text: "Canberra cost ranges are required before this section goes live: silicone replacement to corners only; shower regrout, cement grout, standard shower; shower regrout, epoxy grout, standard shower; floor regrout, per square metre; sealing, per square metre. Source in priority order: (1) direct quotes from Canberra operators, (2) published Canberra rate cards, (3) hipages or ServiceSeeking Canberra guides cited explicitly as third party estimates. Do not substitute national averages and present them as Canberra pricing." },
+        { type: "p", text: "Third party estimates again, not our quotes. Where only a national figure has been published, it is marked as national rather than dressed up as a Canberra number." },
+        { type: "table", caption: "Third party estimates, August 2026", headers: ["Job", "Typical range", "Basis"], rows: [
+          ["Silicone replacement, corners only", "$180 to $380", "ACT"],
+          ["Shower regrout, cement grout, standard shower", "$480 to $980", "ACT"],
+          ["Shower regrout, epoxy grout, standard shower", "$800 to $1,500", "National — epoxy carries a premium over cement"],
+          ["Floor regrout, per square metre", "$25 to $60 per m² ($15 to $25 cement, $30 to $50 epoxy)", "National"],
+          ["Grout sealing, per square metre", "$5 to $15 per m²", "National"]
+        ] },
+        { type: "credit", text: "ACT rows: The Quote Yard, ACT shower regrouting pricing, 2026. Per square metre and epoxy rows: Australian regrouting and grout sealing cost guides, marked national because no ACT specific rate card was published for them. Third party estimates, not quotes from this site." },
+        { type: "p", text: "Epoxy costs more up front and is worth it in the places that stay wet. It is non porous, so it does not need periodic sealing the way cement grout does, and the sealing line above is a recurring cost that epoxy removes entirely." },
+
+        { type: "h3", text: "What moves the price" },
+        { type: "ul", items: [
+          "**Tile size, more than anything else.** Regrouting is priced by the metre of joint, not really by floor area. A mosaic floor has several times the grout line of a 600 by 600 floor covering exactly the same space, so the same room can quote at wildly different numbers depending only on what is on it.",
+          "**Joint width and depth.** Wider joints hold more grout and take longer to rake out cleanly. Narrow joints are fiddlier to clear without chipping the tile edge. Neither is simply cheaper.",
+          "**Walls or floors.** Wall work is slower than floor work — you are holding position and working against gravity, and the float cannot be loaded the same way.",
+          "**Pattern.** Herringbone, chevron and other angled layouts have more joint per square metre than a straight lay, and more of it meets the tile at an angle, which slows the raking out.",
+          "**Condition of what is there.** Sound grout that just looks tired is a straightforward job. Grout that is crumbling, mouldy through its depth, or hiding movement cracks is not, and it may not be a regrout at all.",
+          "**Whether it is actually a regrout.** If water has been getting past the grout for a while, regrouting seals the symptom over a wet substrate. Worth reading the [leaking shower repair](leaking-shower-repair-canberra.html) page before spending money on the wrong repair."
+        ] },
         { type: "p", text: "Related reading: [Canberra Tiling Cost Guide](tiling-cost-guide-canberra.html)." },
 
         { type: "faqs", items: [
