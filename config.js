@@ -132,7 +132,7 @@ window.SITE_CONFIG = {
       },
       blocks: [
         { type: "h2", text: "Start with what you actually need" },
-        { type: "p", text: "Most tiling enquiries fall into one of three situations, and they are different jobs with different costs. Working out which one you are in saves the most money." },
+        { type: "p", text: "Most people looking for a tiler in Canberra fall into one of three situations, and they are different jobs with different costs. Working out which one you are in saves the most money." },
 
         { type: "h3", text: "Something is leaking or damaged" },
         { type: "p", text: "A shower that leaks, grout that is crumbling, tiles that sound hollow or have cracked. The first question is always whether the problem is at the surface or underneath it, because that determines whether you are looking at a few hundred dollars or several thousand." },
@@ -159,7 +159,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "**Repairs.** Leaking showers, regrouting, resiliconing, and cracked or drummy tiles." },
 
         { type: "h2", text: "How a tiling job actually runs" },
-        { type: "p", text: "Useful to know when you are reading a quote, because most of these stages are where costs vary." },
+        { type: "p", text: "Useful to know when you are reading a quote, because most of these stages are where costs vary, and because it tells you what a tiler is actually pricing." },
         { type: "ol", items: [
           "**Assessment and quote.** What is there now, what is going in, and what condition the substrate is in. On a repair, this stage should include diagnosing the actual cause rather than pricing a guess.",
           "**Removal and disposal.** Existing tiles and adhesive out, and away. Tiles are heavy and tip fees are usually charged by weight.",
@@ -516,8 +516,8 @@ window.SITE_CONFIG = {
         { type: "p", text: "That last row is the most useful line here, because it comes from a Canberra tiler's own published rate card rather than a national estimate. Its labour figure of $85 per square metre sits almost exactly on the national bathroom average. Canberra tiling labour is not an outlier." },
         { type: "p", text: "Wall tiling costs more per square metre than floor tiling, because of the waterproofing preparation behind it and the difficulty of working vertically." },
 
-        { type: "h3", text: "The individual line items" },
-        { type: "p", text: "One Canberra rate card itemises a full bathroom, which is more useful than any range because you can see what each component contributes:" },
+        { type: "h3", text: "What it costs to tile a bathroom, line by line" },
+        { type: "p", text: "One Canberra rate card breaks the cost to tile a bathroom into its parts, which is more useful than any range because you can see what each component contributes:" },
         { type: "table", caption: "Itemised bathroom, Canberra rate card", headers: ["Item", "Rate"], rows: [
           ["Tile supply, floor to ceiling, plus 15% wastage", "$50 per m²"],
           ["Tiler labour, floor to ceiling", "$85 per m²"],
@@ -1131,7 +1131,7 @@ window.SITE_CONFIG = {
       shortDescription: "Drummy, loose or cracked tiles explained: how to test them yourself, what usually caused it, and what repair actually involves.",
       metaTitle: "Tile Repair Canberra | Cracked, Loose & Drummy Tiles",
       metaDescription: "Drummy, loose or cracked tiles explained. How to test them yourself, what the cause usually is, when it matters, and what repair actually involves.",
-      headline: "Cracked, Loose and Drummy Tiles",
+      headline: "Cracked, Loose and Drummy Tiles in Canberra",
       ctaText: "Get a Quote",
       ctaHeading: "Cracked or drummy tiles in Canberra",
       ctaBody: "Tell us roughly how many tiles are affected, whether they are scattered or clustered, and whether they are in a wet area. Those three answers separate a small repair from a symptom of something else.",
@@ -1144,7 +1144,7 @@ window.SITE_CONFIG = {
       blocks: [
         { type: "lead", text: "Ever heard someone tap a tile and call it 'drummy' and didn't know what it meant?" },
         { type: "p", text: "It means the tile has separated from whatever it was stuck to. The tile itself is usually fine. The bond underneath it is not." },
-        { type: "p", text: "Whether that matters depends on where it is, how much of the floor is affected, and what caused it. Sometimes it is cosmetic and can be left. Sometimes it is the first visible sign of something that will get expensive. This page covers how to tell the difference." },
+        { type: "p", text: "Whether that matters depends on where it is, how much of the floor is affected, and what caused it. Sometimes it is cosmetic and can be left. Sometimes it is the first visible sign of something that will get expensive. Most tile repair in Canberra starts with working out which of the two you are looking at, and this page covers how to tell the difference." },
 
         { type: "h2", text: "What \"drummy\" means, and how to check yourself" },
         { type: "p", text: "A drummy tile sounds hollow when tapped, because there is a void between the tile and the substrate instead of solid adhesive." },
