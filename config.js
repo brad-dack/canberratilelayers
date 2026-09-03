@@ -1474,8 +1474,7 @@ window.SITE_CONFIG = {
        and feature walls. Kitchen, bathroom and outdoor pages reference this
        page for those rather than restating them. Hands substrate ASBESTOS
        and strip-out detail to tile-removal, and grout-as-a-material to
-       regrouting. No hero image yet - heroMain renders centred without one.
-       TODO (Brad): source a hero image for this page and the five below. */
+       regrouting. */
     {
       page: "floor-and-wall-tiling-canberra.html",
       name: "Floor and Wall Tiling",
@@ -1486,6 +1485,12 @@ window.SITE_CONFIG = {
       ctaText: "Get a Quote",
       ctaHeading: "Floor and wall tiling in Canberra",
       ctaBody: "Tell us what the room is, what is on the floor now, and roughly how old the house is. Those three answers cover most of what a floor tiling quote actually depends on.",
+      image: {
+        src: "images/floor-and-wall-large-format-level.jpg",
+        alt: "A spirit level and a tile spacer resting on freshly laid large-format grey floor tiles, viewed at a low angle",
+        width: 1200,
+        height: 655
+      },
       blocks: [
         { type: "lead", text: "Outside the bathroom, tiling is mostly a substrate problem. The tile sets the look and a good part of the material cost. What is underneath it sets the labour, and that is the part nobody can see while they are quoting." },
         { type: "p", text: "Living areas, hallways, entries and general floor tiling, plus internal wall tiling and feature walls. Floors are rarely level, and bringing one within tolerance for large format tile is often the largest single line on the job." },
@@ -1585,6 +1590,12 @@ window.SITE_CONFIG = {
       ctaText: "Get a Quote",
       ctaHeading: "Kitchen tiling in Canberra",
       ctaBody: "Tell us whether it is a splashback, a floor, or both, whether the benchtop is in yet, and what is on the wall now. A splashback is priced on detail rather than area, so those answers matter more than the measurement does.",
+      image: {
+        src: "images/kitchen-splashback-tile-samples.jpg",
+        alt: "White subway splashback tile samples, a tile cutter and a tube of adhesive on a concrete benchtop",
+        width: 1200,
+        height: 655
+      },
       blocks: [
         { type: "lead", text: "A kitchen splashback is the clearest example of why square metres are a poor way to price tiling. Two or three square metres of wall can take most of a day, because almost none of it is a clear run." },
         { type: "p", text: "Kitchen tiling splits into two jobs that have almost nothing in common: the splashback, which is small and made of detail, and the floor, which is usually the largest continuous run of tile in the house. This page covers both." },
@@ -1652,6 +1663,12 @@ window.SITE_CONFIG = {
       ctaText: "Get a Quote",
       ctaHeading: "Outdoor tiling in Canberra",
       ctaBody: "Tell us what the area is, what is under it now, and whether anything is underneath it - a garage, a room, or just ground. Tiling over habitable space is a different job from tiling a slab on grade, and it is the first thing anyone quoting needs to know.",
+      image: {
+        src: "images/outdoor-patio-textured-pavers.jpg",
+        alt: "Textured, slip-resistant outdoor pavers with a notched trowel, a garden softly out of focus behind",
+        width: 1200,
+        height: 655
+      },
       blocks: [
         { type: "lead", text: "Outdoor tiling looks like indoor tiling with a different tile on it. It is not. The surface has to drain, it has to be safe underfoot when it is wet, it has to survive a Canberra winter, and everything holding it together has to be rated for weather." },
         { type: "p", text: "This page covers alfresco areas, patios, courtyards, paths and steps: what the specification actually has to do, and why the same area costs more outside than in." },
@@ -1724,6 +1741,12 @@ window.SITE_CONFIG = {
       ctaText: "Get a Quote",
       ctaHeading: "Pool surround tiling in Canberra",
       ctaBody: "Tell us what is around the pool now, whether the coping is being replaced as well as the paving, and whether anything has lifted or moved. Movement at the pool edge is the usual cause, and it changes what the repair is.",
+      image: {
+        src: "images/pool-coping-movement-joint.jpg",
+        alt: "Close-up of pool coping tiles and the movement joint where the coping meets the surrounding paving",
+        width: 1200,
+        height: 655
+      },
       blocks: [
         { type: "lead", text: "A pool surround is the most demanding tiled surface on a domestic property. It is wet most of the time it is in use, it is walked on barefoot, it is fully exposed to sun and frost, and it sits at the edge of a large structure that moves independently of everything around it." },
         { type: "p", text: "Three requirements drive the specification: slip resistance measured barefoot, movement at the pool edge, and constant exposure to water that is not rainwater. This page covers each." },
@@ -1788,6 +1811,12 @@ window.SITE_CONFIG = {
       ctaText: "Get a Quote",
       ctaHeading: "Commercial tiling in Canberra",
       ctaBody: "Tell us what the space is, what the program is, and whether you are working to a specification already. Commercial work is decided by dates and by the spec more than by the tile, and those are the first things anyone quoting will ask about.",
+      image: {
+        src: "images/commercial-fitout-large-format.jpg",
+        alt: "Large-format floor tiles being set out with a laser level line in an open commercial fitout under construction",
+        width: 1200,
+        height: 655
+      },
       blocks: [
         { type: "lead", text: "Commercial tiling is the same trade as domestic tiling with a different set of constraints on it. The finish matters less than people expect. What matters is the program, the specification, and whether the surface is still acceptable after five years of traffic a house never sees." },
         { type: "p", text: "This page is about what changes when the client is a business: how the schedule is set, what durability actually means in a specification, and why a commercial quote is not a domestic quote with a margin on it." },
@@ -1862,6 +1891,12 @@ window.SITE_CONFIG = {
       ctaText: "Get a Quote",
       ctaHeading: "Laundry tiling in Canberra",
       ctaBody: "Tell us whether the laundry has a floor waste, whether the floor is timber or slab, and whether the tub or the machine is being moved. Those three answers decide whether it is a straightforward tile or a waterproofing job.",
+      image: {
+        src: "images/laundry-floor-waste-macro.jpg",
+        alt: "A stainless steel floor waste set into small-format tiles in a compact laundry, with wall pipework visible behind",
+        width: 1200,
+        height: 655
+      },
       blocks: [
         { type: "lead", text: "A laundry is a wet area. It is treated as an afterthought more often than any other room in the house, and it should not be." },
         { type: "p", text: "It is small, it is usually the cheapest room in a renovation, and it is the one where a budget gets recovered when something else runs over. But it has a tub, a tap set, and a washing machine with two hoses under mains pressure and a drain hose sitting loose in a standpipe. Water gets onto that floor routinely, and when a hose lets go, a great deal of it arrives at once." },
