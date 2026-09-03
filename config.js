@@ -129,18 +129,33 @@ window.SITE_CONFIG = {
       ctaBody: "Tell us what you need done, what is there now, and whether anything has been repaired before. That last detail matters more than people expect, because a repair that has already failed once usually points to a different problem than the one being described.",
       /* Responsive variants - added Sep 2026 after a PageSpeed Insights run
          flagged this as the LCP element, downloading the full 1200px image
-         at a 651x437 mobile display size (92.6 KiB avoidable). .hero-img is
-         CSS-capped at 520px below the 900px breakpoint and roughly 450px in
-         the desktop hero-grid column above it - sizes reflects that. Widths
-         chosen to cover 1x/2x DPR at both. Variant files generated from the
-         same source: images/hero-tiling-tools-{400,560,720,960}.jpg. */
+         into a 372px-wide mobile slot.
+
+         READ THE SIZES STRING BEFORE EDITING IT. The first attempt declared
+         "520px" for mobile and made things WORSE (score 85 -> 80): 520px is
+         .hero-img's max-width CAP, not its rendered width. The browser did
+         520 x 1.75 DPR = 910 and picked the 960w file for a slot that is
+         actually 372 CSS px. A sizes value must describe what the image
+         really occupies at that viewport, never the cap.
+
+         The real geometry, from css/styles.css:
+           .container   max-width 1080px, padding-inline 20px
+           .hero-img    width 100%, max-width 520px  (below 900px)
+           hero-grid    1.1fr 0.9fr, gap 40px        (900px and up)
+         so the rendered width is:
+           < 560px    100vw - 40px      (container is narrower than the cap)
+           560-899px  520px             (cap reached: 560 - 40 = 520)
+           900-1119px (100vw - 80px) x 0.45   (0.9fr of the grid, fluid)
+           >= 1120px  450px             (container capped at 1080)
+         Widths cover 1x-2x DPR across those. Variant files are generated
+         from the same source: images/hero-tiling-tools-{400,560,720,960}.jpg */
       image: {
         src: "images/hero-tiling-tools.jpg",
         alt: "Tiling tools and ceramic tile samples arranged on a work surface",
         width: 1200,
         height: 805,
         widths: [400, 560, 720, 960],
-        sizes: "(min-width: 900px) 450px, 520px"
+        sizes: "(min-width: 1120px) 450px, (min-width: 900px) calc((100vw - 80px) * 0.45), (min-width: 560px) 520px, calc(100vw - 40px)"
       },
       blocks: [
         { type: "h2", text: "Start with what you actually need" },
