@@ -43,9 +43,12 @@
       not our prices).
    7. services - each is an ordered array of content BLOCKS (see the
       block-type reference in README), plus its own page filename. This
-      build carries 8 (the template's usual 3-5 guidance doesn't apply to
+      build carries 14 (the template's usual 3-5 guidance doesn't apply to
       a content-driven build like this one - see build brief §3 page
-      inventory).
+      inventory). The original 8 came from the build brief; the six added
+      in Sep 2026 (floor and wall, kitchen, outdoor/patio, pool, commercial,
+      laundry) came from a competitor content audit - services the homepage
+      already claimed in prose but had no page for.
    8. areas (0+) - ships empty. All 34 area-keyword searches returned null
       (build brief §9) - Canberra is one compact market, so suburb pages
       were dropped, not just deferred.
@@ -148,24 +151,24 @@ window.SITE_CONFIG = {
 
         { type: "h2", text: "What we cover" },
         { type: "p", text: "**Bathroom tiling.** Floor and wall tiling in bathrooms and ensuites, including shower areas, niches and hobs. The most common tiling job and the one with the most that can go wrong, because it is a wet area. [More on bathroom tiling](bathroom-tiling-canberra.html)" },
-        { type: "p", text: "**Floor and wall tiling.** Living areas, hallways, entries and general floor tiling, plus internal wall tiling. Cost here is driven by the substrate more than anything else, since floors are rarely level and bringing one within tolerance for large format tile is often the largest single line." },
-        { type: "p", text: "**Kitchen tiling and splashbacks.** Kitchen floors, and splashbacks behind benches and cooktops. Splashbacks are small in area and high in detail, with cuts around GPOs, rangehoods and window returns, so they take longer than the square metre count suggests." },
-        { type: "p", text: "**Laundry tiling.** A wet area, so waterproofing requirements apply the same way they do in a bathroom, even though laundries are often treated as an afterthought." },
-        { type: "p", text: "**Outdoor and patio tiling.** Alfresco areas, patios and paths. External tiling needs slip rated tiles and weather resistant adhesives, and it carries a premium over internal work of roughly 10 to 20% on both supply and labour." },
-        { type: "p", text: "**Pool surrounds and coping.** Specialist work with its own requirements around movement, slip rating and water exposure." },
-        { type: "p", text: "**Commercial tiling.** Retail, hospitality and office fitouts, where the drivers are program and durability rather than domestic finish." },
+        { type: "p", text: "**Floor and wall tiling.** Living areas, hallways, entries and general floor tiling, plus internal wall tiling and feature walls. Cost here is driven by the substrate more than anything else, since floors are rarely level and bringing one within tolerance for large format tile is often the largest single line. [More on floor and wall tiling](floor-and-wall-tiling-canberra.html)" },
+        { type: "p", text: "**Kitchen tiling and splashbacks.** Kitchen floors, and splashbacks behind benches and cooktops. Splashbacks are small in area and high in detail, with cuts around power points, rangehoods and window returns, so they take longer than the square metre count suggests. [More on kitchen tiling](kitchen-tiling-canberra.html)" },
+        { type: "p", text: "**Laundry tiling.** A wet area, so waterproofing requirements apply the same way they do in a bathroom, even though laundries are often treated as an afterthought. [More on laundry tiling](laundry-tiling-canberra.html)" },
+        { type: "p", text: "**Outdoor and patio tiling.** Alfresco areas, patios and paths. External tiling needs slip rated tiles and weather resistant adhesives, and it carries a premium over internal work of roughly 10 to 20% on both supply and labour. [More on outdoor and patio tiling](outdoor-patio-tiling-canberra.html)" },
+        { type: "p", text: "**Pool surrounds and coping.** Specialist work with its own requirements around movement, slip rating and water exposure. [More on pool tiling](pool-tiling-canberra.html)" },
+        { type: "p", text: "**Commercial tiling.** Retail, hospitality and office fitouts, where the drivers are program and durability rather than domestic finish. [More on commercial tiling](commercial-tiling-canberra.html)" },
         { type: "p", text: "**Waterproofing.** Membrane application in wet areas, to AS 3740:2021. The one part of a bathroom you pay for and never see, and the most expensive thing to get wrong. [More on waterproofing](waterproofing-canberra.html)" },
         { type: "p", text: "**Tile removal.** Strip out of existing tiles and adhesive, and preparation of the substrate for what comes next. Frequently quoted separately and frequently underestimated. [More on tile removal](tile-removal-canberra.html)" },
-        { type: "p", text: "**Repairs.** Leaking showers, regrouting, resiliconing, and cracked or drummy tiles." },
+        { type: "p", text: "**Repairs.** Leaking showers, regrouting, resiliconing, and cracked or drummy tiles. [Leaking shower repair](leaking-shower-repair-canberra.html) · [Regrouting](regrouting-canberra.html) · [Tile repair](tile-repair-canberra.html)" },
 
         { type: "h2", text: "How a tiling job actually runs" },
         { type: "p", text: "Useful to know when you are reading a quote, because most of these stages are where costs vary, and because it tells you what a tiler is actually pricing." },
         { type: "ol", items: [
           "**Assessment and quote.** What is there now, what is going in, and what condition the substrate is in. On a repair, this stage should include diagnosing the actual cause rather than pricing a guess.",
           "**Removal and disposal.** Existing tiles and adhesive out, and away. Tiles are heavy and tip fees are usually charged by weight.",
-          "**Substrate preparation.** Levelling, screeding, patching and repairing. The most variable stage on any renovation, because what is underneath is not fully known until the old surface is off.",
+          "**Substrate preparation.** Levelling, screeding, patching and repairing. The most variable stage on any renovation, because what is underneath is not fully known until the old surface is off. It is also where tile format gets decided in practice: large format tiles, 600 by 600mm and up, need a flatter substrate than smaller ones, because any deviation shows as lipping at the edges. Choosing large format can add a floor levelling stage a smaller tile would not have needed, and that is usually a bigger number than the extra laying rate.",
           "**Waterproofing.** In wet areas, membrane applied and detailed at junctions and the floor waste, then left to cure. Cure times lengthen in cold weather, which matters in a Canberra winter.",
-          "**Setting out.** Where the first tile goes determines where every cut lands. On patterned layouts like herringbone this stage decides whether the job looks right.",
+          "**Setting out.** Where the first tile goes determines where every cut lands, and the layout pattern determines how many cuts there are. Straight set, or grid, is the baseline and the cheapest: joints line up both ways, cuts land on two edges, waste is predictable. Offset and brick bond are a small step up. Diagonal, herringbone and chevron are a large one, because nearly every perimeter tile is an angled cut, the wastage allowance on the tile order goes up, and the setting out has to be exact from the first tile or the error compounds across the room.",
           "**Laying.** The part everyone pictures, and often not the longest.",
           "**Grouting and silicone.** Grout to the joints, silicone to the movement junctions where the walls meet the floor and each other. These are different materials doing different jobs and they are not interchangeable.",
           "**Curing and sealing.** Grout cures before the area is used or sealed. Cement based grout benefits from sealing. Epoxy does not."
@@ -467,15 +470,27 @@ window.SITE_CONFIG = {
      page is ever added. */
   howItWorks: [],
 
-  /* --- Services (8) -----------------------------------------------------
+  /* --- Services (14) ----------------------------------------------------
      More than the template's usual 3-5 - this build is content-driven
      (build brief §3 page inventory), not card-driven, so the count follows
-     the keyword data rather than the template's rule of thumb. Order
-     follows the build brief's own page numbering. `/tile-and-grout-
-     cleaning-canberra/` is deliberately NOT built - different renter pool
-     from tiling, see build brief §3. Suburb-style area pages are also
-     deliberately absent (cfg.areas stays empty) - all 34 area keywords
-     returned null search volume (build brief §9). */
+     the keyword data rather than the template's rule of thumb. The first 8
+     follow the build brief's own page numbering; the last 6 were added in
+     Sep 2026 from a competitor content audit, covering services the
+     homepage already listed in prose with nowhere to send anyone.
+
+     Cannibalisation boundaries for the six new pages, so a later edit
+     doesn't blur them: floor-and-wall owns tile format vs substrate,
+     layout pattern cost, joint width/grout colour and feature walls;
+     outdoor-patio owns AS 4586 slip classification for the whole site;
+     pool owns barefoot classification and pool-edge movement; kitchen owns
+     splashback detail pricing; laundry owns the "small wet area" argument;
+     commercial owns program/specification. Every other page references
+     these in a sentence and links, the same discipline the original 8 use.
+
+     `/tile-and-grout-cleaning-canberra/` is deliberately NOT built -
+     different renter pool from tiling, see build brief §3. Suburb-style
+     area pages are also deliberately absent (cfg.areas stays empty) - all
+     34 area keywords returned null search volume (build brief §9). */
   services: [
     /* ---------------------------------------------------------------------
        COST GUIDE - the inbound-link hub (13 body-copy inbound links, the
@@ -540,6 +555,7 @@ window.SITE_CONFIG = {
           ["Outdoor tiling premium", "10 to 20% on supply and labour"],
           ["Pool tiling, labour only", "$60 to $120 per m²"]
         ] },
+        { type: "p", text: "Three of those rows have a page behind them. Large format labour is an addition to the laying rate, not a substitute for the levelling it may also require - see [floor and wall tiling](floor-and-wall-tiling-canberra.html). The outdoor premium covers a higher tile specification and more preparation - see [outdoor and patio tiling](outdoor-patio-tiling-canberra.html). The pool figure is a labour rate for the field area, not a job price, because the coping detail is what moves it - see [pool tiling](pool-tiling-canberra.html)." },
 
         { type: "h3", text: "Repairs" },
         { type: "table", headers: ["Repair", "Range"], rows: [
@@ -847,7 +863,7 @@ window.SITE_CONFIG = {
         { type: "ul", items: [
           "Shower areas, with the most extensive requirements of any wet area",
           "Bathroom floors, with the extent depending on whether the room is enclosed and how the shower is configured",
-          "Laundries",
+          "Laundries, which are a wet area with real requirements even though they are routinely treated as though they are not - see [laundry tiling](laundry-tiling-canberra.html)",
           "Areas over habitable spaces, where a failure has somewhere worse to go"
         ] },
         { type: "p", text: "One extent requirement is concrete and worth knowing on a Canberra job specifically: shower walls must be waterproof to at least 1800mm above finished floor level, following Access Canberra's own construction guidance for wet areas in single residential (Class 1) buildings." },
@@ -882,7 +898,13 @@ window.SITE_CONFIG = {
 
         { type: "h2", text: "Balconies and external areas" },
         { type: "p", text: "Balconies and decks over habitable space are waterproofed too, and failures there tend to be more expensive because the water has somewhere to go and something to damage on the way." },
+        { type: "p", text: "**A balcony fails the same way a shower does.** There is a membrane under the tiles, the membrane is what keeps water out, and the grout is not it. The failure points are the same ones: the junction where the balcony floor meets the wall of the building, the connection at the drainage outlet, and the perimeter and threshold at the door." },
+        { type: "p", text: "**What differs is what is underneath.** A failed shower membrane damages the bathroom and the room beside it. A failed balcony membrane over habitable space puts water into a ceiling, and in a unit or a townhouse it frequently puts it into someone else's." },
+        { type: "p", text: "That makes balconies a common problem in units and townhouses specifically, where the same construction detail is repeated across a building and any weakness in it is repeated with it. Where a balcony is common property or the building is under a body corporate, who is responsible for the repair is worth settling before anyone starts removing tiles, because the answer changes who is paying for the strip-out." },
+        { type: "p", text: "**The symptoms** are a stain or bubbling paint on the ceiling below, efflorescence or damp at the wall under the balcony, tiles on the balcony sounding drummy or lifting, and water ponding at the outlet rather than draining away. Drummy tiles on a balcony deserve the same attention they get in a bathroom and for the same reason - see [tile repair](tile-repair-canberra.html)." },
+        { type: "p", text: "**The repair is the same shape as a shower repair.** If the membrane has failed, reaching it means removing the tiles and the screed above it, and no surface product restores a failed membrane. If the problem is a perished perimeter sealant, a blocked outlet, or a threshold that was never detailed, it is a far smaller job. Which one it is has to be established before anyone prices it, and the reasoning is the same as it is for a shower - see [leaking shower repair](leaking-shower-repair-canberra.html)." },
         { type: "p", text: "The exposure is different from a bathroom. External membranes deal with UV, thermal cycling and standing water rather than daily wetting, and the systems specified reflect that." },
+        { type: "p", text: "For new balcony, alfresco and patio tiling rather than a repair, see [outdoor and patio tiling](outdoor-patio-tiling-canberra.html)." },
         { type: "p", text: "What this page does not cover is below-ground and structural waterproofing: basements, retaining structures, tanking, and remedial work on building envelopes. That is a separate discipline with different contractors, and a tiler is not who you want for it." },
 
         { type: "h2", text: "The part most people miss: certification" },
@@ -973,6 +995,13 @@ window.SITE_CONFIG = {
         { type: "p", text: "Epoxy is worth the difference in a shower floor or a kitchen splashback. Whether it is worth it across an entire floor is a budget decision - on current Australian retail pricing, standard cement-based grout runs roughly $2 to $6 per kilogram, while epoxy grout runs roughly $15 to $45 per kilogram depending on the brand and pack size, so figure on epoxy costing somewhere from three to eight times as much in material alone before labour." },
         { type: "credit", text: "Retail per-kg pricing, National Tiles and other major Australian tile suppliers, August 2026 - trade pricing may differ." },
 
+        { type: "h2", text: "Grout sealing is not regrouting" },
+        { type: "p", text: "Worth separating, because the two get quoted in the same conversation and they do different things." },
+        { type: "p", text: "**Grout sealing** is a penetrating sealer applied to sound cement based grout so that it absorbs less water, soap residue and staining. It is maintenance rather than repair, it is cheap, and it wears: it is reapplied periodically rather than done once. Published rates run around $5 to $15 per square metre." },
+        { type: "p", text: "**Regrouting** replaces the grout itself. It is what you do when the grout has physically failed, and sealing failing grout does not arrest the failure - it just makes it look wetter for a while." },
+        { type: "p", text: "**Epoxy grout needs neither**, because it is non porous. That recurring sealing line is part of what the higher up-front price buys back." },
+        { type: "p", text: "There is a third product sold alongside both: a colour seal or grout paint, which coats the surface of existing grout to change or restore its colour. It is cosmetic. It works on grout that is sound but stained, and it does nothing at all for grout that is cracking or letting water through." },
+
         { type: "h2", text: "What a proper regrout involves" },
         { type: "image", src: "images/regrouting-removal-depth.jpg", alt: "Diagram comparing correct full-depth grout removal against a shallow skim-over that leaves old grout packed beneath a thin new layer", width: 1200, height: 805 },
         { type: "p", text: "This is worth knowing because the shortcut version is common and it fails within a year or two." },
@@ -1056,11 +1085,12 @@ window.SITE_CONFIG = {
         { type: "p", text: "**It can work when** the existing tiles are sound and well bonded, the surface is flat, and the height change at doorways, floor wastes and fixtures can be accommodated." },
         { type: "p", text: "**It does not work when** tiles are drummy or loose, because you would be bonding to something that is already failing. It also does not work where the added height creates a problem, which in a bathroom it often does, because the floor waste and the door both sit at fixed levels." },
         { type: "p", text: "**The catch nobody mentions:** tiling over a wet area leaves any waterproofing failure exactly where it is, now buried under two layers of tile instead of one. If the reason you are retiling is a leak, tiling over is not an option. See [leaking shower repair](leaking-shower-repair-canberra.html)." },
+        { type: "p", text: "Outside a wet area, height is still the constraint that decides it: at doorways, at thresholds, and where tile meets another floor covering, the extra thickness has to go somewhere. See [floor and wall tiling](floor-and-wall-tiling-canberra.html)." },
 
         { type: "h2", text: "What makes tile removal expensive" },
         { type: "p", text: "The tile is not the variable. The bond is." },
         { type: "p", text: "**How well it was stuck down.** A tile laid on a proper adhesive bed to a clean slab comes off harder than one laid badly. Good original workmanship makes removal slower, which is a genuinely annoying inversion." },
-        { type: "p", text: "**What it is stuck to.** Tiles on a concrete slab generally come off leaving adhesive residue that has to be ground or scraped back. Tiles on wall sheeting frequently take the sheeting with them, in which case the wall is being replaced rather than cleaned up. Tiles on a timber floor bring their own questions about what the substrate is doing." },
+        { type: "p", text: "**What it is stuck to.** Tiles on a concrete slab generally come off leaving adhesive residue that has to be ground or scraped back. Tiles on wall sheeting frequently take the sheeting with them, in which case the wall is being replaced rather than cleaned up. Tiles on a timber floor bring their own questions about what the substrate is doing. In Canberra stock from the 1960s to the 1980s, fibre cement sheet flooring and wall sheeting are both common, and both change the answer." },
         { type: "p", text: "**How much adhesive is left.** Removing tiles is often the quick part. Removing the adhesive bed underneath is the slow, dusty part, and it is what stands between a stripped floor and a floor that is ready to tile." },
         { type: "p", text: "**Access and containment.** In an occupied home, dust containment, floor protection and daily clean-down all take time. So does carrying heavy debris out through a house rather than throwing it into a bin outside a door." },
         { type: "p", text: "**Volume and weight.** Tiles are heavy and tip fees are usually charged by weight rather than volume." },
@@ -1194,6 +1224,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "The problem in every case is matching. Even where the tile is still available, dye lots vary between production runs, and an existing floor has years of wear and light exposure on it. A replacement tile that is technically the same product can be visibly different." },
         { type: "p", text: "If the tile has been discontinued, the options narrow quickly: source from a tile recycler or clearance stock, take tiles from a concealed location such as under a vanity or inside a cupboard and patch that spot instead, or accept a deliberate contrast." },
         { type: "p", text: "This is the strongest argument for keeping spare tiles from the original job. If you are having tiling done now, keep the offcuts and the spare box somewhere you will find them in ten years." },
+        { type: "p", text: "**Tile restoration is a different trade again.** Regrinding, honing or resealing an existing surface rather than replacing it applies mostly to natural stone, terrazzo and tessellated tiling rather than to modern porcelain. If what you have is an original stone, terrazzo or tessellated floor, a restoration specialist is who you want, and it is worth identifying that before anyone quotes to take it out. See [floor and wall tiling](floor-and-wall-tiling-canberra.html) for what turns up in older Canberra stock." },
 
         { type: "h2", text: "When it points to something bigger" },
         { type: "p", text: "Three situations where the tiles are a symptom rather than the problem:" },
@@ -1213,6 +1244,7 @@ window.SITE_CONFIG = {
           { q: "Why do tiles come loose?", a: "Most commonly insufficient adhesive coverage at installation, adhesive applied as dabs rather than a full bed. Other causes are movement with no joints to accommodate it, moisture degrading the bond, and substrate movement." },
           { q: "My tiles cracked in a straight line across the floor. Why?", a: "Almost certainly because the substrate underneath cracked and the tiles followed it. Replacing the tiles will not fix it, because new tiles will crack along the same line. The substrate has to be addressed first." },
           { q: "Can you replace just one tile?", a: "Yes, technically. The difficulty is matching. Dye lots vary between production runs and an existing floor has wear and light exposure the new tile does not. If the tile is discontinued, taking a replacement from a concealed spot such as under a vanity is often the neatest solution." },
+          { q: "Can you match existing tiles for a repair job?", a: "Sometimes, and it is worth being realistic about it before the work starts rather than after. Even where the tile is still in production, dye lots vary between runs and an existing floor has years of wear and light exposure on it, so a technically identical tile can be visibly different once it is in. If the line has been discontinued, the options narrow to a tile recycler or clearance stock, taking tiles from a concealed spot such as under a vanity or inside a cupboard and patching that area instead, or accepting a deliberate contrast. Send a photo and, if you still have it, the tile name or the box - it is the difference between an answer and a guess." },
           { q: "Are drummy tiles a sign my shower is leaking?", a: "Not on their own, but in a wet area they are a reason to look further. Water in the adhesive bed degrades the bond, so drummy tiles in a bathroom are often the first visible sign of a waterproofing problem rather than an adhesive one." },
           { q: "Should I be worried if my tiles are lifting or tenting?", a: "Yes. That means the tiled surface is under compression with nowhere to expand, which is a movement joint problem. Relaying without addressing the cause repeats the failure." }
         ] }
@@ -1382,7 +1414,8 @@ window.SITE_CONFIG = {
         { type: "p", text: "Bathroom floors get wet, and tile slip resistance is measured and rated rather than guessed at. Slip resistance of pedestrian surfaces in Australia is tested under AS 4586:2013 (as amended), which rates a tile by wet pendulum (P0 to P5), oil-wet ramp (R-rating), or - most relevant for a shower floor, where nobody is wearing shoes - a barefoot A, B or C rating. The companion handbook, HB 198, guides which rating suits which application." },
         { type: "note", text: "There isn't a single mandated minimum slip rating for a private bathroom floor the way there is for many commercial and public surfaces under the National Construction Code - HB 198's recommendations for a domestic wet area are best-practice guidance, not a blanket legal minimum. That's exactly why it's worth asking for the rating by name rather than assuming a tile that looks textured automatically passes." },
         { type: "credit", text: "AS 4586:2013 (as amended); HB 198:2014, Standards Australia." },
-        { type: "p", text: "The practical point stands regardless of the exact figure: ask the supplier for the slip rating of the tile you are considering, and ask specifically about the shower floor, which is the wettest surface in the house and often the smallest tile. Polished and highly glazed tiles that look good on a wall can be a poor choice underfoot in a wet room." },
+        { type: "p", text: "The practical point stands regardless of the exact figure: ask the supplier for the slip rating of the tile you are considering, and ask specifically about the shower floor, which is the wettest surface in the house and often the smallest tile. Polished and highly glazed tiles that look good on a wall can be a poor choice underfoot in a wet room. Tiles marketed as non slip tiles are not a defined category; the classification is the part with a test behind it." },
+        { type: "p", text: "The same system covers external and barefoot surfaces, where the requirements are more demanding again - see [outdoor and patio tiling](outdoor-patio-tiling-canberra.html) and [pool tiling](pool-tiling-canberra.html)." },
         { type: "h3", text: "Size, and why smaller often wins on a shower floor" },
         { type: "p", text: "Large format tiles are popular and they look good, but they are difficult in a small wet room for two reasons." },
         { type: "p", text: "First, they need a flatter substrate, because any deviation shows as lipping at the edges. In a bathroom that usually means additional levelling." },
@@ -1399,6 +1432,8 @@ window.SITE_CONFIG = {
         { type: "p", text: "**Niches.** A shower niche is a small feature with a lot of work in it: framing, waterproofing detail, a fall in the base, and mitred or trimmed edges. Worth having, worth knowing it is not free." },
         { type: "p", text: "**Hob or hobless.** A hobless walk-in shower has more membrane area and more complex drainage falls than a step-up hob design. It looks better and it costs more." },
         { type: "p", text: "**How level the floor is.** Unknown until the old surface comes off, and frequently the largest single line on a renovation. Screeding and levelling run around $15 to $30 per square metre." },
+        { type: "p", text: "**A feature wall.** A single tiled wall the room is arranged around - behind the bath, behind the vanity, or the shower wall done differently from the rest - is priced as feature work rather than as wall tiling, because the tile is usually the hardest one in the room to lay and every joint is at eye level with nothing to hide a cut behind. See [feature wall tiling](floor-and-wall-tiling-canberra.html)." },
+        { type: "p", text: "**Underfloor heating.** Heating under a bathroom floor changes the adhesive and grout specification, because the surface expands and contracts every time the system cycles, and it adds a screed and a commissioning sequence ahead of tiling. See [floor and wall tiling](floor-and-wall-tiling-canberra.html)." },
         { type: "p", text: "**Whether the tile is here.** Imported tiles carry lead times. Running short mid-job on a discontinued line is a serious problem, which is why the order includes a wastage allowance rather than the bare floor area." },
         { type: "p", text: "Full breakdown with sources in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html)." },
 
@@ -1411,6 +1446,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "Roughly: demolition, plumbing and electrical rough-in, substrate preparation, waterproofing, cure, tiling, grouting, then fit-off of the vanity, screen and tapware." },
         { type: "p", text: "Tiling sits in the middle, which means it is dependent on everything before it and blocking everything after it. If the rough-in is not finished, the tiler waits or comes back, and return visits get priced accordingly." },
         { type: "p", text: "A typical Canberra bathroom runs three to five weeks end to end, and the tiling is a fraction of that. Substrate preparation and waterproofing cure time drive the schedule more than laying does." },
+        { type: "p", text: "Related reading: [floor and wall tiling](floor-and-wall-tiling-canberra.html) for what changes outside a wet area, [kitchen tiling](kitchen-tiling-canberra.html) for splashbacks, and [laundry tiling](laundry-tiling-canberra.html) for the other wet area in the house." },
 
         { type: "h2", text: "What goes wrong in bathroom tiling" },
         { type: "p", text: "**Falls that do not work.** Water sitting on a shower floor rather than draining. Hard to correct afterwards without removing the floor." },
@@ -1427,6 +1463,441 @@ window.SITE_CONFIG = {
           { q: "Do you do full bathroom renovations?", a: "No. A renovation involves plumbing, electrical, carpentry, plastering and painting alongside the tiling and is generally run by a builder. If you are stripping a bathroom back to the studs, a renovation builder is who you want. We will say so rather than take the enquiry." },
           { q: "How long does a bathroom take to tile?", a: "The laying itself is usually a few days. The schedule is driven by substrate preparation and by waterproofing cure time, which extends in cold weather." },
           { q: "Is dark or light grout better in a bathroom?", a: "Light grout will not stay light in a shower. Mid tones are more forgiving, and epoxy grout holds colour far better than cement based without needing sealing." }
+        ] }
+      ]
+    },
+
+    /* ---------------------------------------------------------------------
+       FLOOR AND WALL TILING - the dry-area counterpart to bathroom tiling,
+       and the home for four subjects that had no page of their own: tile
+       format vs substrate, layout pattern cost, grout colour/joint width,
+       and feature walls. Kitchen, bathroom and outdoor pages reference this
+       page for those rather than restating them. Hands substrate ASBESTOS
+       and strip-out detail to tile-removal, and grout-as-a-material to
+       regrouting. No hero image yet - heroMain renders centred without one.
+       TODO (Brad): source a hero image for this page and the five below. */
+    {
+      page: "floor-and-wall-tiling-canberra.html",
+      name: "Floor and Wall Tiling",
+      shortDescription: "Living areas, hallways, entries and internal walls: why the substrate sets the cost, what large format tile needs under it, and the layout and grout decisions.",
+      metaTitle: "Floor & Wall Tiling Canberra | Living Areas & Hallways",
+      metaDescription: "Floor and wall tiling in Canberra. Why the substrate drives the cost, what large format tiles need underneath them, and the layout, grout and joint decisions that matter.",
+      headline: "Floor and Wall Tiling in Canberra",
+      ctaText: "Get a Quote",
+      ctaHeading: "Floor and wall tiling in Canberra",
+      ctaBody: "Tell us what the room is, what is on the floor now, and roughly how old the house is. Those three answers cover most of what a floor tiling quote actually depends on.",
+      blocks: [
+        { type: "lead", text: "Outside the bathroom, tiling is mostly a substrate problem. The tile sets the look and a good part of the material cost. What is underneath it sets the labour, and that is the part nobody can see while they are quoting." },
+        { type: "p", text: "Living areas, hallways, entries and general floor tiling, plus internal wall tiling and feature walls. Floors are rarely level, and bringing one within tolerance for large format tile is often the largest single line on the job." },
+        { type: "p", text: "This page covers what wall and floor tiling involves outside a wet area, why tile format and substrate are the same conversation, and the layout, joint and grout decisions that move the price." },
+
+        { type: "h2", text: "What this covers" },
+        { type: "ul", items: [
+          "**Living areas and open plan floors.** The one place a tiler gets a productive run, and where large format tile makes the most sense.",
+          "**Hallways.** Narrow, high traffic, and usually the route everything else in the house gets carried along.",
+          "**Entries and entrance floors.** Small in area with a disproportionate amount of detail in them: a threshold, a door swing, often a step, and a transition to whatever the adjoining floor is. An entry is priced closer to a bathroom floor than to an open living area for that reason.",
+          "**Internal wall tiling and feature walls.** Fireplace surrounds, entry walls, and wall tiling outside wet areas.",
+          "**Tile installation over existing substrates**, where what is already there is sound enough to take it."
+        ] },
+        { type: "p", text: "Wet areas are a different job with waterproofing under it. See [bathroom tiling](bathroom-tiling-canberra.html) and [laundry tiling](laundry-tiling-canberra.html). Kitchens sit across both, because the splashback is priced on detail rather than area - see [kitchen tiling](kitchen-tiling-canberra.html)." },
+
+        { type: "h2", text: "The substrate is the job" },
+        { type: "p", text: "Floors are rarely level. Bringing one within tolerance may need self levelling compound or a screed, and published rates put floor levelling at $15 to $30 per square metre. How much is needed is unknown until the old covering is off, which is why it is the line most often missing from the cheapest quote." },
+        { type: "p", text: "A concrete slab, a suspended timber floor and a sheeted wall are three different preparation jobs. A slab usually needs old adhesive ground or scraped back and any dips filled. A timber floor raises a different question, which is how much it flexes, because a rigid tiled surface bonded to a floor that moves underfoot will crack or debond somewhere eventually. A sheeted wall needs to be sound and fixed at the right centres before anything is bonded to it." },
+        { type: "p", text: "Ask tiling contractors directly what preparation their number assumes, and whether levelling is included or provisional. Two quotes on the same floor can differ by more than the tile costs on that answer alone. Full breakdown in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html)." },
+
+        { type: "h2", text: "Tile format and substrate are the same conversation" },
+        { type: "p", text: "Large format tiles, generally 600 by 600mm and up, need a flatter substrate than smaller tiles do. A small tile bridges a deviation over a short span. A large one cannot: a dip or a hump in the floor shows up as lipping, one tile edge standing proud of its neighbour, which is a trip hazard and permanently visible once the grout is in." },
+        { type: "p", text: "So large format changes two lines on a quote rather than one. It adds $10 to $20 per square metre to laying labour on top of base rates, and it can add a floor levelling stage a smaller tile would not have needed. The second one is usually the bigger number, and it is the one that appears after the old floor comes up rather than at the quote." },
+        { type: "p", text: "It runs the other way too. Mosaics and small format tiles are slow, because you are handling many more sheets and finishing far more linear metres of grout joint per square metre of floor." },
+        { type: "p", text: "The practical version: decide the tile format before anyone prices the preparation, and have every quote priced on the same one." },
+
+        { type: "h2", text: "Layout: what the pattern costs" },
+        { type: "p", text: "Where the first tile goes determines where every cut lands. The pattern determines how many cuts there are, and cuts are time and waste." },
+        { type: "ul", items: [
+          "**Straight set, or grid.** The baseline and the cheapest. Joints line up in both directions, cuts land on two edges of the room, and the waste allowance is predictable.",
+          "**Offset, or brick bond.** A small step up. The same cuts, plus a half tile starting every second row and a setting out that has to stay honest across the floor.",
+          "**Diagonal.** A larger step. Every perimeter tile is a cut, they are angled cuts, and the offcuts are triangles that mostly cannot be used elsewhere, so the wastage allowance on the order goes up as well as the labour.",
+          "**Herringbone and chevron.** The largest step. Nearly every perimeter tile is an angled cut, there is far more joint per square metre, and the setting out has to be exact from the first tile because any error compounds across the room rather than staying where it started."
+        ] },
+        { type: "p", text: "None of that makes a pattern a bad idea. It makes it a decision to price rather than one to make in a showroom. If you are getting three quotes, name the pattern in the brief." },
+
+        { type: "h2", text: "Grout colour and joint width" },
+        { type: "p", text: "Two decisions made in about a minute at the counter that you then live with for twenty years." },
+        { type: "p", text: "**The joint width has to suit the tile.** Grout is manufactured for different joint widths. As a working guide, unsanded or fine grout is formulated for joints up to around 3mm, with sanded grout specified above that, because the sand gives a wider joint bulk and resists shrinkage. A rectified tile with a machine cut edge allows a narrow, precise joint. A cushioned edge tile needs a wider one to absorb the variation between tiles, and forcing a narrow joint onto one makes every small difference in tile size visible." },
+        { type: "credit", text: "Davco (Sika Australia), grout product data sheets." },
+        { type: "p", text: "**Movement is a separate question from the grout joint.** Grout joints are not movement joints. Tiled floors need dedicated movement joints at perimeters and at intervals across large areas, and AS 3958:2023 calls for a minimum width of 6mm for them, with intermediate joints at no more than 4.5m centres on internal floors over 9m in any dimension, or over 6m where the floor gets direct sun. Domestic tiling frequently leaves them out, and the result turns up years later as tiles debonding along a wall or tenting in the middle of a floor. See [tile repair](tile-repair-canberra.html)." },
+        { type: "credit", text: "AS 3958:2023 Section 5, clause 5.4.7, as summarised by the Housing Industry Association's guide to joints in floor and wall tiles." },
+        { type: "p", text: "**Grout colour is a maintenance decision as much as a visual one.** A wide contrasting joint makes the grid part of the design, and it also draws the eye to every variation in tile size and every imperfect cut. A tight matching joint reads as a continuous surface and hides the setting out. On a floor, contrasting grout shows wear and traffic staining sooner, and light cement based grout in a hallway is the hardest combination in the house to keep looking new, because cement grout is porous. Mid tones are more forgiving than either extreme." },
+        { type: "p", text: "Cement grout benefits from sealing and epoxy does not. [Regrouting](regrouting-canberra.html) covers the difference between the two, and the difference between grout sealing and replacing grout." },
+
+        { type: "h2", text: "Feature wall tiling" },
+        { type: "p", text: "A feature wall is a different job from wall tiling, and it is worth naming it as one when you ask for a quote." },
+        { type: "p", text: "Ordinary wall tiling covers an area. A feature wall is a single visible surface the room is arranged around: a fireplace surround, the wall behind a bed or a bath, a chimney breast, an entry wall. It is usually small in area and high in detail, and the tile chosen for it is often the hardest one in the house to lay - finger mosaic, elongated subway in a stack or herringbone set, split face stone, a three dimensional profile, or a large format slab where the join has to be placed deliberately." },
+        { type: "p", text: "What that means in practice is that the square metre rate on a feature wall is not the square metre rate on the rest of the room, and quoting it as though it is produces a number nobody can deliver. Setting out matters more, because every joint is at eye level and there is nothing to hide a bad cut behind. External corners need a mitre or a trim, and on a feature wall a mitre is usually what is wanted, which is labour rather than a length of edging." },
+        { type: "p", text: "Feature walls turn up most often in bathrooms and kitchens - see [bathroom tiling](bathroom-tiling-canberra.html) and [kitchen tiling](kitchen-tiling-canberra.html) - but a fireplace surround or an entry wall is the same job without the waterproofing under it." },
+
+        { type: "h2", text: "Tiling over underfloor heating" },
+        { type: "p", text: "Underfloor heating gets tiled over routinely, whether it is electric cable laid under the tile or hydronic pipework running warm water through a screed. Tile is a good surface for it, because it conducts heat well and does not object to being cycled." },
+        { type: "p", text: "What changes on the tiling side is the specification and the sequence. The adhesive has to be one rated for a heated floor, because the surface expands and contracts every time the system cycles, and a rigid adhesive that is fine on an unheated slab will not stay bonded to one that moves daily." },
+        { type: "p", text: "The sequence matters more than people expect, and it is not the tiler's to set. Ardex Australia's own bulletin for tiling over under-tile heating puts it plainly: the adhesive and grout are left to cure for at least 14 days before the heating is turned on at all, and when the floor is finally commissioned the temperature is brought up by roughly 2 degrees per day until it reaches working temperature, never above 45 degrees. Heating a floor before the adhesive has cured, or bringing it up in one step, is what softens adhesive and debonds tiles." },
+        { type: "credit", text: "ARDEX Australia, Technical Bulletin TB176.007, Tiling with Underfloor Heating Systems, 8 July 2025. Scoped to under-tile heating cables above concrete, compressed fibre cement and timber floors - hydronic systems in a screed carry their own manufacturer requirements as well." },
+        { type: "p", text: "Two other things from the same bulletin are worth knowing before you choose a tile. A timber or fibre cement sheeted floor has a deflection limit, and the limit tightens for large format tile, from 1 in 360 of the joist span to 1 in 500 once the tile is over 400 by 400mm. And an embedding screed over the heating gets its own cure period before anything is bonded on top of it." },
+        { type: "p", text: "The practical version: get the heating manufacturer's specification and the adhesive manufacturer's requirements to the tiler before the quote, not after the screed is down. A heated floor is one of the few tiling jobs where the program is dictated by a trade other than the tiler." },
+
+        { type: "h2", text: "Older Canberra homes" },
+        { type: "p", text: "Canberra housing stock from the 1960s through the 1980s regularly turns up substrates that need assessing before anything goes over them: fibre cement sheet flooring and wall sheeting, sand and cement screeds of unknown depth, and existing floor coverings laid straight onto them." },
+        { type: "p", text: "That is a bonding question and a safety question rather than a heritage one. A sheet floor that flexes underfoot will crack a rigid tiled surface however well the tiling is done, so how the floor is framed and fixed matters more than what is on top of it." },
+        { type: "p", text: "The safety half is asbestos. WorkSafe ACT treats a residential building constructed or refurbished before 1990 as likely to contain asbestos containing material, and it turns up in sheeting, in some tile adhesives, and in vinyl floor tiles and their backing. In the ACT only a licensed asbestos assessor can identify or test suspected material, and only a licensed asbestos removalist can remove it, with no small quantity exemption for DIY. Identification comes before demolition, not after. [More on tile removal](tile-removal-canberra.html)." },
+        { type: "credit", text: "WorkSafe ACT, Asbestos; WorkSafe ACT, Asbestos licensing." },
+        { type: "p", text: "Older entries and verandahs sometimes carry tessellated tiling, and terrazzo occasionally turns up as an original floor finish, more often in mid century units and public buildings than in houses. Both are tile restoration work rather than tiling work: matching is difficult and sometimes impossible, and a specialist restorer is a different trade from a tiler. Worth identifying what you have before anyone quotes to take it out." },
+
+        { type: "h2", text: "What goes wrong" },
+        { type: "p", text: "**Lipping.** Large format tile laid on a floor that was not levelled for it. Visible along every joint, permanent, and a trip hazard where it is worst." },
+        { type: "p", text: "**No movement joints.** The failure arrives years later as debonding along a wall or tiles tenting in the middle of a floor, and relaying without addressing it repeats it." },
+        { type: "p", text: "**Setting out from the wrong point.** A sliver of cut tile in the most visible line of sight in the room. It costs nothing to get right at the start and cannot be fixed afterwards." },
+        { type: "p", text: "**Transitions left to the end.** Where tile meets timber, carpet or the next room there is a height difference and an exposed edge. Deciding how that is finished - a trim, a threshold strip, or a flush detail built into the levelling - belongs at the quote, not on the last day." },
+
+        { type: "faqs", items: [
+          { q: "Can you tile over existing tiles?", a: "Sometimes. It depends mostly on whether what is there now is sound: tiles that are well bonded, a surface that is flat, and a height change at doorways, thresholds and fixtures that can be accommodated. Tiles that sound hollow when tapped are a no, because you would be bonding to something that is already failing. In a wet area there is a further catch, which is that tiling over leaves any waterproofing failure exactly where it is, buried under two layers of tile instead of one. See [tile removal](tile-removal-canberra.html)." },
+          { q: "How much does floor tiling cost in Canberra?", a: "Published national rates for standard floor tiling supply and install run roughly $55 to $140 per square metre, with most guides putting the average around $75 to $100. Preparation is usually separate, and on a renovation it is frequently the largest single line. Sources in the [cost guide](tiling-cost-guide-canberra.html)." },
+          { q: "Do I need to level the floor before tiling?", a: "It depends on how flat the floor already is and how flat the tile you have chosen needs it to be. Large format tile is much less forgiving than small format, so the same floor can need levelling for one tile and not for another. Nobody knows how much is needed until the old covering is off, which is why it is worth asking whether the quote includes it or provides for it." },
+          { q: "Can you tile onto a timber floor?", a: "Usually, but the floor has to be stiff enough that the tiled surface is not being asked to absorb the flex. How the floor is framed, what is over it, and whether it needs additional sheeting are the questions, and they are worth settling before the tile is ordered rather than after." },
+          { q: "What size tile should I use?", a: "Larger tiles read calmer and have less grout line to clean, and they need a flatter floor and cost more to lay. Smaller tiles are more forgiving of an uneven substrate and give you more joint to maintain. It is a trade-off rather than a right answer, and the deciding factor is usually how flat the floor is to start with." },
+          { q: "Does the grout colour really matter?", a: "For maintenance, yes. Cement based grout is porous, so light grout on a floor shows traffic and staining soonest and needs sealing to resist it. Contrasting grout also draws the eye to every variation in tile size and cut. Mid tones are the forgiving choice, and epoxy holds colour far better than cement based grout without sealing." }
+        ] }
+      ]
+    },
+
+    /* ---------------------------------------------------------------------
+       KITCHEN TILING - splashback-first framing, because the splashback is
+       the part that is mispriced. Hands feature walls to floor-and-wall,
+       grout material to regrouting, slip classification to outdoor-patio,
+       and open-plan floors to floor-and-wall. Deliberately declines kitchen
+       coordination in the same terms the site declines bathroom renos. ---- */
+    {
+      page: "kitchen-tiling-canberra.html",
+      name: "Kitchen Tiling",
+      shortDescription: "Kitchen floors and splashbacks: why a splashback takes far longer than its square metre count, and where tiling sits in a kitchen job.",
+      metaTitle: "Kitchen Tiling Canberra | Splashbacks & Kitchen Floors",
+      metaDescription: "Kitchen tiling in Canberra. Why a splashback takes longer than its square metre count suggests, kitchen floor choices, and where tiling sits in a kitchen job.",
+      headline: "Kitchen Tiling and Splashbacks in Canberra",
+      ctaText: "Get a Quote",
+      ctaHeading: "Kitchen tiling in Canberra",
+      ctaBody: "Tell us whether it is a splashback, a floor, or both, whether the benchtop is in yet, and what is on the wall now. A splashback is priced on detail rather than area, so those answers matter more than the measurement does.",
+      blocks: [
+        { type: "lead", text: "A kitchen splashback is the clearest example of why square metres are a poor way to price tiling. Two or three square metres of wall can take most of a day, because almost none of it is a clear run." },
+        { type: "p", text: "Kitchen tiling splits into two jobs that have almost nothing in common: the splashback, which is small and made of detail, and the floor, which is usually the largest continuous run of tile in the house. This page covers both." },
+
+        { type: "h2", text: "Why a splashback takes longer than its size suggests" },
+        { type: "p", text: "Measure a splashback and you get a small number. Then look at what is in it." },
+        { type: "ul", items: [
+          "**Power points.** Every GPO on the splashback is a set of cuts and an opening that has to land accurately, because the plate covers a fixed amount of wall and no more. They are almost never positioned to fall on a joint, so the cut goes through the middle of a tile.",
+          "**The cooktop and rangehood return.** Usually the tallest part of the splashback, often the only part running full height, and it has to finish square against the hood with nothing to hide behind.",
+          "**Window returns.** A window over the sink means reveals and a sill: internal and external corners, mitres or trims, and cuts on three sides of an opening.",
+          "**Where it ends.** A splashback finishes somewhere - at a wall, at a return, at a fridge cavity, or in mid air at the end of a bench. Every one of those needs an edge, and an edge is a mitre or a trim.",
+          "**Fixed top and bottom.** The tile has to land properly on the benchtop and against the underside of the overhead cupboards, with no room to adjust either. That constrains the setting out before a single tile is cut."
+        ] },
+        { type: "p", text: "So the labour is close to all detail and almost no productive run. A tiler pricing a splashback is pricing cuts and setting out rather than area, which is why the effective rate looks high against a floor rate and why it usually is not." },
+        { type: "p", text: "The practical consequence: ask for a splashback as a job price, and ask what is included. Cuts around power points, the edge treatment at each end, and the window return if there is one are the three lines that separate two quotes." },
+
+        { type: "h2", text: "Choosing a splashback tile" },
+        { type: "p", text: "**Format.** Subway and similar small formats are the default, and they are forgiving of a wall that is not perfectly flat. Mosaics are quick to place, because they arrive on sheets, and slow to finish, because of the sheer quantity of grout joint. Large format and slab splashbacks give you very few joints and an easy surface to wipe down, but each cut is expensive to get wrong and the wall behind has to be genuinely flat." },
+        { type: "p", text: "**Finish.** A polished or highly glazed tile behind a cooktop shows every splash and every wipe mark. Matt and lightly textured finishes are more forgiving, and the difference is a maintenance question rather than an aesthetic one." },
+        { type: "p", text: "**Grout.** The wall behind a cooktop takes oil, steam and repeated cleaning. Epoxy grout is non porous, so it resists staining and chemical attack without sealing and holds its colour, and a splashback is small enough that the material premium is a modest number in absolute terms even though it is several times the price per kilogram. It is one of the two places on a domestic job where epoxy is straightforwardly worth it. See [regrouting](regrouting-canberra.html) for the comparison." },
+        { type: "p", text: "**A splashback done as a feature.** Herringbone subway, finger mosaic, split face stone, or a slab with a deliberately placed join is feature work and is priced as feature work, not as a splashback. See [feature wall tiling](floor-and-wall-tiling-canberra.html)." },
+
+        { type: "h2", text: "Kitchen floors" },
+        { type: "p", text: "A kitchen floor is a dry area in the regulatory sense and a wet one in practice. It gets splashed, mopped, and stood on with wet hands and wet feet more than any other floor in the house." },
+        { type: "p", text: "That makes slip resistance worth asking about even though there is no wet area requirement attached to it. Slip resistance is tested and classified under AS 4586 rather than judged by how a tile feels dry in a showroom, and a polished tile that looks good in a display can be genuinely slippery with water on it. Ask the supplier for the classification. Tiles marketed as non slip are not a category with a definition behind them; the classification is. See [outdoor and patio tiling](outdoor-patio-tiling-canberra.html) for how the classifications work." },
+        { type: "credit", text: "AS 4586:2013 (as amended); HB 198:2014, Standards Australia." },
+        { type: "p", text: "In an open plan kitchen and living area the floor is usually one continuous surface, which is the strongest case on a domestic job for large format tile and for planning the levelling around it. See [floor and wall tiling](floor-and-wall-tiling-canberra.html)." },
+        { type: "p", text: "Grout in a kitchen floor takes cooking residue as well as traffic. Cement based grout is porous and benefits from grout sealing, which is a separate product, a separate visit and a recurring cost, because sealer wears and is reapplied rather than done once. Epoxy removes that line entirely." },
+
+        { type: "h2", text: "Where tiling sits in a kitchen job" },
+        { type: "p", text: "The sequence catches people out more in kitchens than anywhere else, because two trades have to finish before the tiler can start and one has to wait until after." },
+        { type: "p", text: "**The splashback goes on after the benchtop.** It is tiled down to the bench, so it cannot be set out until the bench is physically there. If the benchtop is stone it is templated after the cabinets are installed and then fabricated, and that gap is usually a week or two. Planning a splashback for the same week as the cabinets does not work." },
+        { type: "p", text: "**Electrical fit off comes after the splashback**, because the power point plates sit on top of the finished tile. If the plates go on first they come off again." },
+        { type: "p", text: "**The floor is a decision rather than a sequence.** Tiling the floor before the cabinets go in means tile under the kickboards: more tile, more cost, and a continuous floor if the kitchen is ever changed or a cabinet is moved. Tiling after means less tile and a visible edge at the kickboard line, and it commits the room to that layout. Both are done routinely. It is worth deciding deliberately rather than finding out which one happened." },
+        { type: "p", text: "Cabinetry, benchtops, plumbing and electrical are separate trades, and coordinating a kitchen is a builder's or a kitchen company's job rather than a tiler's. Same answer we give on full bathroom renovations - see [about](about.html)." },
+
+        { type: "h2", text: "What it costs" },
+        { type: "p", text: "Wall tiling runs higher per square metre than floor tiling nationally, around $95 against $85, and a splashback sits above even that because of the detail in it. Treat a per square metre rate as the wrong tool for a splashback and ask for a job price instead. A kitchen floor prices much closer to a general floor rate, with the substrate as the variable. Full picture and sources in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html)." },
+
+        { type: "faqs", items: [
+          { q: "How much does a tiled kitchen splashback cost?", a: "It is priced as a job rather than by the square metre, and a national wall tiling rate near $95 per square metre is the wrong tool for it, because a splashback is two or three square metres of almost pure detail. Ask for a job price and ask what it includes: the cuts around power points, the edge treatment at each end, and the window return if there is one. See the [cost guide](tiling-cost-guide-canberra.html)." },
+          { q: "Can I tile over an existing splashback?", a: "Sometimes, if what is there is well bonded and flat. The constraint people miss is depth: the power point plates have to sit flat against the finished surface, and adding a tile thickness can mean the electrician needs to pack the boxes out. That is worth checking with the electrician before assuming it, not after the tiles are on." },
+          { q: "Do I need epoxy grout behind the cooktop?", a: "You do not need it, but it is one of the places it earns its cost. Epoxy is non porous, so it resists oil, staining and repeated chemical cleaning without sealing, and it holds its colour. A splashback is small enough that the material premium is a modest number in absolute terms." },
+          { q: "Should the splashback go to the underside of the cupboards or to the ceiling?", a: "Either is normal. To the cupboards is the cheaper and more common answer. Full height changes the look of the room and costs more in tile and labour, and it is the better answer where there are no overheads on that wall or where the tile is the feature." },
+          { q: "When should the splashback be tiled?", a: "After the benchtop is installed and before the electrical fit off. A stone benchtop is templated once the cabinets are in and then fabricated, so allow for that gap rather than booking the tiler for the same week as the cabinets." },
+          { q: "Should the kitchen floor be tiled before or after the cabinets?", a: "Both are done. Before means tile under the kickboards, which costs more and leaves you a continuous floor if the kitchen ever changes. After means less tile and an edge at the kickboard line, and it locks in the layout. The point is to choose rather than to discover which one happened." }
+        ] }
+      ]
+    },
+
+    /* ---------------------------------------------------------------------
+       OUTDOOR AND PATIO TILING - owns slip resistance classification for
+       the whole site (bathroom, kitchen, laundry, pool and commercial all
+       link here for how AS 4586 works, rather than restating it). The
+       10-20% external premium and $15-30/m2 screed are the cost guide's
+       own published figures, kept to a sentence and linked. Balconies as
+       a repair/waterproofing subject stay on waterproofing-canberra. ----- */
+    {
+      page: "outdoor-patio-tiling-canberra.html",
+      name: "Outdoor and Patio Tiling",
+      shortDescription: "Alfresco areas, patios and paths: slip resistance classification, weather resistant adhesive, drainage and falls, and why external work costs more.",
+      metaTitle: "Outdoor & Patio Tiling Canberra | Alfresco & Paths",
+      metaDescription: "Outdoor and patio tiling in Canberra. Slip resistance ratings, weather resistant adhesive, drainage and frost, and why external tiling costs more than the same area inside.",
+      headline: "Outdoor and Patio Tiling in Canberra",
+      ctaText: "Get a Quote",
+      ctaHeading: "Outdoor tiling in Canberra",
+      ctaBody: "Tell us what the area is, what is under it now, and whether anything is underneath it - a garage, a room, or just ground. Tiling over habitable space is a different job from tiling a slab on grade, and it is the first thing anyone quoting needs to know.",
+      blocks: [
+        { type: "lead", text: "Outdoor tiling looks like indoor tiling with a different tile on it. It is not. The surface has to drain, it has to be safe underfoot when it is wet, it has to survive a Canberra winter, and everything holding it together has to be rated for weather." },
+        { type: "p", text: "This page covers alfresco areas, patios, courtyards, paths and steps: what the specification actually has to do, and why the same area costs more outside than in." },
+
+        { type: "h2", text: "What this covers" },
+        { type: "ul", items: [
+          "**Alfresco areas and covered outdoor rooms.** The most common external tiling job, and the most forgiving, because it is partly sheltered.",
+          "**Patios and courtyards.** Fully exposed, so the tile specification and the drainage both matter more.",
+          "**Paths, steps and thresholds.** Small areas with the highest slip consequence on the property, because they are where people are moving and changing level.",
+          "**Balconies and areas over habitable space.** Tiled over a membrane, with somewhere worse for a failure to go. See [waterproofing](waterproofing-canberra.html)."
+        ] },
+        { type: "p", text: "Pool surrounds and coping are related but have their own requirements - see [pool tiling](pool-tiling-canberra.html)." },
+
+        { type: "h2", text: "Slip resistance, and how it is actually measured" },
+        { type: "p", text: "This is the requirement that separates outdoor tiling from indoor tiling most sharply, and it is the one most often decided by looking at a sample." },
+        { type: "p", text: "Slip resistance of pedestrian surfaces in Australia is tested and classified under AS 4586. A surface can be rated by wet pendulum test, which produces a P0 to P5 classification, by oil wet ramp, which produces an R rating, or by a barefoot ramp test, which produces an A, B or C rating for surfaces used without shoes. The companion handbook, HB 198, guides which classification suits which application." },
+        { type: "credit", text: "AS 4586:2013 (as amended); HB 198:2014, Standards Australia." },
+        { type: "p", text: "**What that means when you are choosing a tile.** Ask the supplier for the classification by name, for the specific tile and for the application you have in mind. External, exposed and sloped surfaces sit at the demanding end, and the same tile that is fine on a covered alfresco floor can be the wrong choice for an exposed step. Two finishes in the same tile range frequently carry different classifications." },
+
+        { type: "h3", text: "Where a minimum is actually mandated" },
+        { type: "p", text: "Worth getting right, because the requirement is narrower than tile marketing implies and stricter than most people expect on the surfaces it does cover." },
+        { type: "p", text: "The National Construction Code sets minimum slip resistance classifications for houses, tested to AS 4586, and they attach to steps, ramps and landings rather than to floors generally. For a Class 1 dwelling the Housing Provisions require, on a wet surface, P4 or R11 for a stair tread, P4 for a nosing or landing edge strip, and P5 or R12 for a ramp no steeper than 1:8. The dry figures sit one step lower in each case." },
+        { type: "credit", text: "National Construction Code 2022, Housing Provisions, clause 11.2.4 and Table 11.2.4." },
+        { type: "p", text: "The definition of a wet surface is the part that catches people out. The Australian Building Codes Board treats a surface exposed to weather, an external stairway being its own example, as a wet surface regardless of the weather on the day. So the external steps and any ramp at a Canberra house are assessed against the wet column, not the dry one." },
+        { type: "credit", text: "Australian Building Codes Board, Advisory Note - Slip-resistance for stairways, landings and ramps, 2020." },
+        { type: "note", text: "What is not mandated is a minimum for the patio itself. The Board's own note is explicit that AS 4586 applies to all new pedestrian surfaces while the Code's classification requirements attach to stairways, ramps and landings. HB 198 recommends classifications for other applications, external and wet areas included, but it is guidance rather than a blanket legal minimum for a private patio. That is exactly why it is worth asking for the classification by name rather than assuming a tile that looks textured automatically passes." },
+        { type: "p", text: "One thing worth knowing regardless: tiles marketed as non slip tiles or as slip resistant flooring are not a defined category. Anyone can print it on a box. The classification is the part with a test behind it." },
+
+        { type: "h2", text: "Adhesive, grout and what weather does to them" },
+        { type: "p", text: "Outside, the adhesive and grout are exposed to UV, to rain, and to a temperature range an internal floor never sees." },
+        { type: "p", text: "**Weather resistant adhesive, applied as a full bed.** External tiling needs an adhesive rated for external use and for the substrate it is going onto, and it needs close to full coverage rather than dabs. A void under an external tile fills with water, and water that sits in a void through a Canberra winter freezes. Freezing water expands, and it lifts tiles." },
+        { type: "p", text: "**Frost matters here more than it does in most of Australia.** Canberra gets hard frosts and sub-zero overnight temperatures through winter, which coastal capitals largely do not. A tile specified as frost resistant, and full adhesive coverage so there is nowhere for water to sit, are both more than a formality in this climate." },
+        { type: "p", text: "**Movement joints are not optional outside.** AS 3958:2023 calls for movement joints at no more than 4.5m centres in any direction outdoors, against 4.5m centres on internal floors only once the floor exceeds 9m in a dimension. The reason is straightforward: an external surface expands in the sun and contracts overnight, every day, and it needs somewhere designed to absorb that. Perimeter joints matter as much as the field joints." },
+        { type: "credit", text: "AS 3958:2023 Section 5, clause 5.4.7, as summarised by the Housing Industry Association's guide to joints in floor and wall tiles." },
+        { type: "p", text: "**Grout and joint width.** External joints take water and movement, so joint width has to suit the tile rather than be squeezed to look neat. See [floor and wall tiling](floor-and-wall-tiling-canberra.html) for how joint width is matched to a tile format." },
+
+        { type: "h2", text: "Drainage and falls" },
+        { type: "p", text: "An outdoor tiled surface has to shed water, and it has to shed it away from the house. A patio that ponds is a maintenance problem, a slip problem, and where it drains back toward a wall it becomes a building problem." },
+        { type: "p", text: "The fall is built into the substrate, not into the tiling. If the slab was poured flat, the fall has to be created with a screed before tiling starts, and that is a real line on the quote rather than something a tiler can absorb by laying the tiles on a slope." },
+        { type: "p", text: "**Over habitable space** - a balcony, or an alfresco over a garage or a room - there is a waterproof membrane under all of it, and the same rules about junction detailing and cure time apply as in a bathroom, with UV and thermal cycling on top. That is a different and more expensive job than a patio on ground. See [waterproofing](waterproofing-canberra.html)." },
+
+        { type: "h2", text: "What outdoor tiling costs" },
+        { type: "p", text: "External tiling carries a premium over the same area done inside, in the order of 10 to 20% on both supply and labour. The tile specification is higher, the adhesive is dearer, and the preparation is more involved." },
+        { type: "p", text: "That premium sits on top of whatever the substrate needs. Falls, drainage and levelling on an existing slab are the real variable, and published rates put screeding and levelling at $15 to $30 per square metre. Full breakdown and sources in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html)." },
+
+        { type: "faqs", items: [
+          { q: "Can you tile over an existing concrete patio?", a: "Often, provided the slab is sound, clean, and already falls the right way, and provided any joints in the slab are carried through the tiling rather than tiled over. A slab that has cracked will crack the tiled surface above it in the same line, so the crack has to be assessed before anything goes on top of it." },
+          { q: "What slip rating do I need outside?", a: "It depends on the surface. For steps, ramps and landings at a house there is a mandated minimum under the National Construction Code, tested to AS 4586, and because a surface exposed to weather counts as wet, an external stair tread needs P4 or R11 and a ramp no steeper than 1:8 needs P5 or R12. For the patio floor itself there is no mandated minimum, only HB 198 guidance by application. Either way, ask the supplier for the classification of the specific tile and finish rather than the range, and tell them what it is for." },
+          { q: "Will outdoor tiles crack in a Canberra winter?", a: "They can, and the usual mechanism is water rather than cold on its own. Water sitting in a void under a tile expands when it freezes and lifts the tile. Frost resistant tiles and full adhesive coverage, so there is no void for water to collect in, are the controls that matter here." },
+          { q: "Do outdoor tiles need sealing?", a: "It depends on the material. Porcelain is dense and generally does not. Natural stone usually does, and it needs resealing periodically, which is a recurring cost worth knowing about before you choose it. Cement based grout benefits from sealing outdoors as well as in." },
+          { q: "Can I use the same tile inside and outside?", a: "Frequently yes, and many ranges are made to do exactly that so a floor can run through a doorway without a change. What often differs is the finish: the external version of a range usually carries a different surface and a different slip classification. Ask for both classifications rather than assuming the range name covers it." },
+          { q: "Does an outdoor area need movement joints?", a: "Yes, on any area of size. AS 3958:2023 calls for joints at no more than 4.5m centres in any direction outdoors, because the surface expands in the sun and contracts overnight every day. Leaving them out is one of the more common causes of external tiling lifting or tenting a few years later." }
+        ] }
+      ]
+    },
+
+    /* ---------------------------------------------------------------------
+       POOL TILING - scoped to surrounds and coping. The pool INTERIOR
+       (waterline, shell finishes) is explicitly declined, same as full
+       bathroom renovations are, because it is a pool trade rather than a
+       tiling one. Barefoot classification is the page's own angle; the
+       general AS 4586 explainer stays on outdoor-patio. ------------------ */
+    {
+      page: "pool-tiling-canberra.html",
+      name: "Pool Tiling",
+      shortDescription: "Pool surrounds and coping: barefoot slip resistance, the movement joint at the pool edge, and what constant water exposure does to a tiled surface.",
+      metaTitle: "Pool Tiling Canberra | Surrounds, Coping & Paving",
+      metaDescription: "Pool surround and coping tiling in Canberra. Barefoot slip resistance, movement at the pool edge, and why constant water exposure changes the specification.",
+      headline: "Pool Surround and Coping Tiling in Canberra",
+      ctaText: "Get a Quote",
+      ctaHeading: "Pool surround tiling in Canberra",
+      ctaBody: "Tell us what is around the pool now, whether the coping is being replaced as well as the paving, and whether anything has lifted or moved. Movement at the pool edge is the usual cause, and it changes what the repair is.",
+      blocks: [
+        { type: "lead", text: "A pool surround is the most demanding tiled surface on a domestic property. It is wet most of the time it is in use, it is walked on barefoot, it is fully exposed to sun and frost, and it sits at the edge of a large structure that moves independently of everything around it." },
+        { type: "p", text: "Three requirements drive the specification: slip resistance measured barefoot, movement at the pool edge, and constant exposure to water that is not rainwater. This page covers each." },
+
+        { type: "h2", text: "What this covers, and what it does not" },
+        { type: "p", text: "**Covered.** The tiled surround or paving around a pool, the coping at the pool edge, steps and thresholds between the house and the pool area, and the transition to whatever paving or lawn lies beyond it." },
+        { type: "p", text: "**Not covered: the inside of the pool.** Waterline tiling and interior pool finishes are a pool trade. They go onto a pool shell with its own structure, its own movement and its own waterproofing, and they are not a domestic tiling job. If that is what you need, a pool builder or a pool renovation specialist is who you want, and we will say so rather than take the enquiry." },
+        { type: "p", text: "**Also not covered:** pool barrier and fencing compliance. That is a separate regulatory matter in the ACT, and it is not something a tiler determines. Worth resolving before any work changes the levels around a pool, because the levels are part of what a barrier is assessed against." },
+
+        { type: "h2", text: "Slip resistance, measured barefoot" },
+        { type: "p", text: "A pool surround is the clearest case on a domestic property for the barefoot classification in AS 4586." },
+        { type: "p", text: "Slip resistance is tested three ways: a wet pendulum result, giving a P0 to P5 classification; an oil wet ramp result, giving an R rating; and a barefoot ramp result, giving an A, B or C rating. The barefoot rating is the one that describes how a surface behaves under a wet bare foot, which is the only way anyone uses a pool surround. A tile can carry a respectable R rating and still be the wrong choice around a pool." },
+        { type: "credit", text: "AS 4586:2013 (as amended); HB 198:2014, Standards Australia." },
+        { type: "p", text: "HB 198 recommends classifications by application rather than setting one figure for everywhere, and a pool surround is one of the applications it addresses. It is a paywalled Standards Australia publication, so this page cites it by number rather than reproducing its recommendations: ask the supplier, or the tile's technical data, for the barefoot classification recommended for a pool surround, and get the answer in writing." },
+        { type: "p", text: "What is mandated rather than recommended is narrower, and it still applies here. The National Construction Code sets minimum classifications for steps, ramps and landings at a house, tested to AS 4586, and a surface exposed to weather counts as a wet surface. The steps into a pool area and any ramp fall under that even though the paving around the pool does not. See [outdoor and patio tiling](outdoor-patio-tiling-canberra.html) for the figures." },
+        { type: "credit", text: "National Construction Code 2022, Housing Provisions, clause 11.2.4 and Table 11.2.4; Australian Building Codes Board, Advisory Note - Slip-resistance for stairways, landings and ramps, 2020." },
+        { type: "p", text: "The instruction does not depend on any of that: ask for the barefoot classification rather than the R rating alone, and ask for it against the specific finish rather than the range. Two finishes in one range routinely differ." },
+
+        { type: "h2", text: "Movement at the pool edge" },
+        { type: "p", text: "This is what separates pool surround tiling from patio tiling, and it is the reason most pool surrounds fail where they do." },
+        { type: "p", text: "A pool shell is a large, rigid structure in the ground. The paving around it sits on fill, or on its own slab, or on both. They are not the same structure, they do not move together, and the joint between them has to take the difference." },
+        { type: "p", text: "So the coping detail and the joint behind it are the job. A movement joint at the pool edge, correctly sized and filled with a flexible sealant rather than grout, is what stops the coping lifting or the first course of paving debonding. AS 3958:2023 sets a minimum movement joint width of 6mm and joints at no more than 4.5m centres in any direction outdoors, and around a pool the perimeter joint matters at least as much as the field joints do." },
+        { type: "credit", text: "AS 3958:2023 Section 5, clause 5.4.7, as summarised by the Housing Industry Association's guide to joints in floor and wall tiles." },
+        { type: "p", text: "Grout in a movement joint cracks. It is the same failure as grout in a bathroom corner, on a larger and more exposed surface, and it comes back however many times it is regrouted. See [regrouting](regrouting-canberra.html)." },
+        { type: "p", text: "If paving next to your pool has lifted, tented or gone drummy along the edge, this is the first thing to check rather than the tile or the adhesive. See [tile repair](tile-repair-canberra.html)." },
+
+        { type: "h2", text: "Water exposure" },
+        { type: "p", text: "A pool surround is wet in a way a patio is not. Splash-out is constant while the pool is in use, and it is not clean water." },
+        { type: "p", text: "**Pool water.** Salt chlorinated water leaves salt behind as it evaporates, and salt crystallising inside a porous grout joint works on it over time. Epoxy grout is non porous and handles it considerably better, which is why it is specified around pools more often than anywhere else on a domestic property. Cement based grout is also vulnerable to acidic cleaners, which are common in pool area maintenance - see [regrouting](regrouting-canberra.html)." },
+        { type: "p", text: "**Freeze and thaw.** Canberra frosts, and a surround that holds water in voids under tiles or in a ponding low spot has water in it when the temperature drops. Full adhesive coverage and a fall that actually drains are the controls, and they are decided at installation rather than afterwards." },
+        { type: "p", text: "**Efflorescence.** White chalky deposits appearing at joints and edges as water passes through and leaves salts behind. Largely cosmetic, common around pools, and far easier to prevent with drainage than to remove once it has started." },
+
+        { type: "h2", text: "What pool tiling costs" },
+        { type: "p", text: "Published figures put pool tiling labour at $60 to $120 per square metre. Take that as a labour rate for the field area rather than a job price: the coping detail, the movement joint at the pool edge, and whatever the surround is sitting on are what actually move the number." },
+        { type: "p", text: "External tiling generally also carries a 10 to 20% premium over the same work inside, on both supply and labour. Sources in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html)." },
+
+        { type: "faqs", items: [
+          { q: "Can you tile the inside of a pool?", a: "No. Waterline tiling and interior pool finishes are a pool trade, done to a pool shell with its own structure and waterproofing, and they are not a domestic tiling job. A pool builder or a pool renovation specialist is who you want for that." },
+          { q: "What tile should I use around a pool?", a: "The requirements are a barefoot slip classification suited to the application, frost resistance, and a material that tolerates constant wetting and pool chemistry. Porcelain and dense stone are the usual answers. Ask the supplier for the barefoot classification of the specific finish rather than the range." },
+          { q: "Why does the paving next to my pool keep lifting?", a: "Almost always movement at the pool edge with nowhere designed to absorb it. A pool shell and the paving around it are separate structures that move differently, and the joint between them needs to be a flexible movement joint rather than grout. Relaying without addressing that repeats the failure." },
+          { q: "Should I use epoxy grout around a pool?", a: "It is one of the strongest cases for it on a domestic property. Epoxy is non porous, so it resists the salt, the pool chemistry and the acidic cleaners that degrade cement based grout, and it does not need periodic sealing. It costs several times as much in material and takes longer to lay." },
+          { q: "Can you tile over existing pool paving?", a: "Sometimes, but there are two extra constraints beyond the usual ones. The added height changes the relationship between the paving and the coping and between the paving and any door thresholds, and the existing movement joint at the pool edge has to be carried through the new surface rather than tiled over." },
+          { q: "What is coping?", a: "The finished edge that caps the top of the pool shell, where the pool meets the paving around it. It is the most detailed part of a pool surround, it takes the most water, and it sits directly on the movement joint between two structures, which is why it is where problems usually appear first." }
+        ] }
+      ]
+    },
+
+    /* ---------------------------------------------------------------------
+       COMMERCIAL TILING - the only page on the site aimed at a business
+       rather than a homeowner, so the framing is program/specification
+       rather than cost tiers. Deliberately carries NO rate: every figure
+       on this site is a published domestic rate and none of the cost
+       guide's sources publish a commercial one. Conditional pre-renter
+       wording in the first FAQ, same as about/disclaimer/privacy. ------- */
+    {
+      page: "commercial-tiling-canberra.html",
+      name: "Commercial Tiling",
+      shortDescription: "Retail, hospitality and office fitouts: why program and specification drive commercial tiling rather than finish, and what that changes in a quote.",
+      metaTitle: "Commercial Tiling Canberra | Retail & Office Fitouts",
+      metaDescription: "Commercial tiling in Canberra for retail, hospitality and office fitouts. Why program, specification and durability drive the job rather than domestic finish.",
+      headline: "Commercial Tiling in Canberra",
+      ctaText: "Get a Quote",
+      ctaHeading: "Commercial tiling in Canberra",
+      ctaBody: "Tell us what the space is, what the program is, and whether you are working to a specification already. Commercial work is decided by dates and by the spec more than by the tile, and those are the first things anyone quoting will ask about.",
+      blocks: [
+        { type: "lead", text: "Commercial tiling is the same trade as domestic tiling with a different set of constraints on it. The finish matters less than people expect. What matters is the program, the specification, and whether the surface is still acceptable after five years of traffic a house never sees." },
+        { type: "p", text: "This page is about what changes when the client is a business: how the schedule is set, what durability actually means in a specification, and why a commercial quote is not a domestic quote with a margin on it." },
+
+        { type: "h2", text: "What this covers" },
+        { type: "ul", items: [
+          "**Retail fitouts and shopfronts.** Usually the tightest programs, because a fixed opening date exists before anyone measures anything.",
+          "**Hospitality.** Cafes, restaurants and bars, including commercial kitchens and their wet areas, where the surface has to be cleanable as well as durable.",
+          "**Office fitouts.** Amenities, kitchenettes, lift lobbies and end of trip facilities.",
+          "**Body corporate and common area work.** Lobbies, stairs, common bathrooms and balconies in units and townhouses, where the same detail is repeated across a building."
+        ] },
+        { type: "p", text: "Not covered: structural and below ground waterproofing, tanking, and remedial building envelope work. That is a different discipline with different contractors. See [waterproofing](waterproofing-canberra.html)." },
+
+        { type: "h2", text: "Program drives everything" },
+        { type: "p", text: "On a domestic job the schedule is set by the substrate and by membrane cure time. On a commercial fitout it is set by a handover date fixed before anyone measured anything." },
+        { type: "p", text: "**Tiling sits in the middle of the trade sequence**, dependent on everything before it and blocking everything after it. On a fitout with a fixed opening, a delay in the rough-in does not move the opening. It compresses the tiling." },
+        { type: "p", text: "**Which is where waterproofing gets compressed.** Membranes need cure time before tiling, and cure times lengthen in cold conditions. A Canberra winter fitout with a fixed handover is exactly the situation in which a membrane gets tiled over early, and that decision is invisible for two years and expensive when it surfaces. See [waterproofing](waterproofing-canberra.html)." },
+        { type: "p", text: "**Out of hours work.** Occupied buildings, tenanted retail and trading hospitality venues mean night and weekend work, restricted access, lift bookings, noise windows and dust containment. All of it is real cost, and all of it belongs in the quote rather than being discovered halfway through." },
+        { type: "p", text: "**Staging.** Keeping part of a space trading while another part is tiled costs more than closing it, because the work is done in pieces and the setting out has to reconcile across the joins between them." },
+
+        { type: "h2", text: "Durability, not finish" },
+        { type: "p", text: "The domestic question is what the tile looks like. The commercial question is what it looks like after five years of trolleys, chairs, heels, spills and daily chemical cleaning." },
+        { type: "p", text: "**Wear.** Porcelain rather than ceramic in traffic areas, and through body or unglazed porcelain where the surface will be genuinely abraded, because a glaze that wears through shows a different colour underneath it." },
+        { type: "p", text: "**Slip resistance is specified, not chosen.** Classification under AS 4586 usually appears in the specification for commercial work, and ramps, stairs, entries and wet areas carry requirements a private patio does not. Where a fitout arrives without a classification specified, that is worth resolving before tiles are ordered rather than after they are laid. See [outdoor and patio tiling](outdoor-patio-tiling-canberra.html) for how the classifications work." },
+        { type: "credit", text: "AS 4586:2013 (as amended); HB 198:2014, Standards Australia." },
+        { type: "p", text: "**Grout.** Epoxy is normal in commercial kitchens, food areas and heavy wet areas, because it is non porous, needs no sealing and tolerates chemical cleaning. It costs several times cement based grout in material and takes longer to lay, and on a commercial floor that is usually the right trade. See [regrouting](regrouting-canberra.html)." },
+        { type: "p", text: "**Movement joints.** Large commercial floors need them, and they get them more reliably than domestic floors do because they are usually specified. AS 3958:2023 applies here as it does at home. See [tile repair](tile-repair-canberra.html)." },
+        { type: "credit", text: "AS 3958:2023 Section 5, clause 5.4.7, as summarised by the Housing Industry Association's guide to joints in floor and wall tiles." },
+        { type: "p", text: "**Junction detail.** Commercial kitchens and food preparation areas commonly call for a coved junction between floor and wall rather than a square one, so the floor can be washed down without water sitting in the corner. That is driven by what the surface has to be able to be cleaned to, and it is a detail to confirm against the specification rather than to assume either way." },
+
+        { type: "h2", text: "Specification and documentation" },
+        { type: "p", text: "Commercial work usually arrives with a specification: a named tile, adhesive, membrane and grout, and a slip classification. That is a good thing. It removes most of the ambiguity that makes domestic quotes incomparable, because everyone is pricing the same materials rather than describing a similar job." },
+        { type: "p", text: "It also changes what a variation is. A substitution becomes something to be approved rather than a decision the tiler makes on site, which is worth understanding before a lead time on a specified tile turns into a program problem." },
+        { type: "p", text: "Wet area waterproofing documentation matters more here rather than less. It is what a certifier and a building surveyor ask for, and on a commercial fitout there is usually someone whose job it is to collect it. Get it at the time - reconstructing it later is difficult and sometimes impossible. See [waterproofing](waterproofing-canberra.html)." },
+
+        /* No cost heading on this page, deliberately. Every figure on this
+           site is a published DOMESTIC rate and none of the cost guide's
+           sources publish a commercial one, so a "what it costs" section
+           here would either be empty or invented. Resolved per README
+           content-sourcing rule 5: explaining why no figure can honestly be
+           given is a valid resolution. If a checkable commercial source
+           ever turns up (industry body, published rate card, government
+           schedule of rates), it goes here. */
+        { type: "h2", text: "Why this page carries no rate" },
+        { type: "p", text: "Every cost figure on this site is a published domestic rate, and the sources behind the [Canberra tiling cost guide](tiling-cost-guide-canberra.html) do not publish a commercial equivalent. Rather than convert a domestic rate into a commercial one and present the result as data, there is no figure here." },
+        { type: "p", text: "What can be said without one: commercial rates are not domestic rates with a margin applied. Out of hours access, staging around a trading business, program compression, specified materials and higher performance grout all sit inside the number, and on a fitout the access and program lines are frequently larger than the tiling itself. Price commercial work from a scope and a program, not from a square metre rate carried across from a house." },
+
+        { type: "faqs", items: [
+          { q: "Do you take commercial tiling enquiries in Canberra?", a: "Yes, for retail, hospitality and office fitouts. Where we have a contractor covering that type of work, your enquiry goes to them, and where we do not we will tell you rather than sit on it. Commercial and domestic tiling are not always the same contractor pool, so it helps to include the scope and the program when you enquire." },
+          { q: "Is commercial tiling more expensive than domestic tiling?", a: "Usually, and not mainly because of the tiling. Out of hours access, staging around a trading business, program compression, specified materials and higher performance grout all sit in the price, and on a fitout those lines are frequently larger than the laying itself." },
+          { q: "Can tiling be done out of hours?", a: "It is normal in occupied buildings and trading venues. Night work, weekend work, lift bookings, noise windows and dust containment all cost time, and they should be priced into the quote rather than added as a variation later. Tell us the access constraints when you enquire." },
+          { q: "What slip rating does a commercial floor need?", a: "It is normally set by the specification, classified under AS 4586, and it varies by surface: ramps, stairs, entries and wet areas carry requirements that a general floor area does not. If a fitout arrives without a classification specified, resolve it before the tiles are ordered." },
+          { q: "Do you do commercial kitchens?", a: "It is within scope as tiling work, and it is one of the places where the specification does most of the deciding: epoxy grout, a slip classification appropriate to a wet working floor, and commonly a coved floor to wall junction so the area can be washed down. Confirm those against the specification rather than assuming them." },
+          { q: "Who is responsible for the waterproofing documentation on a fitout?", a: "In practice, whoever the certifier asks. What matters from a tiling point of view is that the person applying the membrane can produce documentation for a building surveyor, and that it is collected at the time rather than reconstructed afterwards." }
+        ] }
+      ]
+    },
+
+    /* ---------------------------------------------------------------------
+       LAUNDRY TILING - the argument of the page is that a laundry is a wet
+       area and gets treated as though it is not. AS 3740 extent and the
+       NCC timber-vs-concrete distinction are both already sourced on
+       waterproofing-canberra; repeated here in one sentence each with the
+       same credits, and handed off rather than expanded. ----------------- */
+    {
+      page: "laundry-tiling-canberra.html",
+      name: "Laundry Tiling",
+      shortDescription: "A laundry is a wet area with the same waterproofing requirements as a bathroom, and it is the room most often treated as though it is not.",
+      metaTitle: "Laundry Tiling Canberra | Wet Area Floors & Walls",
+      metaDescription: "Laundry tiling in Canberra. Why a laundry is a wet area with real waterproofing requirements, where laundries leak, and what that means for a small room.",
+      headline: "Laundry Tiling in Canberra",
+      ctaText: "Get a Quote",
+      ctaHeading: "Laundry tiling in Canberra",
+      ctaBody: "Tell us whether the laundry has a floor waste, whether the floor is timber or slab, and whether the tub or the machine is being moved. Those three answers decide whether it is a straightforward tile or a waterproofing job.",
+      blocks: [
+        { type: "lead", text: "A laundry is a wet area. It is treated as an afterthought more often than any other room in the house, and it should not be." },
+        { type: "p", text: "It is small, it is usually the cheapest room in a renovation, and it is the one where a budget gets recovered when something else runs over. But it has a tub, a tap set, and a washing machine with two hoses under mains pressure and a drain hose sitting loose in a standpipe. Water gets onto that floor routinely, and when a hose lets go, a great deal of it arrives at once." },
+
+        { type: "h2", text: "The waterproofing requirement is real" },
+        { type: "p", text: "Wet area waterproofing in Australian homes is governed by AS 3740:2021 Waterproofing of Domestic Wet Areas, and laundries are one of the areas it covers. The extent required is not the same as a shower, because a laundry has no shower recess, but it is not nothing and it does not disappear because the room is small." },
+        { type: "credit", text: "AS 3740:2021, Standards Australia." },
+        { type: "p", text: "How much of the room needs membraning depends on the room: whether there is a floor waste, what the floor is made of, and where the tub and the machine sit. One difference is worth knowing because it changes the size of the job. Outside a shower area the National Construction Code requires a timber based floor, plywood and particleboard included, to be waterproof, while a concrete or fibre cement floor in the same position need only be water resistant. A laundry on a suspended timber floor is a bigger job than the same laundry on a slab, and Canberra has plenty of both." },
+        { type: "credit", text: "National Construction Code, Specification 26 - Waterproofing and water-resistance requirements for building elements in wet areas, clause S26C4. AS 3740 carries the installation detail." },
+        { type: "p", text: "And it is the same as a bathroom in the respect that matters most: once the tiles are on, the membrane is sealed underneath them permanently. There is no inspecting it later and no topping it up. The window between waterproofing and tiling is the only chance to look at it. See [waterproofing](waterproofing-canberra.html)." },
+
+        { type: "h2", text: "Where laundries actually leak" },
+        { type: "p", text: "**The washing machine.** Two hoses under mains pressure, a drain hose that can work its way out of the standpipe, and a machine that moves during a spin cycle. It is the most likely source of a large volume of water on a laundry floor in a short time, and it is the reason the floor under and around it is worth doing properly rather than economically." },
+        { type: "p", text: "**The tub.** The junction between the tub and the wall, and the splash zone behind and beside it, take water every day. That junction is a movement joint and belongs in silicone rather than grout, and silicone is a wear item that perishes. See [regrouting](regrouting-canberra.html)." },
+        { type: "p", text: "**The floor waste, where there is one.** The same puddle flange connection as a bathroom and the same failure mode: if the membrane is not properly bonded to the flange, water tracks past the drain rather than into it. And a floor waste with no fall to it is decoration." },
+        { type: "p", text: "**The door threshold.** A laundry that shares a wall with a hallway or a bedroom, with no fall and no threshold detail, sends water out of the room rather than to the drain. That is how a laundry leak turns into a carpet problem." },
+
+        { type: "h2", text: "What makes a laundry its own job" },
+        { type: "p", text: "**It is priced like a bathroom, not like a floor.** Small and detailed: the floor is mostly cuts, around the tub, the machine recess, the doorway, the floor waste and whatever else has been fitted into the room. The productive middle where a tiler lays quickly barely exists, so the effective rate per square metre runs well above a headline floor tiling figure even though the total stays small." },
+        { type: "p", text: "**Splashback height behind the tub and the machine.** Full height, to the underside of a cupboard, or a short splash above the tub. Worth deciding rather than defaulting, because the wall behind a washing machine is the wall nobody sees and nobody dries." },
+        { type: "p", text: "**Floor finish.** A laundry floor gets wet, gets walked on with wet feet, and is often the route in from the garage or the washing line. Slip resistance is classified under AS 4586 and it is worth asking about, particularly if you are considering a polished tile. See [outdoor and patio tiling](outdoor-patio-tiling-canberra.html) for how the classifications work." },
+        { type: "credit", text: "AS 4586:2013 (as amended); HB 198:2014, Standards Australia." },
+        { type: "p", text: "**Grout.** Cement based grout in a laundry takes detergent, bleach and constant damp. Acidic cleaners attack cement based grout, because cement corrodes in contact with acid, and strong bleach can affect the oxides that give grout its colour. Epoxy is the exception on both counts. See [regrouting](regrouting-canberra.html)." },
+        { type: "credit", text: "Ardex Australia, Technical Bulletin TB186.004, Cleaning / Maintenance of ARDEX Grouts, July 2024." },
+        { type: "p", text: "**What is there now.** Older laundries frequently have a tiled splash over a sheet or vinyl floor, or tiles laid straight onto sheet flooring. What comes off, and what it takes with it, is the usual unknown. See [tile removal](tile-removal-canberra.html)." },
+
+        { type: "h2", text: "What laundry tiling costs" },
+        { type: "p", text: "The same trap as a small bathroom applies: the room is mostly edges and cuts, so the rate per square metre is high and the total is still modest. Waterproofing added to a wet area generally runs $500 to $1,000, and that line is where a laundry quote most often differs from another one. Sources in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html)." },
+
+        { type: "faqs", items: [
+          { q: "Does a laundry need waterproofing?", a: "Yes. A laundry is a wet area under AS 3740:2021. How much of the room needs a membrane depends on the room, particularly whether there is a floor waste and whether the floor is timber or concrete, but the room is not exempt because it is small or because the budget is." },
+          { q: "Does a laundry need a floor waste?", a: "That depends on the requirements applying to your building and on how the room is configured, and it is a question for the building surveyor or the plumber rather than the tiler. What can be said is that a floor waste with no fall to it does not work, and a laundry without one needs the door threshold detailed so that water does not simply leave the room." },
+          { q: "Is a laundry cheaper to tile than a bathroom?", a: "In total usually yes, per square metre often not. A laundry is small and detailed in the same way a bathroom is, so the productive area is a small fraction of the floor and the fixed costs do not shrink with the room." },
+          { q: "How high should the splashback go behind a laundry tub?", a: "There is no single answer, and the useful framing is what gets wet rather than what looks finished. The splash zone behind and beside a tub takes water daily, and the wall behind a washing machine is one nobody ever dries. Full height behind both is the safe answer; a short splash above the tub is the cheap one." },
+          { q: "Can the laundry use the same tile as the bathroom?", a: "Often, and there is a practical argument for it: a single tile order, one wastage allowance, and spares that cover both rooms. The thing to check is slip resistance if the laundry doubles as an entry from the garage or the line, since that floor gets walked on with wet feet more than a bathroom floor does." },
+          { q: "My laundry floor is timber. Does that change anything?", a: "Yes, and it is worth raising before quotes come in. Outside a shower area the National Construction Code requires a timber based floor to be waterproof, while a concrete or fibre cement floor in the same position need only be water resistant. That is a genuine difference in scope, not an upsell." }
         ] }
       ]
     }
