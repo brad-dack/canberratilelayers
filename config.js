@@ -537,7 +537,9 @@ window.SITE_CONFIG = {
         src: "images/cost-guide-tile-samples.jpg",
         alt: "A fan of different tile samples laid out for selection, with a notebook and pencil beside them",
         width: 1200,
-        height: 655
+        height: 655,
+        widths: [400, 560, 720, 960],
+        sizes: "(min-width: 1120px) 450px, (min-width: 900px) calc((100vw - 80px) * 0.45), (min-width: 560px) 520px, calc(100vw - 40px)"
       },
       blocks: [
         { type: "lead", text: "Search for what a bathroom costs in Canberra and you will get answers ranging from $9,500 to $120,000. Those are real published figures from real Canberra businesses, all for 2026, all for a main bathroom." },
@@ -736,7 +738,9 @@ window.SITE_CONFIG = {
         src: "images/leaking-shower-drain-macro.jpg",
         alt: "Close-up of a stainless steel shower floor waste set into tiles",
         width: 1200,
-        height: 805
+        height: 805,
+        widths: [400, 560, 720, 960],
+        sizes: "(min-width: 1120px) 450px, (min-width: 900px) calc((100vw - 80px) * 0.45), (min-width: 560px) 520px, calc(100vw - 40px)"
       },
       blocks: [
         { type: "lead", text: "A leaking shower rarely announces itself. By the time you notice a damp patch on the hallway carpet or a musty smell that will not shift, water has usually been moving through the wall or slab for months." },
@@ -872,7 +876,9 @@ window.SITE_CONFIG = {
         src: "images/waterproofing-tile-edge-macro.jpg",
         alt: "Close-up of a tiled corner edge showing crisp tile and grout line detailing",
         width: 1200,
-        height: 655
+        height: 655,
+        widths: [400, 560, 720, 960],
+        sizes: "(min-width: 1120px) 450px, (min-width: 900px) calc((100vw - 80px) * 0.45), (min-width: 560px) 520px, calc(100vw - 40px)"
       },
       blocks: [
         { type: "lead", text: "Waterproofing is the only part of a bathroom you pay for and never see." },
@@ -985,7 +991,9 @@ window.SITE_CONFIG = {
         src: "images/regrouting-grout-float-macro.jpg",
         alt: "Close-up of a grout float smoothing fresh grout between tiles",
         width: 1200,
-        height: 805
+        height: 805,
+        widths: [400, 560, 720, 960],
+        sizes: "(min-width: 1120px) 450px, (min-width: 900px) calc((100vw - 80px) * 0.45), (min-width: 560px) 520px, calc(100vw - 40px)"
       },
       blocks: [
         { type: "lead", text: "Grout is the part of a tiled surface that wears out first. It is porous, it sits in the lowest point of the surface where water and dirt collect, and it takes the movement that the tiles themselves cannot." },
@@ -1097,7 +1105,9 @@ window.SITE_CONFIG = {
         src: "images/tile-removal-offcuts-tools.jpg",
         alt: "A small stack of assorted tile offcuts beside a chisel and hammer",
         width: 1200,
-        height: 655
+        height: 655,
+        widths: [400, 560, 720, 960],
+        sizes: "(min-width: 1120px) 450px, (min-width: 900px) calc((100vw - 80px) * 0.45), (min-width: 560px) 520px, calc(100vw - 40px)"
       },
       blocks: [
         { type: "lead", text: "Tile removal is the stage everyone underestimates and nobody photographs. It is dusty, loud, heavy, and almost always takes longer than expected, because what is underneath the tiles is not known until they come off." },
@@ -1193,7 +1203,9 @@ window.SITE_CONFIG = {
         src: "images/tile-repair-cracked-tile.jpg",
         alt: "A single ceramic tile with a visible hairline crack",
         width: 1200,
-        height: 805
+        height: 805,
+        widths: [400, 560, 720, 960],
+        sizes: "(min-width: 1120px) 450px, (min-width: 900px) calc((100vw - 80px) * 0.45), (min-width: 560px) 520px, calc(100vw - 40px)"
       },
       blocks: [
         { type: "lead", text: "Ever heard someone tap a tile and call it 'drummy' and didn't know what it meant?" },
@@ -1293,7 +1305,9 @@ window.SITE_CONFIG = {
         src: "images/quote-checklist-clipboard.jpg",
         alt: "A blank clipboard and pencil beside a couple of tile samples",
         width: 1200,
-        height: 805
+        height: 805,
+        widths: [400, 560, 720, 960],
+        sizes: "(min-width: 1120px) 450px, (min-width: 900px) calc((100vw - 80px) * 0.45), (min-width: 560px) 520px, calc(100vw - 40px)"
       },
       blocks: [
         { type: "lead", text: "Three quotes for the same bathroom can be thousands apart without anyone being unreasonable. Usually they are not quoting the same job." },
@@ -1412,7 +1426,9 @@ window.SITE_CONFIG = {
         src: "images/bathroom-tiling-shower-recess.jpg",
         alt: "An empty, newly tiled shower recess with neutral large-format tiles",
         width: 1200,
-        height: 655
+        height: 655,
+        widths: [400, 560, 720, 960],
+        sizes: "(min-width: 1120px) 450px, (min-width: 900px) calc((100vw - 80px) * 0.45), (min-width: 560px) 520px, calc(100vw - 40px)"
       },
       blocks: [
         { type: "lead", text: "A bathroom is the hardest room in the house to tile well. It is small, so almost every tile is a cut. It is a wet area, so waterproofing sits underneath everything. It has more penetrations per square metre than any other room. And the falls have to work, or the floor holds water." },
@@ -1513,7 +1529,9 @@ window.SITE_CONFIG = {
         src: "images/floor-and-wall-large-format-level.jpg",
         alt: "A spirit level and a tile spacer resting on freshly laid large-format grey floor tiles, viewed at a low angle",
         width: 1200,
-        height: 655
+        height: 655,
+        widths: [400, 560, 720, 960],
+        sizes: "(min-width: 1120px) 450px, (min-width: 900px) calc((100vw - 80px) * 0.45), (min-width: 560px) 520px, calc(100vw - 40px)"
       },
       blocks: [
         { type: "lead", text: "Outside the bathroom, tiling is mostly a substrate problem. The tile sets the look and a good part of the material cost. What is underneath it sets the labour, and that is the part nobody can see while they are quoting." },
@@ -1618,7 +1636,9 @@ window.SITE_CONFIG = {
         src: "images/kitchen-splashback-tile-samples.jpg",
         alt: "White subway splashback tile samples, a tile cutter and a tube of adhesive on a concrete benchtop",
         width: 1200,
-        height: 655
+        height: 655,
+        widths: [400, 560, 720, 960],
+        sizes: "(min-width: 1120px) 450px, (min-width: 900px) calc((100vw - 80px) * 0.45), (min-width: 560px) 520px, calc(100vw - 40px)"
       },
       blocks: [
         { type: "lead", text: "A kitchen splashback is the clearest example of why square metres are a poor way to price tiling. Two or three square metres of wall can take most of a day, because almost none of it is a clear run." },
@@ -1691,7 +1711,9 @@ window.SITE_CONFIG = {
         src: "images/outdoor-patio-textured-pavers.jpg",
         alt: "Textured, slip-resistant outdoor pavers with a notched trowel, a garden softly out of focus behind",
         width: 1200,
-        height: 655
+        height: 655,
+        widths: [400, 560, 720, 960],
+        sizes: "(min-width: 1120px) 450px, (min-width: 900px) calc((100vw - 80px) * 0.45), (min-width: 560px) 520px, calc(100vw - 40px)"
       },
       blocks: [
         { type: "lead", text: "Outdoor tiling looks like indoor tiling with a different tile on it. It is not. The surface has to drain, it has to be safe underfoot when it is wet, it has to survive a Canberra winter, and everything holding it together has to be rated for weather." },
@@ -1769,7 +1791,9 @@ window.SITE_CONFIG = {
         src: "images/pool-coping-movement-joint.jpg",
         alt: "Close-up of pool coping tiles and the movement joint where the coping meets the surrounding paving",
         width: 1200,
-        height: 655
+        height: 655,
+        widths: [400, 560, 720, 960],
+        sizes: "(min-width: 1120px) 450px, (min-width: 900px) calc((100vw - 80px) * 0.45), (min-width: 560px) 520px, calc(100vw - 40px)"
       },
       blocks: [
         { type: "lead", text: "A pool surround is the most demanding tiled surface on a domestic property. It is wet most of the time it is in use, it is walked on barefoot, it is fully exposed to sun and frost, and it sits at the edge of a large structure that moves independently of everything around it." },
@@ -1839,7 +1863,9 @@ window.SITE_CONFIG = {
         src: "images/commercial-fitout-large-format.jpg",
         alt: "Large-format floor tiles being set out with a laser level line in an open commercial fitout under construction",
         width: 1200,
-        height: 655
+        height: 655,
+        widths: [400, 560, 720, 960],
+        sizes: "(min-width: 1120px) 450px, (min-width: 900px) calc((100vw - 80px) * 0.45), (min-width: 560px) 520px, calc(100vw - 40px)"
       },
       blocks: [
         { type: "lead", text: "Commercial tiling is the same trade as domestic tiling with a different set of constraints on it. The finish matters less than people expect. What matters is the program, the specification, and whether the surface is still acceptable after five years of traffic a house never sees." },
@@ -1919,7 +1945,9 @@ window.SITE_CONFIG = {
         src: "images/laundry-floor-waste-macro.jpg",
         alt: "A stainless steel floor waste set into small-format tiles in a compact laundry, with wall pipework visible behind",
         width: 1200,
-        height: 655
+        height: 655,
+        widths: [400, 560, 720, 960],
+        sizes: "(min-width: 1120px) 450px, (min-width: 900px) calc((100vw - 80px) * 0.45), (min-width: 560px) 520px, calc(100vw - 40px)"
       },
       blocks: [
         { type: "lead", text: "A laundry is a wet area. It is treated as an afterthought more often than any other room in the house, and it should not be." },
