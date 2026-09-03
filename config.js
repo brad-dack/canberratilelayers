@@ -127,11 +127,20 @@ window.SITE_CONFIG = {
       ctaText: "Get a Quote",
       ctaHeading: "Get a quote",
       ctaBody: "Tell us what you need done, what is there now, and whether anything has been repaired before. That last detail matters more than people expect, because a repair that has already failed once usually points to a different problem than the one being described.",
+      /* Responsive variants - added Sep 2026 after a PageSpeed Insights run
+         flagged this as the LCP element, downloading the full 1200px image
+         at a 651x437 mobile display size (92.6 KiB avoidable). .hero-img is
+         CSS-capped at 520px below the 900px breakpoint and roughly 450px in
+         the desktop hero-grid column above it - sizes reflects that. Widths
+         chosen to cover 1x/2x DPR at both. Variant files generated from the
+         same source: images/hero-tiling-tools-{400,560,720,960}.jpg. */
       image: {
         src: "images/hero-tiling-tools.jpg",
         alt: "Tiling tools and ceramic tile samples arranged on a work surface",
         width: 1200,
-        height: 805
+        height: 805,
+        widths: [400, 560, 720, 960],
+        sizes: "(min-width: 900px) 450px, 520px"
       },
       blocks: [
         { type: "h2", text: "Start with what you actually need" },
