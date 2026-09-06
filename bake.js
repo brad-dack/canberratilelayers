@@ -197,8 +197,17 @@ const breadcrumbSchema = (name, canonical) => ({
 
 /* ---------- page templates ----------------------------------------------- */
 
-const canonicalFor = file =>
-  cfg.domain + "/" + (file === "index.html" ? "" : file);
+/* Cloudflare Workers Assets runs html_handling "auto-trailing-slash" (the
+   default): it serves "/about" and 307-redirects "/about.html" to it. So the
+   public URL of a generated file is its name without the extension, and that
+   is what every canonical, sitemap <loc>, schema url and internal href has to
+   use. Emitting the .html form instead points Google at a redirect for every
+   page but the homepage, and leaves the URLs that actually return 200
+   undeclared - which is exactly what Search Console reported. */
+const pathFor = file =>
+  file === "index.html" ? "/" : "/" + file.replace(/\.html$/, "");
+
+const canonicalFor = file => cfg.domain + pathFor(file);
 
 function head({ title, description, file, faqs, extraSchemas }) {
   const canonical = canonicalFor(file);
@@ -327,8 +336,12 @@ const exists = rel => fs.existsSync(path.join(__dirname, rel));
 function richText(s) {
   let t = esc(String(s == null ? "" : s));
   t = t.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
+  /* Config copy links to pages by filename - "[cost guide](tiling-cost-guide-canberra.html)" -
+     so the target stays greppable against what is on disk; the href emitted is
+     the extensionless path the server actually serves. Anything that isn't a
+     bare page filename (tel:, mailto:, absolute URLs, #anchors) passes through. */
   t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, label, url) =>
-    '<a href="' + url + '">' + label + "</a>");
+    '<a href="' + (/^[a-z0-9-]+\.html$/.test(url) ? pathFor(url) : url) + '">' + label + "</a>");
   return t.replace(/\n/g, "<br>");
 }
 
@@ -338,7 +351,7 @@ const callButtonHtml = extraClass => hasPhone()
   : "";
 
 const quoteButtonHtml = (text, extraClass) =>
-  '<a class="btn btn-primary ' + (extraClass || "") + '" href="contact.html#quote">' +
+  '<a class="btn btn-primary ' + (extraClass || "") + '" href="' + pathFor("contact.html") + '#quote">' +
   esc(text) + "</a>";
 
 /* Responsive variants. An image entry may carry `widths: [400, 560, 720, 960]`
@@ -548,9 +561,9 @@ function photosSection() {
 function serviceCards(services) {
   return services.map(s =>
     '<article class="card">' +
-      '<h3><a href="' + esc(s.page) + '">' + esc(s.name) + "</a></h3>" +
+      '<h3><a href="' + esc(pathFor(s.page)) + '">' + esc(s.name) + "</a></h3>" +
       "<p>" + esc(s.shortDescription) + "</p>" +
-      '<a class="card-link" href="' + esc(s.page) + '">' + UI.serviceDetails + " &rarr;</a>" +
+      '<a class="card-link" href="' + esc(pathFor(s.page)) + '">' + UI.serviceDetails + " &rarr;</a>" +
     "</article>"
   ).join("");
 }
@@ -558,7 +571,7 @@ function serviceCards(services) {
 function areasSection() {
   if (!cfg.areas || !cfg.areas.length) return "";
   const links = cfg.areas.map(a =>
-    '<li><a href="' + esc(a.slug) + '.html">' + esc(a.name) + "</a></li>").join("");
+    '<li><a href="' + esc(pathFor(areaFile(a))) + '">' + esc(a.name) + "</a></li>").join("");
   return '<section class="section" id="areas"><div class="container"><h2>' + UI.areasTitle +
     '</h2><ul class="area-links">' + links + "</ul></div></section>";
 }
@@ -576,20 +589,20 @@ function faqsSection() {
    click handler is still wired by main.js; only the markup is baked. */
 function headerHtml(file) {
   const links = [
-    { href: "index.html", label: "Home" },
-    { href: "about.html", label: "About" },
-    { href: "contact.html", label: "Contact" }
+    { file: "index.html", label: "Home" },
+    { file: "about.html", label: "About" },
+    { file: "contact.html", label: "Contact" }
   ];
   const nav = links.map(l =>
-    "<li><a" + (l.href === file ? ' class="active"' : "") +
-    ' href="' + l.href + '">' + l.label + "</a></li>").join("");
+    "<li><a" + (l.file === file ? ' class="active"' : "") +
+    ' href="' + pathFor(l.file) + '">' + l.label + "</a></li>").join("");
   const navPhone = hasPhone()
     ? '<a class="btn btn-primary nav-phone" href="' + telHref() + '">' +
       UI.callLabel + " " + esc(cfg.business.phoneDisplay) + "</a>"
     : quoteButtonHtml(cfg.pages.home.ctaText, "nav-phone");
 
   return '<div class="container header-inner">' +
-      '<a class="logo" href="index.html">' + esc(cfg.business.name) + "</a>" +
+      '<a class="logo" href="' + pathFor("index.html") + '">' + esc(cfg.business.name) + "</a>" +
       '<button class="nav-toggle" aria-expanded="false" aria-controls="site-nav" aria-label="' + UI.menuLabel + '">' +
         "<span></span><span></span><span></span>" +
       "</button>" +
@@ -604,7 +617,7 @@ function headerHtml(file) {
    internal linking. */
 function footerHtml() {
   const serviceLinks = cfg.services.map(s =>
-    '<li><a href="' + esc(s.page) + '">' + esc(s.name) + "</a></li>").join("");
+    '<li><a href="' + esc(pathFor(s.page)) + '">' + esc(s.name) + "</a></li>").join("");
 
   const contactLines = [];
   if (hasPhone()) contactLines.push('<a href="' + telHref() + '">' + esc(cfg.business.phoneDisplay) + "</a>");
@@ -621,11 +634,11 @@ function footerHtml() {
       "</div>" +
       '<div><p class="footer-title">' + UI.services + "</p><ul>" + serviceLinks + "</ul></div>" +
       '<div><p class="footer-title">Pages</p><ul>' +
-        '<li><a href="index.html">Home</a></li>' +
-        '<li><a href="about.html">About</a></li>' +
-        '<li><a href="contact.html">Contact</a></li>' +
-        '<li><a href="privacy.html">Privacy Policy</a></li>' +
-        '<li><a href="disclaimer.html">Disclaimer</a></li>' +
+        '<li><a href="' + pathFor("index.html") + '">Home</a></li>' +
+        '<li><a href="' + pathFor("about.html") + '">About</a></li>' +
+        '<li><a href="' + pathFor("contact.html") + '">Contact</a></li>' +
+        '<li><a href="' + pathFor("privacy.html") + '">Privacy Policy</a></li>' +
+        '<li><a href="' + pathFor("disclaimer.html") + '">Disclaimer</a></li>' +
       "</ul></div>" +
     "</div>" +
     '<div class="container footer-bottom">' +
@@ -707,7 +720,7 @@ function areaContentHtml(area) {
     '<section class="section section-alt"><div class="container">' +
       "<h2>" + UI.servicesInPrefix + " " + esc(area.name) + "</h2>" +
       '<div class="grid-3">' + serviceCards(featured) + "</div>" +
-      '<p class="center"><a class="text-link" href="index.html">' + UI.backHome + " &rarr;</a></p>" +
+      '<p class="center"><a class="text-link" href="' + pathFor("index.html") + '">' + UI.backHome + " &rarr;</a></p>" +
     "</div></section>" +
     howItWorksSection(true) +
     (area.faqs && area.faqs.length
@@ -1193,9 +1206,11 @@ function runCheck() {
     errors.push("sitemap.xml is missing (run node bake.js)");
   } else {
     const locs = [...sitemapRaw.matchAll(/<loc>([^<]+)<\/loc>/g)].map(m => m[1]);
+    /* <loc> now carries the extensionless public path, so map it back to the
+       file on disk before comparing. */
     const locFiles = locs.map(u => {
       const p = u.replace(/^https?:\/\/[^/]+\/?/, "");
-      return p === "" ? "index.html" : p;
+      return p === "" ? "index.html" : p + ".html";
     });
     for (const f of locFiles) {
       if (!exists(f)) errors.push("sitemap.xml lists a page that doesn't exist on disk: " + f);
