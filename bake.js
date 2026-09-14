@@ -587,15 +587,54 @@ function faqsSection() {
 /* #site-header is position:sticky, so filling it from JS after first paint
    pushes the whole page down - a layout shift on every page. The nav toggle's
    click handler is still wired by main.js; only the markup is baked. */
+/* Groups for the header's Services dropdown, resolved to service entries.
+   Falls back to one ungrouped list of every service when cfg.nav isn't set,
+   so a template config without it still gets a working menu. Unknown pages
+   are skipped here and reported by --check. */
+function navGroups() {
+  const byPage = new Map(cfg.services.map(s => [s.page, s]));
+  if (!cfg.nav || !cfg.nav.groups) return [{ label: "", services: cfg.services }];
+  return cfg.nav.groups
+    .map(g => ({ label: g.label || "", services: (g.pages || []).map(p => byPage.get(p)).filter(Boolean) }))
+    .filter(g => g.services.length);
+}
+
+const CHEVRON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" ' +
+  'stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="6 9 12 15 18 9"/></svg>';
+
+/* A disclosure button, not a link: there is no services index page to point
+   it at. Every service link is in the baked HTML, so the menu is crawlable
+   without JS; main.js only toggles it open for click, touch and keyboard.
+   On desktop it also opens on hover from CSS alone. */
+function servicesDropdownHtml(file) {
+  const groups = navGroups();
+  if (!groups.length) return "";
+  const current = groups.some(g => g.services.some(s => s.page === file));
+  const groupsHtml = groups.map(g =>
+    '<div class="nav-group">' +
+      (g.label ? '<p class="nav-group-title">' + esc(g.label) + "</p>" : "") +
+      "<ul>" + g.services.map(s =>
+        "<li><a" + (s.page === file ? ' class="active" aria-current="page"' : "") +
+        ' href="' + esc(pathFor(s.page)) + '">' + esc(s.name) + "</a></li>").join("") +
+      "</ul>" +
+    "</div>").join("");
+  return '<li class="nav-item-dropdown">' +
+      '<button type="button" class="nav-dropdown-toggle' + (current ? " active" : "") + '"' +
+        ' aria-expanded="false" aria-controls="nav-services">' +
+        esc((cfg.nav && cfg.nav.servicesLabel) || "Services") + CHEVRON +
+      "</button>" +
+      '<div class="nav-dropdown" id="nav-services">' + groupsHtml + "</div>" +
+    "</li>";
+}
+
 function headerHtml(file) {
-  const links = [
-    { file: "index.html", label: "Home" },
-    { file: "about.html", label: "About" },
-    { file: "contact.html", label: "Contact" }
-  ];
-  const nav = links.map(l =>
-    "<li><a" + (l.file === file ? ' class="active"' : "") +
-    ' href="' + pathFor(l.file) + '">' + l.label + "</a></li>").join("");
+  const link = (f, label) =>
+    "<li><a" + (f === file ? ' class="active" aria-current="page"' : "") +
+    ' href="' + pathFor(f) + '">' + label + "</a></li>";
+  const nav = link("index.html", "Home") +
+    servicesDropdownHtml(file) +
+    link("about.html", "About") +
+    link("contact.html", "Contact");
   const navPhone = hasPhone()
     ? '<a class="btn btn-primary nav-phone" href="' + telHref() + '">' +
       UI.callLabel + " " + esc(cfg.business.phoneDisplay) + "</a>"
@@ -1192,6 +1231,22 @@ function runCheck() {
       errors.push("orphaned page file with no config entry: " + f +
         " - bake.js does not generate it, so its copy is frozen at whatever " +
         "config said when it was last baked (delete it, or add the config entry back)");
+    }
+  }
+
+  /* -- 3b. header Services menu <-> services -------------------------------- */
+  if (cfg.nav && cfg.nav.groups) {
+    const inMenu = new Set();
+    cfg.nav.groups.forEach((g, gi) => (g.pages || []).forEach((p, pi) => {
+      if (!servicePages.includes(p)) {
+        errors.push("config nav.groups[" + gi + "].pages[" + pi + "]: \"" + p +
+          "\" is not a services[].page - it won't appear in the header menu");
+      }
+      inMenu.add(p);
+    }));
+    for (const p of servicePages) {
+      if (!inMenu.has(p)) warnings.push("service page " + p + " is not in nav.groups - " +
+        "it has no link in the header Services menu");
     }
   }
 

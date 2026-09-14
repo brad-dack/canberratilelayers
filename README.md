@@ -484,3 +484,15 @@ stock engine.
     (a wet-area cross-section, a drummy-tile pattern map, a fall-to-waste
     diagram); every service `image` field is currently omitted rather
     than reusing an unrelated stock icon from the old niche.
+12. **The header has a Services dropdown** between Home and About, because
+    with 14 service pages the footer and in-copy links were the only way to
+    reach them. Grouping and menu order come from `cfg.nav.groups` (lists of
+    `services[].page` filenames), deliberately separate from the
+    `services` array order. `servicesDropdownHtml` in `bake.js` bakes every
+    link into the HTML, so it's crawlable without JS; on desktop CSS opens
+    it on hover, and `initNavDropdowns` in `main.js` handles click, touch,
+    Escape and tabbing out. Below 800px it's an accordion inside the mobile
+    menu. `--check` fails on a `nav.groups` page that isn't a service and
+    warns on a service missing from the menu. Nav selectors in
+    `css/styles.css` now use child combinators (`.site-nav > ul > li > a`)
+    so they don't leak into the dropdown's links.

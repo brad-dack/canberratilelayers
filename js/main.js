@@ -98,6 +98,52 @@
       var open = navEl.classList.toggle("open");
       toggle.setAttribute("aria-expanded", open ? "true" : "false");
     });
+    initNavDropdowns(navEl);
+  }
+
+  /* Services dropdown. Desktop hover is pure CSS; this handles click, touch
+     and keyboard, keeping aria-expanded in step with the .open class. */
+  function initNavDropdowns(navEl) {
+    var items = navEl.querySelectorAll(".nav-item-dropdown");
+    var desktop = window.matchMedia ? window.matchMedia("(min-width: 800px)") : null;
+
+    function setOpen(item, open) {
+      item.classList.toggle("open", open);
+      var btn = item.querySelector(".nav-dropdown-toggle");
+      if (btn) btn.setAttribute("aria-expanded", open ? "true" : "false");
+    }
+
+    Array.prototype.forEach.call(items, function (item) {
+      var btn = item.querySelector(".nav-dropdown-toggle");
+      if (!btn) return;
+      btn.addEventListener("click", function () {
+        setOpen(item, !item.classList.contains("open"));
+      });
+      // Tabbing out of the panel closes it.
+      item.addEventListener("focusout", function (e) {
+        if (!e.relatedTarget || !item.contains(e.relatedTarget)) setOpen(item, false);
+      });
+      // A click-opened panel shouldn't outlive the hover on desktop. Not on
+      // mobile, where it's an accordion inside the menu.
+      item.addEventListener("mouseleave", function () {
+        if (desktop && desktop.matches) setOpen(item, false);
+      });
+    });
+
+    document.addEventListener("click", function (e) {
+      Array.prototype.forEach.call(items, function (item) {
+        if (item.classList.contains("open") && !item.contains(e.target)) setOpen(item, false);
+      });
+    });
+    document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape") return;
+      Array.prototype.forEach.call(items, function (item) {
+        if (!item.classList.contains("open")) return;
+        setOpen(item, false);
+        var btn = item.querySelector(".nav-dropdown-toggle");
+        if (btn && item.contains(document.activeElement)) btn.focus();
+      });
+    });
   }
 
   /* Fixed bottom bar on mobile - phone/quote/email stay reachable below the

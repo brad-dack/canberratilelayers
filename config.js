@@ -1990,6 +1990,49 @@ window.SITE_CONFIG = {
     }
   ],
 
+  /* --- Header "Services" dropdown -------------------------------------------
+     Groups the service pages in the header menu. Each entry in `pages` is a
+     services[].page filename; the link label is that service's `name`. The
+     services array above stays in its own order (cost guide first, etc.) -
+     this is only the order a visitor scans the menu in, mirroring the
+     homepage's "leaking or damaged / tiling something new / working out a
+     budget" split. --check fails on a page that isn't a service and warns on
+     a service left out of the menu. */
+  nav: {
+    servicesLabel: "Services",
+    groups: [
+      {
+        label: "Tiling",
+        pages: [
+          "bathroom-tiling-canberra.html",
+          "floor-and-wall-tiling-canberra.html",
+          "kitchen-tiling-canberra.html",
+          "laundry-tiling-canberra.html",
+          "outdoor-patio-tiling-canberra.html",
+          "pool-tiling-canberra.html",
+          "commercial-tiling-canberra.html",
+          "waterproofing-canberra.html",
+          "tile-removal-canberra.html"
+        ]
+      },
+      {
+        label: "Repairs",
+        pages: [
+          "leaking-shower-repair-canberra.html",
+          "regrouting-canberra.html",
+          "tile-repair-canberra.html"
+        ]
+      },
+      {
+        label: "Guides",
+        pages: [
+          "tiling-cost-guide-canberra.html",
+          "tiling-quote-checklist-canberra.html"
+        ]
+      }
+    ]
+  },
+
   /* --- Service-area pages ---------------------------------------------------
      Deliberately empty. All 34 area-page keywords (Gungahlin, Belconnen,
      Woden, Queanbeyan, etc.) returned null Google Ads search volume -
