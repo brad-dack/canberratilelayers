@@ -947,10 +947,47 @@ const cnameContent = () => hostOf(cfg.domain) + "\n";
 const robotsContent = () => "User-agent: *\nAllow: /\n\nSitemap: " +
   cfg.domain + "/sitemap.xml\n";
 
-const sitemapContent = pageNames =>
+/* Google schedules crawls off <lastmod>, but only while it trusts the field -
+   a sitemap that restamps every page with the build date on every deploy
+   teaches it to ignore them. So a page's date only moves when its generated
+   HTML actually differs from what is already on disk; an unchanged page keeps
+   the date already in sitemap.xml, falling back to the file's mtime the first
+   time through, when no sitemap carries dates yet. */
+
+const isoDay = d => new Date(d).toISOString().slice(0, 10);
+
+function sitemapDatesInUse() {
+  const raw = exists("sitemap.xml")
+    ? fs.readFileSync(path.join(__dirname, "sitemap.xml"), "utf8")
+    : "";
+  const dates = {};
+  for (const m of raw.matchAll(/<loc>([^<]+)<\/loc><lastmod>([^<]+)<\/lastmod>/g)) {
+    dates[m[1]] = m[2];
+  }
+  return dates;
+}
+
+/* Must run BEFORE the pages are written - it compares the HTML about to be
+   written against the copy still on disk from the previous bake. */
+function lastmodsFor(pages) {
+  const previous = sitemapDatesInUse();
+  const today = isoDay(Date.now());
+  const out = {};
+  for (const [name, html] of pages) {
+    const full = path.join(__dirname, name);
+    const unchanged = exists(name) && fs.readFileSync(full, "utf8") === html;
+    out[name] = unchanged
+      ? (previous[canonicalFor(name)] || isoDay(fs.statSync(full).mtime))
+      : today;
+  }
+  return out;
+}
+
+const sitemapContent = (pageNames, lastmods) =>
   '<?xml version="1.0" encoding="UTF-8"?>\n' +
   '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-  pageNames.map(f => "  <url><loc>" + canonicalFor(f) + "</loc></url>").join("\n") +
+  pageNames.map(f => "  <url><loc>" + canonicalFor(f) + "</loc>" +
+    "<lastmod>" + lastmods[f] + "</lastmod></url>").join("\n") +
   "\n</urlset>\n";
 
 /* Self-contained on purpose: GitHub Pages serves 404.html for ANY missing
@@ -1039,6 +1076,7 @@ function bake() {
   }
 
   const pages = buildPages();
+  const lastmods = lastmodsFor(pages);
   for (const [name, html] of pages) {
     fs.writeFileSync(path.join(__dirname, name), html, "utf8");
     console.log("baked " + name);
@@ -1048,7 +1086,7 @@ function bake() {
   const aux = [
     ["CNAME", cnameContent()],
     ["robots.txt", robotsContent()],
-    ["sitemap.xml", sitemapContent(pageNames)],
+    ["sitemap.xml", sitemapContent(pageNames, lastmods)],
     ["404.html", notFoundContent()],
     ["favicon.svg", faviconContent()]
   ];
