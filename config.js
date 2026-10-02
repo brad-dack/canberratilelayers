@@ -800,7 +800,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "**What it is:** Localised removal of tiles around the drain, correcting the flange to membrane connection, then rewaterproofing and retiling that area." },
         { type: "p", text: "**When it works:** When the leak has been traced specifically to the drain connection and the rest of the membrane is sound. Much less disruptive than a full rebuild." },
         { type: "h3", text: "Full strip out and rewaterproof" },
-        { type: "p", text: "**What it is:** Tiles and screed removed back to the substrate, new membrane applied, new screed and tiles." },
+        { type: "p", text: "**What it is:** Tiles and screed removed back to the substrate, new membrane applied, new screed and tiles. What the strip out stage involves is covered on [bathroom strip out](bathroom-strip-out-canberra.html)." },
         { type: "p", text: "**When it works:** When the membrane has failed. It is the only repair that actually addresses the cause." },
         { type: "p", text: "**The honest version:** this is the expensive option and no one wants to hear it. But a full rewaterproof done once costs less than three surface repairs and the water damage that accumulates between them. If two previous repairs have not held, this is why." },
 
@@ -1157,7 +1157,7 @@ window.SITE_CONFIG = {
 
         { type: "h2", text: "Disposal" },
         { type: "p", text: "Tile waste is heavy and disposal is usually charged by weight. A bathroom strip-out produces more material than people expect, and a Canberra tiler's published calculator allows $800 for rubbish removal on a bathroom alongside $1,500 for the demolition itself." },
-        { type: "p", text: "Establish who is taking the waste away and whether tip fees are included, because it is a line that gets left out of quotes and then appears later." },
+        { type: "p", text: "Establish who is taking the waste away and whether tip fees are included, because it is a line that gets left out of quotes and then appears later. For a whole wet area, including screed, membrane and who disconnects what, see [bathroom strip out](bathroom-strip-out-canberra.html)." },
         { type: "p", text: "Asbestos containing material cannot go to general waste and has its own disposal requirements." },
 
         { type: "h2", text: "Doing it yourself" },
@@ -1180,6 +1180,112 @@ window.SITE_CONFIG = {
           { q: "Do I need to worry about asbestos?", a: "In homes built or refurbished before 1990 it is a real possibility, in tile adhesives, vinyl tiles and sheeting. In the ACT, only a licensed asbestos assessor can identify it and only a licensed asbestos removalist can remove it, with no small-quantity exemption for DIY. Identification should happen before demolition, not after." },
           { q: "How long does tile removal take?", a: "Removing the tiles is often quicker than removing the adhesive underneath them. The second stage is what determines whether the surface is actually ready to tile." },
           { q: "Can I remove the tiles myself and have a tiler do the rest?", a: "Yes, and it does save money, though less than it appears because the slow part is preparation rather than demolition. Agree with the tiler in advance what condition they need the substrate in, otherwise you may pay them to redo it." }
+        ] }
+      ]
+    },
+
+    /* ---------------------------------------------------------------------
+       BATHROOM STRIP OUT - added Oct 2026 from Search Console, not the
+       build brief: "bathroom strip out canberra" sat at position ~9 with no
+       page targeting it. Scope is the tiled wet area coming out ahead of a
+       retile or rewaterproof - NOT a gut renovation, which the site sends
+       to a builder everywhere (home + bathroom FAQs), and this page must
+       keep saying so. Boundaries: generic removal mechanics, silica and
+       asbestos detail stay on tile-removal (one sentence + link here);
+       membrane detail stays on waterproofing; repair options and their
+       prices stay on leaking-shower-repair. This page owns scope - what
+       "strip out" includes, what is found underneath, who disconnects
+       what - and the order of works. No new figures: every number here
+       is already sourced elsewhere on the site. ------------------------- */
+    {
+      page: "bathroom-strip-out-canberra.html",
+      name: "Bathroom Strip Out",
+      shortDescription: "What a bathroom strip out actually includes, what is usually found underneath, who disconnects what, and how to compare quotes that use the same words for different jobs.",
+      metaTitle: "Bathroom Strip Out Canberra | Tiles, Screed & Membrane",
+      metaDescription: "Bathroom strip out in Canberra: what it includes, what is found under the tiles, asbestos in older homes, and how to compare strip out quotes properly.",
+      headline: "Bathroom Strip Out in Canberra",
+      ctaText: "Get a Quote",
+      ctaHeading: "Bathroom strip out in Canberra",
+      ctaBody: "Tell us whether it is the shower or the whole room, whether the floor is slab or timber, and roughly when the house was built. Those three answers decide most of the scope.",
+      image: {
+        src: "images/tile-removal-offcuts-tools.jpg",
+        alt: "A small stack of assorted tile offcuts beside a chisel and hammer",
+        width: 1200,
+        height: 655,
+        widths: [400, 560, 720, 960],
+        sizes: "(min-width: 1120px) 450px, (min-width: 900px) calc((100vw - 80px) * 0.45), (min-width: 560px) 520px, calc(100vw - 40px)"
+      },
+      blocks: [
+        { type: "lead", text: "\"Strip out\" is one of the least precise words in a bathroom quote. It can mean the tiles off the shower walls, or every tile, screed bed and membrane in the room down to the slab or the joists. Two quotes for a bathroom strip out can be describing completely different jobs." },
+        { type: "p", text: "It is also the point where a bathroom stops being a plan and becomes what is actually there. Nobody knows what is under the tiles until they come off, and what is found decides what the rest of the job costs." },
+        { type: "p", text: "This page covers what a strip out includes, what is usually found underneath, and how to make sure two quotes are describing the same work." },
+
+        { type: "h2", text: "Strip out, or renovation?" },
+        { type: "p", text: "Worth settling first, because it decides who you should be calling." },
+        { type: "p", text: "**A strip out ahead of retiling** takes the tiled surfaces back to a sound substrate so the room can be rewaterproofed and retiled in the same layout. The shower stays where it is, the vanity goes back where it was. That is tiling work, and it is the job this page is about." },
+        { type: "p", text: "**A strip back to the studs** with the layout changing, walls being resheeted, the plumbing moving and new electrical going in is a renovation. That involves plumbing, electrical, carpentry, plastering and painting, and it is generally run by a builder rather than a tiler. If that is your job, a renovation builder is who you want, and we will say so rather than take the enquiry." },
+        { type: "p", text: "Plenty of jobs sit in between, which is why the scope needs writing down rather than assuming." },
+
+        { type: "h2", text: "What a bathroom strip out can include" },
+        { type: "image", src: "images/shower-waterproofing-cross-section.jpg", alt: "Cross-section diagram of a shower corner showing the waterproof membrane running below the tiles and screed, up the wall junction, and connecting to the floor waste at the puddle flange", width: 1200, height: 805 },
+        { type: "p", text: "A tiled wet area is built in layers, and a strip out can stop at any of them. From the surface down:" },
+        { type: "ul", items: [
+          "**Fixtures.** Vanity, toilet, shower screen, bath, mirrors, accessories. These have to come out before any tile does.",
+          "**Wall tiles and adhesive.** On rendered or masonry walls the tiles usually come off leaving adhesive behind. On sheeted walls they frequently take the sheeting with them.",
+          "**Floor tiles and adhesive.** Often the slowest part, because the adhesive bed has to be ground or scraped back before anything new goes down.",
+          "**Screed.** The mortar bed that sets the fall to the floor waste. If the falls are wrong, or the membrane under the screed has failed, the screed has to come out too.",
+          "**The old membrane.** Under the screed, under the wall tiles in the shower, and up the walls at the junctions. If a leak is the reason for the job, this is the layer that has failed.",
+          "**Wall sheeting.** Only where it came away with the tiles or is damaged by water. Replacing it is carpentry, not tiling."
+        ] },
+        { type: "p", text: "A quote that says \"strip out bathroom\" without saying which of these layers is included, and whether the room ends up ready to waterproof, is not a scope. Ask which layers are coming out and what condition the room is left in." },
+
+        { type: "h2", text: "What is found underneath" },
+        { type: "p", text: "This is why strip out quotes carry allowances, and why the honest ones say so." },
+        { type: "p", text: "**A failed membrane, or none at all.** In an older bathroom it is common to find the waterproofing has broken down, was never continuous, or was not bonded to the floor waste. Damp screed and staining around the waste are the usual signs. See [leaking shower repair](leaking-shower-repair-canberra.html)." },
+        { type: "p", text: "**Water damaged timber.** Older Canberra houses through the inner north and inner south are more likely to have suspended timber floors under the bathroom. If the timber has been wet long enough to soften, the job stops being a tiling job and becomes a structural one, and a carpenter or builder needs to see it before anything goes back on top." },
+        { type: "p", text: "**Floors that are not flat or do not fall.** Unknown until the old surface is off, and frequently the largest single line on the job. Screeding and levelling run around $15 to $30 per square metre." },
+        { type: "p", text: "**Sheeting that comes away with the tiles.** Tiles bonded to wall sheeting often pull its face off. The wall is then replaced rather than patched." },
+        { type: "p", text: "**Previous repairs.** Sealers, patched grout, tiles laid over tiles. Each one has to come off, and a bathroom that has been repaired more than once is telling you something about what is underneath." },
+
+        { type: "h2", text: "Asbestos in older Canberra bathrooms" },
+        { type: "p", text: "WorkSafe ACT's guidance is that a residential building constructed or refurbished before 1990 is likely to contain asbestos containing material. In a bathroom the likely places are fibre cement wall sheeting behind the tiles, fibre cement floor sheeting under them, and some older tile adhesives. Fibre cement sheeting is common in Canberra stock from the 1960s to the 1980s." },
+        { type: "p", text: "In the ACT only a licensed asbestos assessor can identify or test suspected material, and only a licensed asbestos removalist can remove it from a residential premises, with no small-quantity exemption for DIY. In a pre-1990 bathroom, identification comes before the first tile comes off, not after." },
+        { type: "credit", text: "WorkSafe ACT, Asbestos; WorkSafe ACT, Asbestos licensing." },
+        { type: "p", text: "Strip outs also generate silica dust from tiles, adhesive and screed, which has its own controls. Both are covered in more detail on the [tile removal](tile-removal-canberra.html) page." },
+
+        { type: "h2", text: "Who disconnects what" },
+        { type: "p", text: "Before tiles come off, the room has to be made safe to work in." },
+        { type: "p", text: "**Plumbing.** Disconnecting and capping the toilet, basin, bath and shower, and reconnecting them at the end, is a licensed plumber's work. So is anything that moves a waste or a supply." },
+        { type: "p", text: "**Electrical.** Isolating and removing light fittings, exhaust fans, heated towel rails and powerpoints is a licensed electrician's work." },
+        { type: "p", text: "Whoever is quoting the strip out should say whether they are arranging those trades or whether you are. It is one of the lines most often missing from a quote, and it is the one that stops the job on day one if nobody has booked it." },
+
+        { type: "h2", text: "The order of works" },
+        { type: "p", text: "Roughly, for a strip out and retile in the same layout:" },
+        { type: "ol", items: [
+          "Asbestos identification, if the house is pre-1990",
+          "Plumber and electrician disconnect and make safe",
+          "Fixtures out, then tiles, adhesive, screed and membrane to the agreed layer",
+          "Inspect what is underneath, and adjust the scope if something has been found",
+          "Substrate repairs, resheeting and levelling",
+          "Waterproofing, then cure",
+          "Screed to falls, tiling, grout and silicone",
+          "Plumber and electrician fit off"
+        ] },
+        { type: "p", text: "Step four is the one to plan for. It is where the quote meets the house, and where a job that was priced on assumptions gets repriced on facts. A good quote says what happens at that point rather than leaving it to a conversation on site." },
+        { type: "p", text: "The membrane cure is usually what sets the timeline, and it runs longer in an unheated Canberra bathroom in winter. If it is the only bathroom in the house, that is worth knowing before the first tile comes off. See [waterproofing](waterproofing-canberra.html)." },
+
+        { type: "h2", text: "What a bathroom strip out costs" },
+        { type: "p", text: "Strip out is usually quoted separately from the tiling, and it varies more than any other line because nobody knows what is under the tiles until they come off." },
+        { type: "p", text: "A Canberra tiler's published bathroom calculator allows $1,500 for demolition and $800 for rubbish removal. ACT figures for a full shower strip out and rewaterproof run from around $1,800 to $2,800 and up. Tile waste is heavy and tip fees are usually charged by weight, so establish who is taking it away and whether disposal is in the price." },
+        { type: "p", text: "Full breakdown and sources in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html), and the questions worth asking every quoter in the [quote checklist](tiling-quote-checklist-canberra.html)." },
+
+        { type: "faqs", items: [
+          { q: "How much does a bathroom strip out cost in Canberra?", a: "A Canberra tiler's published bathroom calculator allows $1,500 for demolition and $800 for rubbish removal, and ACT figures for a full shower strip out and rewaterproof run from around $1,800 to $2,800 and up. What moves the number is how many layers are coming out, what is found underneath, and whether disposal is included. See the [cost guide](tiling-cost-guide-canberra.html)." },
+          { q: "What is included in a bathroom strip out?", a: "It depends on the quote, which is the problem. It can mean wall tiles only, or every tile, screed bed and membrane down to the slab or joists. Ask which layers are coming out, whether fixtures and disconnection are included, and what condition the room is left in." },
+          { q: "Do I need a plumber for a bathroom strip out?", a: "Yes. Disconnecting and capping the toilet, basin, bath and shower, and reconnecting them afterwards, is licensed plumbing work. Light fittings, fans and heated towel rails need a licensed electrician. Check whether the quote includes arranging them." },
+          { q: "Can I strip my bathroom out myself?", a: "It is unskilled labour rather than trade work, so it can be done. Three things decide whether it should be: whether the house is old enough for asbestos to be a possibility, whether you can control the silica dust, and whether you can leave the substrate in the condition the tiler needs. Agree that condition with the tiler first. See [tile removal](tile-removal-canberra.html)." },
+          { q: "Is there asbestos in my bathroom?", a: "If the house was built or refurbished before 1990 it is a real possibility, most often in fibre cement wall or floor sheeting behind and under the tiles. In the ACT only a licensed asbestos assessor can identify it and only a licensed removalist can remove it from a home, with no DIY exemption." },
+          { q: "How long is the bathroom out of action?", a: "The strip out itself is usually quick. What sets the timeline is what is found underneath, the trades that have to fit around it, and the waterproofing cure, which runs longer in a cold Canberra winter. A full bathroom typically runs three to five weeks end to end." }
         ] }
       ]
     },
@@ -1438,7 +1544,7 @@ window.SITE_CONFIG = {
         { type: "h2", text: "What a bathroom tiling job includes" },
         { type: "p", text: "Tiling is one stage of a bathroom, not the whole thing. A tiling scope usually covers:" },
         { type: "ul", items: [
-          "Removing existing tiles and adhesive, and disposing of them",
+          "Removing existing tiles and adhesive, and disposing of them. See [bathroom strip out](bathroom-strip-out-canberra.html)",
           "Preparing the substrate: levelling, screeding, patching, and establishing falls",
           "Waterproofing the wet areas, or coordinating with whoever does",
           "Setting out and laying wall and floor tiles",
@@ -2012,7 +2118,8 @@ window.SITE_CONFIG = {
           "pool-tiling-canberra.html",
           "commercial-tiling-canberra.html",
           "waterproofing-canberra.html",
-          "tile-removal-canberra.html"
+          "tile-removal-canberra.html",
+          "bathroom-strip-out-canberra.html"
         ]
       },
       {
