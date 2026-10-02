@@ -157,9 +157,17 @@ const faqSchema = faqs => ({
   "mainEntity": faqs.map(f => ({
     "@type": "Question",
     "name": f.q,
-    "acceptedAnswer": { "@type": "Answer", "text": f.a }
+    "acceptedAnswer": { "@type": "Answer", "text": plainText(f.a) }
   }))
 });
+
+/* Schema text is plain text, not richText's markup. Left raw, an answer
+   carries "[cost guide](tiling-cost-guide-canberra.html)" verbatim into the
+   JSON-LD - markdown noise in any rich result, and a stray .html URL (the
+   form that 301s) handed to Google on every FAQ page. Keep the label only. */
+const plainText = s => String(s == null ? "" : s)
+  .replace(/\*\*(.+?)\*\*/g, "$1")
+  .replace(/\[([^\]]+)\]\(([^)]+)\)/g, "$1");
 
 /* Flattens every { type: "faqs", items: [...] } block on a page into one
    list - the FAQPage schema for that page is built from exactly the FAQs
