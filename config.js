@@ -120,7 +120,7 @@ window.SITE_CONFIG = {
      pushing link equity to the three strongest pages on the site. */
   pages: {
     home: {
-      metaTitle: "Tiler Canberra | Tiling, Waterproofing & Tile Repairs",
+      metaTitle: "Tiler Canberra | Canberra Tile Layers, Tiling & Repairs",
       metaDescription: "Tiling across Canberra and the ACT. Bathroom and floor tiling, waterproofing, and repairs including leaking showers and regrouting. Get a free quote.",
       headline: "Tiling Across Canberra and the ACT",
       subheadline: "Bathroom and floor tiling, waterproofing, and repairs to showers, grout and cracked tiles. Across Canberra, the ACT and Queanbeyan.",
@@ -163,7 +163,7 @@ window.SITE_CONFIG = {
 
         { type: "h3", text: "Something is leaking or damaged" },
         { type: "p", text: "A shower that leaks, grout that is crumbling, tiles that sound hollow or have cracked. The first question is always whether the problem is at the surface or underneath it, because that determines whether you are looking at a few hundred dollars or several thousand." },
-        { type: "p", text: "[Leaking shower repair](leaking-shower-repair-canberra.html) · [Regrouting](regrouting-canberra.html) · [Tile repair](tile-repair-canberra.html)" },
+        { type: "p", text: "[Bathroom repairs](bathroom-repairs-canberra.html) · [Leaking shower repair](leaking-shower-repair-canberra.html) · [Regrouting](regrouting-canberra.html) · [Tile repair](tile-repair-canberra.html)" },
 
         { type: "h3", text: "You are tiling something new" },
         { type: "p", text: "A bathroom, a floor, a splashback, an outdoor area. New work is more predictable than repair work, and the cost is driven mostly by the tile you choose, the layout, and the condition of what is underneath." },
@@ -183,7 +183,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "**Commercial tiling.** Retail, hospitality and office fitouts, where the drivers are program and durability rather than domestic finish. [More on commercial tiling](commercial-tiling-canberra.html)" },
         { type: "p", text: "**Waterproofing.** Membrane application in wet areas, to AS 3740:2021. The one part of a bathroom you pay for and never see, and the most expensive thing to get wrong. [More on waterproofing](waterproofing-canberra.html)" },
         { type: "p", text: "**Tile removal.** Strip out of existing tiles and adhesive, and preparation of the substrate for what comes next. Frequently quoted separately and frequently underestimated. [More on tile removal](tile-removal-canberra.html)" },
-        { type: "p", text: "**Repairs.** Leaking showers, regrouting, resiliconing, and cracked or drummy tiles. [Leaking shower repair](leaking-shower-repair-canberra.html) · [Regrouting](regrouting-canberra.html) · [Tile repair](tile-repair-canberra.html)" },
+        { type: "p", text: "**Repairs.** Leaking showers, regrouting, resiliconing, and cracked or drummy tiles. Not sure which one you need? Start with [bathroom repairs](bathroom-repairs-canberra.html). [Leaking shower repair](leaking-shower-repair-canberra.html) · [Regrouting](regrouting-canberra.html) · [Tile repair](tile-repair-canberra.html)" },
 
         { type: "h2", text: "How a tiling job actually runs" },
         { type: "p", text: "Useful to know when you are reading a quote, because most of these stages are where costs vary, and because it tells you what a tiler is actually pricing." },
@@ -203,10 +203,15 @@ window.SITE_CONFIG = {
         { type: "p", text: "Usually they are not quoting the same job. One includes removing the old tiles and taking them away. One assumes the floor is flat. One has allowed for waterproofing and one has left it out expecting a separate waterproofer. None of that is visible when you compare three totals." },
         { type: "p", text: "The fix is to give every quoter the same written brief and ask each to itemise against it. Our [cost guide](tiling-cost-guide-canberra.html) sets out the questions that make quotes comparable, and what the published Canberra figures actually say." },
 
-        { type: "h2", text: "Where we work" },
-        { type: "p", text: "Canberra and the ACT, plus Queanbeyan and the immediate NSW fringe." },
-        { type: "p", text: "North through Gungahlin and Belconnen. Central across the Inner North, Inner South and Molonglo. Woden Valley and Weston Creek. South through Tuggeranong. Across the border, Queanbeyan, Jerrabomberra and Googong." },
-        { type: "p", text: "Jobs further out toward Yass, Murrumbateman or Bungendore can still be sent through, but there is no guarantee anyone covers that far out." },
+        { type: "h2", text: "Tiling across Canberra and Queanbeyan" },
+        { type: "p", text: "We take tiling, waterproofing and tile repair enquiries from across Canberra and the ACT, plus Queanbeyan, Jerrabomberra and Googong over the NSW border. Jobs further out toward Yass, Murrumbateman or Bungendore can still be sent through, but there is no guarantee anyone covers that far out." },
+        { type: "p", text: "North through Gungahlin and Belconnen. Central across the Inner North, Inner South and Molonglo. Woden Valley and Weston Creek. South through Tuggeranong." },
+
+        { type: "h3", text: "What changes from one part of Canberra to another" },
+        { type: "p", text: "The house matters more than the suburb, but the two are linked. Older stock through the inner north and inner south is more likely to have suspended timber floors and original wet area construction, which is why the same shower repair can quote higher there. Newer areas such as Gungahlin and the Molonglo Valley are more likely to be slab on ground with modern waterproofing." },
+        { type: "p", text: "Age matters for a second reason. WorkSafe ACT treats a home built or refurbished before 1990 as likely to contain asbestos, and fibre cement sheeting behind and under tiles is common in Canberra houses from the 1960s to the 1980s. In those homes, identification by a licensed assessor comes before any tile comes off. See [tile removal](tile-removal-canberra.html)." },
+        { type: "p", text: "The weather sets the program as well. Membranes and adhesives cure more slowly in the cold, so a winter job in an unheated Canberra bathroom takes longer between stages than the same job in summer. See [waterproofing](waterproofing-canberra.html)." },
+        { type: "p", text: "Call, or use the [quote form](contact.html), and include your suburb and roughly when the house was built. Those two details tell whoever quotes more about the job than most descriptions do." },
 
         { type: "h2", text: "Common questions" },
         { type: "faqs", items: [
@@ -229,6 +234,18 @@ window.SITE_CONFIG = {
           {
             q: "How long does a bathroom take to tile?",
             a: "The laying is rarely the constraint. Substrate preparation and waterproofing cure time drive the schedule, and cure times extend in cold weather."
+          },
+          {
+            q: "Do you cover Queanbeyan, Jerrabomberra and Googong?",
+            a: "Yes. One difference is worth knowing: they are in NSW, where a contractor licence is needed for residential tiling work valued at more than $5,000 in labour and materials, including GST. The ACT has no separate licence for tiling. See the [quote checklist](tiling-quote-checklist-canberra.html)."
+          },
+          {
+            q: "Does it matter which part of Canberra my house is in?",
+            a: "Indirectly. What matters is how the house was built, and that follows its age. Older homes in the inner north and inner south are more likely to have timber subfloors and original wet areas, while newer suburbs such as Gungahlin and the Molonglo Valley are more likely to be slab on ground with modern waterproofing."
+          },
+          {
+            q: "Can tiling be done in a Canberra winter?",
+            a: "Yes, but it takes longer. Waterproofing membranes and adhesives cure more slowly in the cold, so the gaps between stages stretch out in an unheated room. Worth allowing for if it is the only bathroom in the house."
           }
         ] }
       ]
@@ -275,7 +292,7 @@ window.SITE_CONFIG = {
         { type: "h3", text: "Where we cover" },
         { type: "p", text: "Canberra and the ACT, plus Queanbeyan and the immediate NSW fringe." },
         { type: "p", text: "That covers the northern districts through Gungahlin and Belconnen, the central areas including the Inner North and Inner South, Woden Valley and Weston Creek, Molonglo, and Tuggeranong in the south. Across the border it includes Queanbeyan, Jerrabomberra and Googong." },
-        { type: "p", text: "Jobs further out toward Yass, Murrumbateman or Bungendore can still be sent through, but there is no guarantee anyone covers that far out." },
+        { type: "p", text: "Jobs further out toward Yass, Murrumbateman or Bungendore can still be sent through, but there is no guarantee anyone covers that far out. What changes for a tiling job from one part of Canberra to another is on the [home page](index.html)." },
 
         { type: "h3", text: "Contact" },
         { type: "p", text: "Brad, trading as Canberra Tile Layers. ABN 78 538 005 810." }
@@ -297,7 +314,7 @@ window.SITE_CONFIG = {
           "**Whether it is a wet area.** Bathroom, ensuite, laundry or shower. Wet areas carry waterproofing requirements that dry areas do not.",
           "**Whether anything has been repaired before.** This matters more than people expect. A repair that has already failed once usually points to a different underlying problem than the one being described.",
           "**Roughly when the house was built.** Relevant for older homes, where asbestos identification comes before any demolition.",
-          "**Your suburb.**"
+          "**Your suburb.** It hints at how the house was built. See [tiling across Canberra and Queanbeyan](index.html) for why."
         ] },
 
         { type: "h3", text: "Service area" },
@@ -745,7 +762,7 @@ window.SITE_CONFIG = {
       blocks: [
         { type: "lead", text: "A leaking shower rarely announces itself. By the time you notice a damp patch on the hallway carpet or a musty smell that will not shift, water has usually been moving through the wall or slab for months." },
         { type: "p", text: "The frustrating part is that most leaking showers get \"fixed\" more than once. A resealing job that holds for eight months, then the same stain comes back. That happens because the repair treated the surface when the problem was underneath it." },
-        { type: "p", text: "This page covers how to tell where your shower is actually leaking from, which repairs hold and which ones buy you a year at best, and what to expect from the process." },
+        { type: "p", text: "This page covers how to tell where your shower is actually leaking from, which repairs hold and which ones buy you a year at best, and what to expect from the process. If you are not yet sure it is a leak rather than tired grout or a cracked tile, [bathroom repairs](bathroom-repairs-canberra.html) sorts the common problems into the job each one needs." },
 
         { type: "h2", text: "Signs your shower is leaking" },
         { type: "p", text: "Some are obvious. Most are not." },
@@ -858,6 +875,83 @@ window.SITE_CONFIG = {
     },
 
     /* ---------------------------------------------------------------------
+       BATHROOM REPAIRS - a triage hub, added Oct 2026 for "bathroom repairs
+       canberra" (Search Console: 13 impressions at position 9 with no page
+       targeting it). Cannibalisation boundary: this page sorts symptoms
+       into jobs and links out. Diagnosis depth stays on leaking-shower-
+       repair, drummy/crack patterns on tile-repair, grout material on
+       regrouting, strip out scope on bathroom-strip-out, and every figure
+       on the cost guide. Keep each section here to two paragraphs and a
+       link - if a section starts growing, the detail belongs on the page
+       it links to. ------------------------------------------------------- */
+    {
+      page: "bathroom-repairs-canberra.html",
+      name: "Bathroom Repairs",
+      shortDescription: "Cracked or loose tiles, failed grout and silicone, or a leak: how to tell which bathroom repair you actually need, and when repairing stops making sense.",
+      metaTitle: "Bathroom Repairs Canberra | Tiles, Grout, Silicone & Leaks",
+      metaDescription: "Bathroom repairs in Canberra: cracked or loose tiles, failed grout and silicone, and shower leaks. How to tell which repair you need before paying for one.",
+      headline: "Bathroom Repairs in Canberra",
+      ctaText: "Get a Quote",
+      ctaHeading: "Get a Canberra bathroom repair quoted",
+      ctaBody: "Call, or use the form, and tell us what you are seeing, where it is, and whether it has been repaired before. Those three answers usually separate a maintenance job from a leak.",
+      image: {
+        src: "images/regrouting-grout-float-macro.jpg",
+        alt: "Close-up of a grout float smoothing fresh grout between tiles",
+        width: 1200,
+        height: 805,
+        widths: [400, 560, 720, 960],
+        sizes: "(min-width: 1120px) 450px, (min-width: 900px) calc((100vw - 80px) * 0.45), (min-width: 560px) 520px, calc(100vw - 40px)"
+      },
+      blocks: [
+        { type: "lead", text: "Most bathroom repairs in Canberra are one of three jobs: replacing cracked or loose tiles, renewing failed grout and silicone, or fixing a leak. They can look alike from the doorway and differ by thousands of dollars, so the first step is working out which one you have." },
+        { type: "p", text: "This page is that sorting step. It covers how to tell the three apart, what each repair involves, and the point where repairing a bathroom stops making sense. Each job has its own page with the detail." },
+
+        { type: "h2", text: "Which repair does your bathroom need?" },
+        { type: "table", headers: ["What you are seeing", "Most likely job", "Start here"], rows: [
+          ["Grout that is discoloured, cracked or crumbling, with nothing showing outside the room", "Regrouting", "[Regrouting](regrouting-canberra.html)"],
+          ["Silicone that has gone black, hard or is peeling away at the corners", "Silicone replacement, often alongside regrouting", "[Regrouting](regrouting-canberra.html)"],
+          ["One tile cracked after something was dropped on it", "Single tile replacement", "[Tile repair](tile-repair-canberra.html)"],
+          ["Tiles that sound hollow when tapped, or a crack running across several tiles", "Tile repair, after finding the cause", "[Tile repair](tile-repair-canberra.html)"],
+          ["Damp, staining, peeling paint or a musty smell outside the bathroom", "Leak diagnosis: membrane, floor waste or plumbing", "[Leaking shower repair](leaking-shower-repair-canberra.html)"],
+          ["Water sitting on the shower floor instead of draining", "Shower floor relaid to the correct fall", "[Bathroom strip out](bathroom-strip-out-canberra.html)"]
+        ] },
+        { type: "p", text: "If more than one row applies, start with the one furthest down. A leak outranks a grout problem, because regrouting over a failed membrane hides the symptom without stopping the water." },
+
+        { type: "h2", text: "Cracked or loose bathroom tiles" },
+        { type: "p", text: "A single tile cracked by an impact is a small, contained repair: the tile is cut out, the bed cleaned back, and a replacement set and grouted in. The hard part is matching it. Tile ranges are discontinued, and a spare from the original order is worth more than anything a showroom has now." },
+        { type: "p", text: "Tiles that sound hollow, or cracks that run in a line across several tiles, are a different job. They point to a failed bond or movement underneath, and replacing the visible tiles without dealing with the cause usually brings the problem back. [Tile repair](tile-repair-canberra.html) covers how to test for drummy tiles and what the patterns mean." },
+
+        { type: "h2", text: "Failed grout and silicone" },
+        { type: "p", text: "Grout and silicone do different jobs. Grout fills the joints between tiles. Silicone goes in the corners and junctions where walls meet each other and the floor, because those joints move and grout would crack there. Both wear out, and both are the cheapest repairs in a bathroom when they are caught early." },
+        { type: "p", text: "Neither one is the waterproofing. Grout is porous and water passes through it; the membrane underneath is what keeps water in the shower. Renewing grout and silicone is maintenance, not a fix for a membrane that has already failed. [Regrouting](regrouting-canberra.html) covers full replacement versus a surface touch-up, and cement versus epoxy grout." },
+
+        { type: "h2", text: "Leaks and damp" },
+        { type: "p", text: "If water is showing up outside the bathroom, in the hallway carpet, a skirting board, the room on the other side of the wall or the ceiling below, the problem is almost always under the tiles rather than on them. The usual causes are a failed membrane, a floor waste that was never properly sealed to it, or a plumbing leak in the wall." },
+        { type: "p", text: "Where the house is matters too. Older Canberra stock through the inner north and inner south is more likely to have a suspended timber floor and original wet area construction under the bathroom. Newer areas such as Gungahlin and the Molonglo Valley are more likely to be slab on ground with modern waterproofing. [Leaking shower repair](leaking-shower-repair-canberra.html) covers how to tell where a shower is leaking from and which repairs actually hold." },
+
+        { type: "h2", text: "When repair stops making sense" },
+        { type: "p", text: "A repair is the right call when the problem is at the surface and the layers underneath are sound. It stops being the right call when:" },
+        { type: "ul", items: [
+          "**The same area has been repaired and failed again.** A shower that has been regrouted or resealed twice and leaked twice is telling you the membrane is the problem.",
+          "**Water is reaching rooms outside the bathroom.** That is a failure under the tiles, and the tiles have to come up to reach it.",
+          "**The shower floor holds water.** Correcting the fall means relaying the screed under the tiles, which is a rebuild of the floor rather than a repair to it.",
+          "**Hollow tiles are spreading.** Scattered drummy tiles can sit for years. A patch that keeps growing means the bond is failing progressively."
+        ] },
+        { type: "p", text: "At that point the job becomes a strip out and rewaterproof of the shower or the room. [Bathroom strip out](bathroom-strip-out-canberra.html) covers what that involves. In a house built or refurbished before 1990, asbestos identification by a licensed assessor comes before any tile comes off." },
+
+        { type: "h2", text: "What a tiler does not repair" },
+        { type: "p", text: "Bathroom repairs often involve more than tiling. Taps, pipes and anything that moves a waste or supply is licensed plumbing work. Exhaust fans, lights and heated towel rails are licensed electrical work. Water damaged framing or flooring is carpentry. A tiling repair can be quoted around those trades, but not instead of them." },
+        { type: "p", text: "On cost, bathroom repairs run from a silicone reseal to a full shower rebuild, and the gap between those two is more than ten times. The figures and their sources are in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html)." },
+
+        { type: "faqs", items: [
+          { q: "Can you replace just one bathroom tile?", a: "Usually, yes. A single cracked tile can be cut out and replaced without disturbing its neighbours, provided the tiles around it are well bonded. The hard part is matching it, so check for spares from the original job first. In a shower it is worth asking why it cracked, because a tile over a moving or wet substrate will crack again." },
+          { q: "Will regrouting fix a leaking shower?", a: "Only if the grout is how water is getting through and the membrane underneath is intact. If damp is showing outside the bathroom, the membrane or the floor waste has usually failed and regrouting will not stop it. See [leaking shower repair](leaking-shower-repair-canberra.html)." },
+          { q: "Is it worth repairing an old bathroom instead of renovating it?", a: "Often, if the problem is at the surface and the layers underneath are sound. New grout, new silicone and a few replacement tiles can keep a bathroom going for years. It stops being worth it when the same area keeps failing or water is reaching the rooms around it." }
+        ] }
+      ]
+    },
+
+    /* ---------------------------------------------------------------------
        WATERPROOFING - membrane-as-a-system framing, new work. Hands off to
        leaking-shower-repair for symptoms/diagnosis rather than duplicating
        (build brief §7). Scoped to wet areas + a short balcony section, with
@@ -903,7 +997,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "One requirement worth knowing because it is easy to check: the standard sets a minimum fall to waste in shower areas of 1:80. A shower floor that holds water rather than draining is not just annoying, it is outside the standard." },
 
         { type: "h2", text: "Who can do it in the ACT" },
-        { type: "p", text: "Unlike builders, electricians and plumbers, waterproofing does not appear on Access Canberra's list of licensed construction occupations - there is no separate \"licensed waterproofer\" trade in the ACT the way there is in some other regulatory contexts." },
+        { type: "p", text: "Unlike builders, electricians and plumbers, waterproofing does not appear on Access Canberra's list of licensed construction occupations - there is no separate \"licensed waterproofer\" trade in the ACT the way there is in some other regulatory contexts. The same goes for tiling - see [does a tiler need a licence in the ACT](tiling-quote-checklist-canberra.html) for what to check instead." },
         { type: "credit", text: "Access Canberra / City and Environment Directorate, list of ACT construction occupation licences." },
         { type: "p", text: "What is regulated instead is the documentation. Wet area waterproofing details have to be submitted as part of the building approval for Class 1 (single residential) work, and Access Canberra has specifically flagged incorrect or undocumented wet area waterproofing as a recurring compliance problem. A building surveyor requires that documentation before signing off tiling, and undocumented or non-compliant waterproofing can trigger a Stop Work Notice under the Building Act 2004." },
         { type: "credit", text: "Access Canberra, Construction Note 01/2023 – Wet Areas (updating 2022/13); Building Act 2004 (ACT)." },
@@ -1317,6 +1411,7 @@ window.SITE_CONFIG = {
         { type: "lead", text: "Ever heard someone tap a tile and call it 'drummy' and didn't know what it meant?" },
         { type: "p", text: "It means the tile has separated from whatever it was stuck to. The tile itself is usually fine. The bond underneath it is not." },
         { type: "p", text: "Whether that matters depends on where it is, how much of the floor is affected, and what caused it. Sometimes it is cosmetic and can be left. Sometimes it is the first visible sign of something that will get expensive. Most tile repair in Canberra starts with working out which of the two you are looking at, and this page covers how to tell the difference." },
+        { type: "p", text: "In a bathroom, a cracked or hollow tile is sometimes the visible end of a grout, silicone or leak problem. [Bathroom repairs](bathroom-repairs-canberra.html) sets out how to tell those jobs apart." },
 
         { type: "h2", text: "What \"drummy\" means, and how to check yourself" },
         { type: "p", text: "A drummy tile sounds hollow when tapped, because there is a void between the tile and the substrate instead of solid adhesive." },
@@ -1396,13 +1491,17 @@ window.SITE_CONFIG = {
     /* ---------------------------------------------------------------------
        QUOTE CHECKLIST - a link asset, not a lead page (build brief §10/
        §12). Ungated by design; no cost figures (they live on the cost
-       guide); no FAQPage schema (content isn't in Q&A form). ------------- */
+       guide). The checklist itself isn't Q&A; the licence section added
+       Oct 2026 is, so its three questions carry this page's FAQPage
+       schema. Licence facts: ACT Planning "Construction licences" page
+       and NSW Government "Wall and floor tiling work" page, both checked
+       8 Oct 2026. ------------------------------------------------------ */
     {
       page: "tiling-quote-checklist-canberra.html",
       name: "Tiling Quote Checklist",
       shortDescription: "A printable checklist of the questions that make tiling quotes comparable, and the ones that stop a variation appearing halfway through the job.",
       metaTitle: "Tiling Quote Checklist | Questions to Ask Before You Sign",
-      metaDescription: "A printable checklist of the questions that make tiling quotes comparable, and the ones that stop a variation appearing halfway through the job.",
+      metaDescription: "A printable checklist of the questions that make tiling quotes comparable, plus whether a tiler needs a licence in the ACT and in Queanbeyan.",
       headline: "Tiling Quote Checklist",
       ctaText: "Get a Quote",
       ctaHeading: "Ready to start getting quotes?",
@@ -1494,7 +1593,7 @@ window.SITE_CONFIG = {
         { type: "ul", items: [
           "☐ **Written and itemised.** A single total cannot be compared, cannot be checked, and gives you nothing to point at when a variation appears.",
           "☐ **Payment schedule.** What is due when.",
-          "☐ **Licence and insurance details.**",
+          "☐ **Qualification, insurance and, for NSW jobs over $5,000, the contractor licence number.** See the licence section below.",
           "☐ **Waterproofing certification**, for wet areas."
         ] },
 
@@ -1504,6 +1603,26 @@ window.SITE_CONFIG = {
           "☐ **Do all three cover the same scope items?** Go line by line against the scope list above.",
           "☐ **Has anyone raised something the others did not?** Whoever mentions a problem the others missed has usually looked harder.",
           "☐ **Did anyone tell you something you did not want to hear?** That is worth more than the cheapest number."
+        ] },
+
+        { type: "h2", text: "Does a tiler need a licence in the ACT?" },
+        { type: "p", text: "No. Tiling is not a licensed occupation in the ACT, so there is no tiling licence number to ask a Canberra tiler for. Across the border it is different: in NSW, which includes Queanbeyan, Jerrabomberra and Googong, a contractor licence is needed for residential tiling work valued at more than $5,000 in labour and materials, including GST." },
+        { type: "p", text: "The ACT licenses builders, electricians, plumbers, drainers and gasfitters, building surveyors and a few other construction roles. Trades such as carpentry and bricklaying do not currently need a licence, tiling is not on the list either, and nor is waterproofing as a trade of its own." },
+        { type: "credit", text: "ACT Planning, Construction licences; NSW Government, Wall and floor tiling work." },
+        { type: "p", text: "No licence does not mean nothing to check. In the ACT, ask instead for:" },
+        { type: "ul", items: [
+          "☐ **A trade qualification.** The nationally recognised one is the Certificate III in Wall and Floor Tiling. Ask whether the person laying your tiles holds it, not only the business owner.",
+          "☐ **Waterproofing documentation**, in a wet area. Whoever applies the membrane should be able to produce what a building surveyor needs. See [waterproofing](waterproofing-canberra.html).",
+          "☐ **Public liability insurance**, shown as a certificate of currency rather than a verbal yes.",
+          "☐ **Who is doing the plumbing and electrical work.** Those are licensed trades in the ACT, and a tiler cannot do them under a tiling quote.",
+          "☐ **A NSW contractor licence number**, for jobs in Queanbeyan, Jerrabomberra or Googong over $5,000."
+        ] },
+        { type: "p", text: "If you would like a job quoted with those answers supplied up front, call or use the form." },
+
+        { type: "faqs", items: [
+          { q: "Do tilers need a licence in Canberra?", a: "No. Tiling is not on the ACT's list of licensed construction occupations, which covers roles such as builders, electricians, plumbers and building surveyors. Ask for a trade qualification, insurance and, in a wet area, waterproofing documentation instead." },
+          { q: "Do tilers need a licence in Queanbeyan?", a: "For larger jobs, yes. Queanbeyan is in NSW, where a contractor licence is needed for residential tiling work valued at more than $5,000 in labour and materials, including GST. The same applies in Jerrabomberra and Googong." },
+          { q: "Does a waterproofer need a licence in the ACT?", a: "No. Waterproofing is not its own licensed trade in the ACT. What is regulated is the documentation: wet area waterproofing details form part of the building approval for Class 1 residential work, and a building surveyor needs them before signing off. See [waterproofing](waterproofing-canberra.html)." }
         ] },
 
         { type: "p", text: "Full context on what drives tiling costs, and what the published Canberra figures actually say, in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html)." }
@@ -1568,7 +1687,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "Second, a shower floor needs a fall to the waste, and a rigid large tile cannot follow a fall in two directions. Smaller tiles and mosaics accommodate the fall because there are more joints to absorb the change in plane. That is why shower floors are often a smaller tile than the rest of the room even when it was not the design intent." },
         { type: "image", src: "images/bathroom-tiling-fall-to-waste.jpg", alt: "Diagram comparing a large rigid tile, which leaves a gap under the tile where it cannot follow the slope to a shower floor waste, against several smaller tiles that conform closely to the fall", width: 1200, height: 805 },
         { type: "h3", text: "Finish" },
-        { type: "p", text: "Matt and textured finishes hide water spotting and soap residue better than polished ones. Polished tiles show everything, including every drip, which is a maintenance question rather than an aesthetic one." },
+        { type: "p", text: "Matt and textured finishes hide water spotting and soap residue better than polished ones. Polished tiles show everything, including every drip, which is a maintenance question rather than an aesthetic one. Whether the tile is porcelain, ceramic or stone is a separate decision, covered under [floor and wall tiling](floor-and-wall-tiling-canberra.html)." },
         { type: "h3", text: "Grout colour" },
         { type: "p", text: "Light grout in a shower will not stay light. It is a porous material in the wettest place in the house. Mid tones are far more forgiving, and epoxy grout holds colour considerably better than cement based grout without needing sealing. See [regrouting](regrouting-canberra.html) for the difference between the two." },
 
@@ -1698,6 +1817,18 @@ window.SITE_CONFIG = {
         { type: "p", text: "Two other things from the same bulletin are worth knowing before you choose a tile. A timber or fibre cement sheeted floor has a deflection limit, and the limit tightens for large format tile, from 1 in 360 of the joist span to 1 in 500 once the tile is over 400 by 400mm. And an embedding screed over the heating gets its own cure period before anything is bonded on top of it." },
         { type: "p", text: "The practical version: get the heating manufacturer's specification and the adhesive manufacturer's requirements to the tiler before the quote, not after the screed is down. A heated floor is one of the few tiling jobs where the program is dictated by a trade other than the tiler." },
 
+        { type: "h2", text: "Porcelain, ceramic or natural stone" },
+        { type: "p", text: "For most Canberra floors porcelain is the safe default, because it absorbs the least water and wears the best. Ceramic suits walls and light traffic, and natural stone suits anyone happy to seal it and keep resealing it." },
+        { type: "p", text: "The difference between porcelain and ceramic is water absorption, not appearance. The tile classification standard groups tiles by how much water the body absorbs, and porcelain sits in the lowest group, at 0.5% or less. That density is what makes it hard wearing, stain resistant, and the better choice where a tile has to deal with water or cold." },
+        { type: "credit", text: "AS ISO 13006, Ceramic tiles - Definitions, classification, characteristics and marking, Standards Australia." },
+        { type: "ul", items: [
+          "**Porcelain.** Dense and hard wearing, and the usual choice for living areas, hallways and entries. It is also harder to cut and drill, which shows up in the labour on a detailed room. Through-body porcelain carries its colour all the way through, so a chip shows less than on a glazed tile.",
+          "**Glazed ceramic.** A softer, more absorbent body under a glaze. Easier to cut, often cheaper, and sold widely as wall tile. Many ceramic wall tiles are not made for foot traffic at all, so check the manufacturer lists a tile as suitable for floors before it goes on one.",
+          "**Natural stone.** Marble, limestone, travertine, slate and granite. Each one behaves differently, but most are porous and need sealing, then resealing periodically, which is a recurring cost. Marble, limestone and travertine are also etched by acids, including some household cleaners. Stone is usually heavier and less uniform than porcelain, which adds time to the laying."
+        ] },
+        { type: "p", text: "Two numbers on the tile's data sheet are worth reading before you buy. The first is whether it is rated for floors and, for glazed tile, its abrasion class, often shown as a PEI rating, which tells you how much foot traffic the glaze will stand. The second, for anything going outside or into an unheated room, is whether the manufacturer lists it as frost resistant. Canberra gets regular winter frosts, and water absorbed into a porous tile expands when it freezes. Slip resistance outdoors is a separate rating again, covered under [outdoor and patio tiling](outdoor-patio-tiling-canberra.html)." },
+        { type: "p", text: "Whatever you choose, have every quote priced on the same tile. Porcelain is slower to cut than ceramic, and stone is slower again, so three quotes on three materials will not compare. Call or use the form with the tile you have in mind and we can tell you what it means for the job." },
+
         { type: "h2", text: "Older Canberra homes" },
         { type: "p", text: "Canberra housing stock from the 1960s through the 1980s regularly turns up substrates that need assessing before anything goes over them: fibre cement sheet flooring and wall sheeting, sand and cement screeds of unknown depth, and existing floor coverings laid straight onto them." },
         { type: "p", text: "That is a bonding question and a safety question rather than a heritage one. A sheet floor that flexes underfoot will crack a rigid tiled surface however well the tiling is done, so how the floor is framed and fixed matters more than what is on top of it." },
@@ -1712,6 +1843,9 @@ window.SITE_CONFIG = {
         { type: "p", text: "**Transitions left to the end.** Where tile meets timber, carpet or the next room there is a height difference and an exposed edge. Deciding how that is finished - a trim, a threshold strip, or a flush detail built into the levelling - belongs at the quote, not on the last day." },
 
         { type: "faqs", items: [
+          { q: "What is the difference between porcelain and ceramic tiles?", a: "Water absorption. Porcelain is the densest group under the tile classification standard, absorbing 0.5% of its weight in water or less, which makes it harder wearing and better suited to floors, wet areas and outdoor use. Ceramic has a softer, more absorbent body under a glaze, is easier to cut, and is often sold as wall tile." },
+          { q: "Can floor tiles be used on walls?", a: "Usually, yes. A floor rated tile is generally tougher than a wall tile needs to be. The thing to check is weight: large or heavy tiles on a wall need an adhesive and a wall substrate rated to hold them, so tell whoever is quoting what the tile is before the wall is prepared." },
+          { q: "Can wall tiles be used on floors?", a: "Often not. Many glazed ceramic wall tiles are not designed for foot traffic and will wear or crack on a floor. Check that the manufacturer rates the tile for floors, and for glazed tile its abrasion class, before buying." },
           { q: "Can you tile over existing tiles?", a: "Sometimes. It depends mostly on whether what is there now is sound: tiles that are well bonded, a surface that is flat, and a height change at doorways, thresholds and fixtures that can be accommodated. Tiles that sound hollow when tapped are a no, because you would be bonding to something that is already failing. In a wet area there is a further catch, which is that tiling over leaves any waterproofing failure exactly where it is, buried under two layers of tile instead of one. See [tile removal](tile-removal-canberra.html)." },
           { q: "How much does floor tiling cost in Canberra?", a: "Published national rates for standard floor tiling supply and install run roughly $55 to $140 per square metre, with most guides putting the average around $75 to $100. Preparation is usually separate, and on a renovation it is frequently the largest single line. Sources in the [cost guide](tiling-cost-guide-canberra.html)." },
           { q: "Do I need to level the floor before tiling?", a: "It depends on how flat the floor already is and how flat the tile you have chosen needs it to be. Large format tile is much less forgiving than small format, so the same floor can need levelling for one tile and not for another. Nobody knows how much is needed until the old covering is off, which is why it is worth asking whether the quote includes it or provides for it." },
@@ -1732,7 +1866,7 @@ window.SITE_CONFIG = {
       page: "kitchen-tiling-canberra.html",
       name: "Kitchen Tiling",
       shortDescription: "Kitchen floors and splashbacks: why a splashback takes far longer than its square metre count, and where tiling sits in a kitchen job.",
-      metaTitle: "Kitchen Tiling Canberra | Splashbacks & Kitchen Floors",
+      metaTitle: "Kitchen Splashback Tiling Canberra | Splashbacks & Floors",
       metaDescription: "Kitchen tiling in Canberra. Why a splashback takes longer than its square metre count suggests, kitchen floor choices, and where tiling sits in a kitchen job.",
       headline: "Kitchen Tiling and Splashbacks in Canberra",
       ctaText: "Get a Quote",
@@ -1870,7 +2004,7 @@ window.SITE_CONFIG = {
           { q: "Can you tile over an existing concrete patio?", a: "Often, provided the slab is sound, clean, and already falls the right way, and provided any joints in the slab are carried through the tiling rather than tiled over. A slab that has cracked will crack the tiled surface above it in the same line, so the crack has to be assessed before anything goes on top of it." },
           { q: "What slip rating do I need outside?", a: "It depends on the surface. For steps, ramps and landings at a house there is a mandated minimum under the National Construction Code, tested to AS 4586, and because a surface exposed to weather counts as wet, an external stair tread needs P4 or R11 and a ramp no steeper than 1:8 needs P5 or R12. For the patio floor itself there is no mandated minimum, only HB 198 guidance by application. Either way, ask the supplier for the classification of the specific tile and finish rather than the range, and tell them what it is for." },
           { q: "Will outdoor tiles crack in a Canberra winter?", a: "They can, and the usual mechanism is water rather than cold on its own. Water sitting in a void under a tile expands when it freezes and lifts the tile. Frost resistant tiles and full adhesive coverage, so there is no void for water to collect in, are the controls that matter here." },
-          { q: "Do outdoor tiles need sealing?", a: "It depends on the material. Porcelain is dense and generally does not. Natural stone usually does, and it needs resealing periodically, which is a recurring cost worth knowing about before you choose it. Cement based grout benefits from sealing outdoors as well as in." },
+          { q: "Do outdoor tiles need sealing?", a: "It depends on the material. Porcelain is dense and generally does not. Natural stone usually does, and it needs resealing periodically, which is a recurring cost worth knowing about before you choose it. Cement based grout benefits from sealing outdoors as well as in. More on [porcelain, ceramic and stone](floor-and-wall-tiling-canberra.html)." },
           { q: "Can I use the same tile inside and outside?", a: "Frequently yes, and many ranges are made to do exactly that so a floor can run through a doorway without a change. What often differs is the finish: the external version of a range usually carries a different surface and a different slip classification. Ask for both classifications rather than assuming the range name covers it." },
           { q: "Does an outdoor area need movement joints?", a: "Yes, on any area of size. AS 3958:2023 calls for joints at no more than 4.5m centres in any direction outdoors, because the surface expands in the sun and contracts overnight every day. Leaving them out is one of the more common causes of external tiling lifting or tenting a few years later." }
         ] }
@@ -2125,6 +2259,7 @@ window.SITE_CONFIG = {
       {
         label: "Repairs",
         pages: [
+          "bathroom-repairs-canberra.html",
           "leaking-shower-repair-canberra.html",
           "regrouting-canberra.html",
           "tile-repair-canberra.html"
