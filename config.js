@@ -2109,7 +2109,6 @@ window.SITE_CONFIG = {
       },
       blocks: [
         { type: "lead", text: "Commercial tiling is the same trade as domestic tiling with a different set of constraints on it. The finish matters less than people expect. What matters is the program, the specification, and whether the surface is still acceptable after five years of traffic a house never sees." },
-        { type: "p", text: "This page is about what changes when the client is a business: how the schedule is set, what durability actually means in a specification, and why a commercial quote is not a domestic quote with a margin on it." },
 
         { type: "h2", text: "What this covers" },
         { type: "ul", items: [
