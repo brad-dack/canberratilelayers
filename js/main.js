@@ -61,6 +61,12 @@
   function injectGA4() {
     var id = cfg.ga4Id;
     if (!id || id.indexOf("XXXX") !== -1 || !/^G-[A-Z0-9]+$/.test(id)) return;
+    /* Only the real domain reports. Local previews and any workers.dev copy
+       were landing in GA4 as visitors - a preview of an unpublished page
+       showed up as a landing page before the page existed. Comparing against
+       cfg.domain also covers www, which redirects to the apex anyway. */
+    var host = window.location.hostname.replace(/^www\./, "");
+    if (cfg.domain.replace(/^https?:\/\//, "").replace(/^www\./, "") !== host) return;
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
     window.gtag("js", new Date());
@@ -368,6 +374,15 @@
       }).then(function (res) {
         if (res.ok) {
           form.innerHTML = '<p class="form-status success">' + esc(cfg.contact.successMessage) + "</p>";
+          /* Fired only once the ingest endpoint has accepted the lead, so it
+             counts deliveries rather than clicks on Submit. Mark it as a key
+             event in GA4 for it to show as a conversion. */
+          if (typeof window.gtag === "function") {
+            window.gtag("event", "generate_lead", {
+              service: serviceVal.value,
+              page_location: window.location.href
+            });
+          }
         } else {
           btn.disabled = false;
           showError();
