@@ -889,8 +889,8 @@ window.SITE_CONFIG = {
       page: "bathroom-repairs-canberra.html",
       name: "Bathroom Repairs",
       shortDescription: "Cracked or loose tiles, failed grout and silicone, or a leak: how to tell which bathroom repair you actually need, and when repairing stops making sense.",
-      metaTitle: "Bathroom Repairs Canberra | Tiles, Grout, Silicone & Leaks",
-      metaDescription: "Bathroom repairs in Canberra: cracked or loose tiles, failed grout and silicone, and shower leaks. How to tell which repair you need before paying for one.",
+      metaTitle: "Bathroom Repairs Canberra | Tile, Grout & Shower Repairs",
+      metaDescription: "Bathroom, tile, grout and shower repairs in Canberra. Work out which repair you need, what it involves, and when repairing stops making sense.",
       headline: "Bathroom Repairs in Canberra",
       ctaText: "Get a Quote",
       ctaHeading: "Get a Canberra bathroom repair quoted",
@@ -905,7 +905,7 @@ window.SITE_CONFIG = {
       },
       blocks: [
         { type: "lead", text: "Most bathroom repairs in Canberra are one of three jobs: replacing cracked or loose tiles, renewing failed grout and silicone, or fixing a leak. They can look alike from the doorway and differ by thousands of dollars, so the first step is working out which one you have." },
-        { type: "p", text: "This page is that sorting step. It covers how to tell the three apart, what each repair involves, and the point where repairing a bathroom stops making sense. Each job has its own page with the detail." },
+        { type: "p", text: "Tile repairs, grout repairs and shower repairs are quoted across Canberra and Queanbeyan, from older homes in the inner north and inner south to newer slab houses in Gungahlin and the Molonglo Valley. Below is how to tell the three apart, what each repair involves, and the point where repairing a bathroom stops making sense. Each job has its own page with the detail." },
 
         { type: "h2", text: "Which repair does your bathroom need?" },
         { type: "table", headers: ["What you are seeing", "Most likely job", "Start here"], rows: [
@@ -918,15 +918,15 @@ window.SITE_CONFIG = {
         ] },
         { type: "p", text: "If more than one row applies, start with the one furthest down. A leak outranks a grout problem, because regrouting over a failed membrane hides the symptom without stopping the water." },
 
-        { type: "h2", text: "Cracked or loose bathroom tiles" },
+        { type: "h2", text: "Tile repairs: cracked or loose bathroom tiles" },
         { type: "p", text: "A single tile cracked by an impact is a small, contained repair: the tile is cut out, the bed cleaned back, and a replacement set and grouted in. The hard part is matching it. Tile ranges are discontinued, and a spare from the original order is worth more than anything a showroom has now." },
         { type: "p", text: "Tiles that sound hollow, or cracks that run in a line across several tiles, are a different job. They point to a failed bond or movement underneath, and replacing the visible tiles without dealing with the cause usually brings the problem back. [Tile repair](tile-repair-canberra.html) covers how to test for drummy tiles and what the patterns mean." },
 
-        { type: "h2", text: "Failed grout and silicone" },
+        { type: "h2", text: "Grout repairs and silicone replacement" },
         { type: "p", text: "Grout and silicone do different jobs. Grout fills the joints between tiles. Silicone goes in the corners and junctions where walls meet each other and the floor, because those joints move and grout would crack there. Both wear out, and both are the cheapest repairs in a bathroom when they are caught early." },
-        { type: "p", text: "Neither one is the waterproofing. Grout is porous and water passes through it; the membrane underneath is what keeps water in the shower. Renewing grout and silicone is maintenance, not a fix for a membrane that has already failed. [Regrouting](regrouting-canberra.html) covers full replacement versus a surface touch-up, and cement versus epoxy grout." },
+        { type: "p", text: "Neither one is the waterproofing. Grout is porous and water passes through it; the membrane underneath is what keeps water in the shower. Renewing grout and silicone is maintenance, not a fix for a membrane that has already failed. [Grout repair or a full regrout](regrouting-canberra.html) covers full replacement versus a surface touch-up, and cement versus epoxy grout." },
 
-        { type: "h2", text: "Leaks and damp" },
+        { type: "h2", text: "Shower repairs: leaks and damp" },
         { type: "p", text: "If water is showing up outside the bathroom, in the hallway carpet, a skirting board, the room on the other side of the wall or the ceiling below, the problem is almost always under the tiles rather than on them. The usual causes are a failed membrane, a floor waste that was never properly sealed to it, or a plumbing leak in the wall." },
         { type: "p", text: "Where the house is matters too. Older Canberra stock through the inner north and inner south is more likely to have a suspended timber floor and original wet area construction under the bathroom. Newer areas such as Gungahlin and the Molonglo Valley are more likely to be slab on ground with modern waterproofing. [Leaking shower repair](leaking-shower-repair-canberra.html) covers how to tell where a shower is leaking from and which repairs actually hold." },
 
@@ -1111,7 +1111,7 @@ window.SITE_CONFIG = {
         { type: "credit", text: "Ardex Australia, Technical Bulletin TB186.004, \"Cleaning / Maintenance of ARDEX Grouts\", July 2024." },
         { type: "p", text: "**Poor original installation.** Grout applied too dry, joints not filled to full depth, or grouting done before the adhesive had cured. Failures from this show up early and usually across the whole surface at once rather than in patches." },
 
-        { type: "h2", text: "Partial or full regrout" },
+        { type: "h2", text: "Grout repair: partial or full regrout" },
         { type: "p", text: "**Partial** makes sense when failure is confined to one area, such as a shower floor while the walls are sound." },
         { type: "p", text: "The catch is colour. New grout will not match aged grout, even using the same product and colour code, because the existing grout has years of wear and staining on it. A patched section stays visible. Anyone quoting a partial regrout should tell you that before they start rather than after." },
         { type: "p", text: "**Full regrout** gives a uniform result and is the only sensible option when failure is widespread or when you are changing grout colour." },
@@ -1216,6 +1216,11 @@ window.SITE_CONFIG = {
         { type: "p", text: "**The catch nobody mentions:** tiling over a wet area leaves any waterproofing failure exactly where it is, now buried under two layers of tile instead of one. If the reason you are retiling is a leak, tiling over is not an option. See [leaking shower repair](leaking-shower-repair-canberra.html)." },
         { type: "p", text: "Outside a wet area, height is still the constraint that decides it: at doorways, at thresholds, and where tile meets another floor covering, the extra thickness has to go somewhere. See [floor and wall tiling](floor-and-wall-tiling-canberra.html)." },
 
+        { type: "h2", text: "Tile removal cost in Canberra" },
+        { type: "p", text: "Removal is generally quoted separately from tiling, and it varies more than almost any other line because the bond and the substrate are unknown until work starts." },
+        { type: "p", text: "A Canberra tiler's published bathroom calculator allows $1,500 for demolition and $800 for rubbish removal. On a floor, the removal is often the smaller part: getting the slab ready to tile again, with the adhesive ground back and the surface levelled, is what moves the price, and published rates put screeding and levelling at $15 to $30 per square metre. Full breakdown and sources in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html)." },
+        { type: "p", text: "The two questions that move the number most: is adhesive removal included, and who pays for tip fees. The rest of this page covers why." },
+
         { type: "h2", text: "What makes tile removal expensive" },
         { type: "p", text: "The tile is not the variable. The bond is." },
         { type: "p", text: "**How well it was stuck down.** A tile laid on a proper adhesive bed to a clean slab comes off harder than one laid badly. Good original workmanship makes removal slower, which is a genuinely annoying inversion." },
@@ -1265,13 +1270,9 @@ window.SITE_CONFIG = {
         { type: "p", text: "**What you leave behind.** Removing tiles is easy. Getting a substrate genuinely ready to tile is not, and a tiler arriving to a floor with adhesive residue still on it will either charge to fix it or decline the job. If you are doing the strip-out to save money, agree with the tiler beforehand what condition they need the surface in." },
         { type: "p", text: "The saving is real but smaller than it looks, because the slow part is the preparation rather than the demolition." },
 
-        { type: "h2", text: "What tile removal costs" },
-        { type: "p", text: "Removal is generally quoted separately from tiling, and it varies more than almost any other line because the bond and the substrate are unknown until work starts." },
-        { type: "p", text: "A Canberra tiler's published bathroom calculator allows $1,500 for demolition and $800 for rubbish removal. National figures put tile removal cost in a broad range depending on area, substrate and whether adhesive grinding is included. Full breakdown and sources in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html)." },
-        { type: "p", text: "The two questions that move the number most: is adhesive removal included, and who pays for tip fees." },
-
         { type: "faqs", items: [
           { q: "How much does tile removal cost?", a: "It is usually quoted separately from tiling and varies widely with the substrate and how well the tiles were originally bonded. A Canberra operator's published bathroom calculator allows $1,500 for demolition and $800 for waste removal. The two things that move the price are whether adhesive grinding is included and who covers tip fees. See the [cost guide](tiling-cost-guide-canberra.html)." },
+          { q: "How much does it cost to remove a tile floor?", a: "Removing the tiles is the smaller part of the price. Grinding or scraping the adhesive bed back, and levelling the floor afterwards, is what moves it. Published rates put screeding and levelling at $15 to $30 per square metre, on top of the removal itself and tip fees charged by weight. See the [cost guide](tiling-cost-guide-canberra.html)." },
           { q: "Can I tile over existing tiles instead of removing them?", a: "Sometimes, if the existing tiles are sound and well bonded and the height change works at doorways and fixtures. In a wet area it also means any waterproofing failure underneath stays buried, so it is not an option if the reason you are retiling is a leak." },
           { q: "Will removing wall tiles damage the wall?", a: "Frequently, yes. Tiles bonded to plasterboard or wall sheeting often take the surface with them, and the wall ends up being replaced rather than repaired. Tiles on a rendered or masonry wall usually come off leaving adhesive to be removed." },
           { q: "Is tile removal dusty?", a: "Very, and the dust matters. Tiles, adhesive and screed contain crystalline silica, and grinding or breaking them dry produces fine respirable dust associated with serious lung disease. Water suppression, on-tool extraction and proper respiratory protection are the controls. Ask what a contractor uses." },
@@ -1399,8 +1400,8 @@ window.SITE_CONFIG = {
       name: "Tile Repair",
       shortDescription: "Drummy, loose or cracked tiles explained: how to test them yourself, what usually caused it, and what repair actually involves.",
       metaTitle: "Tile Repair Canberra | Cracked, Loose & Drummy Tiles",
-      metaDescription: "Drummy, loose or cracked tiles explained. How to test them yourself, what the cause usually is, when it matters, and what repair actually involves.",
-      headline: "Cracked, Loose and Drummy Tiles in Canberra",
+      metaDescription: "Tile repair in Canberra for cracked, loose and drummy floor, wall and shower tiles. How to test them, what causes it, and what a repair involves.",
+      headline: "Tile Repair in Canberra: Cracked, Loose and Drummy Tiles",
       ctaText: "Get a Quote",
       ctaHeading: "Cracked or drummy tiles in Canberra",
       ctaBody: "Tell us roughly how many tiles are affected, whether they are scattered or clustered, and whether they are in a wet area. Those three answers separate a small repair from a symptom of something else.",
