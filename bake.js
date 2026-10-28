@@ -455,7 +455,10 @@ function quoteFormHtml(opts) {
     "</fieldset>";
   }
 
+  /* The collection notice goes above every form a block places, the same as
+     on the contact page - see the consent note on contact.reassurance. */
   return (opts.heading ? "<h2>" + esc(opts.heading) + "</h2>" : "") +
+    (opts.notice ? '<p class="reassurance">' + richText(cfg.contact.reassurance) + "</p>" : "") +
     '<form id="quote-form" novalidate>' +
       presetInput +
       picker +
@@ -502,7 +505,7 @@ function blockHtml(b) {
       return '<div class="block-faqs">' + faqItems(b.items) + "</div>";
     case "form":
       return quoteFormHtml({
-        heading: b.heading, presetService: b.presetService,
+        heading: b.heading, presetService: b.presetService, notice: true,
         extraField: b.extraField, placeholders: b.placeholders
       });
     case "image":
@@ -810,7 +813,7 @@ function contactContentHtml() {
     '<section class="section section-alt" id="quote"><div class="container narrow">' +
       "<h2>" + esc(cfg.contact.formHeadline) + "</h2>" +
       /* richText, not esc: this line is the collection notice sitting directly
-         above the only form on the site, and it has to be able to link to the
+         above the form, and it has to be able to link to the
          privacy policy. See the consent note on contact.reassurance in config. */
       '<p class="reassurance">' + richText(cfg.contact.reassurance) + "</p>" +
       quoteFormHtml({}) +

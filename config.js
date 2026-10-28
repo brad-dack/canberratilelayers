@@ -167,7 +167,7 @@ window.SITE_CONFIG = {
 
         { type: "h3", text: "You are tiling something new" },
         { type: "p", text: "A bathroom, a floor, a splashback, an outdoor area. New work is more predictable than repair work, and the cost is driven mostly by the tile you choose, the layout, and the condition of what is underneath." },
-        { type: "p", text: "[Bathroom tiling](bathroom-tiling-canberra.html) · [Waterproofing](waterproofing-canberra.html) · [Tile removal](tile-removal-canberra.html)" },
+        { type: "p", text: "[Bathroom tiling](bathroom-tiling-canberra.html) · [Waterproofing](waterproofing-canberra.html) · [Tile removal](tile-removal-canberra.html) · [Bathroom strip out](bathroom-strip-out-canberra.html)" },
 
         { type: "h3", text: "You are still working out a budget" },
         { type: "p", text: "Published Canberra figures for the same bathroom range from $9,500 to $120,000, which is not much help. Our cost guide sets out where those numbers come from and why they disagree." },
@@ -182,7 +182,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "**Pool surrounds and coping.** Specialist work with its own requirements around movement, slip rating and water exposure. [More on pool tiling](pool-tiling-canberra.html)" },
         { type: "p", text: "**Commercial tiling.** Retail, hospitality and office fitouts, where the drivers are program and durability rather than domestic finish. [More on commercial tiling](commercial-tiling-canberra.html)" },
         { type: "p", text: "**Waterproofing.** Membrane application in wet areas, to AS 3740:2021. The one part of a bathroom you pay for and never see, and the most expensive thing to get wrong. [More on waterproofing](waterproofing-canberra.html)" },
-        { type: "p", text: "**Tile removal.** Strip out of existing tiles and adhesive, and preparation of the substrate for what comes next. Frequently quoted separately and frequently underestimated. [More on tile removal](tile-removal-canberra.html)" },
+        { type: "p", text: "**Tile removal.** Strip out of existing tiles and adhesive, and preparation of the substrate for what comes next. Frequently quoted separately and frequently underestimated. Where it is the whole wet area, screed and membrane included, see [bathroom strip out](bathroom-strip-out-canberra.html). [More on tile removal](tile-removal-canberra.html)" },
         { type: "p", text: "**Repairs.** Leaking showers, regrouting, resiliconing, and cracked or drummy tiles. Not sure which one you need? Start with [bathroom repairs](bathroom-repairs-canberra.html). [Leaking shower repair](leaking-shower-repair-canberra.html) · [Regrouting](regrouting-canberra.html) · [Tile repair](tile-repair-canberra.html)" },
 
         { type: "h2", text: "How a tiling job actually runs" },
@@ -211,7 +211,8 @@ window.SITE_CONFIG = {
         { type: "p", text: "The house matters more than the suburb, but the two are linked. Older stock through the inner north and inner south is more likely to have suspended timber floors and original wet area construction, which is why the same shower repair can quote higher there. Newer areas such as Gungahlin and the Molonglo Valley are more likely to be slab on ground with modern waterproofing." },
         { type: "p", text: "Age matters for a second reason. WorkSafe ACT treats a home built or refurbished before 1990 as likely to contain asbestos, and fibre cement sheeting behind and under tiles is common in Canberra houses from the 1960s to the 1980s. In those homes, identification by a licensed assessor comes before any tile comes off. See [tile removal](tile-removal-canberra.html)." },
         { type: "p", text: "The weather sets the program as well. Membranes and adhesives cure more slowly in the cold, so a winter job in an unheated Canberra bathroom takes longer between stages than the same job in summer. See [waterproofing](waterproofing-canberra.html)." },
-        { type: "p", text: "Call, or use the [quote form](contact.html), and include your suburb and roughly when the house was built. Those two details tell whoever quotes more about the job than most descriptions do." },
+        { type: "p", text: "Call, or use the form below, and include your suburb and roughly when the house was built. Those two details tell whoever quotes more about the job than most descriptions do." },
+        { type: "form", heading: "Ask for a quote" },
 
         { type: "h2", text: "Common questions" },
         { type: "faqs", items: [
@@ -282,11 +283,11 @@ window.SITE_CONFIG = {
         { type: "p", text: "Plumbing, electrical work, stone benchtops, and structural work are all separate trades we do not handle either." },
 
         { type: "h3", text: "What happens after you enquire" },
-        { type: "p", text: "After you submit the form, you will be contacted by a Canberra tiling contractor if they cover your job." },
-        { type: "p", text: "Your job goes to one contractor rather than to everyone buying leads that day, so you get one conversation instead of five calls. Your details are not sold, not added to a marketing list, and not shared with advertisers. The full position is in the [privacy policy](privacy.html)." },
+        { type: "p", text: "If we have a contractor covering your job, they will contact you." },
+        { type: "p", text: "Where your job goes to a contractor, it goes to one rather than to everyone buying leads that day, so you get one conversation instead of five calls. Your details are not sold, not added to a marketing list, and not shared with advertisers. The full position is in the [privacy policy](privacy.html)." },
 
         { type: "h3", text: "How the service is paid for" },
-        { type: "p", text: "The contractor pays for the enquiry. You do not." },
+        { type: "p", text: "Where a contractor takes the enquiry, they pay for it. You do not." },
         { type: "p", text: "There is no cost to you at any point, the quote is free, and there is no obligation to go ahead with the work. There is nothing unusual in the model. It is how referral services are generally funded, free to the person making the enquiry and paid for by the business that receives it." },
 
         { type: "h3", text: "Where we cover" },
@@ -401,8 +402,10 @@ window.SITE_CONFIG = {
          that their details go to a contractor. That is why the collection
          notice wording on both channels is load-bearing and must not be
          softened into generic reassurance copy:
-           - Web form: contact.reassurance, rendered directly above the only
-             form on the site. See the note on that key.
+           - Web form: contact.reassurance, rendered directly above every
+             quote form (contact, home, bathroom repairs, bathroom strip
+             out - quoteFormHtml adds it to each form block). See the note
+             on that key.
            - Phone: the voicemail greeting, which is the only opportunity to
              give notice before a caller speaks. Held in the backend as
              sites.greeting_audio_url (the MP3) and sites.greeting_text (the
@@ -601,7 +604,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "Three of those rows have a page behind them. Large format labour is an addition to the laying rate, not a substitute for the levelling it may also require - see [floor and wall tiling](floor-and-wall-tiling-canberra.html). The outdoor premium covers a higher tile specification and more preparation - see [outdoor and patio tiling](outdoor-patio-tiling-canberra.html). The pool figure is a labour rate for the field area, not a job price, because the coping detail is what moves it - see [pool tiling](pool-tiling-canberra.html)." },
 
         { type: "h3", text: "Repairs" },
-        { type: "table", headers: ["Repair", "Range"], rows: [
+        { type: "table", caption: "National and interstate published guides", headers: ["Repair", "Range"], rows: [
           ["Silicone replacement only", "$150 to $350"],
           ["Shower regrout, cement grout", "$600 to $1,200"],
           ["Shower regrout, epoxy grout", "$800 to $1,500"],
@@ -614,6 +617,7 @@ window.SITE_CONFIG = {
           ["Shower leak repair, full range", "$250 to $4,000"]
         ] },
         { type: "p", text: "The spread in that last row is the whole point. A silicone reseal and a full membrane replacement are both called \"leaking shower repair\" and they differ by more than ten times. Which one you need is a diagnosis, not a preference. See [leaking shower repair](leaking-shower-repair-canberra.html)." },
+        { type: "p", text: "The ranges in that table come from national and interstate guides. Where an ACT figure has been published, it is on the [leaking shower repair](leaking-shower-repair-canberra.html) and [regrouting](regrouting-canberra.html) pages, marked as ACT, and that is the better guide for a Canberra job." },
 
         { type: "h3", text: "Bathroom renovation in Canberra" },
         { type: "p", text: "This is where published figures fall apart, so here they are side by side. All 2026, all for a main bathroom in Canberra unless noted." },
@@ -725,8 +729,8 @@ window.SITE_CONFIG = {
           { q: "How much does a tiler charge per square metre in Australia?", a: "Published national rates for standard floor tiling supply and install run roughly $55 to $140 per square metre, with most guides putting the average around $75 to $100. Bathroom floor tiling sits near $85 and wall tiling near $95, the difference reflecting waterproofing preparation. Canberra bathroom labour sits squarely on that national average." },
           { q: "Why are my tiling quotes so different?", a: "Almost always because they cover different scopes. Preparation, demolition, disposal, waterproofing and trims are the usual variables. Ask each quoter to itemise against the same written brief and most of the gap becomes visible." },
           { q: "Is it cheaper to tile a small bathroom than a large room?", a: "In total yes, per square metre usually no. Small wet areas are dominated by cuts, edges and detail around penetrations. A small bathroom often lands around $2,000 to $3,500 for tiling including materials, a much higher effective rate than the headline figures suggest." },
-          { q: "What does it cost to regrout a shower?", a: "Roughly $600 to $1,500 for a standard shower, with cement based grout at the lower end and epoxy at the upper. Epoxy costs more and lasts roughly twice as long without needing sealing. See [regrouting](regrouting-canberra.html)." },
-          { q: "What does a leaking shower cost to fix?", a: "Anywhere from around $250 for a silicone reseal to $4,000 for a full strip-out and membrane replacement. The difference is entirely about what has failed. If water is reaching rooms outside the bathroom, the membrane has gone and a surface repair will not hold." },
+          { q: "What does it cost to regrout a shower?", a: "National guides put it at roughly $600 to $1,500 for a standard shower, with cement based grout at the lower end and epoxy at the upper. Epoxy costs more and lasts roughly twice as long without needing sealing. Published ACT figures, the better guide for a Canberra job, are on the [regrouting](regrouting-canberra.html) page." },
+          { q: "What does a leaking shower cost to fix?", a: "Anywhere from around $250 for a silicone reseal to $4,000 for a [full strip-out and membrane replacement](bathroom-strip-out-canberra.html). The difference is entirely about what has failed. If water is reaching rooms outside the bathroom, the membrane has gone and a surface repair will not hold." },
           { q: "Should I supply my own tiles?", a: "It gives you control over price and selection, but responsibility for measuring, ordering enough and dealing with breakage moves to you. Agree in writing who carries that risk." },
           { q: "Does the tile I choose change the labour cost?", a: "Substantially. Size, hardness, edge type and layout pattern all affect installation time independently of the tile price. Large format adds $10 to $20 per square metre in labour alone." },
           { q: "Is waterproofing a place to economise?", a: "No. It is regulated, it is concealed once tiling starts, and correcting it later means removing the finished surface." },
@@ -830,7 +834,7 @@ window.SITE_CONFIG = {
           ["Regrout and reseal, standard shower", "$480 to $980", "ACT"],
           ["Floor waste or puddle flange repair", "$280 to $650", "ACT"],
           ["Surface applied sealing system", "$495 to $795, or $1,000 to $2,000 for a full epoxy reseal", "National - no ACT figure published"],
-          ["Full strip out and rewaterproof", "$1,800 to $2,800 and up", "ACT"]
+          ["[Full strip out and rewaterproof](bathroom-strip-out-canberra.html)", "$1,800 to $2,800 and up", "ACT"]
         ] },
         { type: "p", text: "As a check against real jobs rather than published guides, Canberra listings on Airtasker through 2025 and 2026 ran from around $100 for a simple cubicle regrout, to about $350 for a one square metre recess with the screen involved, up to about $1,500 for larger work." },
 
@@ -944,9 +948,13 @@ window.SITE_CONFIG = {
         { type: "p", text: "Bathroom repairs often involve more than tiling. Taps, pipes and anything that moves a waste or supply is licensed plumbing work. Exhaust fans, lights and heated towel rails are licensed electrical work. Water damaged framing or flooring is carpentry. A tiling repair can be quoted around those trades, but not instead of them." },
         { type: "p", text: "On cost, bathroom repairs run from a silicone reseal to a full shower rebuild, and the gap between those two is more than ten times. The figures and their sources are in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html)." },
 
+        { type: "form", heading: "Tell us about the repair" },
+
         { type: "faqs", items: [
           { q: "Can you replace just one bathroom tile?", a: "Usually, yes. A single cracked tile can be cut out and replaced without disturbing its neighbours, provided the tiles around it are well bonded. The hard part is matching it, so check for spares from the original job first. In a shower it is worth asking why it cracked, because a tile over a moving or wet substrate will crack again." },
           { q: "Will regrouting fix a leaking shower?", a: "Only if the grout is how water is getting through and the membrane underneath is intact. If damp is showing outside the bathroom, the membrane or the floor waste has usually failed and regrouting will not stop it. See [leaking shower repair](leaking-shower-repair-canberra.html)." },
+          { q: "How much does grout repair cost?", a: "It depends on how much of the grout has failed. Published ACT estimates put silicone replacement in the corners only at $180 to $380, and a full regrout of a standard shower in cement grout at $480 to $980. Epoxy grout costs more, around $800 to $1,500 for a standard shower on national figures. The sources and the full breakdown are on [regrouting](regrouting-canberra.html)." },
+          { q: "Can damaged grout be repaired without redoing it all?", a: "Yes, if the failure is confined to one area and the rest of the grout is sound. A partial regrout replaces only the failed joints. The catch is appearance: the existing grout has years of wear and staining on it, so a patched section usually stays visible even with the same product and colour. If the grout is failing only in the corners, grout is the wrong material there and the fix is silicone. See [regrouting](regrouting-canberra.html)." },
           { q: "Is it worth repairing an old bathroom instead of renovating it?", a: "Often, if the problem is at the surface and the layers underneath are sound. New grout, new silicone and a few replacement tiles can keep a bathroom going for years. It stops being worth it when the same area keeps failing or water is reaching the rooms around it." }
         ] }
       ]
@@ -1379,6 +1387,8 @@ window.SITE_CONFIG = {
         { type: "p", text: "A Canberra tiler's published bathroom calculator allows $1,500 for demolition and $800 for rubbish removal. ACT figures for a full shower strip out and rewaterproof run from around $1,800 to $2,800 and up. Tile waste is heavy and tip fees are usually charged by weight, so establish who is taking it away and whether disposal is in the price." },
         { type: "p", text: "Full breakdown and sources in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html), and the questions worth asking every quoter in the [quote checklist](tiling-quote-checklist-canberra.html)." },
 
+        { type: "form", heading: "Tell us about the strip out" },
+
         { type: "faqs", items: [
           { q: "How much does a bathroom strip out cost in Canberra?", a: "A Canberra tiler's published bathroom calculator allows $1,500 for demolition and $800 for rubbish removal, and ACT figures for a full shower strip out and rewaterproof run from around $1,800 to $2,800 and up. What moves the number is how many layers are coming out, what is found underneath, and whether disposal is included. See the [cost guide](tiling-cost-guide-canberra.html)." },
           { q: "What is included in a bathroom strip out?", a: "It depends on the quote, which is the problem. It can mean wall tiles only, or every tile, screed bed and membrane down to the slab or joists. Ask which layers are coming out, whether fixtures and disconnection are included, and what condition the room is left in." },
@@ -1511,7 +1521,7 @@ window.SITE_CONFIG = {
       headline: "Tiling Quote Checklist",
       ctaText: "Get a Quote",
       ctaHeading: "Ready to start getting quotes?",
-      ctaBody: "Take this checklist to every quote and write the answers next to the questions. Once you have them, tell us what you need and we will help you compare what comes back.",
+      ctaBody: "Take this checklist to every quote and write the answers next to the questions. Once you have them, you will be comparing like with like. To have the job quoted with those answers supplied up front, call or use the form.",
       image: {
         src: "images/quote-checklist-clipboard.jpg",
         alt: "A blank clipboard and pencil beside a couple of tile samples",
@@ -1834,7 +1844,7 @@ window.SITE_CONFIG = {
           "**Natural stone.** Marble, limestone, travertine, slate and granite. Each one behaves differently, but most are porous and need sealing, then resealing periodically, which is a recurring cost. Marble, limestone and travertine are also etched by acids, including some household cleaners. Stone is usually heavier and less uniform than porcelain, which adds time to the laying."
         ] },
         { type: "p", text: "Two numbers on the tile's data sheet are worth reading before you buy. The first is whether it is rated for floors and, for glazed tile, its abrasion class, often shown as a PEI rating, which tells you how much foot traffic the glaze will stand. The second, for anything going outside or into an unheated room, is whether the manufacturer lists it as frost resistant. Canberra gets regular winter frosts, and water absorbed into a porous tile expands when it freezes. Slip resistance outdoors is a separate rating again, covered under [outdoor and patio tiling](outdoor-patio-tiling-canberra.html)." },
-        { type: "p", text: "Whatever you choose, have every quote priced on the same tile. Porcelain is slower to cut than ceramic, and stone is slower again, so three quotes on three materials will not compare. Call or use the form with the tile you have in mind and we can tell you what it means for the job." },
+        { type: "p", text: "Whatever you choose, have every quote priced on the same tile. Porcelain is slower to cut than ceramic, and stone is slower again, so three quotes on three materials will not compare. Call or use the form with the tile you have in mind, and whoever quotes can tell you what it means for the job." },
 
         { type: "h2", text: "Older Canberra homes" },
         { type: "p", text: "Canberra housing stock from the 1960s through the 1980s regularly turns up substrates that need assessing before anything goes over them: fibre cement sheet flooring and wall sheeting, sand and cement screeds of unknown depth, and existing floor coverings laid straight onto them." },
@@ -2323,14 +2333,15 @@ window.SITE_CONFIG = {
        respond to this enquiry", which described the wrong data flow and
        worked against the consent the exemption depends on. Keep it accurate
        and keep the privacy policy link. */
-    reassurance: "No spam and no obligation. Your details go to a tiling contractor in your area so they can quote your job - the contractor pays for the enquiry, you do not. We never sell your details or add you to a marketing list. [How we handle your information](privacy.html).",
+    reassurance: "No spam and no obligation. Where we have a tiling contractor covering your job, your details go to them so they can quote it, and the contractor pays for the enquiry, not you. We never sell your details or add you to a marketing list. [How we handle your information](privacy.html).",
     /* Real enquiry categories, not page names - cfg.services on this build
        is a list of PAGES (it includes the cost guide and the quote
        checklist, which aren't things a homeowner "needs done"). See the
        contact page's own field list in the build brief. */
     jobTypes: [
       "New tiling", "Bathroom tiling", "Waterproofing", "Leaking shower",
-      "Regrouting", "Cracked or loose tiles", "Tile removal"
+      "Regrouting", "Cracked or loose tiles", "Tile removal",
+      "Bathroom repairs", "Bathroom strip out"
     ],
     fields: [
       { name: "name", label: "Name", type: "text", autocomplete: "name" },
