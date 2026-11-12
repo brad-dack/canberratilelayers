@@ -210,6 +210,8 @@ What to edit in `config.js`:
 4. **ga4Id** — **required before launch**: while it contains `XXXX`, no
    analytics and no `click_to_call` tracking, meaning no call-volume proof
    for a future renter.
+   Open any page once with `?internal=1` to tag that browser's GA4 hits as `traffic_type=internal` (excluded by the GA4 "Internal Traffic" filter); it persists per browser in localStorage.
+   Open any page with `?internal=0` to clear it. Either parameter is stripped from the address bar on load.
 5. **ingestUrl / ingestSecret / turnstileSiteKey** — form leads post straight
    to our own ingest endpoint (see `rank-and-rent-backend`'s
    `docs/DASHBOARD_PLAN.md`, Phase 2 Stage B), not to a third-party form

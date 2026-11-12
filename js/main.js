@@ -58,7 +58,34 @@
      The brand palette and the theme attributes on <html> are baked into every
      page by bake.js, so nothing here needs to re-derive them. */
 
+  /* Per-browser internal-traffic opt-out. Opening any page once with
+     ?internal=1 saves a flag in this browser; ?internal=0 clears it. While it
+     is set, GA4 hits carry traffic_type=internal, which the property's
+     "Internal Traffic" data filter excludes. Done per browser rather than by
+     IP because the home IP changes and mobile data has no fixed IP. Storage
+     can throw (private windows, blocked site data), so every access is
+     wrapped and GA loads normally without it. */
+  var INTERNAL_KEY = "ga_internal";
+  function internalTraffic() {
+    var param = null;
+    try { param = new URLSearchParams(window.location.search).get("internal"); } catch (e) {}
+    if (param === "1") {
+      try { window.localStorage.setItem(INTERNAL_KEY, "1"); } catch (e) {}
+    } else if (param === "0") {
+      try { window.localStorage.removeItem(INTERNAL_KEY); } catch (e) {}
+    }
+    if (param !== null) {
+      try {
+        var url = new URL(window.location.href);
+        url.searchParams.delete("internal");
+        window.history.replaceState(window.history.state, "", url.pathname + url.search + url.hash);
+      } catch (e) {}
+    }
+    try { return window.localStorage.getItem(INTERNAL_KEY) === "1"; } catch (e) { return false; }
+  }
+
   function injectGA4() {
+    var internal = internalTraffic();
     var id = cfg.ga4Id;
     if (!id || id.indexOf("XXXX") !== -1 || !/^G-[A-Z0-9]+$/.test(id)) return;
     /* Only the real domain reports. Local previews and any workers.dev copy
@@ -70,7 +97,8 @@
     window.dataLayer = window.dataLayer || [];
     window.gtag = function () { window.dataLayer.push(arguments); };
     window.gtag("js", new Date());
-    window.gtag("config", id);
+    if (internal) window.gtag("config", id, { traffic_type: "internal" });
+    else window.gtag("config", id);
     /* gtag.js is ~170KB and ~250ms of script evaluation. It's fetched only
        after the load event AND the browser's first largest-contentful-paint
        report: on a fast connection "load" can fire before the first paint, and
