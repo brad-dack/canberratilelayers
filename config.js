@@ -122,7 +122,7 @@ window.SITE_CONFIG = {
     home: {
       metaTitle: "Tiler Canberra | Canberra Tile Layers, Tiling & Repairs",
       metaDescription: "Tiling across Canberra and the ACT. Bathroom and floor tiling, waterproofing, and repairs including leaking showers and regrouting. Get a free quote.",
-      headline: "Tiling Across Canberra and the ACT",
+      headline: "Tilers in Canberra and the ACT",
       subheadline: "Bathroom and floor tiling, waterproofing, and repairs to showers, grout and cracked tiles. Across Canberra, the ACT and Queanbeyan.",
       ctaText: "Get a Quote",
       ctaHeading: "Get a quote",
@@ -218,7 +218,7 @@ window.SITE_CONFIG = {
         { type: "faqs", items: [
           {
             q: "How much does a tiler charge in Canberra?",
-            a: "Rates for floor tiling supply and install run roughly $55 to $140 per square metre, but are dependent on an on-site quote."
+            a: "Published national guides put standard floor tiling supply and install at roughly $55 to $140 per square metre. Canberra figures and their sources are in the [cost guide](tiling-cost-guide-canberra.html). Any real job needs an on-site quote."
           },
           {
             q: "My shower is leaking. Do I need it regrouted or replaced?",
@@ -403,9 +403,9 @@ window.SITE_CONFIG = {
          notice wording on both channels is load-bearing and must not be
          softened into generic reassurance copy:
            - Web form: contact.reassurance, rendered directly above every
-             quote form (contact, home, bathroom repairs, bathroom strip
-             out - quoteFormHtml adds it to each form block). See the note
-             on that key.
+             quote form (contact, home and every service page -
+             quoteFormHtml adds it to each form block). See the note on
+             that key.
            - Phone: the voicemail greeting, which is the only opportunity to
              give notice before a caller speaks. Held in the backend as
              sites.greeting_audio_url (the MP3) and sites.greeting_text (the
@@ -682,7 +682,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "**Removal and disposal.** Old tiles are heavy and tip fees are usually charged by weight. The Canberra rate card allows $1,500 for demolition and $800 for rubbish removal on a bathroom. These are frequently separate lines and sometimes missing entirely." },
         { type: "p", text: "**What demolition reveals.** Rotted framing, a slab further out of level than expected, or failed previous waterproofing. The most common variation on any bathroom job." },
         { type: "p", text: "**Asbestos in older homes.** WorkSafe ACT treats a residential building constructed or refurbished before 1990 as likely to contain asbestos containing material, and the ACT carries additional legacy issues including Mr Fluffy affected blocks. If present, only a licensed asbestos assessor can identify it, and only a licensed asbestos removalist can remove it in the ACT - there's no small-quantity DIY exemption here." },
-        { type: "credit", text: "WorkSafe ACT, Asbestos; WorkSafe ACT, Asbestos licensing." },
+        { type: "credit", text: "WorkSafe ACT, [Asbestos](https://www.worksafe.act.gov.au/health-and-safety-portal/safety-topics/dangerous-goods-and-hazardous-substances/asbestos); WorkSafe ACT, [Asbestos licensing](https://www.worksafe.act.gov.au/licensing-and-registration/asbestos-licensing). Checked 13 November 2026." },
         { type: "p", text: "**Trims and edging.** External corners and tile edges need either a mitre or a trim. Inexpensive, frequently omitted from quotes, and the mitred alternative is labour." },
         { type: "p", text: "**Grout upgrades.** Epoxy grout runs $800 to $1,500 for a full shower regrout against $600 to $1,200 for cement based. It lasts roughly twice as long and resists mould without sealing." },
         { type: "p", text: "**Sealing.** Natural stone and cement based grout both benefit from sealing, a separate product and a separate visit." },
@@ -712,7 +712,8 @@ window.SITE_CONFIG = {
         { type: "h3", text: "Ask about the tile order" },
         { type: "p", text: "Who is measuring, what waste allowance is assumed, and who is responsible if the order falls short." },
         { type: "h3", text: "Ask about the schedule" },
-        { type: "p", text: "How many days, how many visits, what has to be finished first, and how long the waterproofing needs to cure. A typical Canberra bathroom renovation runs three to five weeks, longer for complex work." },
+        { type: "p", text: "How many days, how many visits, what has to be finished first, and how long the waterproofing needs to cure. Substrate preparation and cure time set the overall length more than the laying does." },
+        /* [VERIFY] "A typical Canberra bathroom renovation runs three to five weeks" was removed: no source. Reinstate only with one. */
         { type: "h3", text: "For repairs, ask for the diagnosis before the price" },
         { type: "p", text: "A shower repair quote should name the diagnosed cause: grout failure, silicone failure, membrane failure, waste seal failure, or a supply pipe leak. A quote arriving without anyone having established where the water is going is a guess with a price on it. If regrouting or injection sealing has already been tried and the leak returned, the membrane has failed and a surface repair will not fix it." },
         { type: "h3", text: "Take a list with you" },
@@ -724,6 +725,8 @@ window.SITE_CONFIG = {
         { type: "p", text: "**Spend where failure is expensive.** Waterproofing and substrate preparation are concealed, and they cost the most to put right afterwards because fixing them means removing the finished surface. Tile is visible and replaceable. If the budget has to give, give on the tile." },
         { type: "p", text: "**Fixtures are the biggest lever.** That $14,250 fixture allowance exceeds the tiling cost on most bathrooms. Changing tapware and vanity selection moves the total further than any tiling decision." },
         { type: "p", text: "**Keep the plumbing where it is.** Moving a toilet, shower or vanity is consistently identified as one of the largest avoidable costs, and in the ACT relocating plumbing may require a drainage plan and building approval." },
+
+        { type: "form", heading: "Get your job quoted" },
 
         { type: "faqs", items: [
           { q: "How much does a tiler charge per square metre in Australia?", a: "Published national rates for standard floor tiling supply and install run roughly $55 to $140 per square metre, with most guides putting the average around $75 to $100. Bathroom floor tiling sits near $85 and wall tiling near $95, the difference reflecting waterproofing preparation. Canberra bathroom labour sits squarely on that national average." },
@@ -868,6 +871,8 @@ window.SITE_CONFIG = {
         { type: "credit", text: "Manufacturer flood-testing guidance (e.g. Laticrete, Mapei); not a universal AS 3740 mandate on every job, but standard industry practice." },
         { type: "p", text: "If a quote arrives without anyone having established where the water is going, it is a guess with a price on it." },
 
+        { type: "form", heading: "Tell us about the leak" },
+
         { type: "faqs", items: [
           { q: "Can a leaking shower be fixed without removing the tiles?", a: "Sometimes. If the waterproofing membrane below the tiles is still sound and the problem is deteriorated grout or perished silicone, then yes, a surface repair is the correct fix. If the membrane has failed, no surface treatment will stop it, and applying one can trap moisture in the wall or slab. Which applies to your shower is the question a proper assessment answers." },
           { q: "Why does my shower keep leaking after it was repaired?", a: "Usually because the repair addressed the surface and the failure is underneath. Regrouting a shower with a failed membrane will hold for a while, because new grout slows water down. It does not stop it. If a shower has been repaired twice and leaked twice, the membrane is the likely cause." },
@@ -932,7 +937,7 @@ window.SITE_CONFIG = {
 
         { type: "h2", text: "Shower repairs: leaks and damp" },
         { type: "p", text: "If water is showing up outside the bathroom, in the hallway carpet, a skirting board, the room on the other side of the wall or the ceiling below, the problem is almost always under the tiles rather than on them. The usual causes are a failed membrane, a floor waste that was never properly sealed to it, or a plumbing leak in the wall." },
-        { type: "p", text: "Where the house is matters too. Older Canberra stock through the inner north and inner south is more likely to have a suspended timber floor and original wet area construction under the bathroom. Newer areas such as Gungahlin and the Molonglo Valley are more likely to be slab on ground with modern waterproofing. [Leaking shower repair](leaking-shower-repair-canberra.html) covers how to tell where a shower is leaking from and which repairs actually hold." },
+        { type: "p", text: "[Leaking shower repair in Canberra](leaking-shower-repair-canberra.html) covers where a shower leaks from and which repairs hold." },
 
         { type: "h2", text: "When repair stops making sense" },
         { type: "p", text: "A repair is the right call when the problem is at the surface and the layers underneath are sound. It stops being the right call when:" },
@@ -955,6 +960,7 @@ window.SITE_CONFIG = {
           { q: "Will regrouting fix a leaking shower?", a: "Only if the grout is how water is getting through and the membrane underneath is intact. If damp is showing outside the bathroom, the membrane or the floor waste has usually failed and regrouting will not stop it. See [leaking shower repair](leaking-shower-repair-canberra.html)." },
           { q: "How much does grout repair cost?", a: "It depends on how much of the grout has failed. Published ACT estimates put silicone replacement in the corners only at $180 to $380, and a full regrout of a standard shower in cement grout at $480 to $980. Epoxy grout costs more, around $800 to $1,500 for a standard shower on national figures. The sources and the full breakdown are on [regrouting](regrouting-canberra.html)." },
           { q: "Can damaged grout be repaired without redoing it all?", a: "Yes, if the failure is confined to one area and the rest of the grout is sound. A partial regrout replaces only the failed joints. The catch is appearance: the existing grout has years of wear and staining on it, so a patched section usually stays visible even with the same product and colour. If the grout is failing only in the corners, grout is the wrong material there and the fix is silicone. See [regrouting](regrouting-canberra.html)." },
+          { q: "Do plumbers repair showers?", a: "Some shower repairs are plumbing and some are tiling, and a leak can be either. Taps, shower roses, pipes in the wall and anything that moves a waste or supply are licensed plumbing work. The membrane, tiles, grout and silicone are tiling and waterproofing work. If water is reaching rooms outside the bathroom, finding out which one has failed comes first. See [leaking shower repair](leaking-shower-repair-canberra.html)." },
           { q: "Is it worth repairing an old bathroom instead of renovating it?", a: "Often, if the problem is at the surface and the layers underneath are sound. New grout, new silicone and a few replacement tiles can keep a bathroom going for years. It stops being worth it when the same area keeps failing or water is reaching the rooms around it." }
         ] }
       ]
@@ -1062,6 +1068,8 @@ window.SITE_CONFIG = {
         { type: "note", text: "Flood testing isn't universally mandated by AS 3740 on every job, but it is standard industry practice and a condition of some manufacturers' warranties. The usual method: plug the waste, fill to the height of the upstand, and leave it for at least 24 hours before checking whether the level has dropped." },
         { type: "credit", text: "Manufacturer flood-testing guidance (e.g. Laticrete, Mapei)." },
 
+        { type: "form", heading: "Tell us about the wet area" },
+
         { type: "faqs", items: [
           { q: "Do I really need waterproofing if I am only replacing tiles?", a: "If the existing membrane is intact and undisturbed, sometimes not. But removing tiles frequently damages the membrane beneath them, and a membrane at the end of its service life is worth replacing while the area is open. The realistic assessment happens once the tiles are off." },
           { q: "Can waterproofing be done after tiling?", a: "No, not properly. The membrane goes under the tiles. Products applied over a finished surface are sealers, which is a different thing serving a different purpose." },
@@ -1084,9 +1092,9 @@ window.SITE_CONFIG = {
       page: "regrouting-canberra.html",
       name: "Regrouting",
       shortDescription: "When grout can be repaired, when it needs full replacement, cement versus epoxy, and how to spot a shortcut job.",
-      metaTitle: "Regrouting Canberra | Shower Regrout & Grout Replacement",
+      metaTitle: "Regrouting & Grout Repair Canberra | Shower Regrout",
       metaDescription: "Shower regrouting and grout replacement in Canberra: partial or full regrout, cement or epoxy, ACT prices, and how to spot a shortcut job.",
-      headline: "Regrouting in Canberra",
+      headline: "Regrouting and Grout Repair in Canberra",
       ctaText: "Get a Quote",
       ctaHeading: "Get a straight answer on your grout",
       ctaBody: "Tell us where the grout is failing, whether it is cracked or just discoloured, and how old the tiling is. Those three things determine whether you need a clean, a corner reseal, or a full regrout, and they are very different jobs.",
@@ -1124,7 +1132,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "The catch is colour. New grout will not match aged grout, even using the same product and colour code, because the existing grout has years of wear and staining on it. A patched section stays visible. Anyone quoting a partial regrout should tell you that before they start rather than after." },
         { type: "p", text: "**Full regrout** gives a uniform result and is the only sensible option when failure is widespread or when you are changing grout colour." },
 
-        { type: "h2", text: "Cement or epoxy" },
+        { type: "h2", text: "Cement or epoxy: the best grout for a shower" },
         { type: "p", text: "**Cement based grout** is the standard. Cheaper, easier to work with, available in a wide colour range, and straightforward to repair later. It is porous, so it stains and it needs sealing to resist that." },
         { type: "p", text: "**Epoxy grout** is non porous, so it resists staining and chemical attack without sealing, and it holds colour far better over time. It costs more in both material and labour, because it has a short working time and has to be cleaned off the tile face before it sets. Done badly it leaves a haze on the tiles that is difficult to remove." },
         { type: "p", text: "Epoxy is worth the difference in a shower floor or a kitchen splashback. Whether it is worth it across an entire floor is a budget decision - on current Australian retail pricing, standard cement-based grout runs roughly $2 to $6 per kilogram, while epoxy grout runs roughly $15 to $45 per kilogram depending on the brand and pack size, so figure on epoxy costing somewhere from three to eight times as much in material alone before labour." },
@@ -1177,8 +1185,10 @@ window.SITE_CONFIG = {
         ] },
         { type: "p", text: "Related reading: [Canberra Tiling Cost Guide](tiling-cost-guide-canberra.html)." },
 
+        { type: "form", heading: "Tell us about the grout" },
+
         { type: "faqs", items: [
-          { q: "How long does regrouting last?", a: "It depends far more on the grout type and the conditions than on the job itself. Epoxy outlasts cement grout considerably. Cement grout in a daily use shower wears faster than the same grout on a hallway floor." },
+          { q: "How long should a shower regrout last?", a: "It depends far more on the grout type and the conditions than on the job itself. Epoxy outlasts cement grout considerably. Cement grout in a daily use shower wears faster than the same grout on a hallway floor." },
           { q: "Can I regrout over existing grout?", a: "Not properly. The old grout has to be raked out first. Applying a thin layer over the top gives a good result for a few months and then breaks up, because the new material is too shallow to hold." },
           { q: "Will regrouting stop my shower leaking?", a: "Only if the waterproofing membrane underneath the tiles is still sound. Grout is porous and was never the waterproofing layer. If water is reaching rooms outside the bathroom, the membrane is the problem and regrouting is a cosmetic fix on a structural failure. See [leaking shower repair](leaking-shower-repair-canberra.html)." },
           { q: "Why does my grout keep cracking in the same corner?", a: "Because that corner is a movement joint and it has been grouted instead of siliconed. Regrouting it will produce the same crack again. Cutting it out and sealing it with silicone is the actual fix." },
@@ -1227,6 +1237,14 @@ window.SITE_CONFIG = {
         { type: "h2", text: "Tile removal cost in Canberra" },
         { type: "p", text: "Removal is generally quoted separately from tiling, and it varies more than almost any other line because the bond and the substrate are unknown until work starts." },
         { type: "p", text: "A Canberra tiler's published bathroom calculator allows $1,500 for demolition and $800 for rubbish removal. On a floor, the removal is often the smaller part: getting the slab ready to tile again, with the adhesive ground back and the surface levelled, is what moves the price, and published rates put screeding and levelling at $15 to $30 per square metre. Full breakdown and sources in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html)." },
+        { type: "table", caption: "What a tile removal quote should list", headers: ["Line", "What to check"], rows: [
+          ["Tile removal", "Usually its own line. Ask whether it covers the adhesive bed or only the tiles."],
+          ["Adhesive grinding or scraping", "Often the slow, dusty part of the job, and the line most often missing."],
+          ["Screeding and levelling", "Published rates put it at $15 to $30 per square metre."],
+          ["Demolition (bathroom)", "A Canberra tiler's published calculator allows $1,500."],
+          ["Rubbish removal (bathroom)", "The same calculator allows $800. Tip fees are usually charged by weight."]
+        ] },
+        /* [VERIFY] No sourced per-square-metre rate for tile removal itself. Add a row once a Canberra/ACT figure with a named source is found. */
         { type: "p", text: "The two questions that move the number most: is adhesive removal included, and who pays for tip fees. The rest of this page covers why." },
 
         { type: "h2", text: "What makes tile removal expensive" },
@@ -1249,8 +1267,9 @@ window.SITE_CONFIG = {
         { type: "h2", text: "The dust problem" },
         { type: "p", text: "This is the part of tile removal that gets treated casually and should not be." },
         { type: "p", text: "Tiles, tile adhesive, screed and concrete all contain crystalline silica. Cutting, grinding, chiselling and breaking them generates respirable crystalline silica dust, which is fine enough to reach deep into the lungs and is associated with serious and irreversible lung disease. Dry grinding adhesive off a slab is one of the higher exposure activities in domestic renovation work." },
-        { type: "p", text: "Safe Work Australia's national workplace exposure standard for respirable crystalline silica is 0.05 mg/m³ averaged over an eight-hour day. In the ACT, a business carrying out this work must not allow dry cutting, grinding, crushing, polishing, sanding or trimming of silica-containing material - wet cutting or on-tool dust extraction is required instead, along with fitted respiratory protection, a safe work method statement, and in some cases air monitoring." },
-        { type: "credit", text: "Safe Work Australia, workplace exposure standard for respirable crystalline silica; WorkSafe ACT, managing silica dust at construction sites. These duties apply to a business engaging workers - a homeowner doing genuine DIY isn't bound by them the same way, but the health risk is identical either way." },
+        { type: "p", text: "Safe Work Australia's national workplace exposure standard for respirable crystalline silica is 0.05 mg/m³ averaged over an eight-hour day. In the ACT, the code of practice for managing silica dust says a business must not let workers cut, grind or otherwise process porcelain dry with a power tool, or process other silica-containing material such as ceramic tiles, concrete, adhesive or grout without dust controls. Those controls include water suppression, a vacuum fitted to the tool and local exhaust ventilation, and the code requires a combination of them, because water or a mask on its own is not enough. Air monitoring is required where a business cannot be sure exposure is below the standard." },
+        /* Checked against NI2024-339 (in force from 1 July 2024) on 13 Nov 2026. "Adhesive" is an inference: the code names cement and concrete products, grout and mortar, not tile adhesive by name. NI2023-589 is repealed - do not link it. */
+        { type: "credit", text: "Safe Work Australia, [workplace exposure standard for respirable crystalline silica](https://www.safeworkaustralia.gov.au/safety-topic/hazards/silica/whs-duties-silica/workplace-exposure-standard-respirable-crystalline-silica), checked 13 November 2026; ACT [Managing the Risks of Airborne Crystalline Silica (Silica Dust) in the Workplace Code of Practice](https://www.legislation.act.gov.au/ni/2024-339/) (NI2024-339), checked 13 November 2026. These duties apply to a business engaging workers - a homeowner doing genuine DIY isn't bound by them the same way, but the health risk is identical either way." },
         { type: "p", text: "The controls are well established and they are the thing to ask about:" },
         { type: "ul", items: [
           "**Water suppression or on-tool dust extraction.** Wet cutting, or a tool connected to an appropriately rated vacuum, rather than dry grinding into open air.",
@@ -1263,7 +1282,7 @@ window.SITE_CONFIG = {
         { type: "h2", text: "Asbestos in older homes" },
         { type: "p", text: "WorkSafe ACT's own guidance is that a residential building constructed or refurbished before 1990 is likely to contain asbestos containing material, and they turn up in tile removal in more than one form: in some tile adhesives, in vinyl floor tiles and their backing, and in wall and floor sheeting behind or beneath tiles." },
         { type: "p", text: "The ACT carries additional legacy issues, including Mr Fluffy affected properties, and asbestos rules here are also stricter than in some other states: only a licensed asbestos assessor can identify or test suspected material, and no asbestos containing material may be removed from a residential premises in the ACT by anyone other than a licensed asbestos removalist - there is no small-quantity or non-friable exemption for DIY removal here, unlike some other jurisdictions." },
-        { type: "credit", text: "WorkSafe ACT, Asbestos; WorkSafe ACT, Asbestos licensing." },
+        { type: "credit", text: "WorkSafe ACT, [Asbestos](https://www.worksafe.act.gov.au/health-and-safety-portal/safety-topics/dangerous-goods-and-hazardous-substances/asbestos); WorkSafe ACT, [Asbestos licensing](https://www.worksafe.act.gov.au/licensing-and-registration/asbestos-licensing). Checked 13 November 2026." },
         { type: "p", text: "The practical position: if the home was built before 1990 and you are disturbing adhesive, sheeting or old floor coverings, identification by a licensed assessor comes before demolition, not after. This is the single strongest argument against a DIY strip-out in an older Canberra home." },
 
         { type: "h2", text: "Disposal" },
@@ -1277,6 +1296,8 @@ window.SITE_CONFIG = {
         { type: "p", text: "**Dust control.** See above. The tooling that controls silica dust properly is not what most people have in a shed." },
         { type: "p", text: "**What you leave behind.** Removing tiles is easy. Getting a substrate genuinely ready to tile is not, and a tiler arriving to a floor with adhesive residue still on it will either charge to fix it or decline the job. If you are doing the strip-out to save money, agree with the tiler beforehand what condition they need the surface in." },
         { type: "p", text: "The saving is real but smaller than it looks, because the slow part is the preparation rather than the demolition." },
+
+        { type: "form", heading: "Tell us what's coming up" },
 
         { type: "faqs", items: [
           { q: "How much does tile removal cost?", a: "It is usually quoted separately from tiling and varies widely with the substrate and how well the tiles were originally bonded. A Canberra operator's published bathroom calculator allows $1,500 for demolition and $800 for waste removal. The two things that move the price are whether adhesive grinding is included and who covers tip fees. See the [cost guide](tiling-cost-guide-canberra.html)." },
@@ -1308,7 +1329,7 @@ window.SITE_CONFIG = {
       page: "bathroom-strip-out-canberra.html",
       name: "Bathroom Strip Out",
       shortDescription: "What a bathroom strip out actually includes, what is usually found underneath, who disconnects what, and how to compare quotes that use the same words for different jobs.",
-      metaTitle: "Bathroom Strip Out Canberra | Tiles, Screed & Membrane",
+      metaTitle: "Bathroom Strip Out Canberra | Scope, Asbestos & Costs",
       metaDescription: "Bathroom strip out in Canberra: what it includes, what is found under the tiles, asbestos in older homes, and how to compare strip out quotes properly.",
       headline: "Bathroom Strip Out in Canberra",
       ctaText: "Get a Quote",
@@ -1334,6 +1355,9 @@ window.SITE_CONFIG = {
         { type: "p", text: "**A strip back to the studs** with the layout changing, walls being resheeted, the plumbing moving and new electrical going in is a renovation. That involves plumbing, electrical, carpentry, plastering and painting, and it is generally run by a builder rather than a tiler. If that is your job, a renovation builder is who you want, and we will say so rather than take the enquiry." },
         { type: "p", text: "Plenty of jobs sit in between, which is why the scope needs writing down rather than assuming." },
 
+        { type: "h2", text: "Kitchen strip outs" },
+        { type: "p", text: "The tiled parts of a kitchen, the splashback and any tiled floor, come out the same way as tiles anywhere else: tiles and adhesive off, then the wall or slab made ready for what goes on next. Cabinets, the benchtop, the sink and cooktop connections and the appliances are not tiling work. Joinery, plumbing and electrical trades handle those, and the cabinets and benchtop usually come out before the splashback can. Where the floor tiles run under the cabinets, settle whether they stay or go before anything is removed. See [tile removal](tile-removal-canberra.html) and [kitchen tiling](kitchen-tiling-canberra.html)." },
+
         { type: "h2", text: "What a bathroom strip out can include" },
         { type: "image", src: "images/shower-waterproofing-cross-section.jpg", alt: "Cross-section diagram of a shower corner showing the waterproof membrane running below the tiles and screed, up the wall junction, and connecting to the floor waste at the puddle flange", width: 1200, height: 805 },
         { type: "p", text: "A tiled wet area is built in layers, and a strip out can stop at any of them. From the surface down:" },
@@ -1358,7 +1382,7 @@ window.SITE_CONFIG = {
         { type: "h2", text: "Asbestos in older Canberra bathrooms" },
         { type: "p", text: "WorkSafe ACT's guidance is that a residential building constructed or refurbished before 1990 is likely to contain asbestos containing material. In a bathroom the likely places are fibre cement wall sheeting behind the tiles, fibre cement floor sheeting under them, and some older tile adhesives. Fibre cement sheeting is common in Canberra stock from the 1960s to the 1980s." },
         { type: "p", text: "In the ACT only a licensed asbestos assessor can identify or test suspected material, and only a licensed asbestos removalist can remove it from a residential premises, with no small-quantity exemption for DIY. In a pre-1990 bathroom, identification comes before the first tile comes off, not after." },
-        { type: "credit", text: "WorkSafe ACT, Asbestos; WorkSafe ACT, Asbestos licensing." },
+        { type: "credit", text: "WorkSafe ACT, [Asbestos](https://www.worksafe.act.gov.au/health-and-safety-portal/safety-topics/dangerous-goods-and-hazardous-substances/asbestos); WorkSafe ACT, [Asbestos licensing](https://www.worksafe.act.gov.au/licensing-and-registration/asbestos-licensing). Checked 13 November 2026." },
         { type: "p", text: "Strip outs also generate silica dust from tiles, adhesive and screed, which has its own controls. Both are covered in more detail on the [tile removal](tile-removal-canberra.html) page." },
 
         { type: "h2", text: "Who disconnects what" },
@@ -1367,7 +1391,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "**Electrical.** Isolating and removing light fittings, exhaust fans, heated towel rails and powerpoints is a licensed electrician's work." },
         { type: "p", text: "Whoever is quoting the strip out should say whether they are arranging those trades or whether you are. It is one of the lines most often missing from a quote, and it is the one that stops the job on day one if nobody has booked it." },
 
-        { type: "h2", text: "The order of works" },
+        { type: "h2", text: "How a bathroom is stripped out, in order" },
         { type: "p", text: "Roughly, for a strip out and retile in the same layout:" },
         { type: "ol", items: [
           "Asbestos identification, if the house is pre-1990",
@@ -1395,7 +1419,8 @@ window.SITE_CONFIG = {
           { q: "Do I need a plumber for a bathroom strip out?", a: "Yes. Disconnecting and capping the toilet, basin, bath and shower, and reconnecting them afterwards, is licensed plumbing work. Light fittings, fans and heated towel rails need a licensed electrician. Check whether the quote includes arranging them." },
           { q: "Can I strip my bathroom out myself?", a: "It is unskilled labour rather than trade work, so it can be done. Three things decide whether it should be: whether the house is old enough for asbestos to be a possibility, whether you can control the silica dust, and whether you can leave the substrate in the condition the tiler needs. Agree that condition with the tiler first. See [tile removal](tile-removal-canberra.html)." },
           { q: "Is there asbestos in my bathroom?", a: "If the house was built or refurbished before 1990 it is a real possibility, most often in fibre cement wall or floor sheeting behind and under the tiles. In the ACT only a licensed asbestos assessor can identify it and only a licensed removalist can remove it from a home, with no DIY exemption." },
-          { q: "How long is the bathroom out of action?", a: "The strip out itself is usually quick. What sets the timeline is what is found underneath, the trades that have to fit around it, and the waterproofing cure, which runs longer in a cold Canberra winter. A full bathroom typically runs three to five weeks end to end." }
+          { q: "How long is the bathroom out of action?", a: "The strip out itself is usually quick. What sets the timeline is what is found underneath, the trades that have to fit around it, and the waterproofing cure, which runs longer in a cold Canberra winter." }
+          /* [VERIFY] "A full bathroom typically runs three to five weeks end to end" was removed: no source. */
         ] }
       ]
     },
@@ -1470,7 +1495,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "**Hairline cracks in the glaze only, in a fine network.** Crazing, which is a defect in the tile itself rather than an installation problem." },
         { type: "p", text: "**Cracking following a drummy area.** An unsupported tile flexing under load until it fails." },
 
-        { type: "h2", text: "Repair options, and the matching problem" },
+        { type: "h2", text: "Floor, wall and shower tile repair options" },
         { type: "p", text: "**Individual tile replacement.** The affected tiles are cut out, the substrate cleaned back, and new tiles bedded and grouted. Practical for isolated damage." },
         { type: "p", text: "**Section replacement.** A defined area lifted and relaid. Sensible when a contiguous zone has failed." },
         { type: "p", text: "**Full re-lay.** When the failure is widespread, or when the cause is the substrate rather than the tiles." },
@@ -1489,6 +1514,8 @@ window.SITE_CONFIG = {
         { type: "p", text: "Individual tile replacement is a small job, but the variables are access, whether matching tiles exist, and whether the underlying cause needs addressing first." },
         { type: "p", text: "The last one is what moves the price. Replacing four cracked tiles is inexpensive. Establishing that they cracked because the slab moved, or because water has been sitting under them, changes the job." },
         { type: "p", text: "See the [Canberra tiling cost guide](tiling-cost-guide-canberra.html) for the full picture with sources." },
+
+        { type: "form", heading: "Tell us about the tiles" },
 
         { type: "faqs", items: [
           { q: "What does \"drummy\" mean?", a: "A drummy tile sounds hollow when tapped, because the bond between the tile and the substrate has failed and there is a void underneath. The tile itself is usually undamaged. It is Australian trade shorthand and you will hear it from any tiler." },
@@ -1635,6 +1662,8 @@ window.SITE_CONFIG = {
         ] },
         { type: "p", text: "If you would like a job quoted with those answers supplied up front, call or use the form." },
 
+        { type: "form", heading: "Get your job quoted" },
+
         { type: "faqs", items: [
           { q: "Do tilers need a licence in Canberra?", a: "No. Tiling is not on the ACT's list of licensed construction occupations, which covers roles such as builders, electricians, plumbers and building surveyors. Ask for a trade qualification, insurance and, in a wet area, waterproofing documentation instead." },
           { q: "Do tilers need a licence in Queanbeyan?", a: "For larger jobs, yes. Queanbeyan is in NSW, where a contractor licence is needed for residential tiling work valued at more than $5,000 in labour and materials, including GST. The same applies in Jerrabomberra and Googong." },
@@ -1726,7 +1755,8 @@ window.SITE_CONFIG = {
         { type: "h2", text: "Where tiling sits in a bathroom renovation" },
         { type: "p", text: "Roughly: demolition, plumbing and electrical rough-in, substrate preparation, waterproofing, cure, tiling, grouting, then fit-off of the vanity, screen and tapware." },
         { type: "p", text: "Tiling sits in the middle, which means it is dependent on everything before it and blocking everything after it. If the rough-in is not finished, the tiler waits or comes back, and return visits get priced accordingly." },
-        { type: "p", text: "A typical Canberra bathroom runs three to five weeks end to end, and the tiling is a fraction of that. Substrate preparation and waterproofing cure time drive the schedule more than laying does." },
+        { type: "p", text: "The tiling is a fraction of a bathroom's overall timeline. Substrate preparation and waterproofing cure time drive the schedule more than laying does." },
+        /* [VERIFY] "A typical Canberra bathroom runs three to five weeks end to end" was removed: no source. */
         { type: "p", text: "Related reading: [floor and wall tiling](floor-and-wall-tiling-canberra.html) for what changes outside a wet area, [kitchen tiling](kitchen-tiling-canberra.html) for splashbacks, and [laundry tiling](laundry-tiling-canberra.html) for the other wet area in the house." },
 
         { type: "h2", text: "What goes wrong in bathroom tiling" },
@@ -1736,6 +1766,8 @@ window.SITE_CONFIG = {
         { type: "p", text: "**Setting out started from the wrong point.** Cuts landing badly at eye level, or a slim sliver of tile in the most visible corner. Costs nothing to get right and cannot be fixed later." },
         { type: "p", text: "**Large format tile on a floor that was not levelled for it.** Lipping at the edges, which is both a trip hazard and permanently visible." },
         { type: "p", text: "If an existing bathroom is showing cracked tiles or failed grout and silicone, [bathroom repairs](bathroom-repairs-canberra.html) sets out which repair it needs." },
+
+        { type: "form", heading: "Tell us about the bathroom" },
 
         { type: "faqs", items: [
           { q: "How much does bathroom tiling cost in Canberra?", a: "A Canberra tiler's published rate card puts bathroom tiling labour at $85 per square metre floor to ceiling, with tile supply from around $50 per square metre. National figures for bathroom floor tiling supply and install sit near $85 per square metre and wall tiling near $95. A small 5 to 8 square metre bathroom often lands around $2,000 to $3,500 for tiling including materials. Sources in the [cost guide](tiling-cost-guide-canberra.html)." },
@@ -1850,7 +1882,7 @@ window.SITE_CONFIG = {
         { type: "p", text: "Canberra housing stock from the 1960s through the 1980s regularly turns up substrates that need assessing before anything goes over them: fibre cement sheet flooring and wall sheeting, sand and cement screeds of unknown depth, and existing floor coverings laid straight onto them." },
         { type: "p", text: "That is a bonding question and a safety question rather than a heritage one. A sheet floor that flexes underfoot will crack a rigid tiled surface however well the tiling is done, so how the floor is framed and fixed matters more than what is on top of it." },
         { type: "p", text: "The safety half is asbestos. WorkSafe ACT treats a residential building constructed or refurbished before 1990 as likely to contain asbestos containing material, and it turns up in sheeting, in some tile adhesives, and in vinyl floor tiles and their backing. In the ACT only a licensed asbestos assessor can identify or test suspected material, and only a licensed asbestos removalist can remove it, with no small quantity exemption for DIY. Identification comes before demolition, not after. [More on tile removal](tile-removal-canberra.html)." },
-        { type: "credit", text: "WorkSafe ACT, Asbestos; WorkSafe ACT, Asbestos licensing." },
+        { type: "credit", text: "WorkSafe ACT, [Asbestos](https://www.worksafe.act.gov.au/health-and-safety-portal/safety-topics/dangerous-goods-and-hazardous-substances/asbestos); WorkSafe ACT, [Asbestos licensing](https://www.worksafe.act.gov.au/licensing-and-registration/asbestos-licensing). Checked 13 November 2026." },
         { type: "p", text: "Older entries and verandahs sometimes carry tessellated tiling, and terrazzo occasionally turns up as an original floor finish, more often in mid century units and public buildings than in houses. Both are tile restoration work rather than tiling work: matching is difficult and sometimes impossible, and a specialist restorer is a different trade from a tiler. Worth identifying what you have before anyone quotes to take it out." },
 
         { type: "h2", text: "What goes wrong" },
@@ -1858,6 +1890,8 @@ window.SITE_CONFIG = {
         { type: "p", text: "**No movement joints.** The failure arrives years later as debonding along a wall or tiles tenting in the middle of a floor, and relaying without addressing it repeats it." },
         { type: "p", text: "**Setting out from the wrong point.** A sliver of cut tile in the most visible line of sight in the room. It costs nothing to get right at the start and cannot be fixed afterwards." },
         { type: "p", text: "**Transitions left to the end.** Where tile meets timber, carpet or the next room there is a height difference and an exposed edge. Deciding how that is finished - a trim, a threshold strip, or a flush detail built into the levelling - belongs at the quote, not on the last day." },
+
+        { type: "form", heading: "Tell us about the floor or wall" },
 
         { type: "faqs", items: [
           { q: "What is the difference between porcelain and ceramic tiles?", a: "Water absorption. Porcelain is the densest group under the tile classification standard, absorbing 0.5% of its weight in water or less, which makes it harder wearing and better suited to floors, wet areas and outdoor use. Ceramic has a softer, more absorbent body under a glaze, is easier to cut, and is often sold as wall tile." },
@@ -1935,6 +1969,8 @@ window.SITE_CONFIG = {
 
         { type: "h2", text: "What it costs" },
         { type: "p", text: "Wall tiling runs higher per square metre than floor tiling nationally, around $95 against $85, and a splashback sits above even that because of the detail in it. Treat a per square metre rate as the wrong tool for a splashback and ask for a job price instead. A kitchen floor prices much closer to a general floor rate, with the substrate as the variable. Full picture and sources in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html)." },
+
+        { type: "form", heading: "Tell us about the kitchen" },
 
         { type: "faqs", items: [
           { q: "How much does a tiled kitchen splashback cost?", a: "It is priced as a job rather than by the square metre, and a national wall tiling rate near $95 per square metre is the wrong tool for it, because a splashback is two or three square metres of almost pure detail. Ask for a job price and ask what it includes: the cuts around power points, the edge treatment at each end, and the window return if there is one. See the [cost guide](tiling-cost-guide-canberra.html)." },
@@ -2017,6 +2053,8 @@ window.SITE_CONFIG = {
         { type: "p", text: "External tiling carries a premium over the same area done inside, in the order of 10 to 20% on both supply and labour. The tile specification is higher, the adhesive is dearer, and the preparation is more involved." },
         { type: "p", text: "That premium sits on top of whatever the substrate needs. Falls, drainage and levelling on an existing slab are the real variable, and published rates put screeding and levelling at $15 to $30 per square metre. Full breakdown and sources in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html)." },
 
+        { type: "form", heading: "Tell us about the outdoor area" },
+
         { type: "faqs", items: [
           { q: "Can you tile over an existing concrete patio?", a: "Often, provided the slab is sound, clean, and already falls the right way, and provided any joints in the slab are carried through the tiling rather than tiled over. A slab that has cracked will crack the tiled surface above it in the same line, so the crack has to be assessed before anything goes on top of it." },
           { q: "What slip rating do I need outside?", a: "It depends on the surface. For steps, ramps and landings at a house there is a mandated minimum under the National Construction Code, tested to AS 4586, and because a surface exposed to weather counts as wet, an external stair tread needs P4 or R11 and a ramp no steeper than 1:8 needs P5 or R12. For the patio floor itself there is no mandated minimum, only HB 198 guidance by application. Either way, ask the supplier for the classification of the specific tile and finish rather than the range, and tell them what it is for." },
@@ -2087,6 +2125,8 @@ window.SITE_CONFIG = {
         { type: "h2", text: "What pool tiling costs" },
         { type: "p", text: "Published figures put pool tiling labour at $60 to $120 per square metre. Take that as a labour rate for the field area rather than a job price: the coping detail, the movement joint at the pool edge, and whatever the surround is sitting on are what actually move the number." },
         { type: "p", text: "External tiling generally also carries a 10 to 20% premium over the same work inside, on both supply and labour. Sources in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html)." },
+
+        { type: "form", heading: "Tell us about the pool surround" },
 
         { type: "faqs", items: [
           { q: "Can you tile the inside of a pool?", a: "No. Waterline tiling and interior pool finishes are a pool trade, done to a pool shell with its own structure and waterproofing, and they are not a domestic tiling job. A pool builder or a pool renovation specialist is who you want for that." },
@@ -2170,6 +2210,8 @@ window.SITE_CONFIG = {
         { type: "p", text: "Every cost figure on this site is a published domestic rate, and the sources behind the [Canberra tiling cost guide](tiling-cost-guide-canberra.html) do not publish a commercial equivalent. Rather than convert a domestic rate into a commercial one and present the result as data, there is no figure here." },
         { type: "p", text: "What can be said without one: commercial rates are not domestic rates with a margin applied. Out of hours access, staging around a trading business, program compression, specified materials and higher performance grout all sit inside the number, and on a fitout the access and program lines are frequently larger than the tiling itself. Price commercial work from a scope and a program, not from a square metre rate carried across from a house." },
 
+        { type: "form", heading: "Tell us about the fitout" },
+
         { type: "faqs", items: [
           { q: "Do you take commercial tiling enquiries in Canberra?", a: "Yes, for retail, hospitality and office fitouts. Where we have a contractor covering that type of work, your enquiry goes to them, and where we do not we will tell you rather than sit on it. Commercial and domestic tiling are not always the same contractor pool, so it helps to include the scope and the program when you enquire." },
           { q: "Is commercial tiling more expensive than domestic tiling?", a: "Usually, and not mainly because of the tiling. Out of hours access, staging around a trading business, program compression, specified materials and higher performance grout all sit in the price, and on a fitout those lines are frequently larger than the laying itself." },
@@ -2233,6 +2275,8 @@ window.SITE_CONFIG = {
 
         { type: "h2", text: "What laundry tiling costs" },
         { type: "p", text: "The same trap as a small bathroom applies: the room is mostly edges and cuts, so the rate per square metre is high and the total is still modest. Waterproofing added to a wet area generally runs $500 to $1,000, and that line is where a laundry quote most often differs from another one. Sources in the [Canberra tiling cost guide](tiling-cost-guide-canberra.html)." },
+
+        { type: "form", heading: "Tell us about the laundry" },
 
         { type: "faqs", items: [
           { q: "Does a laundry need waterproofing?", a: "Yes. A laundry is a wet area under AS 3740:2021. How much of the room needs a membrane depends on the room, particularly whether there is a floor waste and whether the floor is timber or concrete, but the room is not exempt because it is small or because the budget is." },
