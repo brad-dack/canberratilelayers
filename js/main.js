@@ -219,11 +219,11 @@
   function renderContactBar() {
     var parts = [];
     if (hasPhone()) parts.push('<a class="contact-bar-item" href="' + telHref() + '">' + UI.callLabel + "</a>");
-    /* /contact#quote, not /about#quote: the quote form and its #quote anchor
-       only exist on the contact page, so the old target landed on About with
-       a dead anchor. Extensionless to match the baked CTAs - the server
-       307-redirects the .html form. */
-    parts.push('<a class="contact-bar-item contact-bar-primary" href="/contact#quote">' + UI.quoteShort + "</a>");
+    /* This page's own #quote when it has a form (home and every service page
+       wrap their form block in #quote), else the Contact form. Extensionless
+       to match the baked CTAs - the server 307-redirects the .html form. */
+    parts.push('<a class="contact-bar-item contact-bar-primary" href="' +
+      (document.getElementById("quote") ? "#quote" : "/contact#quote") + '">' + UI.quoteShort + "</a>");
     if (hasEmail()) parts.push('<a class="contact-bar-item" href="mailto:' + esc(cfg.business.email) + '">' + UI.emailLabel + "</a>");
     if (parts.length < 2) return; // just the quote link isn't worth a bar
 

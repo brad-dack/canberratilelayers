@@ -339,6 +339,15 @@ const telHref = () => "tel:" + cfg.business.phone;
 
 const exists = rel => fs.existsSync(path.join(__dirname, rel));
 
+/* Pages whose content holds a quote form, so "#quote" on that page resolves
+   locally. A page without one sends quote CTAs to the Contact page's form
+   instead. Set per page by buildPages() before its HTML is rendered; bake
+   is synchronous, so a module-level flag is enough. Ported from the
+   template (its fallback is About; this build's fallback form is Contact). */
+let pageHasForm = false;
+const blocksHaveForm = blocks => (blocks || []).some(b => b.type === "form");
+const quoteHref = () => pageHasForm ? "#quote" : pathFor("contact.html") + "#quote";
+
 /* Escape first, THEN re-enable a tiny
    markup subset, so config copy can never inject HTML. */
 function richText(s) {
@@ -346,10 +355,12 @@ function richText(s) {
   t = t.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>");
   /* Config copy links to pages by filename - "[cost guide](tiling-cost-guide-canberra.html)" -
      so the target stays greppable against what is on disk; the href emitted is
-     the extensionless path the server actually serves. Anything that isn't a
-     bare page filename (tel:, mailto:, absolute URLs, #anchors) passes through. */
+     the extensionless path the server actually serves. "#quote" resolves to
+     this page's form, or to the Contact form on a page that has none.
+     Anything else (tel:, mailto:, absolute URLs, other anchors) passes through. */
   t = t.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, label, url) =>
-    '<a href="' + (/^[a-z0-9-]+\.html$/.test(url) ? pathFor(url) : url) + '">' + label + "</a>");
+    '<a href="' + (/^[a-z0-9-]+\.html$/.test(url) ? pathFor(url)
+      : url === "#quote" ? quoteHref() : url) + '">' + label + "</a>");
   return t.replace(/\n/g, "<br>");
 }
 
@@ -359,7 +370,7 @@ const callButtonHtml = extraClass => hasPhone()
   : "";
 
 const quoteButtonHtml = (text, extraClass) =>
-  '<a class="btn btn-primary ' + (extraClass || "") + '" href="' + pathFor("contact.html") + '#quote">' +
+  '<a class="btn btn-primary ' + (extraClass || "") + '" href="' + quoteHref() + '">' +
   esc(text) + "</a>";
 
 /* Responsive variants. An image entry may carry `widths: [400, 560, 720, 960]`
@@ -504,10 +515,11 @@ function blockHtml(b) {
     case "faqs":
       return '<div class="block-faqs">' + faqItems(b.items) + "</div>";
     case "form":
-      return quoteFormHtml({
+      /* Wrapped in #quote so the page's own "#quote" CTAs land on it. */
+      return '<div class="block-form" id="quote">' + quoteFormHtml({
         heading: b.heading, presetService: b.presetService, notice: true,
         extraField: b.extraField, placeholders: b.placeholders
-      });
+      }) + "</div>";
     case "image":
       return '<figure class="block-image">' + imgTag(b, "", true) +
         (b.caption ? "<figcaption>" + richText(b.caption) + "</figcaption>" : "") + "</figure>";
@@ -856,6 +868,9 @@ ${mainInner}
 function buildPages() {
   const files = [];
 
+  /* pageHasForm is set before each page renders, so quote CTAs on that page
+     resolve to its own #quote or fall back to Contact's. */
+  pageHasForm = blocksHaveForm(cfg.pages.home.blocks);
   files.push(["index.html", page("home",
     head({
       title: cfg.pages.home.metaTitle, description: cfg.pages.home.metaDescription, file: "index.html",
@@ -865,6 +880,7 @@ function buildPages() {
     "index.html")]);
 
   for (const svc of cfg.services) {
+    pageHasForm = blocksHaveForm(svc.blocks);
     files.push([svc.page, page("service",
       head({
         title: svc.metaTitle, description: svc.metaDescription, file: svc.page,
@@ -880,6 +896,7 @@ function buildPages() {
 
   for (const area of cfg.areas || []) {
     const file = areaFile(area);
+    pageHasForm = false;
     files.push([file, page("area",
       head({
         title: area.metaTitle, description: area.metaDescription, file: file, faqs: area.faqs,
@@ -889,6 +906,7 @@ function buildPages() {
       file)]);
   }
 
+  pageHasForm = blocksHaveForm(cfg.pages.about.blocks);
   files.push(["about.html", page("about",
     head({
       title: cfg.pages.about.metaTitle, description: cfg.pages.about.metaDescription, file: "about.html",
@@ -898,6 +916,7 @@ function buildPages() {
     pageHeadMain(cfg.pages.about.headline, aboutContentHtml()),
     "about.html")]);
 
+  pageHasForm = true; // Contact always carries the #quote section
   files.push(["contact.html", page("contact",
     head({
       title: cfg.pages.contact.metaTitle, description: cfg.pages.contact.metaDescription, file: "contact.html",
@@ -909,6 +928,7 @@ function buildPages() {
     pageHeadMain(cfg.pages.contact.headline, contactContentHtml()),
     "contact.html")]);
 
+  pageHasForm = blocksHaveForm(cfg.pages.disclaimer.blocks);
   files.push(["disclaimer.html", page("disclaimer",
     head({
       title: cfg.pages.disclaimer.metaTitle, description: cfg.pages.disclaimer.metaDescription, file: "disclaimer.html",
@@ -917,6 +937,7 @@ function buildPages() {
     pageHeadMain(cfg.pages.disclaimer.headline, disclaimerContentHtml()),
     "disclaimer.html")]);
 
+  pageHasForm = blocksHaveForm(cfg.pages.privacy.blocks);
   files.push(["privacy.html", page("privacy",
     head({
       title: cfg.pages.privacy.metaTitle, description: cfg.pages.privacy.metaDescription, file: "privacy.html",
